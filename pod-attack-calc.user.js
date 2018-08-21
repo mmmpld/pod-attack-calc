@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Path of Diablo attack speed helper
 // @namespace    http://tampermonkey.net/
-// @version      3
+// @version      4
 // @description  tweak the calc for PoD use.
 // @author       mmmpld
 // @match        https://diablo3.ingame.de/diablo-2/calculatoren/angriffsgeschwindigkeit/*
@@ -12,8 +12,8 @@
 
 (function() {
     'use strict';
-    updateFanaValues();
-    replaceIasTable();
+    berechneBreakpoints = berechneBreakpoints2; // updated ias tables
+    setzeSIAS = setzeSIAS2; // updated skill ias values
     preventReload();
 })();
 
@@ -22,9 +22,109 @@ function preventReload() {
     jQuery('form button.btn').attr('type', 'button');
 }
 
-function replaceIasTable() {
-    berechneBreakpoints = berechneBreakpoints2;
-    console.log('replaced ias table function');
+function replaceSkillSelectOptions($select, values) {
+    $select.empty();
+    for (let i = 0; i < values.length; i++) {
+        $select.append('<option value="' + values[i] + '">' + i + '</option>');
+    }
+}
+
+function updateFanaValues() {
+    var values = [0,20,24,27,30,32,34,35,36,38,38,39,40,41,41,42,43,43,43,44,44];
+    var $select = jQuery("select[name=fana]");
+    replaceSkillSelectOptions($select, values);
+}
+
+function updateFrenzyValues() {
+    var values = [0,9,13,15,18,20,21,22,23,24,25,26,26,27,28,28,29,29,29,29,30];
+    var $select = jQuery("select[name=frenzy]");
+    replaceSkillSelectOptions($select, values);
+}
+
+function updateWolfValues() {
+    var values = [0,36,45,52,58,62,66,69,71,74,76,78,79,81,82,83,85,85,86,87,88];
+    var $select = jQuery("select[name=wolf]");
+    replaceSkillSelectOptions($select, values);
+}
+
+function updateHolyFreezeValues() {
+    var values = [0,14,18,20,23,25,26,27,28,29,30,31,31,32,33,33,34,34,34,34,35];
+    var $select = jQuery("select[name=holyfrost]");
+    replaceSkillSelectOptions($select, values);
+}
+
+/// set skill ias
+function setzeSIAS2() {
+    // fanaticisim
+    if (statischFana == true) { 
+        statischFana = false;
+        while (document.myform.fana.length > 0) document.myform.fana.options[0] = null;
+        // for (i = 0; i <= 50; i++) {
+        //     neuElement = new Option(i, Math.floor(Math.floor((110 * i) / (6 + i)) * (40 - 10) / 100) + 10);
+        //     document.myform.fana.options[document.myform.fana.length] = neuElement;
+        //     if (i == 0) {
+        //         document.myform.fana.options[document.myform.fana.length - 1].value = 0;
+        //     }
+        // }
+        updateFanaValues();
+    }
+    // frenzy
+    while (document.myform.frenzy.length > 0) document.myform.frenzy.options[0] = null;
+    if (document.myform.char.value == 2) {
+        // for (i = 0; i <= 50; i++) {
+        //     neuElement = new Option(i, Math.floor(Math.floor((110 * i) / (6 + i)) * (50 - 0) / 100) + 0);
+        //     document.myform.frenzy.options[document.myform.frenzy.length] = neuElement;
+        //     if (i == 0) {
+        //         document.myform.frenzy.options[document.myform.frenzy.length - 1].value = 0;
+        //     }
+        // }
+        updateFrenzyValues();
+    } else {
+        neuElement = new Option("-", 0);
+        document.myform.frenzy.options[document.myform.frenzy.length] = neuElement;
+    }
+    // wearwolf
+    while (document.myform.wolf.length > 0) document.myform.wolf.options[0] = null;
+    if ((document.myform.char.value == 2) || (document.myform.char.value == 3)) {
+        // for (i = 0; i <= 50; i++) {
+        //     neuElement = new Option(i, Math.floor(Math.floor((110 * i) / (6 + i)) * (80 - 10) / 100) + 10);
+        //     document.myform.wolf.options[document.myform.wolf.length] = neuElement;
+        //     if (i == 0) {
+        //         document.myform.wolf.options[document.myform.wolf.length - 1].value = 0;
+        //     }
+        // }
+        updateWolfValues();
+    } else {
+        neuElement = new Option("-", 0);
+        document.myform.wolf.options[document.myform.wolf.length] = neuElement;
+    }
+    // burst of speed
+    while (document.myform.tempo.length > 0) document.myform.tempo.options[0] = null;
+    if (document.myform.char.value == 1) {
+        for (i = 0; i <= 50; i++) {
+            neuElement = new Option(i, Math.floor(Math.floor((110 * i) / (6 + i)) * (60 - 15) / 100) + 15);
+            document.myform.tempo.options[document.myform.tempo.length] = neuElement;
+            if (i == 0) {
+                document.myform.tempo.options[document.myform.tempo.length - 1].value = 0;
+            }
+        }
+    } else {
+        neuElement = new Option("-", 0);
+        document.myform.tempo.options[document.myform.tempo.length] = neuElement;
+    }
+    // holy freeze
+    if (statischFrost == true) {
+        statischFrost = false;
+        while (document.myform.holyfrost.length > 0) document.myform.holyfrost.options[0] = null;
+        // for (i = 0; i <= 30; i++) {
+        //     neuElement = new Option(i, Math.floor(Math.floor((110 * i) / (6 + i)) * (60 - 25) / 100) + 25);
+        //     document.myform.holyfrost.options[document.myform.holyfrost.length] = neuElement;
+        //     if (i == 0) {
+        //         document.myform.holyfrost.options[document.myform.holyfrost.length - 1].value = 0;
+        //     }
+        // }
+        updateHolyFreezeValues();
+    }
 }
 
 /// Show breakpoints popup
@@ -413,59 +513,4 @@ function berechneBreakpoints2() {
         }
     }
     cap = 1;
-}
-
-function updateFanaValues() {
-    var $fanaSelect = jQuery("select[name=fana]");
-    $fanaSelect[0][0].value = 0;
-    $fanaSelect[0][1].value = 20;
-    $fanaSelect[0][2].value = 24;
-    $fanaSelect[0][3].value = 27;
-    $fanaSelect[0][4].value = 30;
-    $fanaSelect[0][5].value = 32;
-    $fanaSelect[0][6].value = 34;
-    $fanaSelect[0][7].value = 35;
-    $fanaSelect[0][8].value = 36;
-    $fanaSelect[0][9].value = 38;
-    $fanaSelect[0][10].value = 38;
-    $fanaSelect[0][11].value = 39;
-    $fanaSelect[0][12].value = 40;
-    $fanaSelect[0][13].value = 41;
-    $fanaSelect[0][14].value = 41;
-    $fanaSelect[0][15].value = 42;
-    $fanaSelect[0][16].value = 43;
-    $fanaSelect[0][17].value = 43;
-    $fanaSelect[0][18].value = 43;
-    $fanaSelect[0][19].value = 44;
-    $fanaSelect[0][20].value = 44;
-//     $fanaSelect[0][21].value =
-//     $fanaSelect[0][22].value =
-//     $fanaSelect[0][23].value =
-//     $fanaSelect[0][24].value =
-//     $fanaSelect[0][25].value =
-//     $fanaSelect[0][26].value =
-//     $fanaSelect[0][27].value =
-//     $fanaSelect[0][28].value =
-//     $fanaSelect[0][29].value =
-//     $fanaSelect[0][30].value =
-//     $fanaSelect[0][31].value =
-//     $fanaSelect[0][32].value =
-//     $fanaSelect[0][33].value =
-//     $fanaSelect[0][34].value =
-//     $fanaSelect[0][35].value =
-//     $fanaSelect[0][36].value =
-//     $fanaSelect[0][37].value =
-//     $fanaSelect[0][38].value =
-//     $fanaSelect[0][39].value =
-//     $fanaSelect[0][40].value =
-//     $fanaSelect[0][41].value =
-//     $fanaSelect[0][42].value =
-//     $fanaSelect[0][43].value =
-//     $fanaSelect[0][44].value =
-//     $fanaSelect[0][45].value =
-//     $fanaSelect[0][46].value =
-//     $fanaSelect[0][47].value =
-//     $fanaSelect[0][48].value =
-//     $fanaSelect[0][49].value =
-//     $fanaSelect[0][50].value =
 }
