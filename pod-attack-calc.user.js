@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Path of Diablo attack speed helper
 // @namespace    http://tampermonkey.net/
-// @version      4
+// @version      5
 // @description  tweak the calc for PoD use.
 // @author       mmmpld
 // @match        https://diablo3.ingame.de/diablo-2/calculatoren/angriffsgeschwindigkeit/*
@@ -14,6 +14,9 @@
     'use strict';
     berechneBreakpoints = berechneBreakpoints2; // updated ias tables
     setzeSIAS = setzeSIAS2; // updated skill ias values
+    setzeIAS = setzeIAS2; // increased weapon ias max
+    statischIAS = true; // reset ias set bool
+    setzeIAS(); // set weapon ias again
     preventReload();
 })();
 
@@ -51,6 +54,44 @@ function updateHolyFreezeValues() {
     var values = [0,14,18,20,23,25,26,27,28,29,30,31,31,32,33,33,34,34,34,34,35];
     var $select = jQuery("select[name=holyfrost]");
     replaceSkillSelectOptions($select, values);
+}
+
+/// set weapon ias options
+function setzeIAS2() {
+    var weaponIasOptionCount = 32; // up from 24
+    if (statischIAS == true) { // is ias unset bool
+        statischIAS = false;
+        while (document.myform.IAS.length > 0) document.myform.IAS.options[0] = null;
+        for (i = 0; i <= 30 * mIAS; i++) {
+            if (mIAS == 1) {
+                neuElement = new Option(5 * i, 5 * i)
+            };
+            if (mIAS == 5) {
+                neuElement = new Option(i, i)
+            };
+            document.myform.IAS.options[document.myform.IAS.length] = neuElement;
+        }
+        while (document.myform.wIAS1.length > 0) document.myform.wIAS1.options[0] = null;
+        for (i = 0; i <= weaponIasOptionCount * mIAS; i++) {
+            if (mIAS == 1) {
+                neuElement = new Option(5 * i, 5 * i)
+            };
+            if (mIAS == 5) {
+                neuElement = new Option(i, i)
+            };
+            document.myform.wIAS1.options[document.myform.wIAS1.length] = neuElement;
+        }
+        while (document.myform.wIAS2.length > 0) document.myform.wIAS2.options[0] = null;
+        for (i = 0; i <= weaponIasOptionCount * mIAS; i++) {
+            if (mIAS == 1) {
+                neuElement = new Option(5 * i, 5 * i)
+            };
+            if (mIAS == 5) {
+                neuElement = new Option(i, i)
+            };
+            document.myform.wIAS2.options[document.myform.wIAS2.length] = neuElement;
+        }
+    }
 }
 
 /// set skill ias
