@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Path of Diablo attack speed helper
 // @namespace    http://tampermonkey.net/
-// @version      1
+// @version      2
 // @description  tweak the calc for PoD use.
 // @author       mmmpld
 // @match        https://diablo3.ingame.de/diablo-2/calculatoren/angriffsgeschwindigkeit/*
 // @grant        none
-// @updateURL
-// @downloadURL
+// @updateURL    https://github.com/mmmpld/pod-attack-calc/raw/master/pod-attack-calc.user.js
+// @downloadURL  https://github.com/mmmpld/pod-attack-calc/raw/master/pod-attack-calc.user.js
 // ==/UserScript==
 
 (function() {
