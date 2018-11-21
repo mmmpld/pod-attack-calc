@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</head>
+<body>
+    <form name=myform>
+        <table>
+            <tr>
+                <th colspan=2>
+                    <h3>Calculation</h3>
+                </th>
+            </tr>
+            <tr>
+                <td class=w50>Character</td>
+                <td class=w50>
+                    <select class=w50-10 name=char size=1 onChange="neuChar()">
+                        <option value=0>Amazon</option>
+                        <option value=1>Assassin</option>
+                        <option value=2>Barbarian</option>
+                        <option value=3>Druid</option>
+                        <option value=4>Necromancer</option>
+                        <option value=5 selected>Paladin</option>
+                        <option value=6>Sorceress</option>
+                        <option value=7>Merc - Rogue</option>
+                        <option value=8>Merc - Town Guard</option>
+                        <option value=9>Merc - Barbarian</option>
+                    </select>
+                    <select class=w50-10 name=charform size=1 onChange="neuCharform()"></select>
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <td>Primary Weapon<br><small><input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is primary select-->
+                        left weapon slot</small></td>
+                <td>
+                    <select class=w50-10 name=waffe size=1 onChange="neuWaffe()"></select><!-- Primary Weapon select-->
+                    <select class=w50-10 name=barbschwert size=1 onChange="neuBarbschwert()"></select><!-- barb 1 or 2-handed -->
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type=text name=infoWaffe1 size=32 value="Waffenlos [0]" readonly><!-- Primary Weapon base type and speed display -->
+                </td>
+            </tr>
+            <tr>
+                <td>Weapon-IAS<br><small>in %</small></td>
+                <td>
+                    <select name=wIAS1 size=1 onChange="berechneWerte()"></select><!-- Primary Weapon ias -->
+                </td>
+            </tr>
+            <tr>
+                <td>Secondary Weapon<br><small><input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is secondary select-->
+                        left weapon slot</small>
+                <td>
+                    <select name=zweitwaffe size=1 onChange="neuZweitwaffe()"></select><!-- Secondary Weapon select-->
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input class=info type=text name=infoWaffe2 size=32 readonly><!-- Secondary Weapon base type and speed display -->
+                </td>
+            </tr>
+            <tr>
+                <td>Weapon-IAS<br><small>in %</small></td>
+                <td>
+                    <select name=wIAS2 size=1 onChange="berechneWerte()"></select><!-- Secondary Weapon ias -->
+                </td>
+            </tr>
+            <tr>
+                <td>IAS<br><small>in %</small></td>
+                </th>
+                <td>
+                    <select name=IAS size=1 onChange="berechneWerte()"></select><!-- Off Weapon ias -->
+                    <input type=checkbox name=IASstufen onChange="setzeIASstufen()"><!-- Toggle ias interval between 1 and 5 -->change interval
+                </td>
+            </tr>
+            <tr>
+                <td>Skill</td>
+                <td>
+                    <select name=skill size=1 onChange="berechneWerte()"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Fanaticism<br><small>Level</small></td>
+                <td>
+                    <select name=fana size=1 onChange="berechneWerte()">
+                        <option value=0 selected>-</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Frenzy<br><small>Level</small></td>
+                <td>
+                    <select name=frenzy size=1 onChange="berechneWerte()">
+                        <option value=0 selected>-</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Werewolf<br><small>Level</small></td>
+                <td>
+                    <select name=wolf size=1 onChange="berechneWerte()">
+                        <option value=0 selected>-</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Burst of Speed<br><small>Level</small></td>
+                <td>
+                    <select name=tempo size=1 onChange="berechneWerte()">
+                        <option value=0 selected>-</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Holy Freeze<br><small>Level</small></td>
+                <td>
+                    <select name=holyfrost size=1 onChange="berechneWerte()">
+                        <option value=0 selected>-</option>
+                    </select>
+                    <input type=checkbox name=altern onChange="berechneWerte()">Decrepify</td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <button type="button" onclick="berechneBreakpoints()" class=" btn">Show IAS Table</button>
+                </td>
+            </tr>
+            <tr>
+                <th colspan=2>
+                    <h3>Results</h3>
+                </th>
+            </tr>
+            <tr>
+                <td>Speed</td>
+                <td>
+                    <input class=w50-10 type=text name=AnzFPA size=32 maxlength="" readonly>
+                    <input class=w50-10 type=text name=AnzMax size=32 maxlength="" readonly style="display: none"><!-- hidden as it currently lies -->
+                </td>
+            </tr>
+            <tr>
+                <td>Frequenzy</td>
+                <td><input class=daten type=text name=AnzFre size=32 maxlength="" readonly></td>
+            </tr>
+        </table>
+    </form>
+
+    <script src="calc.js"></script>
+    <script>
+        neuChar(document.myform);
+    </script>
+</body>
+
+</html>
+
+<!-- Mana Regen Method https://www.diabloii.net/forums/threads/beginner-frenzy-barb.738074/page-7#post-7276135 -->
