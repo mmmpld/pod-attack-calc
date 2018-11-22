@@ -20,7 +20,7 @@ var rollback3;
 var rollback4;
 var rollback5;
 var rollbackframe;
-var tempSkill;
+var tempSkill; // store selected skill when rebuilding skill options
 var tempWaffe;
 var tempZweitwaffe;
 var tempForm;
@@ -255,6 +255,7 @@ function berechneWerte() {
             document.myform.AnzFPA.value = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
             document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
         }
+        // Zeal
         if (document.myform.skill.value == 24) {
             frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
             if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
@@ -283,6 +284,7 @@ function berechneWerte() {
             }
             isMaxIas = true;
             document.myform.AnzFPA.value = rollback1 + "/" + rollback2 + "/" + rollback2 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
+            // Zeal
             if (document.myform.skill.value == 24) {
                 document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 * 3 + rollback3) / 5)) / 100 + " attacks per second";
             }
@@ -537,6 +539,7 @@ function berechneBreakpoints() {
                 if (document.myform.skill.value == 14) {
                     frames = 4;
                 }
+                // Zeal
                 if (document.myform.skill.value == 24) {
                     frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
                 }
@@ -550,6 +553,7 @@ function berechneBreakpoints() {
                 if (document.myform.skill.value == 14) {
                     frames = 13;
                 }
+                // Zeal
                 if (document.myform.skill.value == 24) {
                     frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
                 }
@@ -901,7 +905,7 @@ function neuChar() {
     berechneWerte();
 }
 
-/// 
+/// init after shape shift form selection
 function neuCharform() {
     setzeSkill();
     berechneWerte();
@@ -936,7 +940,7 @@ function setzeIASstufen() {
     berechneWerte();
 }
 
-/// 
+/// update shape shift options
 function setzeCharform() {
     tempForm = document.myform.charform.value;
     while (document.myform.charform.length > 0) document.myform.charform.options[0] = null;
@@ -957,7 +961,7 @@ function setzeCharform() {
     }
 }
 
-/// 
+/// set primary weapon options
 function setzeWaffe() {
     tempWaffe = document.myform.waffe.value;
     while (document.myform.waffe.length > 0) document.myform.waffe.options[0] = null;
@@ -996,7 +1000,7 @@ function setzeBarbschwert() {
     }
 }
 
-/// 
+/// set secondary weapon options
 function setzeZweitwaffe() {
     tempZweitwaffe = document.myform.zweitwaffe.value;
     while (document.myform.zweitwaffe.length > 0) document.myform.zweitwaffe.options[0] = null;
@@ -1087,16 +1091,22 @@ function setzeIAS() {
     }
 }
 
+function isAssasinClaw(weaponId) {
+    var weap = lookupWeapon[weaponId];
+    return weap[2] == 1;
+}
+
 /// update available attack skills
 function setzeSkill() {
-    tempSkill = document.myform.skill.value;
+    tempSkill = document.myform.skill.value; // save current skill selection
     while (document.getElementsByName("skill")[0].hasChildNodes()) document.getElementsByName("skill")[0].removeChild(document.getElementsByName("skill")[0].firstChild);
     var optgroup1 = document.createElement("optgroup");
     var optgroup2 = document.createElement("optgroup");
     optgroup1.label = "native attacks";
     optgroup2.label = "non-class skills";
+
     switch (document.myform.char.value) {
-        case "0":
+        case "0": // Amazon
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
             if (document.myform.charform.value == 0) {
@@ -1116,18 +1126,17 @@ function setzeSkill() {
                     neuElement = new Option(lookupAttack[5][0], lookupAttack[5][1]);
                     optgroup1.appendChild(neuElement);
                 }
-                document.myform.skill.appendChild(optgroup1);
                 if (lookupWeapon[document.myform.waffe.value][5] == 1) {
+                    // Zeal
                     neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
                     optgroup2.appendChild(neuElement);
-                    document.myform.skill.appendChild(optgroup2);
                 }
             }
-            if (document.myform.charform.value > 0) document.myform.skill.appendChild(optgroup1);
             break;
-        case "1":
+        case "1": // Assassin
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
+            // not shapeshifted
             if (document.myform.charform.value == 0) {
                 if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
                     neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
@@ -1159,20 +1168,15 @@ function setzeSkill() {
                 optgroup1.appendChild(neuElement);
                 neuElement = new Option(lookupAttack[14][0], lookupAttack[14][1]);
                 optgroup1.appendChild(neuElement);
-                document.myform.skill.appendChild(optgroup1);
-                if (lookupWeapon[document.myform.waffe.value][5] == 1) {
+                // should be weapons that can be passion runeword || POD chaos, any sin claw
+                if (lookupWeapon[document.myform.waffe.value][5] == 1 || isAssasinClaw(document.myform.waffe.value)) {
+                    // Zeal
                     neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
                     optgroup2.appendChild(neuElement);
                 }
-                if (lookupWeapon[document.myform.waffe.value][2] == 1) {
-                    neuElement = new Option(lookupAttack[19][0], lookupAttack[19][1]);
-                    optgroup2.appendChild(neuElement);
-                }
-                if ((lookupWeapon[document.myform.waffe.value][5] == 1) || (lookupWeapon[document.myform.waffe.value][2] == 1)) document.myform.skill.appendChild(optgroup2);
             }
-            if (document.myform.charform.value > 0) document.myform.skill.appendChild(optgroup1);
             break;
-        case "2":
+        case "2": // Barbarian
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
             if (document.myform.charform.value == 0) {
@@ -1202,20 +1206,18 @@ function setzeSkill() {
                     neuElement = new Option(lookupAttack[23][0], lookupAttack[23][1]);
                     optgroup1.appendChild(neuElement);
                 }
-                document.myform.skill.appendChild(optgroup1);
                 if ((lookupWeapon[document.myform.waffe.value][5] == 1) || (lookupWeapon[document.myform.zweitwaffe.value][5] == 1)) {
+                    // Zeal
                     neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
                     optgroup2.appendChild(neuElement);
-                    document.myform.skill.appendChild(optgroup2);
                 }
             }
             if (document.myform.charform.value == 2) {
                 neuElement = new Option(lookupAttack[26][0], lookupAttack[26][1]);
                 optgroup1.appendChild(neuElement);
             }
-            if (document.myform.charform.value > 0) document.myform.skill.appendChild(optgroup1);
             break;
-        case "3":
+        case "3": // Druid
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
             if (document.myform.charform.value == 0) {
@@ -1223,11 +1225,10 @@ function setzeSkill() {
                     neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
                     optgroup1.appendChild(neuElement);
                 }
-                document.myform.skill.appendChild(optgroup1);
                 if (lookupWeapon[document.myform.waffe.value][5] == 1) {
+                    // Zeal
                     neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
                     optgroup2.appendChild(neuElement);
-                    document.myform.skill.appendChild(optgroup2);
                 }
             }
             if (document.myform.charform.value == 1) {
@@ -1244,9 +1245,8 @@ function setzeSkill() {
                 neuElement = new Option(lookupAttack[29][0], lookupAttack[29][1]);
                 optgroup1.appendChild(neuElement);
             }
-            if (document.myform.charform.value > 0) document.myform.skill.appendChild(optgroup1);
             break;
-        case "5":
+        case "5": // Paladin
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
             if (document.myform.charform.value == 0) {
@@ -1255,6 +1255,7 @@ function setzeSkill() {
                     optgroup1.appendChild(neuElement);
                 }
                 if (lookupWeapon[document.myform.waffe.value][4] != 1) {
+                    // Zeal
                     neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
                     optgroup1.appendChild(neuElement);
                     neuElement = new Option(lookupAttack[30][0], lookupAttack[30][1]);
@@ -1269,30 +1270,26 @@ function setzeSkill() {
                     optgroup1.appendChild(neuElement);
                 }
             }
-            document.myform.skill.appendChild(optgroup1);
             break;
-        case "7":
+        case "7": // Merc - Rogue
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
-            document.myform.skill.appendChild(optgroup1);
             break;
-        case "8":
+        case "8": // Merc - Town Guard
             neuElement = new Option(lookupAttack[3][0], lookupAttack[3][1]);
             optgroup1.appendChild(neuElement);
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
-            document.myform.skill.appendChild(optgroup1);
             break;
-        case "9":
+        case "9": // Merc - Barbarian
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
             neuElement = new Option(lookupAttack[22][0], lookupAttack[22][1]);
             optgroup1.appendChild(neuElement);
             neuElement = new Option(lookupAttack[23][0], lookupAttack[23][1]);
             optgroup1.appendChild(neuElement);
-            document.myform.skill.appendChild(optgroup1);
             break;
-        default:
+        default: // Necromancer & Sorceress
             neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
             optgroup1.appendChild(neuElement);
             if (document.myform.charform.value == 0) {
@@ -1300,16 +1297,22 @@ function setzeSkill() {
                     neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
                     optgroup1.appendChild(neuElement);
                 }
-                document.myform.skill.appendChild(optgroup1);
                 if (lookupWeapon[document.myform.waffe.value][5] == 1) {
+                    // Zeal
                     neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
                     optgroup2.appendChild(neuElement);
-                    document.myform.skill.appendChild(optgroup2);
                 }
             }
-            if (document.myform.charform.value > 0) document.myform.skill.appendChild(optgroup1);
             break;
     }
+    // add options
+    if (optgroup1.hasChildNodes()) {
+        document.myform.skill.appendChild(optgroup1);
+    }
+    if (optgroup2.hasChildNodes()) {
+        document.myform.skill.appendChild(optgroup2);
+    }
+    // retain selected skill if still available
     for (i = 0; i < document.myform.skill.length; i++) {
         if ((document.myform.skill.options[i].value == tempSkill) && (document.myform.char.value != 8)) {
             document.myform.skill.selectedIndex = i;
@@ -1627,6 +1630,7 @@ var sequenzen = [
     [0, 0, 17, 17, 17, 0, 0, 0, 0],
     [0, 0, 12, 0, 12, 0, 0, 0, 0]
 ]
+// name, speed, type? used for sin ww, , , passion zeal
 var lookupWeapon = [
     ["[unarmed]", 0, 0, -1, 0, 0],
     ["Ancient Axe", 10, 6, -1, 0, 1],
