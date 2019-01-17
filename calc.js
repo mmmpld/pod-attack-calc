@@ -971,6 +971,7 @@ function setzeCharform() {
 
 /// set primary weapon options
 function setzeWaffe() {
+    console.debug('set primary weapon options');
     tempWaffe = document.myform.waffe.value;
     while (document.myform.waffe.length > 0) document.myform.waffe.options[0] = null;
     for (i = 0; i < lookupWeapon.length; i++) {
@@ -980,6 +981,7 @@ function setzeWaffe() {
                 || ((document.myform.char.value == 7) && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8)) // Act 1 Merc
                 || ((document.myform.char.value == 8) && ((lookupWeapon[i][4] == 8) || (lookupWeapon[i][4] == 2))) // Act 2 Merc
                 || ((document.myform.char.value == 9) && (lookupWeapon[i][4] == 9)) // Act 5 Merc
+                || ((document.myform.char.value == 10) && (lookupWeapon[i][4] == 9)) // Act 3 Merc
                 ) {
                 neuElement = new Option(unescape(lookupWeapon[i][0]), i);
                 document.myform.waffe.options[document.myform.waffe.length] = neuElement;
@@ -1056,11 +1058,11 @@ function setzeZweitwaffe() {
     }
 }
 
-/// 
+/// Updates the weapon info box with weapon type and wsm
 function waffenInfo() {
-    document.myform.infoWaffe1.value = unescape(waffengattung[lookupWeapon[document.myform.waffe.value][2]][10]) + " [" + lookupWeapon[document.myform.waffe.value][1] + "]";
+    document.myform.infoWaffe1.value = unescape(waffengattung[lookupWeapon[document.myform.waffe.value][2]][11]) + " [" + lookupWeapon[document.myform.waffe.value][1] + "]";
     if (document.myform.zweitwaffe.value > 0) {
-        document.myform.infoWaffe2.value = unescape(waffengattung[lookupWeapon[document.myform.zweitwaffe.value][2]][10]) + " [" + lookupWeapon[document.myform.zweitwaffe.value][1] + "]";
+        document.myform.infoWaffe2.value = unescape(waffengattung[lookupWeapon[document.myform.zweitwaffe.value][2]][11]) + " [" + lookupWeapon[document.myform.zweitwaffe.value][1] + "]";
     } else {
         document.myform.infoWaffe2.value = "";
     }
@@ -1295,11 +1297,15 @@ function setzeSkill() {
             optgroup1.appendChild(neuElement);
             break;
         case "9": // Merc - Barbarian
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
+            // neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]); // standard
+            // optgroup1.appendChild(neuElement);
+            neuElement = new Option(lookupAttack[22][0], lookupAttack[22][1]); // bash
             optgroup1.appendChild(neuElement);
-            neuElement = new Option(lookupAttack[22][0], lookupAttack[22][1]);
-            optgroup1.appendChild(neuElement);
-            neuElement = new Option(lookupAttack[23][0], lookupAttack[23][1]);
+            // neuElement = new Option(lookupAttack[23][0], lookupAttack[23][1]); // stun
+            // optgroup1.appendChild(neuElement);
+            break;
+        case "10": // Merc - Iron Wolves
+            neuElement = new Option(lookupAttack[31][0], lookupAttack[31][1]); // vengeance
             optgroup1.appendChild(neuElement);
             break;
         default: // Necromancer & Sorceress
@@ -1515,7 +1521,7 @@ var waffengattung = [
         [16, 16],
         [15, 15],
         [14, 14],
-        [16, 16], 0, 0, 0, "unarmed"
+        [16, 16], 0, 0, 0, 0, "unarmed"
     ],
     [
         [0, 0],
@@ -1524,7 +1530,7 @@ var waffengattung = [
         [0, 0],
         [0, 0],
         [0, 0],
-        [0, 0], 0, 0, 0, "claw"
+        [0, 0], 0, 0, 0, 0, "claw"
     ],
     [
         [16, 16],
@@ -1533,7 +1539,7 @@ var waffengattung = [
         [19, 19],
         [19, 19],
         [15, 15],
-        [20, 20], 0, 0, [16, 16], "one-handed swinging weapon"
+        [20, 20], 0, 0, [16, 16], [15, 15], "one-handed swinging weapon"
     ],
     [
         [20, 20],
@@ -1542,7 +1548,7 @@ var waffengattung = [
         [21, 21],
         [23, 23],
         [18, 19],
-        [24, 24], 0, 0, [16, 16], "two-handed sword"
+        [24, 24], 0, 0, [16, 16], 0, "two-handed sword"
     ],
     [
         [15, 15],
@@ -1551,7 +1557,7 @@ var waffengattung = [
         [19, 19],
         [19, 19],
         [17, 17],
-        [19, 19], 0, [16, 16], 0, "one-handed thrusting weapon"
+        [19, 19], 0, [16, 16], 0, 0, "one-handed thrusting weapon"
     ],
     [
         [18, 18],
@@ -1560,7 +1566,7 @@ var waffengattung = [
         [23, 23],
         [24, 24],
         [20, 20],
-        [23, 23], 0, [16, 16], 0, "spear"
+        [23, 23], 0, [16, 16], 0, 0, "spear"
     ],
     [
         [20, 20],
@@ -1569,7 +1575,7 @@ var waffengattung = [
         [17, 17],
         [20, 20],
         [18, 18],
-        [18, 18], 0, [16, 16], 0, "two-handed weapon"
+        [18, 18], 0, [16, 16], 0, 0, "two-handed weapon"
     ],
     [
         [14, 14],
@@ -1579,7 +1585,7 @@ var waffengattung = [
         [18, 18],
         [16, 16],
         [17, 17],
-        [15, 15], 0, 0, "bow"
+        [15, 15], 0, 0, 0, "bow"
     ],
     [
         [20, 20],
@@ -1588,7 +1594,7 @@ var waffengattung = [
         [20, 20],
         [20, 20],
         [20, 20],
-        [20, 20], [15, 15], 0, 0, "crossbow"
+        [20, 20], [15, 15], 0, 0, 0, "crossbow"
     ],
     [16, 16, 16, 18, 20, 16, 20]
 ]

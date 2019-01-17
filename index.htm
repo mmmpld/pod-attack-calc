@@ -26,6 +26,7 @@
                         <option value=7>Merc - Rogue</option>
                         <option value=8>Merc - Town Guard</option>
                         <option value=9>Merc - Barbarian</option>
+                        <option value=10>Merc - Iron Wolves</option>
                     </select>
                     <select class=w50-10 name=charform size=1 onChange="neuCharform()"></select>
                 </td>
@@ -75,7 +76,7 @@
                 </th>
                 <td>
                     <select name=IAS size=1 onChange="berechneWerte()"></select><!-- Off Weapon ias -->
-                    <input type=checkbox name=IASstufen onChange="setzeIASstufen()"><!-- Toggle ias interval between 1 and 5 -->change interval
+                    <label><input type=checkbox name=IASstufen onChange="setzeIASstufen()"><!-- Toggle ias interval between 1 and 5 -->show single increments</label>
                 </td>
             </tr>
             <tr>
@@ -122,7 +123,8 @@
                     <select name=holyfrost size=1 onChange="berechneWerte()">
                         <option value=0 selected>-</option>
                     </select>
-                    <input type=checkbox name=altern onChange="berechneWerte()">Decrepify</td>
+                    <label><input type=checkbox name=altern onChange="berechneWerte()">Decrepify</label>
+                </td>
             </tr>
             <tr>
                 <td colspan=2>
