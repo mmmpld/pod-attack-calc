@@ -48,7 +48,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
     if (lookupAttack[document.myform.skill.value][2] == 5) {
         AnimationSpeed = 128;
     }
-    // Assassin
+    // Bear
     if (document.myform.charform.value == 1) {
         if (lookupWeapon[document.myform.waffe.value][2] == 3) {
             FramesPerDirection = waffengattung[2][document.myform.char.value][0];
@@ -60,7 +60,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
         }
         StartingFrame = 0;
     }
-    // Barbarian
+    // Wolf
     if (document.myform.charform.value == 2) {
         if (lookupWeapon[document.myform.waffe.value][2] == 3) {
             FramesPerDirection = waffengattung[2][document.myform.char.value][0];
@@ -96,6 +96,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
 
 /// Calculate breakpoints
 function berechneWerte() {
+    console.debug('Calculating breakpoints for: ' + lookupAttack[document.myform.skill.value][0]);
     var ergebnis; // "result"
     var temp;
     var temp2;
@@ -115,7 +116,9 @@ function berechneWerte() {
         }
         ergebnis = berechneFPA(frames, acceleration, start);
     }
+    // standard attack
     if ((lookupAttack[document.myform.skill.value][2] == 1) && (lookupAttack[document.myform.skill.value][4] == 100)) {
+        console.debug('standard attack');
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
         if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
             frames = 16;
@@ -124,10 +127,14 @@ function berechneWerte() {
         if (ergebnis > berechneFPA(frames, 175, start)) {
             isMaxIas = false;
         }
-        // Amazon
+        // Unshifted
         if (document.myform.charform.value == 0) {
+            console.debug('unshifted');
             temp = ergebnis;
-            frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][1];
+            var weaponTypeNum = lookupWeapon[document.myform.waffe.value][2];
+            console.debug(weaponTypeNum);
+            frames = waffengattung[weaponTypeNum][document.myform.char.value][1];
+            console.debug(frames);
             if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                 frames = 16;
             }
@@ -137,6 +144,7 @@ function berechneWerte() {
             }
             ergebnis = (ergebnis + temp) / 2;
         }
+        // act 5 merc
         if (document.myform.char.value == 9) {
             ergebnis = ergebnis / 2;
         }
@@ -370,7 +378,7 @@ function berechneWerte() {
         if (((document.myform.char.value == 8) && (document.myform.skill.value == 3)) || ((document.myform.char.value == 9) && (document.myform.skill.value == 0))) {
             document.myform.AnzFre.value = parseInt(100 * 25 / (ergebnis + 1)) / 100 + " attacks per second";
         }
-        // not Amazon && &&
+        // Shape Shifted && &&
         if ((document.myform.charform.value > 0) && (document.myform.zweitwaffe.value > 0) && (document.myform.skill.value == 0)) {
             document.myform.AnzFPA.value = "Calculation makes no sense";
             document.myform.AnzFre.value = "";
@@ -391,12 +399,12 @@ function berechneBreakpoints() {
         TabFenster.close();
     }
     fenster = false;
-    // not Amazon && (|| &&)
+    // Shape Shifted && (|| &&)
     if ((document.myform.charform.value > 0) && ((document.myform.waffe.value == 0) || ((document.myform.zweitwaffe.value > 0) && (document.myform.skill.value == 0)))) {
         fenster = true;
     }
     cap = 0;
-    // Amazon
+    // Unshifted
     if (document.myform.charform.value == 0) {
         while (breakpoints.length > 0) {
             breakpoints.length = breakpoints.length - 1;
@@ -638,7 +646,7 @@ function berechneBreakpoints() {
         TabFenster.document.write('</table><script type="text/javascript">window.setTimeout("stop()", 1000);</script');
         TabFenster.document.write('>');
     }
-    // wereform table, not Amazon
+    // wereform table
     if (document.myform.charform.value > 0) {
         while (parseInt(OIAS / 5) != parseFloat(OIAS / 5)) {
             OIAS--;
@@ -691,7 +699,7 @@ function berechneBreakpoints() {
                     if ((document.myform.skill.value != 26) && (document.myform.skill.value != 29)) {
                         var tempframe = 12;
                         var tempframe2 = 10;
-                        // Barbarian
+                        // Bear
                         if (document.myform.charform.value == 2) {
                             tempframe = 13;
                             tempframe2 = 9;
@@ -777,7 +785,7 @@ function SchreibeDaten() {
     TabFenster.document.write('body { background-color:#000000; color:#FFFFFF; } .title { background-color:#45070E; color:#FFFFFF; font-weight:bold; } .wertitle { background-color:EBBE00; color:FFFFFF; font-weight:bold; } .auswahl { background-color:#BEBEBE; color:#FFFFFF; } .iaswahl { background-color:#45070E; color:#FFFFFF; }');
     TabFenster.document.write('</style></head><body><br><table align="center" border="0" cellpadding="0" cellspacing="5">');
     TabFenster.document.write('<tr><td class="title" colspan="2" align="center"><b>Data:</b></td></tr><tr><td width="130">Character:</td><td>' + document.myform.char.options[document.myform.char.selectedIndex].text + '</td></tr>');
-    // Not Amazon
+    // Unshifted
     if (document.myform.charform.value > 0) {
         TabFenster.document.write('<tr><td>Wereform:</td><td>' + document.myform.charform.options[document.myform.charform.selectedIndex].text + '</td></tr>');
     }
@@ -799,7 +807,7 @@ function SchreibeDaten() {
     if (document.myform.frenzy.selectedIndex > 0) {
         TabFenster.document.write('<tr><td>Frenzy:</td><td> Level ' + document.myform.frenzy.options[document.myform.frenzy.selectedIndex].text + '</td></tr>');
     }
-    // Barbarian
+    // Werewolf
     if ((document.myform.charform.value == 2) && (document.myform.wolf.selectedIndex > 0)) {
         TabFenster.document.write('<tr><td>Werewolf:</td><td> Level ' + document.myform.wolf.options[document.myform.wolf.selectedIndex].text + '</td></tr>');
     }
@@ -875,7 +883,7 @@ function berechneSIAS() {
     var wolf = parseInt(document.myform.wolf.value);
     var tempo = parseInt(document.myform.tempo.value);
     var holyfrost = parseInt(document.myform.holyfrost.value);
-    // != Barbarian
+    // != Wolf
     if (document.myform.charform.value != 2) wolf = 0;
     SIAS = fana + frenzy + wolf + tempo - holyfrost;
     if (document.myform.skill.value == 16) {
@@ -967,7 +975,12 @@ function setzeWaffe() {
     while (document.myform.waffe.length > 0) document.myform.waffe.options[0] = null;
     for (i = 0; i < lookupWeapon.length; i++) {
         if ((lookupWeapon[i][3] < 0) || (lookupWeapon[i][3] == document.myform.char.value)) {
-            if ((document.myform.char.value < 7) || ((document.myform.char.value == 7) && (lookupWeapon[i][2] == 7)) || ((document.myform.char.value == 8) && ((lookupWeapon[i][4] == 8) || (lookupWeapon[i][4] == 2))) || ((document.myform.char.value == 9) && (lookupWeapon[i][4] == 9))) {
+            if (
+                    (document.myform.char.value < 7) // player characters
+                || ((document.myform.char.value == 7) && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8)) // Act 1 Merc
+                || ((document.myform.char.value == 8) && ((lookupWeapon[i][4] == 8) || (lookupWeapon[i][4] == 2))) // Act 2 Merc
+                || ((document.myform.char.value == 9) && (lookupWeapon[i][4] == 9)) // Act 5 Merc
+                ) {
                 neuElement = new Option(unescape(lookupWeapon[i][0]), i);
                 document.myform.waffe.options[document.myform.waffe.length] = neuElement;
             }
@@ -1491,6 +1504,9 @@ function FensterTreffer() {
 }
 var werform = ["unchanged", "Werebear", "Werewolf"]
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0]
+// first level is weapon type number
+// second level is char value
+// third level: first value is ?, seccond value is "frames" (full animation frames?)
 var waffengattung = [
     [
         [13, 13],
@@ -1572,7 +1588,7 @@ var waffengattung = [
         [20, 20],
         [20, 20],
         [20, 20],
-        [20, 20], 0, 0, 0, "crossbow"
+        [20, 20], [15, 15], 0, 0, "crossbow"
     ],
     [16, 16, 16, 18, 20, 16, 20]
 ]
@@ -1630,7 +1646,7 @@ var sequenzen = [
     [0, 0, 17, 17, 17, 0, 0, 0, 0],
     [0, 0, 12, 0, 12, 0, 0, 0, 0]
 ]
-// name, speed, type? used for sin ww, , , passion zeal
+// name, speed, type, , , passion zeal
 var lookupWeapon = [
     ["[unarmed]", 0, 0, -1, 0, 0],
     ["Ancient Axe", 10, 6, -1, 0, 1],
