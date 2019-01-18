@@ -34,6 +34,10 @@ var breakpointsAPS = new Array();
 
 /// Calc FPA
 function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
+    console.debug('calc FPA');
+    console.debug(FramesPerDirection);
+    console.debug(Acceleration);
+    console.debug(StartingFrame);
     var Acceleration;
     var AnimationSpeed = 256;
     // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
@@ -202,6 +206,7 @@ function berechneWerte() {
             ergebnis = ergebnis / 2;
         }
     }
+    // Whirlwind
     if (document.myform.skill.value == 19) {
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
         if (lookupWeapon[document.myform.waffe.value][2] == 3) {
@@ -236,7 +241,9 @@ function berechneWerte() {
         }
         isMaxIas = true;
     }
+    // Dragon Talon, Zeal, Fury
     if (lookupAttack[document.myform.skill.value][4] == 0) {
+        // Dragon Talon
         if (document.myform.skill.value == 14) {
             rollback1 = berechneFPA(4, acceleration, 0);
             rollback1++;
@@ -247,6 +254,7 @@ function berechneWerte() {
             document.myform.AnzFPA.value = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
             document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
         }
+        // Fury
         if (document.myform.skill.value == 29) {
             frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
             rollback1 = berechneFPA(frames, acceleration, 0);
@@ -267,10 +275,16 @@ function berechneWerte() {
         }
         // Zeal
         if (document.myform.skill.value == 24) {
-            frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
-            if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+            var weaponTypeNum = lookupWeapon[document.myform.waffe.value][2];
+            console.debug(weaponTypeNum);
+            frames = aktionsframe[weaponTypeNum][document.myform.char.value];
+            // 2-h sword && barb single handed
+            var isBarbTwoHandedSwordAsOneHanded = false;
+            if ((weaponTypeNum == 3) && (document.myform.barbschwert.value == 1)) {
+                isBarbTwoHandedSwordAsOneHanded = true;
                 frames = 7;
             }
+            console.debug(frames);
             rollback1 = berechneFPA(frames, acceleration, start);
             if (rollback1 > berechneFPA(frames, 175, start)) {
                 isMaxIas = false;
@@ -281,8 +295,9 @@ function berechneWerte() {
                 isMaxIas = false;
             }
             rollback2++;
-            frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-            if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+            frames = waffengattung[weaponTypeNum][document.myform.char.value][0];
+            console.debug(frames);
+            if (isBarbTwoHandedSwordAsOneHanded) {
                 frames = 16;
             }
             rollback3 = berechneFPA(frames, acceleration, 0);
@@ -300,6 +315,7 @@ function berechneWerte() {
             }
         }
     }
+    // Strafe
     if (lookupAttack[document.myform.skill.value][4] == 50) {
         frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
         if (acceleration > 149) {
@@ -345,6 +361,7 @@ function berechneWerte() {
         document.myform.AnzFPA.value = rollback1 + "/" + rollback2 + "/" + rollback3 + "/" + rollback4 + "/" + rollback5 + " frames per attack";
         document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3 * 4 + rollback4 * 3 + rollback5) / 10)) / 100 + " attacks per second";
     }
+    // Fend
     if (lookupAttack[document.myform.skill.value][4] == 40) {
         frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
         rollback1 = berechneFPA(frames, acceleration, start);
@@ -371,6 +388,7 @@ function berechneWerte() {
         document.myform.AnzFPA.value = rollback1 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
         document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3) / 2)) / 100 + " attacks per second";
     }
+    // Most attacks
     if (lookupAttack[document.myform.skill.value][4] == 100) {
         document.myform.AnzFPA.value = ergebnis + " frames per attack";
         document.myform.AnzFre.value = parseInt(100 * 25 / ergebnis) / 100 + " attacks per second";
@@ -380,7 +398,7 @@ function berechneWerte() {
         if (((document.myform.char.value == 8) && (document.myform.skill.value == 3)) || ((document.myform.char.value == 9) && (document.myform.skill.value == 0))) {
             document.myform.AnzFre.value = parseInt(100 * 25 / (ergebnis + 1)) / 100 + " attacks per second";
         }
-        // Shape Shifted && &&
+        // Shape Shifted && off-hand weapon not unarmed && standard attack
         if ((document.myform.charform.value > 0) && (document.myform.zweitwaffe.value > 0) && (document.myform.skill.value == 0)) {
             document.myform.AnzFPA.value = "Calculation makes no sense";
             document.myform.AnzFre.value = "";
@@ -579,6 +597,7 @@ function berechneBreakpoints() {
                 }
             }
         }
+        // Strafe
         if (lookupAttack[document.myform.skill.value][4] == 50) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 149; i++) {
                 frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
@@ -606,6 +625,7 @@ function berechneBreakpoints() {
                 }
             }
         }
+        // Fend
         if (lookupAttack[document.myform.skill.value][4] == 40) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
@@ -1514,7 +1534,7 @@ var werform = ["unchanged", "Werebear", "Werewolf"]
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0]
 // first level is weapon type number
 // second level is char value
-// third level: first value is "FramesPerDirection" (shape shifted frames?), seccond value is "frames" (full animation frames?)
+// third level: first value is "FramesPerDirection" (shape shifted frames? Zeal rollback3), second value is "frames" (full animation frames?)
 var waffengattung = [
     [
         [13, 13],
@@ -1600,9 +1620,12 @@ var waffengattung = [
     ],
     [16, 16, 16, 18, 20, 16, 20] // Throw
 ]
+// used by zeal, strafe, and fend
+// first level is the weapon type
+// second level is the character class
 var aktionsframe = [
     [8, 6, 6, 8, 8, 7, 9],
-    [0, 0, 0, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 0, 0], // claws
     [10, 7, 7, 9, 9, 7, 12],
     [12, 11, 8, 10, 11, 8, 14],
     [9, 7, 7, 8, 9, 8, 11],
@@ -1655,7 +1678,7 @@ var sequenzen = [
     [0, 0, 12, 0, 12, 0, 0, 0, 0]
 ]
 // name, speed, weapon type, , weapon class, passion zeal
-/* types:
+/* weapon types:
  * 0 = unarmed
  * 1 = claw
  * 2 = one-handed swinging weapon
