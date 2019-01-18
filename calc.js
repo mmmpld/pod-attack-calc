@@ -50,8 +50,8 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
     }
     // Bear
     if (document.myform.charform.value == 1) {
-        if (lookupWeapon[document.myform.waffe.value][2] == 3) {
-            FramesPerDirection = waffengattung[2][document.myform.char.value][0];
+        if (lookupWeapon[document.myform.waffe.value][2] == 3) { // 2-hand swords
+            FramesPerDirection = waffengattung[2][document.myform.char.value][0]; //1-hand swinging weapon
         }
         AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(document.myform.IAS.value) - lookupWeapon[document.myform.waffe.value][1]) * AnimationSpeed / 100)));
         FramesPerDirection = 12;
@@ -62,12 +62,12 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
     }
     // Wolf
     if (document.myform.charform.value == 2) {
-        if (lookupWeapon[document.myform.waffe.value][2] == 3) {
-            FramesPerDirection = waffengattung[2][document.myform.char.value][0];
+        if (lookupWeapon[document.myform.waffe.value][2] == 3) { // 2-hand swords
+            FramesPerDirection = waffengattung[2][document.myform.char.value][0]; //1-hand swinging weapon
         }
         AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(document.myform.IAS.value) - lookupWeapon[document.myform.waffe.value][1]) * AnimationSpeed / 100)));
         FramesPerDirection = 13;
-        if ((document.myform.skill.value == 29) && (StartingFrame == 0)) {
+        if ((document.myform.skill.value == 29) && (StartingFrame == 0)) { // Fury
             FramesPerDirection = 7;
         }
         if (lookupAttack[document.myform.skill.value][2] == 6) {
@@ -77,11 +77,11 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
     }
     FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * Acceleration / 100)) - 1;
     FPAmax = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * 175 / 100)) - 1;
-    if (document.myform.skill.value == 19) {
+    if (document.myform.skill.value == 19) { // whirlwind
         FPA = Math.floor(256 * FramesPerDirection / Math.floor(AnimationSpeed * Acceleration / 100));
         FPAmax = 0;
     }
-    if (document.myform.skill.value == 26) {
+    if (document.myform.skill.value == 26) { // Feral Rage
         FPA = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * Acceleration / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100))) / (2 * Math.floor(AnimationSpeed * Acceleration / 100))) - 1;
         FPAmax = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * 175 / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100))) / (2 * Math.floor(AnimationSpeed * 175 / 100))) - 1;
     }
@@ -161,8 +161,10 @@ function berechneWerte() {
         }
         isMaxIas = true;
     }
-    if ((lookupAttack[document.myform.skill.value][2] >= 2) && (lookupAttack[document.myform.skill.value][2] <= 5) && (lookupAttack[document.myform.skill.value][4] == 100)) {
-        if (lookupAttack[document.myform.skill.value][2] == 2) {
+    if ((lookupAttack[document.myform.skill.value][2] >= 2)
+        && (lookupAttack[document.myform.skill.value][2] <= 5) 
+        && (lookupAttack[document.myform.skill.value][4] == 100)) {
+        if (lookupAttack[document.myform.skill.value][2] == 2) { // Throw
             frames = waffengattung[9][document.myform.char.value];
         }
         if (lookupAttack[document.myform.skill.value][2] == 3) {
@@ -981,7 +983,7 @@ function setzeWaffe() {
                 || ((document.myform.char.value == 7) && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8)) // Act 1 Merc
                 || ((document.myform.char.value == 8) && ((lookupWeapon[i][4] == 8) || (lookupWeapon[i][4] == 2))) // Act 2 Merc
                 || ((document.myform.char.value == 9) && (lookupWeapon[i][4] == 9)) // Act 5 Merc
-                || ((document.myform.char.value == 10) && (lookupWeapon[i][4] == 9)) // Act 3 Merc
+                || ((document.myform.char.value == 10) && (lookupWeapon[i][4] == 9) && (lookupWeapon[i][2] == 2)) // Act 3 Merc
                 ) {
                 neuElement = new Option(unescape(lookupWeapon[i][0]), i);
                 document.myform.waffe.options[document.myform.waffe.length] = neuElement;
@@ -1269,19 +1271,19 @@ function setzeSkill() {
                     neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
                     optgroup1.appendChild(neuElement);
                 }
+                // not bow or xbow
                 if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    // Zeal
-                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
+                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]); // Zeal
                     optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[30][0], lookupAttack[30][1]);
+                    neuElement = new Option(lookupAttack[30][0], lookupAttack[30][1]); // Sacrifice
                     optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[31][0], lookupAttack[31][1]);
+                    neuElement = new Option(lookupAttack[31][0], lookupAttack[31][1]); // Vengeance
                     optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[32][0], lookupAttack[32][1]);
+                    neuElement = new Option(lookupAttack[32][0], lookupAttack[32][1]); // Conversion
                     optgroup1.appendChild(neuElement);
                 }
                 if ((lookupWeapon[document.myform.waffe.value][2] == 0) || (lookupWeapon[document.myform.waffe.value][2] == 2) || (lookupWeapon[document.myform.waffe.value][2] == 4)) {
-                    neuElement = new Option(lookupAttack[25][0], lookupAttack[25][1]);
+                    neuElement = new Option(lookupAttack[25][0], lookupAttack[25][1]); // Smite
                     optgroup1.appendChild(neuElement);
                 }
             }
@@ -1512,7 +1514,7 @@ var werform = ["unchanged", "Werebear", "Werewolf"]
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0]
 // first level is weapon type number
 // second level is char value
-// third level: first value is ?, seccond value is "frames" (full animation frames?)
+// third level: first value is "FramesPerDirection" (shape shifted frames?), seccond value is "frames" (full animation frames?)
 var waffengattung = [
     [
         [13, 13],
@@ -1596,7 +1598,7 @@ var waffengattung = [
         [20, 20],
         [20, 20], [15, 15], 0, 0, 0, "crossbow"
     ],
-    [16, 16, 16, 18, 20, 16, 20]
+    [16, 16, 16, 18, 20, 16, 20] // Throw
 ]
 var aktionsframe = [
     [8, 6, 6, 8, 8, 7, 9],
@@ -1652,7 +1654,18 @@ var sequenzen = [
     [0, 0, 17, 17, 17, 0, 0, 0, 0],
     [0, 0, 12, 0, 12, 0, 0, 0, 0]
 ]
-// name, speed, type, , , passion zeal
+// name, speed, weapon type, , weapon class, passion zeal
+/* types:
+ * 0 = unarmed
+ * 1 = claw
+ * 2 = one-handed swinging weapon
+ * 3 = two-handed sword
+ * 4 = one-handed thrusting weapon
+ * 5 = spear
+ * 6 = two-handed weapon
+ * 7 = bow
+ * 8 = crossbow
+ */
 var lookupWeapon = [
     ["[unarmed]", 0, 0, -1, 0, 0],
     ["Ancient Axe", 10, 6, -1, 0, 1],
