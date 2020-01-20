@@ -1388,7 +1388,14 @@ function replaceSkillSelectOptions($select, values) {
 }
 
 function updateFanaValues() {
-    var values = [0,20,24,27,30,32,34,35,36,38,38,39,40,41,41,42,43,43,43,44,44];
+    var values = [];
+    for (i = 0; i <= 50; i++) {
+        var v = Math.floor(Math.floor((110 * i) / (6 + i)) * (40 - 10) / 100) + 10;
+        if (i == 0) { 
+            v = 0;
+        }
+        values.push(v);
+    }
     var $select = jQuery("select[name=fana]");
     replaceSkillSelectOptions($select, values);
 }
