@@ -208,38 +208,11 @@ function berechneWerte() {
     }
     // Whirlwind
     if (document.myform.skill.value == 19) {
-        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-        if (lookupWeapon[document.myform.waffe.value][2] == 3) {
-            frames = 16;
-        }
-        acceleration = 100 + parseInt(document.myform.wIAS1.value) - parseInt(lookupWeapon[document.myform.waffe.value][1]);
-        temp = berechneFPA(frames, acceleration, start);
-        ergebnis = wirbelwind(temp);
-        if (ergebnis > 4) {
-            isMaxIas = false;
-        }
-        if (document.myform.waffe.value == 0) {
-            ergebnis = 10;
-            document.myform.AnzMax.value = "further IAS useless";
-        }
-        if (document.myform.zweitwaffe.value > 0) {
-            temp2 = ergebnis;
-            frames = waffengattung[lookupWeapon[document.myform.zweitwaffe.value][2]][document.myform.char.value][0];
-            if (lookupWeapon[document.myform.zweitwaffe.value][2] == 3) {
-                frames = 16;
-            }
-            acceleration = 100 + parseInt(document.myform.wIAS2.value) - parseInt(lookupWeapon[document.myform.zweitwaffe.value][1]);
-            temp = berechneFPA(frames, acceleration, start);
-            ergebnis = wirbelwind(temp);
-            if (ergebnis > 4) {
-                isMaxIas = false;
-            }
-            ergebnis = (ergebnis + temp2) / 4;
-        }
+        ergebnis = 4; // uses classic whirlwind locked at 4 frame attack for all weapons
+        isMaxIas = true;
         if (isMaxIas) {
             document.myform.AnzMax.value = "further IAS useless";
         }
-        isMaxIas = true;
     }
     // Dragon Talon, Zeal, Fury
     if (lookupAttack[document.myform.skill.value][4] == 0) {
