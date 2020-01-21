@@ -40,16 +40,18 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
     console.debug(StartingFrame);
     var Acceleration;
     var AnimationSpeed = 256;
+    var attackSkill = data.attack[document.myform.skill.value];
     // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
     if ((document.myform.char.value == 1) && (lookupWeapon[document.myform.waffe.value][2] == 1)) {
         AnimationSpeed = 208;
     }
     // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
-    if (((lookupAttack[document.myform.skill.value][2] == 3) || (lookupAttack[document.myform.skill.value][2] == 7)) && (document.myform.skill.value != 19)) {
+    console.debug("attack skill");
+    if (((attackSkill.animation == 3) || (attackSkill.animation == 7)) && (attackSkill.title !== "Whirlwind")) {
         AnimationSpeed = 256;
     }
     // Laying Traps
-    if (lookupAttack[document.myform.skill.value][2] == 5) {
+    if (attackSkill.animation == 5) {
         AnimationSpeed = 128;
     }
     // Bear
@@ -59,7 +61,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
         }
         AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(document.myform.IAS.value) - lookupWeapon[document.myform.waffe.value][1]) * AnimationSpeed / 100)));
         FramesPerDirection = 12;
-        if (lookupAttack[document.myform.skill.value][2] == 6) {
+        if (attackSkill.animation == 6) {
             FramesPerDirection = 10;
         }
         StartingFrame = 0;
@@ -74,7 +76,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
         if ((document.myform.skill.value == 29) && (StartingFrame == 0)) { // Fury
             FramesPerDirection = 7;
         }
-        if (lookupAttack[document.myform.skill.value][2] == 6) {
+        if (attackSkill.animation == 6) {
             FramesPerDirection = 10;
         }
         StartingFrame = 0;
@@ -91,7 +93,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
     }
     if (cap == 1) {
         document.myform.AnzMax.value = "";
-        if ((lookupAttack[document.myform.skill.value][4] == 100) && (lookupAttack[document.myform.skill.value][2] != 1) && (FPA <= FPAmax)) {
+        if ((attackSkill.rollback == 100) && (attackSkill.animation != 1) && (FPA <= FPAmax)) {
             document.myform.AnzMax.value = "further IAS useless";
         }
     }
@@ -100,20 +102,20 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
 
 /// Calculate breakpoints
 function berechneWerte() {
-    console.debug('Calculating breakpoints for: ' + lookupAttack[document.myform.skill.value][0]);
     var ergebnis; // "result"
     var temp;
-    var temp2;
+    var attackSkill = data.attack[document.myform.skill.value];
+    console.debug('Calculating breakpoints for: ' + attackSkill.title);
     berechneSIAS();
     berechneEIAS();
     berechneWSM();
     var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
     var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
     start = 0;
-    if (((document.myform.char.value == 0) || (document.myform.char.value == 6)) && (lookupAttack[document.myform.skill.value][2] < 2)) {
+    if (((document.myform.char.value == 0) || (document.myform.char.value == 6)) && (attackSkill.animation < 2)) {
         start = startframe[lookupWeapon[document.myform.waffe.value][2]];
     }
-    if (((lookupAttack[document.myform.skill.value][2] == 0) || (lookupAttack[document.myform.skill.value][2] == 6)) && (lookupAttack[document.myform.skill.value][4] == 100)) {
+    if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
         if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
             frames = 16;
@@ -121,7 +123,7 @@ function berechneWerte() {
         ergebnis = berechneFPA(frames, acceleration, start);
     }
     // standard attack
-    if ((lookupAttack[document.myform.skill.value][2] == 1) && (lookupAttack[document.myform.skill.value][4] == 100)) {
+    if ((attackSkill.animation == 1) && (attackSkill.rollback == 100)) {
         console.debug('standard attack');
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
         if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
@@ -165,25 +167,25 @@ function berechneWerte() {
         }
         isMaxIas = true;
     }
-    if ((lookupAttack[document.myform.skill.value][2] >= 2)
-        && (lookupAttack[document.myform.skill.value][2] <= 5) 
-        && (lookupAttack[document.myform.skill.value][4] == 100)) {
-        if (lookupAttack[document.myform.skill.value][2] == 2) { // Throw
+    if ((attackSkill.animation >= 2)
+        && (attackSkill.animation <= 5) 
+        && (attackSkill.rollback == 100)) {
+        if (attackSkill.animation == 2) { // Throw
             frames = waffengattung[9][document.myform.char.value];
         }
-        if (lookupAttack[document.myform.skill.value][2] == 3) {
+        if (attackSkill.animation == 3) {
             frames = 13;
         }
-        if (lookupAttack[document.myform.skill.value][2] == 4) {
+        if (attackSkill.animation == 4) {
             frames = 12;
         }
-        if (lookupAttack[document.myform.skill.value][2] == 5) {
+        if (attackSkill.animation == 5) {
             frames = 8;
         }
         ergebnis = berechneFPA(frames, acceleration, start);
     }
-    if ((lookupAttack[document.myform.skill.value][2] == 7) && (document.myform.skill.value != 19) && (lookupAttack[document.myform.skill.value][4] == 100)) {
-        frames = sequenzen[lookupAttack[document.myform.skill.value][3]][lookupWeapon[document.myform.waffe.value][2]];
+    if ((attackSkill.animation == 7) && (document.myform.skill.value != 19) && (attackSkill.rollback == 100)) {
+        frames = sequences[attackSkill.sequence][lookupWeapon[document.myform.waffe.value][2]];
         if ((document.myform.skill.value > 8) && (document.myform.skill.value < 13) && (document.myform.zweitwaffe.value > 0)) {
             frames = 16;
         }
@@ -215,7 +217,7 @@ function berechneWerte() {
         }
     }
     // Dragon Talon, Zeal, Fury
-    if (lookupAttack[document.myform.skill.value][4] == 0) {
+    if (attackSkill.rollback == 0) {
         // Dragon Talon
         if (document.myform.skill.value == 14) {
             rollback1 = berechneFPA(4, acceleration, 0);
@@ -289,7 +291,7 @@ function berechneWerte() {
         }
     }
     // Strafe
-    if (lookupAttack[document.myform.skill.value][4] == 50) {
+    if (attackSkill.rollback == 50) {
         frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
         if (acceleration > 149) {
             acceleration = 149;
@@ -299,26 +301,26 @@ function berechneWerte() {
             isMaxIas = false;
         }
         rollback1++;
-        rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+        rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
         rollback2 = berechneFPA(frames, acceleration, rollbackframe);
         if (rollback2 > berechneFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
         }
         rollback2++;
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
         rollback3 = berechneFPA(frames, acceleration, rollbackframe);
         if (rollback3 > berechneFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
         }
         rollback3++;
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback3) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback3) / 256) * attackSkill.rollback / 100);
         rollback4 = berechneFPA(frames, acceleration, rollbackframe);
         if (rollback4 > berechneFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
         }
         rollback4++;
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * attackSkill.rollback / 100);
         rollback5 = berechneFPA(frames, acceleration, rollbackframe);
         if (rollback5 > berechneFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
@@ -335,21 +337,21 @@ function berechneWerte() {
         document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3 * 4 + rollback4 * 3 + rollback5) / 10)) / 100 + " attacks per second";
     }
     // Fend
-    if (lookupAttack[document.myform.skill.value][4] == 40) {
+    if (attackSkill.rollback == 40) {
         frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
         rollback1 = berechneFPA(frames, acceleration, start);
         if (rollback1 > berechneFPA(frames, 175, start)) {
             isMaxIas = false;
         }
         rollback1++;
-        rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+        rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
         rollback2 = berechneFPA(frames, acceleration, rollbackframe);
         if (rollback2 > berechneFPA(frames, 175, rollbackframe)) {
             isMaxIas = false;
         }
         rollback2++;
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
         rollback3 = berechneFPA(frames, acceleration, rollbackframe);
         if (rollback3 > berechneFPA(frames, 175, rollbackframe)) {
             isMaxIas = false;
@@ -362,7 +364,7 @@ function berechneWerte() {
         document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3) / 2)) / 100 + " attacks per second";
     }
     // Most attacks
-    if (lookupAttack[document.myform.skill.value][4] == 100) {
+    if (attackSkill.rollback == 100) {
         document.myform.AnzFPA.value = ergebnis + " frames per attack";
         document.myform.AnzFre.value = parseInt(100 * 25 / ergebnis) / 100 + " attacks per second";
         if (document.myform.char.value > 6) {
@@ -388,6 +390,7 @@ function berechneBreakpoints() {
     var temp1;
     var OIAS = document.myform.IAS.value;
     var WIAS = document.myform.wIAS1.value;
+    var attackSkill = data.attack[document.myform.skill.value];
     if (fenster == false) {
         TabFenster.close();
     }
@@ -412,7 +415,12 @@ function berechneBreakpoints() {
             breakpointsAPS.length = breakpointsAPS.length - 1;
         }
         temp1 = 0;
-        if (((lookupAttack[document.myform.skill.value][2] == 0) || (lookupAttack[document.myform.skill.value][2] == 2) || (lookupAttack[document.myform.skill.value][2] == 3) || (lookupAttack[document.myform.skill.value][2] == 4) || (lookupAttack[document.myform.skill.value][2] == 5)) && (lookupAttack[document.myform.skill.value][4] == 100)) {
+        if (((attackSkill.animation == 0) 
+            || (attackSkill.animation == 2) 
+            || (attackSkill.animation == 3) 
+            || (attackSkill.animation == 4) 
+            || (attackSkill.animation == 5)
+            ) && (attackSkill.rollback == 100)) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 ergebnis = berechneFPA(frames, i, start);
                 if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMprimaer < 120)) {
@@ -421,7 +429,7 @@ function berechneBreakpoints() {
                 }
             }
         }
-        if ((lookupAttack[document.myform.skill.value][2] == 1) && (document.myform.zweitwaffe.value == 0) && (lookupAttack[document.myform.skill.value][4] == 100)) {
+        if ((attackSkill.animation == 1) && (document.myform.zweitwaffe.value == 0) && (attackSkill.rollback == 100)) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
@@ -443,7 +451,7 @@ function berechneBreakpoints() {
                 }
             }
         }
-        if ((lookupAttack[document.myform.skill.value][2] == 1) && (document.myform.zweitwaffe.value > 0) && (lookupAttack[document.myform.skill.value][4] == 100)) {
+        if ((attackSkill.animation == 1) && (document.myform.zweitwaffe.value > 0) && (attackSkill.rollback == 100)) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
@@ -503,7 +511,7 @@ function berechneBreakpoints() {
                 }
             }
         }
-        if ((lookupAttack[document.myform.skill.value][2] == 7) && (document.myform.skill.value != 19)) {
+        if ((attackSkill.animation == 7) && (document.myform.skill.value != 19)) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 ergebnis = berechneFPA(frames, i, 0);
                 ergebnis++;
@@ -535,7 +543,7 @@ function berechneBreakpoints() {
                 }
             }
         }
-        if (lookupAttack[document.myform.skill.value][4] == 0) {
+        if (attackSkill.rollback == 0) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 if (document.myform.skill.value == 14) {
                     frames = 4;
@@ -571,22 +579,22 @@ function berechneBreakpoints() {
             }
         }
         // Strafe
-        if (lookupAttack[document.myform.skill.value][4] == 50) {
+        if (attackSkill.rollback == 50) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 149; i++) {
                 frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
                 rollback1 = berechneFPA(frames, i, start);
                 rollback1++;
-                RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+                RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
                 rollback2 = berechneFPA(frames, i, RBframe);
                 rollback2++;
-                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * attackSkill.rollback / 100);
                 rollback3 = berechneFPA(frames, i, RBframe);
                 rollback3++;
-                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback3) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback3) / 256) * attackSkill.rollback / 100);
                 rollback4 = berechneFPA(frames, i, RBframe);
                 rollback4++;
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback4) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback4) / 256) * attackSkill.rollback / 100);
                 rollback5 = berechneFPA(frames, i, RBframe);
                 if ((rollback2 == rollback3) || (rollback3 == rollback4)) {
                     ergebnis = rollback1 + rollback2 + rollback3 + rollback4 + rollback5;
@@ -599,16 +607,16 @@ function berechneBreakpoints() {
             }
         }
         // Fend
-        if (lookupAttack[document.myform.skill.value][4] == 40) {
+        if (attackSkill.rollback == 40) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
                 rollback1 = berechneFPA(frames, i, start);
                 rollback1++;
-                RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+                RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
                 rollback2 = berechneFPA(frames, i, RBframe);
                 rollback2++;
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * lookupAttack[document.myform.skill.value][4] / 100);
+                RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * attackSkill.rollback / 100);
                 rollback3 = berechneFPA(frames, i, RBframe);
                 ergebnis = rollback1 + rollback2 + rollback3;
                 if (temp1 != ergebnis) {
@@ -628,12 +636,11 @@ function berechneBreakpoints() {
         if (((document.myform.char.value == 8) && (document.myform.skill.value == 3)) || ((document.myform.char.value == 9) && (document.myform.skill.value == 0))) {
             aidel = 1;
         }
-        if (lookupAttack[document.myform.skill.value][4] == 100) {
+        if (attackSkill.rollback == 100) {
             for (i = 0; i < breakpoints.length; i++) {
                 TabFenster.document.write('<tr><td height="30" align="center">' + breakpoints[i][0] + '</td><td align="center">' + breakpoints[i][1] + '</td><td align="center">' + parseInt(2500 / (aidel + breakpoints[i][1])) / 100 + '</td></tr>');
             }
-        }
-        if (lookupAttack[document.myform.skill.value][4] != 100) {
+        } else {
             for (i = 0; i < breakpoints.length; i++) {
                 TabFenster.document.write('<tr><td height="30" align="center">' + breakpoints[i][0] + '</td><td align="center">' + breakpoints[i][1] + '</td><td align="center">' + breakpointsAPS[i] + '</td></tr>');
             }
@@ -699,7 +706,7 @@ function berechneBreakpoints() {
                             tempframe = 13;
                             tempframe2 = 9;
                         }
-                        if (lookupAttack[document.myform.skill.value][2] == 6) {
+                        if (attackSkill.animation == 6) {
                             tempframe = 10;
                         }
                         breakpoints[breakpoints.length] = Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) - 1;
@@ -878,6 +885,7 @@ function berechneSIAS() {
     var wolf = parseInt(document.myform.wolf.value);
     var tempo = parseInt(document.myform.tempo.value);
     var holyfrost = parseInt(document.myform.holyfrost.value);
+    var attackSkill = data.attack[document.myform.skill.value];
     // != Wolf
     if (document.myform.charform.value != 2) wolf = 0;
     SIAS = fana + frenzy + wolf + tempo - holyfrost;
@@ -890,7 +898,7 @@ function berechneSIAS() {
     if (document.myform.altern.checked == true) {
         SIAS = SIAS - 50;
     }
-    if ((lookupAttack[document.myform.skill.value][2] == 7) && (document.myform.char.value < 7)) {
+    if ((attackSkill.animation == 7) && (document.myform.char.value < 7)) {
         SIAS = SIAS - 30;
     }
 }
@@ -1106,6 +1114,12 @@ function isAssasinClaw(weaponId) {
     return weap[2] == 1;
 }
 
+function skillOptionElement(title)
+{
+    var skill = data.attack.find(a => a.title === title);
+    return new Option(skill.title, skill.index);
+}
+
 /// update available attack skills
 function setzeSkill() {
     tempSkill = document.myform.skill.value; // save current skill selection
@@ -1117,204 +1131,148 @@ function setzeSkill() {
 
     switch (document.myform.char.value) {
         case "0": // Amazon
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Standard"));
             if (document.myform.charform.value == 0) {
                 if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Throw"));
                 }
                 if (lookupWeapon[document.myform.waffe.value][4] == 1) {
-                    neuElement = new Option(lookupAttack[4][0], lookupAttack[4][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Strafe"));
                 }
                 if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][2] == 5)) {
-                    neuElement = new Option(lookupAttack[2][0], lookupAttack[2][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[3][0], lookupAttack[3][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[5][0], lookupAttack[5][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Impale"));
+                    optgroup1.appendChild(skillOptionElement("Jab"));
+                    optgroup1.appendChild(skillOptionElement("Fend"));
                 }
                 if (lookupWeapon[document.myform.waffe.value][5] == 1) {
-                    // Zeal
-                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
-                    optgroup2.appendChild(neuElement);
+                    optgroup2.appendChild(skillOptionElement("Zeal"));
                 }
             }
             break;
         case "1": // Assassin
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Standard"));
             // not shapeshifted
             if (document.myform.charform.value == 0) {
                 if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Throw"));
                 }
-                neuElement = new Option(lookupAttack[15][0], lookupAttack[15][1]);
-                optgroup1.appendChild(neuElement);
+                optgroup1.appendChild(skillOptionElement("Laying Traps"));
                 if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    neuElement = new Option(lookupAttack[6][0], lookupAttack[6][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[7][0], lookupAttack[7][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[8][0], lookupAttack[8][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Tiger Strike"));
+                    optgroup1.appendChild(skillOptionElement("Cobra Strike"));
+                    optgroup1.appendChild(skillOptionElement("Phoenix Strike"));
                 }
                 if ((lookupWeapon[document.myform.waffe.value][2] == 1) || (lookupWeapon[document.myform.waffe.value][2] == 0)) {
-                    neuElement = new Option(lookupAttack[9][0], lookupAttack[9][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[10][0], lookupAttack[10][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[11][0], lookupAttack[11][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Fists of Fire"));
+                    optgroup1.appendChild(skillOptionElement("Claws of Thunder"));
+                    optgroup1.appendChild(skillOptionElement("Blades of Ice"));
                 }
                 if ((lookupWeapon[document.myform.waffe.value][2] == 1) && (lookupWeapon[document.myform.zweitwaffe.value][2] == 1)) {
-                    neuElement = new Option(lookupAttack[12][0], lookupAttack[12][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Dragon Claw"));
                 }
-                neuElement = new Option(lookupAttack[13][0], lookupAttack[13][1]);
-                optgroup1.appendChild(neuElement);
-                neuElement = new Option(lookupAttack[14][0], lookupAttack[14][1]);
-                optgroup1.appendChild(neuElement);
+                optgroup1.appendChild(skillOptionElement("Dragon Tail"));
+                optgroup1.appendChild(skillOptionElement("Dragon Talon"));
                 // should be weapons that can be passion runeword || POD chaos, any sin claw
                 if (lookupWeapon[document.myform.waffe.value][5] == 1 || isAssasinClaw(document.myform.waffe.value)) {
-                    // Zeal
-                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
-                    optgroup2.appendChild(neuElement);
+                    optgroup2.appendChild(skillOptionElement("Zeal"));
                 }
             }
             break;
         case "2": // Barbarian
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Standard"));
             if (document.myform.charform.value == 0) {
+                // primary throwing weapon
                 if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Throw"));
                 }
+                // offhand weapon
                 if (document.myform.zweitwaffe.value > 0) {
-                    neuElement = new Option(lookupAttack[16][0], lookupAttack[16][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[17][0], lookupAttack[17][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Double Swing"));
+                    optgroup1.appendChild(skillOptionElement("Frenzy"));
                 }
+                // primary throwing and offhand throwing
                 if (((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) && ((lookupWeapon[document.myform.zweitwaffe.value][4] == 2) || (lookupWeapon[document.myform.zweitwaffe.value][4] == 3))) {
-                    neuElement = new Option(lookupAttack[18][0], lookupAttack[18][1]);
-                    optgroup1.appendChild(neuElement);
-                }
-                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    neuElement = new Option(lookupAttack[19][0], lookupAttack[19][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[20][0], lookupAttack[20][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[21][0], lookupAttack[21][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[22][0], lookupAttack[22][1]);
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[23][0], lookupAttack[23][1]);
-                    optgroup1.appendChild(neuElement);
-                }
-                if ((lookupWeapon[document.myform.waffe.value][5] == 1) || (lookupWeapon[document.myform.zweitwaffe.value][5] == 1)) {
-                    // Zeal
-                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
-                    optgroup2.appendChild(neuElement);
-                }
-            }
-            if (document.myform.charform.value == 2) {
-                neuElement = new Option(lookupAttack[26][0], lookupAttack[26][1]);
-                optgroup1.appendChild(neuElement);
-            }
-            break;
-        case "3": // Druid
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
-            if (document.myform.charform.value == 0) {
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
-                    optgroup1.appendChild(neuElement);
-                }
-                if (lookupWeapon[document.myform.waffe.value][5] == 1) {
-                    // Zeal
-                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
-                    optgroup2.appendChild(neuElement);
-                }
-            }
-            if (document.myform.charform.value == 1) {
-                neuElement = new Option(lookupAttack[27][0], lookupAttack[27][1]);
-                optgroup1.appendChild(neuElement);
-            }
-            if (document.myform.charform.value == 2) {
-                neuElement = new Option(lookupAttack[26][0], lookupAttack[26][1]);
-                optgroup1.appendChild(neuElement);
-                neuElement = new Option(lookupAttack[27][0], lookupAttack[27][1]);
-                optgroup1.appendChild(neuElement);
-                neuElement = new Option(lookupAttack[28][0], lookupAttack[28][1]);
-                optgroup1.appendChild(neuElement);
-                neuElement = new Option(lookupAttack[29][0], lookupAttack[29][1]);
-                optgroup1.appendChild(neuElement);
-            }
-            break;
-        case "5": // Paladin
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
-            if (document.myform.charform.value == 0) {
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Double Throw"));
                 }
                 // not bow or xbow
                 if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]); // Zeal
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[30][0], lookupAttack[30][1]); // Sacrifice
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[31][0], lookupAttack[31][1]); // Vengeance
-                    optgroup1.appendChild(neuElement);
-                    neuElement = new Option(lookupAttack[32][0], lookupAttack[32][1]); // Conversion
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Whirlwind"));
+                    optgroup1.appendChild(skillOptionElement("Concentrate"));
+                    optgroup1.appendChild(skillOptionElement("Berserk"));
+                    optgroup1.appendChild(skillOptionElement("Bash"));
+                    optgroup1.appendChild(skillOptionElement("Stun"));
+                    //optgroup1.appendChild(skillOptionElement("Cleave"));
+                }
+                // can zeal
+                if ((lookupWeapon[document.myform.waffe.value][5] == 1) || (lookupWeapon[document.myform.zweitwaffe.value][5] == 1)) {
+                    optgroup2.appendChild(skillOptionElement("Zeal"));
+                }
+            }
+            // wolf barb
+            if (document.myform.charform.value == 2) {
+                optgroup1.appendChild(skillOptionElement("Feral Rage"));
+                optgroup1.appendChild(skillOptionElement("Cleave"));
+            }
+            break;
+        case "3": // Druid
+            optgroup1.appendChild(skillOptionElement("Standard"));
+            if (document.myform.charform.value == 0) {
+                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
+                    optgroup1.appendChild(skillOptionElement("Throw"));
+                }
+                if (lookupWeapon[document.myform.waffe.value][5] == 1) {
+                    optgroup2.appendChild(skillOptionElement("Zeal"));
+                }
+            }
+            if (document.myform.charform.value == 1) {
+                optgroup1.appendChild(skillOptionElement("Hunger"));
+            }
+            if (document.myform.charform.value == 2) {
+                optgroup1.appendChild(skillOptionElement("Feral Rage"));
+                optgroup1.appendChild(skillOptionElement("Hunger"));
+                optgroup1.appendChild(skillOptionElement("Rabies"));
+                optgroup1.appendChild(skillOptionElement("Fury"));
+            }
+            break;
+        case "5": // Paladin
+            optgroup1.appendChild(skillOptionElement("Standard"));
+            if (document.myform.charform.value == 0) {
+                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
+                    optgroup1.appendChild(skillOptionElement("Throw"));
+                }
+                // not bow or xbow
+                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
+                    optgroup1.appendChild(skillOptionElement("Zeal"));
+                    optgroup1.appendChild(skillOptionElement("Sacrifice"));
+                    optgroup1.appendChild(skillOptionElement("Vengeance"));
+                    optgroup1.appendChild(skillOptionElement("Conversion"));
                 }
                 if ((lookupWeapon[document.myform.waffe.value][2] == 0) || (lookupWeapon[document.myform.waffe.value][2] == 2) || (lookupWeapon[document.myform.waffe.value][2] == 4)) {
-                    neuElement = new Option(lookupAttack[25][0], lookupAttack[25][1]); // Smite
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Smite"));
                 }
             }
             break;
         case "7": // Merc - Rogue
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Standard"));
             break;
         case "8": // Merc - Town Guard
-            neuElement = new Option(lookupAttack[3][0], lookupAttack[3][1]);
-            optgroup1.appendChild(neuElement);
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Jab"));
+            optgroup1.appendChild(skillOptionElement("Standard"));
             break;
         case "9": // Merc - Barbarian
-            // neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]); // standard
-            // optgroup1.appendChild(neuElement);
-            neuElement = new Option(lookupAttack[22][0], lookupAttack[22][1]); // bash
-            optgroup1.appendChild(neuElement);
-            // neuElement = new Option(lookupAttack[23][0], lookupAttack[23][1]); // stun
-            // optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Bash"));
             break;
         case "10": // Merc - Iron Wolves
-            neuElement = new Option(lookupAttack[31][0], lookupAttack[31][1]); // vengeance
-            optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Vengeance"));
             break;
         default: // Necromancer & Sorceress
-            neuElement = new Option(lookupAttack[0][0], lookupAttack[0][1]);
-            optgroup1.appendChild(neuElement);
+            optgroup1.appendChild(skillOptionElement("Standard"));
             if (document.myform.charform.value == 0) {
                 if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    neuElement = new Option(lookupAttack[1][0], lookupAttack[1][1]);
-                    optgroup1.appendChild(neuElement);
+                    optgroup1.appendChild(skillOptionElement("Throw"));
                 }
                 if (lookupWeapon[document.myform.waffe.value][5] == 1) {
-                    // Zeal
-                    neuElement = new Option(lookupAttack[24][0], lookupAttack[24][1]);
-                    optgroup2.appendChild(neuElement);
+                    optgroup2.appendChild(skillOptionElement("Zeal"));
                 }
             }
             break;
@@ -1429,87 +1387,6 @@ function IASabstufung() {
     setzeIAS();
 }
 
-/// Cast rate window?
-function FensterZauber() {
-    FensterZ = window.open("", "Casting Speeds", "width=1200,height=700,left=110,top=50,scrollbars=yes");
-    FensterZ.focus();
-    FensterZ.document.write('<html><head><style type="text/css"> .body { background-color:#000000; color:#FFFFFF; } .normal { background-color:#000000; color:#FFFFFF; } .title { background-color:#45070E; color:#FFFFFF; font-weight:bold; }</style></head>');
-    FensterZ.document.write('<body><br><br><table cellpadding="4" cellspacing="1" style="border-color:#45070E; border-width:2px; border-style:solid;" align="center"><colgroup width="100" span="9"><tr align="center" class="title"><td class="normal"></td><td>Amazon</td><td>Assassin</td><td>Barbarian</td><td>Druid</td><td>Necromancer</td><td>Paladin</td><td>Sorceress</td><td width="115">Sorceress L/CL</td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">19</td><td>00 </td><td>   </td><td>   </td><td>  </td><td>   </td><td>   </td><td>   </td><td>00 </td></tr>		<tr align="center"><td class="title">18</td><td>07</td><td>   </td><td>   </td><td>00 </td><td>  </td><td>  </td><td>   </td><td>07 </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">17</td><td>14 </td><td>   </td><td>   </td><td>04</td><td>   </td><td>   </td><td>   </td><td>15 </td></tr>		<tr align="center"><td class="title">16</td><td>22</td><td>00 </td><td>   </td><td>10 </td><td>  </td><td>  </td><td>   </td><td>23 </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">15</td><td>32 </td><td>08 </td><td>   </td><td>19</td><td>00 </td><td>00 </td><td>   </td><td>35 </td></tr>		<tr align="center"><td class="title">14</td><td>48</td><td>16 </td><td>   </td><td>30 </td><td>09</td><td>09</td><td>   </td><td>52 </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">13</td><td>68 </td><td>27 </td><td>00 </td><td>46</td><td>18 </td><td>18 </td><td>00 </td><td>78 </td></tr>		<tr align="center"><td class="title">12</td><td>99</td><td>42 </td><td>09 </td><td>68 </td><td>30</td><td>30</td><td>09 </td><td>117</td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">11</td><td>152</td><td>65 </td><td>20 </td><td>99</td><td>48 </td><td>48 </td><td>20 </td><td>194</td></tr>		<tr align="center"><td class="title">10</td><td>  </td><td>102</td><td>37 </td><td>163</td><td>75</td><td>75</td><td>37 </td><td>   </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">09</td><td>   </td><td>174</td><td>63 </td><td>  </td><td>125</td><td>125</td><td>63 </td><td>   </td></tr>		<tr align="center"><td class="title">08</td><td>  </td><td>   </td><td>105</td><td>   </td><td>  </td><td>  </td><td>105</td><td>   </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">07</td><td>   </td><td>   </td><td>200</td><td>  </td><td>   </td><td>   </td><td>200</td><td>   </td></tr></table>');
-    FensterZ.document.write('<p align="center"><b>L/CL:</b> Skills "Lightning" und "Chain Lightning"</p>');
-    FensterZ.document.write('<br><br>');
-    FensterZ.document.write('<table cellspacing="1" cellpadding="4" align="center" style="border-color:#45070E; border-width:2px; border-style:solid;"><colgroup width="100" span="5"><tr align="center" class="title"><td class="normal"></td><td>Iron Wolf</td><td>Vampire</td><td>Werebear</td><td>Werewolf</td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">23</td><td>  </td><td>00 </td><td>   </td><td>   </td></tr>		<tr align="center"><td class="title">22</td><td>   </td><td>06 </td><td>  </td><td>  </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">21</td><td>  </td><td>11 </td><td>   </td><td>   </td></tr>		<tr align="center"><td class="title">20</td><td>   </td><td>18 </td><td>  </td><td>  </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">19</td><td>  </td><td>24 </td><td>   </td><td>   </td></tr>		<tr align="center"><td class="title">18</td><td>   </td><td>35 </td><td>  </td><td>  </td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">17</td><td>00</td><td>48 </td><td>   </td><td>   </td></tr>		<tr align="center"><td class="title">16</td><td>08 </td><td>65 </td><td>00</td><td>00</td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">15</td><td>15</td><td>86 </td><td>07 </td><td>06 </td></tr>		<tr align="center"><td class="title">14</td><td>26 </td><td>120</td><td>15</td><td>14</td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">13</td><td>39</td><td>180</td><td>26 </td><td>26 </td></tr>		<tr align="center"><td class="title">12</td><td>58 </td><td>   </td><td>40</td><td>40</td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">11</td><td>86</td><td>   </td><td>63 </td><td>60 </td></tr>		<tr align="center"><td class="title">10</td><td>138</td><td>   </td><td>99</td><td>95</td></tr>');
-    FensterZ.document.write('<tr align="center"><td class="title">09</td><td>  </td><td>   </td><td>163</td><td>157</td></tr></table><br><br><script type="text/javascript">window.setTimeout("stop()", 1000);</script');
-    FensterZ.document.write('>');
-}
-
-/// Block rate window
-function FensterBlock() {
-    FensterB = window.open("", "Blocking Speeds", "width=1200,height=700,left=110,top=50,scrollbars=yes");
-    FensterB.focus();
-    FensterB.document.write('<html><head><style type="text/css"> body { background-color:#000000; color:#FFFFFF; } .normal { background-color:#000000; color:#FFFFFF; } .title { background-color:#45070E; color:#FFFFFF; font-weight:bold; }</style></head>');
-    FensterB.document.write('<body><br><br><table cellpadding="4" cellspacing="1" style="border-color:#45070E; border-width:2px; border-style:solid;" align="center"><colgroup width="100" span="10"><tr align="center" class="title"><td class="normal"></td><td>Amazon 1hs</td><td>Amazon</td><td>Assassin</td><td>Barbarian</td><td>Druid</td><td>Necromancer</td><td>Paladin</td><td>Paladin HS</td><td>Sorceress</td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">17</td><td>00 </td><td>   </td><td>   </td><td>  </td><td>   </td><td>   </td><td>   </td><td>  </td><td>   </td></tr>			<tr align="center"><td class="title">16</td><td>04 </td><td>  </td><td>  </td><td>   </td><td>   </td><td>   </td><td>  </td><td>  </td><td>    </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">15</td><td>06 </td><td>   </td><td>   </td><td>  </td><td>   </td><td>   </td><td>   </td><td>  </td><td>   </td></tr>			<tr align="center"><td class="title">14</td><td>11 </td><td>  </td><td>  </td><td>   </td><td>   </td><td>   </td><td>  </td><td>  </td><td>    </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">13</td><td>15 </td><td>   </td><td>   </td><td>  </td><td>   </td><td>   </td><td>   </td><td>  </td><td>   </td></tr>			<tr align="center"><td class="title">12</td><td>23 </td><td>  </td><td>  </td><td>   </td><td>   </td><td>   </td><td>  </td><td>  </td><td>    </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">11</td><td>29 </td><td>   </td><td>   </td><td>  </td><td>00 </td><td>00 </td><td>   </td><td>  </td><td>   </td></tr>			<tr align="center"><td class="title">10</td><td>40 </td><td>  </td><td>  </td><td>   </td><td>06 </td><td>06 </td><td>  </td><td>  </td><td>    </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">09</td><td>56 </td><td>   </td><td>   </td><td>  </td><td>13 </td><td>13 </td><td>   </td><td>  </td><td>00 </td></tr>			<tr align="center"><td class="title">08</td><td>80 </td><td>  </td><td>  </td><td>   </td><td>20 </td><td>20 </td><td>  </td><td>  </td><td>07  </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">07</td><td>120</td><td>   </td><td>   </td><td>00</td><td>32 </td><td>32 </td><td>   </td><td>  </td><td>15 </td></tr>			<tr align="center"><td class="title">06</td><td>200</td><td>  </td><td>  </td><td>09 </td><td>52 </td><td>52 </td><td>  </td><td>  </td><td>27  </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">05</td><td>480</td><td>00 </td><td>00 </td><td>20</td><td>86 </td><td>86 </td><td>00 </td><td>  </td><td>48 </td></tr>			<tr align="center"><td class="title">04</td><td>   </td><td>13</td><td>13</td><td>42 </td><td>174</td><td>174</td><td>13</td><td>  </td><td>86  </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">03</td><td>   </td><td>32 </td><td>32 </td><td>86</td><td>600</td><td>600</td><td>32 </td><td>  </td><td>200</td></tr>			<tr align="center"><td class="title">02</td><td>   </td><td>86</td><td>86</td><td>280</td><td>   </td><td>   </td><td>86</td><td>00</td><td>4680</td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">01</td><td>   </td><td>600</td><td>600</td><td>  </td><td>   </td><td>   </td><td>600</td><td>86</td><td>   </td></tr></table>');
-    FensterB.document.write('<p align="center"><b>1hs:</b> single-handed swinging weapons (swords, axes, clubs, maces, sceptre, hammers, throwing axes)<br><b>HS:</b> Skill "Holy Shield"</p>');
-    FensterB.document.write('<br><br>');
-    FensterB.document.write('<table cellspacing="1" cellpadding="4" align="center" style="border-color:#45070E; border-width:2px; border-style:solid;"><colgroup width="100" span="4"><tr align="center" class="title"><td class="normal"></td><td>Vampire</td><td>Werebear</td><td>Werewolf</td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">15</td><td>00 </td><td>    </td><td>   </td></tr>		<tr align="center"><td class="title">14</td><td>02 </td><td></td><td></td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">13</td><td>06 </td><td>    </td><td>   </td></tr>		<tr align="center"><td class="title">12</td><td>10 </td><td>00 </td><td>    </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">11</td><td>16 </td><td>05  </td><td>   </td></tr>		<tr align="center"><td class="title">10</td><td>24 </td><td>10 </td><td>    </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">09</td><td>34 </td><td>16  </td><td>00 </td></tr>		<tr align="center"><td class="title">08</td><td>48 </td><td>27 </td><td>07  </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">07</td><td>72 </td><td>40  </td><td>15 </td></tr>		<tr align="center"><td class="title">06</td><td>117</td><td>65 </td><td>27  </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">05</td><td>208</td><td>109 </td><td>48 </td></tr>		<tr align="center"><td class="title">04</td><td>638</td><td>223</td><td>86  </td></tr>');
-    FensterB.document.write('<tr align="center"><td class="title">03</td><td>   </td><td>1320</td><td>200</td></tr>		<tr align="center"><td class="title">02</td><td>   </td><td>   </td><td>4680</td></tr></table><br><br><script type="text/javascript">window.setTimeout("stop()", 1000);</script');
-    FensterB.document.write('>');
-}
-
-/// Hit recovery window
-function FensterTreffer() {
-    FensterT = window.open("", "Hit Recovery Speeds", "width=1200,height=700,left=110,top=50,scrollbars=yes");
-    FensterT.focus();
-    FensterT.document.write('<html><head><style type="text/css"> body { background-color:#000000; color:#FFFFFF; } .normal { background-color:#000000; color:#FFFFFF; } .title { background-color:#45070E; color:#FFFFFF; font-weight:bold; }</style></head>');
-    FensterT.document.write('<body><br><br><table cellpadding="4" cellspacing="1" style="border-color:#45070E; border-width:2px; border-style:solid;" align="center"><colgroup width="100" span="10"><tr align="center" class="title"><td class="normal"></td><td>Amazon</td><td>Assassin</td><td>Barbarian</td><td>Druid 1hs</td><td>Druid</td><td>Necromancer</td><td width="115">Paladin stf/2ht</td><td>Paladin</td><td>Sorceress</td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">15</td><td>   </td><td>   </td><td>   </td><td>   </td><td>   </td><td>   </td><td>    </td><td>   </td><td>00 </td></tr>		<tr align="center"><td class="title">14</td><td>   </td><td>    </td><td>    </td><td>00 </td><td>   </td><td>   </td><td>   </td><td>    </td><td>05  </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">13</td><td>   </td><td>   </td><td>   </td><td>03 </td><td>00 </td><td>00 </td><td>00  </td><td>   </td><td>09 </td></tr>		<tr align="center"><td class="title">12</td><td>   </td><td>    </td><td>    </td><td>07 </td><td>05 </td><td>05 </td><td>03 </td><td>    </td><td>14  </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">11</td><td>00 </td><td>   </td><td>   </td><td>13 </td><td>10 </td><td>10 </td><td>07  </td><td>   </td><td>20 </td></tr>		<tr align="center"><td class="title">10</td><td>06 </td><td>    </td><td>    </td><td>19 </td><td>16 </td><td>16 </td><td>13 </td><td>    </td><td>30  </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">09</td><td>13 </td><td>00 </td><td>00 </td><td>29 </td><td>26 </td><td>26 </td><td>20  </td><td>00 </td><td>42 </td></tr>		<tr align="center"><td class="title">08</td><td>20 </td><td>07  </td><td>07  </td><td>42 </td><td>39 </td><td>39 </td><td>32 </td><td>07  </td><td>60  </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">07</td><td>32 </td><td>15 </td><td>15 </td><td>63 </td><td>56 </td><td>56 </td><td>48  </td><td>15 </td><td>86 </td></tr>		<tr align="center"><td class="title">06</td><td>52 </td><td>27  </td><td>27  </td><td>99 </td><td>86 </td><td>86 </td><td>75 </td><td>27  </td><td>142 </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">05</td><td>86 </td><td>48 </td><td>48 </td><td>174</td><td>152</td><td>152</td><td>129 </td><td>48 </td><td>280</td></tr>		<tr align="center"><td class="title">04</td><td>174</td><td>86  </td><td>86  </td><td>456</td><td>377</td><td>377</td><td>280</td><td>86  </td><td>1480</td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">03</td><td>600</td><td>200</td><td>200</td><td>   </td><td>   </td><td>   </td><td>4680</td><td>200</td><td>   </td></tr>		<tr align="center"><td class="title">02</td><td>   </td><td>4680</td><td>4680</td><td>   </td><td>   </td><td>   </td><td>   </td><td>4680</td><td>    </td></tr></table>');
-    FensterT.document.write('<p align="center"><b>1hs:</b> single-handed swinging weapons (swords, axes, clubs, maces, sceptre, hammers, throwing axes)<br><b>stf/2ht</b>: All two-handed weapons except swords</p>');
-    FensterT.document.write('<br><br>');
-    FensterT.document.write('<table cellspacing="1" cellpadding="4" align="center" style="border-color:#45070E; border-width:2px; border-style:solid;"><colgroup width="100" span="8"><tr align="center" class="title"><td class="normal"></td><td>Barbarian</td><td>Iron Wolf</td><td>Rogue</td><td>Town Guard</td><td>Vampire</td><td>Werebear</td><td>Werewolf</td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">17</td><td>   </td><td>00 </td><td>   </td><td>   </td><td>   </td><td>   </td><td>  </td></tr>		<tr align="center"><td class="title">16</td><td>    </td><td>05 </td><td>   </td><td>   </td><td>   </td><td>   </td><td>   </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">15</td><td>   </td><td>08 </td><td>   </td><td>00 </td><td>00 </td><td>   </td><td>  </td></tr>		<tr align="center"><td class="title">14</td><td>    </td><td>13 </td><td>   </td><td>05 </td><td>02 </td><td>   </td><td>   </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">13</td><td>   </td><td>18 </td><td>   </td><td>09 </td><td>06 </td><td>00 </td><td>  </td></tr>		<tr align="center"><td class="title">12</td><td>    </td><td>24 </td><td>   </td><td>14 </td><td>10 </td><td>05 </td><td>   </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">11</td><td>   </td><td>32 </td><td>00 </td><td>20 </td><td>16 </td><td>10 </td><td>  </td></tr>		<tr align="center"><td class="title">10</td><td>    </td><td>46 </td><td>06 </td><td>30 </td><td>24 </td><td>16 </td><td>   </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">09</td><td>00 </td><td>63 </td><td>13 </td><td>42 </td><td>34 </td><td>24 </td><td>  </td></tr>		<tr align="center"><td class="title">08</td><td>07  </td><td>86 </td><td>20 </td><td>60 </td><td>48 </td><td>37 </td><td>   </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">07</td><td>15 </td><td>133</td><td>32 </td><td>86 </td><td>72 </td><td>54 </td><td>00</td></tr>		<tr align="center"><td class="title">06</td><td>27  </td><td>232</td><td>52 </td><td>142</td><td>117</td><td>86 </td><td>09 </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">05</td><td>48 </td><td>600</td><td>86 </td><td>280</td><td>208</td><td>152</td><td>20</td></tr>		<tr align="center"><td class="title">04</td><td>86  </td><td>   </td><td>174</td><td>   </td><td>   </td><td>360</td><td>42 </td></tr>');
-    FensterT.document.write('<tr align="center"><td class="title">03</td><td>200</td><td>   </td><td>600</td><td>   </td><td>   </td><td>   </td><td>86</td></tr>		<tr align="center"><td class="title">02</td><td>4680</td><td>   </td><td>   </td><td>   </td><td>   </td><td>   </td><td>280</td></tr></table><br><br><script type="text/javascript">window.setTimeout("stop()", 1000);</script');
-    FensterT.document.write('>');
-}
 var werform = ["unchanged", "Werebear", "Werewolf"]
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0]
 // first level is weapon type number
@@ -1614,43 +1491,8 @@ var aktionsframe = [
     [6, 7, 7, 8, 9, 8, 9],
     [9, 10, 10, 10, 11, 10, 11]
 ]
-// attack skills
-var lookupAttack = [
-    ["Standard",        0,  1, 0, 100],
-    ["Throw",           1,  2, 0, 100],
-    ["Impale",          2,  7, 0, 100],
-    ["Jab",             3,  7, 1, 100],
-    ["Strafe",          4,  0, 0, 50],
-    ["Fend",            5,  0, 0, 40],
-    ["Tiger Strike",    6,  0, 0, 100],
-    ["Cobra Strike",    7,  0, 0, 100],
-    ["Phoenix Strike",  8,  0, 0, 100],
-    ["Fists of Fire",   9,  7, 2, 100],
-    ["Claws of Thunder",10, 7, 2, 100],
-    ["Blades of Ice",   11, 7, 2, 100],
-    ["Dragon Claw",     12, 7, 2, 100],
-    ["Dragon Tail",     13, 3, 0, 100],
-    ["Dragon Talon",    14, 3, 0, 0],
-    ["Laying Traps",    15, 5, 0, 100],
-    ["Double Swing",    16, 7, 3, 100],
-    ["Frenzy",          17, 7, 3, 100],
-    ["Double Throw",    18, 7, 4, 100],
-    ["Whirlwind",       19, 7, 0, 100],
-    ["Concentrate",     20, 0, 0, 100],
-    ["Berserk",         21, 0, 0, 100],
-    ["Bash",            22, 0, 0, 100],
-    ["Stun",            23, 0, 0, 100],
-    ["Zeal",            24, 0, 0, 0],
-    ["Smite",           25, 4, 0, 100],
-    ["Feral Rage",      26, 0, 0, 100],
-    ["Hunger",          27, 6, 0, 100],
-    ["Rabies",          28, 6, 0, 100],
-    ["Fury",            29, 0, 0, 0],
-    ["Sacrifice",       30, 0, 0, 100],
-    ["Vengeance",       31, 0, 0, 100],
-    ["Conversion",      32, 0, 0, 100]
-]
-var sequenzen = [
+
+var sequences = [
     [0, 0, 0, 0, 21, 24, 0, 0, 0],
     [0, 0, 0, 0, 18, 21, 0, 0, 0],
     [12, 12, 16, 0, 0, 0, 0, 0, 0],
@@ -1962,3 +1804,246 @@ var lookupWeapon = [
     ["Yew Wand", 10, 2, -1, 0, 0],
     ["Zweihander", -10, 3, -1, 9, 1]
 ]
+
+var data = {
+    attack: [
+        {
+            title: "Standard",
+            index: 0,
+            animation: 1,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Throw",
+            index: 1,
+            animation: 2,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Impale",
+            index: 2,
+            animation: 7,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Jab",
+            index: 3,
+            animation: 7,
+            sequence: 1,
+            rollback: 100
+        },
+        {
+            title: "Strafe",
+            index: 4,
+            animation: 0,
+            sequence: 0,
+            rollback: 50
+        },
+        {
+            title: "Fend",
+            index: 5,
+            animation: 0,
+            sequence: 0,
+            rollback: 40
+        },
+        {
+            title: "Tiger Strike",
+            index: 6,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Cobra Strike",
+            index: 7,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Phoenix Strike",
+            index: 8,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Fists of Fire",
+            index: 9,
+            animation: 7,
+            sequence: 2,
+            rollback: 100
+        },
+        {
+            title: "Claws of Thunder",
+            index: 10,
+            animation: 7,
+            sequence: 2,
+            rollback: 100
+        },
+        {
+            title: "Blades of Ice",
+            index: 11,
+            animation: 7,
+            sequence: 2,
+            rollback: 100
+        },
+        {
+            title: "Dragon Claw",
+            index: 12,
+            animation: 7,
+            sequence: 2,
+            rollback: 100
+        },
+        {
+            title: "Dragon Tail",
+            index: 13,
+            animation: 3,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Dragon Talon",
+            index: 14,
+            animation: 3,
+            sequence: 0,
+            rollback: 0
+        },
+        {
+            title: "Laying Traps",
+            index: 15,
+            animation: 5,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Double Swing",
+            index: 16,
+            animation: 7,
+            sequence: 3,
+            rollback: 100
+        },
+        {
+            title: "Frenzy",
+            index: 17,
+            animation: 7,
+            sequence: 3,
+            rollback: 100
+        },
+        {
+            title: "Double Throw",
+            index: 18,
+            animation: 7,
+            sequence: 4,
+            rollback: 100
+        },
+        {
+            title: "Whirlwind",
+            index: 19,
+            animation: 7,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Concentrate",
+            index: 20,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Berserk",
+            index: 21,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Bash",
+            index: 22,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Stun",
+            index: 23,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Zeal",
+            index: 24,
+            animation: 0,
+            sequence: 0,
+            rollback: 0
+        },
+        {
+            title: "Smite",
+            index: 25,
+            animation: 4,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Feral Rage",
+            index: 26,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Hunger",
+            index: 27,
+            animation: 6,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Rabies",
+            index: 28,
+            animation: 6,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Fury",
+            index: 29,
+            animation: 0,
+            sequence: 0,
+            rollback: 0
+        },
+        {
+            title: "Sacrifice",
+            index: 30,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Vengeance",
+            index: 31,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Conversion",
+            index: 32,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        },
+        {
+            title: "Cleave",
+            index: 33,
+            animation: 0,
+            sequence: 0,
+            rollback: 100
+        }
+    ]
+};
