@@ -1201,17 +1201,27 @@ function setzeSkill() {
                     optgroup1.appendChild(skillOptionElement("Berserk"));
                     optgroup1.appendChild(skillOptionElement("Bash"));
                     optgroup1.appendChild(skillOptionElement("Stun"));
-                    //optgroup1.appendChild(skillOptionElement("Cleave"));
+                    optgroup1.appendChild(skillOptionElement("Cleave"));
                 }
                 // can zeal
                 if ((lookupWeapon[document.myform.waffe.value][5] == 1) || (lookupWeapon[document.myform.zweitwaffe.value][5] == 1)) {
                     optgroup2.appendChild(skillOptionElement("Zeal"));
                 }
             }
+            // bear barb
+            if (document.myform.charform.value == 1) {
+                // not bow or xbow
+                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
+                    optgroup1.appendChild(skillOptionElement("Cleave"));
+                }
+            }
             // wolf barb
             if (document.myform.charform.value == 2) {
                 optgroup1.appendChild(skillOptionElement("Feral Rage"));
-                optgroup1.appendChild(skillOptionElement("Cleave"));
+                // not bow or xbow
+                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
+                    optgroup1.appendChild(skillOptionElement("Cleave"));
+                }
             }
             break;
         case "3": // Druid
