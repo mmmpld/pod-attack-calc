@@ -35,8 +35,14 @@
                 </td>
             </tr>
             <tr>
-                <td>Primary Weapon<br><small><input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is primary select-->
-                        left weapon slot</small></td>
+                <td>Primary Weapon<br>
+                    <small>
+                        <label>
+                            <input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is primary select-->
+                            character's left
+                        </label>
+                    </small>
+                </td>
                 <td>
                     <select class=w50-10 name=waffe size=1 onChange="neuWaffe()"></select><!-- Primary Weapon select-->
                     <select class=w50-10 name=barbschwert size=1 onChange="neuBarbschwert()"></select><!-- barb 1 or 2-handed -->
@@ -52,11 +58,18 @@
                 <td>Weapon-IAS<br><small>in %</small></td>
                 <td>
                     <select name=wIAS1 size=1 onChange="berechneWerte()"></select><!-- Primary Weapon ias -->
+                    <label><input type=checkbox name=IASstufen onChange="setzeIASstufen()"><!-- Toggle ias interval between 1 and 5 -->show single increments</label>
                 </td>
             </tr>
             <tr>
-                <td>Secondary Weapon<br><small><input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is secondary select-->
-                        left weapon slot</small>
+                <td>Secondary Weapon<br>
+                    <small>
+                        <label>
+                            <input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is secondary select-->
+                            character's left
+                        </label>
+                    </small>
+                </td>
                 <td>
                     <select name=zweitwaffe size=1 onChange="neuZweitwaffe()"></select><!-- Secondary Weapon select-->
                 </td>
@@ -78,7 +91,6 @@
                 </th>
                 <td>
                     <select name=IAS size=1 onChange="berechneWerte()"></select><!-- Off Weapon ias -->
-                    <label><input type=checkbox name=IASstufen onChange="setzeIASstufen()"><!-- Toggle ias interval between 1 and 5 -->show single increments</label>
                 </td>
             </tr>
             <tr>
