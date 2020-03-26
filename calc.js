@@ -47,6 +47,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
     }
     // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
     console.debug("attack skill");
+    console.debug(attackSkill);
     if (((attackSkill.animation == 3) || (attackSkill.animation == 7)) && (attackSkill.title !== "Whirlwind")) {
         AnimationSpeed = 256;
     }
@@ -184,26 +185,34 @@ function berechneWerte() {
         }
         ergebnis = berechneFPA(frames, acceleration, start);
     }
+    // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
+    // && not whirlwind && rollback normal
     if ((attackSkill.animation == 7) && (document.myform.skill.value != 19) && (attackSkill.rollback == 100)) {
         frames = sequences[attackSkill.sequence][lookupWeapon[document.myform.waffe.value][2]];
+        // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
         if ((document.myform.skill.value > 8) && (document.myform.skill.value < 13) && (document.myform.zweitwaffe.value > 0)) {
             frames = 16;
         }
+        // merc act 2
         if (document.myform.char.value == 8) {
             frames = 14;
         }
         start = 0;
         ergebnis = berechneFPA(frames, acceleration, start);
         ergebnis++;
+        // 3 Jab && player classes
         if ((document.myform.skill.value == 3) && (document.myform.char.value < 7)) {
             ergebnis = parseInt(100 * ergebnis / 3) / 100;
         }
+        // merc act 2
         if (document.myform.char.value == 8) {
             ergebnis = ergebnis / 2;
         }
+        // 16 Double Swing, 17 Frenzy, 18 Double Throw 
         if ((document.myform.skill.value > 15) && (document.myform.skill.value < 19)) {
             ergebnis = ergebnis / 2;
         }
+        // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
         if ((document.myform.skill.value > 8) && (document.myform.skill.value < 13) && (document.myform.zweitwaffe.value > 0)) {
             ergebnis = ergebnis / 2;
         }
@@ -1109,11 +1118,6 @@ function setzeIAS() {
     }
 }
 
-function isAssasinClaw(weaponId) {
-    var weap = lookupWeapon[weaponId];
-    return weap[2] == 1;
-}
-
 function skillOptionElement(title)
 {
     var skill = data.attack.find(a => a.title === title);
@@ -1157,14 +1161,9 @@ function setzeSkill() {
                     optgroup1.appendChild(skillOptionElement("Throw"));
                 }
                 optgroup1.appendChild(skillOptionElement("Laying Traps"));
-                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    optgroup1.appendChild(skillOptionElement("Tiger Strike"));
-                    optgroup1.appendChild(skillOptionElement("Cobra Strike"));
-                    optgroup1.appendChild(skillOptionElement("Phoenix Strike"));
-                }
-                if ((lookupWeapon[document.myform.waffe.value][2] == 1) || (lookupWeapon[document.myform.waffe.value][2] == 0)) {
-                    optgroup1.appendChild(skillOptionElement("Fists of Fire"));
-                    optgroup1.appendChild(skillOptionElement("Claws of Thunder"));
+                if (isAssasinClaw(document.myform.waffe.value) || isDagger(document.myform.waffe.value)) {
+                    optgroup1.appendChild(skillOptionElement("Fists of Ember"));
+                    optgroup1.appendChild(skillOptionElement("Fists of Thunder"));
                     optgroup1.appendChild(skillOptionElement("Blades of Ice"));
                 }
                 if ((lookupWeapon[document.myform.waffe.value][2] == 1) && (lookupWeapon[document.myform.zweitwaffe.value][2] == 1)) {
@@ -1815,6 +1814,24 @@ var lookupWeapon = [
     ["Zweihander", -10, 3, -1, 9, 1]
 ]
 
+function isDagger(weaponId) {
+    var weap = lookupWeapon[weaponId];
+    if (weap[2] == 4 && weap[4] == 0) {
+        return true;
+    }
+    return false;
+}
+
+function isAssasinClaw(weaponId) {
+    var weap = lookupWeapon[weaponId];
+    return weap[2] == 1;
+}
+
+function isBowOrXbow(weaponId) {
+    var weap = lookupWeapon[weaponId];
+    return weap[4] == 1;
+}
+
 var data = {
     attack: [
         {
@@ -1881,23 +1898,23 @@ var data = {
             rollback: 100
         },
         {
-            title: "Fists of Fire",
+            title: "Fists of Ember",
             index: 9,
-            animation: 7,
+            animation: 1,
             sequence: 2,
             rollback: 100
         },
         {
-            title: "Claws of Thunder",
+            title: "Fists of Thunder",
             index: 10,
-            animation: 7,
+            animation: 1,
             sequence: 2,
             rollback: 100
         },
         {
             title: "Blades of Ice",
             index: 11,
-            animation: 7,
+            animation: 1,
             sequence: 2,
             rollback: 100
         },
