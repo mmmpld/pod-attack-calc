@@ -551,6 +551,8 @@ function berechneBreakpoints() {
                     temp1 = ergebnis;
                 }
             }
+        if (attackSkill.title == 'Whirlwind') {
+            breakpoints[breakpoints.length] = [0, 4]; // classic whirlwind locked at 4fpa
         }
         if (attackSkill.rollback == 0) {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
