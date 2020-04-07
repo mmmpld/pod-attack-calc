@@ -893,14 +893,16 @@ function berechneWSM() {
     }
     // (assasin or barbarian) with offhand weapon
     if (((document.myform.char.value == 1) || (document.myform.char.value == 2)) && (document.myform.zweitwaffe.value > 0)) {
-        // primary weapon is boot side aka WSM-bug
-        if (document.myform.primaerwaffe[0].checked == true) {
-            WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
-            WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.zweitwaffe.value][1] - lookupWeapon[document.myform.waffe.value][1];
-        } else {
+        if (document.myform.enableWsmBug.checked) {
+            console.log('applying wsm bug');
             WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.waffe.value][1] - lookupWeapon[document.myform.zweitwaffe.value][1];
             WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
+        } else {
+            WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
+            WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.zweitwaffe.value][1] - lookupWeapon[document.myform.waffe.value][1];
         }
+        console.log('average primary wsm: ' + WSMprimaer);
+        console.log('average secondary wsm: ' + WSMsekundaer);
     }
 }
 

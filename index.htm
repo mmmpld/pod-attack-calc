@@ -35,14 +35,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Primary Weapon<br>
-                    <small>
-                        <label>
-                            <input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is primary select-->
-                            character's left
-                        </label>
-                    </small>
-                </td>
+                <td>Primary Weapon</td>
                 <td>
                     <select class=w50-10 name=waffe size=1 onChange="neuWaffe()"></select><!-- Primary Weapon select-->
                     <select class=w50-10 name=barbschwert size=1 onChange="neuBarbschwert()"></select><!-- barb 1 or 2-handed -->
@@ -65,8 +58,7 @@
                 <td>Secondary Weapon<br>
                     <small>
                         <label>
-                            <input type=radio name=primaerwaffe checked onChange="berechneWerte()"><!-- Left Hand is secondary select-->
-                            character's left
+                            <input type="checkbox" name="enableWsmBug" onChange="berechneWerte()"> Apply WSM Bug
                         </label>
                     </small>
                 </td>
