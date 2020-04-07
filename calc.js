@@ -210,6 +210,40 @@ function berechneWerte() {
         }
         // 16 Double Swing, 17 Frenzy, 18 Double Throw 
         if ((document.myform.skill.value > 15) && (document.myform.skill.value < 19)) {
+        if (attackSkill.title === "Frenzy") {
+            console.debug("special case frenzy");
+            console.debug("WSM1: " + WSMprimaer);
+            console.debug("WSM2: " + WSMsekundaer);
+
+            
+            // var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
+            // var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
+
+            // If the primary weapon is equipped in the left weapon slot:
+            // WSM1 = WSM_primary + WSM_secondary - (WSM_primary + WSM_secondary)/2
+            // WSM2 = 2*WSM_secondary - (WSM_primary + WSM_secondary)/2
+            // If the primary weapon is equipped in the right weapon slot:
+            // WSM1 = (WSM_primary + WSM_secondary)/2 + WSM_primary - WSM_secondary
+            // WSM2 = (WSM_primary + WSM_secondary)/2
+
+            // if (document.myform.primaerwaffe[0].checked == true) {
+            //     WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
+            //     WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.zweitwaffe.value][1] - lookupWeapon[document.myform.waffe.value][1];
+            // } else {
+            //     WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.waffe.value][1] - lookupWeapon[document.myform.zweitwaffe.value][1];
+            //     WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
+            // }
+
+            // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
+            // EIAS2 = [120*(OIAS + IASsecondary)/(120 + OIAS + IASsecondary)]
+            // Acceleration1 = 70 + SIAS + EIAS1 - WSM1
+            // Acceleration2 = 70 + SIAS + EIAS2 - WSM2
+            // fpa_1 = {256*9/[256*Acceleration1/100]} - 1
+            // fpa_2 = {(256*17 - fpa_1*[256*Acceleration1/100])/[256*Acceleration2/100]}
+            // fpa = fpa_1 + fpa_2
+
+            ergebnis = ergebnis / 2;
+        } else if ((document.myform.skill.value > 15) && (document.myform.skill.value < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw 
             ergebnis = ergebnis / 2;
         }
         // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
