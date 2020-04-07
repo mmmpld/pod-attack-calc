@@ -699,13 +699,11 @@ function berechneBreakpoints() {
         while (breakpoints2.length > 0) {
             breakpoints2.length = breakpoints2.length - 1;
         }
-        if ((document.myform.waffe.value == 0) || ((document.myform.zweitwaffe.value > 0) && (document.myform.skill.value == 0))) {
-            if ((document.myform.skill.value == 0) && (document.myform.zweitwaffe.value > 0)) {
-                alert("There&lsquo;s a problem regarding the standard attack while using two weapons in wereform, so that speed won&lsquo;t be calculated here.");
-            }
-            if (document.myform.waffe.value == 0) {
-                alert("Please choose a weapon to use.");
-            }
+        // unarmed || (duel wield && standard attack animation)
+        if (document.myform.waffe.value == 0) {
+            alert("Please choose a weapon to use.");
+        } else if ((document.myform.zweitwaffe.value > 0) && (attackSkill.animation == 1)) {
+            alert("There's a problem regarding the standard attack while using two weapons in wereform, so that speed won't be calculated here.");
         } else {
             frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
             if (lookupWeapon[document.myform.waffe.value][2] == 3) {
@@ -718,13 +716,13 @@ function berechneBreakpoints() {
             var iasRows = 50; // x + 1 rows shown. increased from 24 to show higher ias values
             for (i = 0; i <= iasRows; i++) {
                 for (j = 0; j <= 14; j++) {
-                    if (document.myform.skill.value == 26) {
+                    if (attackSkill.title == 'Feral Rage') {
                         breakpoints[breakpoints.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100))) - 1;
                         if ((OIAS > 70) && (j == 0)) {
                             breakpoints2[breakpoints2.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100))) - 1;
                         }
                     }
-                    if (document.myform.skill.value == 29) {
+                    if (attackSkill.title == 'Fury') {
                         temp = (Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) * 4 + Math.ceil(256 * 13 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) - 1) / 5;
                         if (parseInt(temp) == parseFloat(temp)) {
                             temp = temp + ".0";
@@ -738,7 +736,7 @@ function berechneBreakpoints() {
                             breakpoints2[breakpoints2.length] = temp;
                         }
                     }
-                    if ((document.myform.skill.value != 26) && (document.myform.skill.value != 29)) {
+                    if ((attackSkill.title != 'Feral Rage') && (attackSkill.title != 'Fury')) {
                         var tempframe = 12;
                         var tempframe2 = 10;
                         // Bear
@@ -966,7 +964,7 @@ function neuCharform() {
     berechneWerte();
 }
 
-/// 
+/// on change primary weapon
 function neuWaffe() {
     setzeBarbschwert();
     setzeZweitwaffe();
@@ -982,7 +980,7 @@ function neuBarbschwert() {
     berechneWerte();
 }
 
-/// 
+/// on change secondary weapon
 function neuZweitwaffe() {
     setzeSkill();
     waffenInfo();
@@ -2103,7 +2101,7 @@ var data = {
         {
             title: "Cleave",
             index: 33,
-            animation: 0,
+            animation: 1,
             sequence: 0,
             rollback: 100
         }
