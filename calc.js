@@ -581,8 +581,8 @@ function berechneBreakpoints() {
         }
         // Dragon Talon, Zeal. Fury handled under wearform
         if (attackSkill.rollback == 0) {
-                if (attackSkill.title == 'Dragon Talon') {
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
+                if (attackSkill.title == 'Dragon Talon') {
                     frames = 4;
                 }
                 if (attackSkill.title == 'Zeal') {
