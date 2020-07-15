@@ -7,155 +7,158 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </head>
 <body>
-    <form name=myform>
-        <table>
-            <tr>
-                <th colspan=2>
-                    <h3>Calculation</h3>
-                </th>
-            </tr>
-            <tr>
-                <td class=w50>Character</td>
-                <td class=w50>
-                    <select class=w50-10 name=char size=1 onChange="neuChar()">
-                        <option value=0>Amazon</option>
-                        <option value=1>Assassin</option>
-                        <option value=2>Barbarian</option>
-                        <option value=3>Druid</option>
-                        <option value=4>Necromancer</option>
-                        <option value=5 selected>Paladin</option>
-                        <option value=6>Sorceress</option>
-                        <option value=7>Merc - Rogue</option>
-                        <option value=8>Merc - Town Guard</option>
-                        <option value=9>Merc - Barbarian</option>
-                        <option value=10>Merc - Iron Wolves</option>
-                    </select>
-                    <select class=w50-10 name=charform size=1 onChange="neuCharform()"></select>
-                </td>
-                </td>
-            </tr>
-            <tr>
-                <td>Primary Weapon</td>
-                <td>
-                    <select class=w50-10 name=waffe size=1 onChange="neuWaffe()"></select><!-- Primary Weapon select-->
-                    <select class=w50-10 name=barbschwert size=1 onChange="neuBarbschwert()"></select><!-- barb 1 or 2-handed -->
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type=text name=infoWaffe1 size=32 value="Waffenlos [0]" readonly><!-- Primary Weapon base type and speed display -->
-                </td>
-            </tr>
-            <tr>
-                <td>Weapon-IAS<br><small>in %</small></td>
-                <td>
-                    <select name=wIAS1 size=1 onChange="berechneWerte()"></select><!-- Primary Weapon ias -->
-                    <label><input type=checkbox name=IASstufen onChange="setzeIASstufen()"><!-- Toggle ias interval between 1 and 5 -->show single increments</label>
-                </td>
-            </tr>
-            <tr>
-                <td>Secondary Weapon<br>
-                    <small>
-                        <label>
-                            <input type="checkbox" name="enableWsmBug" onChange="berechneWerte()"> Apply WSM Bug
-                        </label>
-                    </small>
-                </td>
-                <td>
-                    <select name=zweitwaffe size=1 onChange="neuZweitwaffe()"></select><!-- Secondary Weapon select-->
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input class=info type=text name=infoWaffe2 size=32 readonly><!-- Secondary Weapon base type and speed display -->
-                </td>
-            </tr>
-            <tr>
-                <td>Weapon-IAS<br><small>in %</small></td>
-                <td>
-                    <select name=wIAS2 size=1 onChange="berechneWerte()"></select><!-- Secondary Weapon ias -->
-                </td>
-            </tr>
-            <tr>
-                <td>IAS<br><small>in %</small></td>
-                </th>
-                <td>
-                    <select name=IAS size=1 onChange="berechneWerte()"></select><!-- Off Weapon ias -->
-                </td>
-            </tr>
-            <tr>
-                <td>Skill</td>
-                <td>
-                    <select name=skill size=1 onChange="berechneWerte()"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>Fanaticism<br><small>Level</small></td>
-                <td>
-                    <select name=fana size=1 onChange="berechneWerte()">
-                        <option value=0 selected>-</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Frenzy<br><small>Level</small></td>
-                <td>
-                    <select name=frenzy size=1 onChange="berechneWerte()">
-                        <option value=0 selected>-</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Werewolf<br><small>Level</small></td>
-                <td>
-                    <select name=wolf size=1 onChange="berechneWerte()">
-                        <option value=0 selected>-</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Burst of Speed<br><small>Level</small></td>
-                <td>
-                    <select name=tempo size=1 onChange="berechneWerte()">
-                        <option value=0 selected>-</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Holy Freeze<br><small>Level</small></td>
-                <td>
-                    <select name=holyfrost size=1 onChange="berechneWerte()">
-                        <option value=0 selected>-</option>
-                    </select>
-                    <label><input type=checkbox name=altern onChange="berechneWerte()">Decrepify</label>
-                </td>
-            </tr>
-            <tr>
-                <td colspan=2>
-                    <button type="button" onclick="berechneBreakpoints()" class=" btn">Show IAS Table</button>
-                </td>
-            </tr>
-            <tr>
-                <th colspan=2>
-                    <h3>Results</h3>
-                </th>
-            </tr>
-            <tr>
-                <td>Speed</td>
-                <td>
-                    <input class=w50-10 type=text name=AnzFPA size=32 maxlength="" readonly>
-                    <input class=w50-10 type=text name=AnzMax size=32 maxlength="" readonly style="display: none"><!-- hidden as it currently lies -->
-                </td>
-            </tr>
-            <tr>
-                <td>Frequency</td>
-                <td><input class=daten type=text name=AnzFre size=32 maxlength="" readonly></td>
-            </tr>
-        </table>
-    </form>
+    <div id="app">
+        <form name=myform>
+            <table>
+                <tr>
+                    <th colspan=2>
+                        <h3>Calculation</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <td class=w50>Character</td>
+                    <td class=w50>
+                        <select class=w50-10 name=char size=1 @change="changedCharacter">
+                            <option value=0>Amazon</option>
+                            <option value=1>Assassin</option>
+                            <option value=2>Barbarian</option>
+                            <option value=3>Druid</option>
+                            <option value=4>Necromancer</option>
+                            <option value=5 selected>Paladin</option>
+                            <option value=6>Sorceress</option>
+                            <option value=7>Merc - Rogue</option>
+                            <option value=8>Merc - Town Guard</option>
+                            <option value=9>Merc - Barbarian</option>
+                            <option value=10>Merc - Iron Wolves</option>
+                        </select>
+                        <select class=w50-10 name=charform size=1 @change="changedShifted"></select>
+                    </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Primary Weapon</td>
+                    <td>
+                        <select class=w50-10 name=waffe size=1 @change="changedPrimaryWeapon"></select><!-- Primary Weapon select-->
+                        <select class=w50-10 name=barbschwert size=1 @change="changedBarbWeaponHandedness"></select><!-- barb 1 or 2-handed -->
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type=text name=infoWaffe1 size=32 value="Waffenlos [0]" readonly><!-- Primary Weapon base type and speed display -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>Weapon-IAS<br><small>in %</small></td>
+                    <td>
+                        <select name=wIAS1 size=1 @change="calculateBreakpoint"></select><!-- Primary Weapon ias -->
+                        <label><input type=checkbox name=IASstufen @change="changedIasSteps"><!-- Toggle ias interval between 1 and 5 -->show single increments</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Secondary Weapon<br>
+                        <small>
+                            <label>
+                                <input type="checkbox" name="enableWsmBug" @change="calculateBreakpoint"> Apply WSM Bug
+                            </label>
+                        </small>
+                    </td>
+                    <td>
+                        <select name=zweitwaffe size=1 @change="changedSecondaryWeapon"></select><!-- Secondary Weapon select-->
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input class=info type=text name=infoWaffe2 size=32 readonly><!-- Secondary Weapon base type and speed display -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>Weapon-IAS<br><small>in %</small></td>
+                    <td>
+                        <select name=wIAS2 size=1 @change="calculateBreakpoint"></select><!-- Secondary Weapon ias -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>IAS<br><small>in %</small></td>
+                    </th>
+                    <td>
+                        <select name=IAS size=1 @change="calculateBreakpoint"></select><!-- Off Weapon ias -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>Skill</td>
+                    <td>
+                        <select name=skill size=1 @change="calculateBreakpoint"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fanaticism<br><small>Level</small></td>
+                    <td>
+                        <select name=fana size=1 @change="calculateBreakpoint">
+                            <option value=0 selected>-</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Frenzy<br><small>Level</small></td>
+                    <td>
+                        <select name=frenzy size=1 @change="calculateBreakpoint">
+                            <option value=0 selected>-</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Werewolf<br><small>Level</small></td>
+                    <td>
+                        <select name=wolf size=1 @change="calculateBreakpoint">
+                            <option value=0 selected>-</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Burst of Speed<br><small>Level</small></td>
+                    <td>
+                        <select name=tempo size=1 @change="calculateBreakpoint">
+                            <option value=0 selected>-</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Holy Freeze<br><small>Level</small></td>
+                    <td>
+                        <select name=holyfrost size=1 @change="calculateBreakpoint">
+                            <option value=0 selected>-</option>
+                        </select>
+                        <label><input type=checkbox name=altern @change="calculateBreakpoint">Decrepify</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=2>
+                        <button type="button" @click="showIasTable" class=" btn">Show IAS Table</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan=2>
+                        <h3>Results</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>
+                        <input class=w50-10 type=text name=AnzFPA size=32 maxlength="" readonly>
+                        <input class=w50-10 type=text name=AnzMax size=32 maxlength="" readonly style="display: none"><!-- hidden as it currently lies -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>Frequency</td>
+                    <td><input class=daten type=text name=AnzFre size=32 maxlength="" readonly></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="calc.js"></script>
     <script>
         neuChar(document.myform);

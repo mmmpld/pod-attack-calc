@@ -2103,3 +2103,36 @@ var data = {
         }
     ]
 };
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    },
+    methods: {
+        changedCharacter: function () {
+            neuChar();
+        },
+        changedShifted: function () {
+            neuCharform();
+        },
+        changedPrimaryWeapon: function () {
+            neuWaffe();
+        },
+        changedBarbWeaponHandedness: function () {
+            neuBarbschwert();
+        },
+        changedSecondaryWeapon: function () {
+            neuZweitwaffe();
+        },
+        changedIasSteps: function () {
+            setzeIASstufen();
+        },
+        calculateBreakpoint: function () {
+            berechneWerte();
+        },
+        showIasTable: function () {
+            berechneBreakpoints();
+        }        
+    }
+});
