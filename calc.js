@@ -33,11 +33,11 @@ var breakpoints2 = new Array();
 var breakpointsAPS = new Array();
 
 /// Calc FPA
-function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
+function calcFPA(FramesPerDirection, Acceleration, StartingFrame) {
     console.debug('calc FPA');
-    console.debug(FramesPerDirection);
-    console.debug(Acceleration);
-    console.debug(StartingFrame);
+    console.debug('FramesPerDirection ' + FramesPerDirection);
+    console.debug('Acceleration ' + Acceleration);
+    console.debug('Starting frame ' + StartingFrame);
     var Acceleration;
     var AnimationSpeed = 256;
     var attackSkill = data.attack[document.myform.skill.value];
@@ -82,7 +82,7 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
         }
         StartingFrame = 0;
     }
-    FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * Acceleration / 100)) - 1;
+    var FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * Acceleration / 100)) - 1;
     FPAmax = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * 175 / 100)) - 1;
     if (document.myform.skill.value == 19) { // whirlwind
         FPA = Math.floor(256 * FramesPerDirection / Math.floor(AnimationSpeed * Acceleration / 100));
@@ -98,12 +98,18 @@ function berechneFPA(FramesPerDirection, Acceleration, StartingFrame) {
             document.myform.AnzMax.value = "further IAS useless";
         }
     }
+    console.debug('FPA ' + FPA);
     return FPA;
 }
 
-/// Calculate breakpoints
+/// Calculate a breakpoint.
+/* Modifies the following variables: 
+ * start
+ * frames
+ * isMaxIas
+ */ 
 function berechneWerte() {
-    var ergebnis; // "result"
+    var ergebnis; // "result" FPA
     var temp;
     var attackSkill = data.attack[document.myform.skill.value];
     console.debug('Calculating breakpoints for: ' + attackSkill.title);
@@ -121,7 +127,7 @@ function berechneWerte() {
         if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
             frames = 16;
         }
-        ergebnis = berechneFPA(frames, acceleration, start);
+        ergebnis = calcFPA(frames, acceleration, start);
     }
     // standard attack
     if ((attackSkill.animation == 1) && (attackSkill.rollback == 100)) {
@@ -130,8 +136,8 @@ function berechneWerte() {
         if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
             frames = 16;
         }
-        ergebnis = berechneFPA(frames, acceleration, start);
-        if (ergebnis > berechneFPA(frames, 175, start)) {
+        ergebnis = calcFPA(frames, acceleration, start);
+        if (ergebnis > calcFPA(frames, 175, start)) {
             isMaxIas = false;
         }
         // Unshifted
@@ -145,8 +151,8 @@ function berechneWerte() {
             if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                 frames = 16;
             }
-            ergebnis = berechneFPA(frames, acceleration, start);
-            if (ergebnis > berechneFPA(frames, 175, start)) {
+            ergebnis = calcFPA(frames, acceleration, start);
+            if (ergebnis > calcFPA(frames, 175, start)) {
                 isMaxIas = false;
             }
             ergebnis = (ergebnis + temp) / 2;
@@ -157,8 +163,8 @@ function berechneWerte() {
         }
         if (document.myform.zweitwaffe.value > 0) {
             temp = ergebnis;
-            ergebnis = berechneFPA(12, acceleration2, 0);
-            if (ergebnis > berechneFPA(12, 175, 0)) {
+            ergebnis = calcFPA(12, acceleration2, 0);
+            if (ergebnis > calcFPA(12, 175, 0)) {
                 isMaxIas = false;
             }
             ergebnis = (ergebnis + temp) / 2;
@@ -183,7 +189,7 @@ function berechneWerte() {
         if (attackSkill.animation == 5) {
             frames = 8;
         }
-        ergebnis = berechneFPA(frames, acceleration, start);
+        ergebnis = calcFPA(frames, acceleration, start);
     }
     // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
     // && not whirlwind && rollback normal
@@ -198,7 +204,7 @@ function berechneWerte() {
             frames = 14;
         }
         start = 0;
-        ergebnis = berechneFPA(frames, acceleration, start);
+        ergebnis = calcFPA(frames, acceleration, start);
         ergebnis++;
         // 3 Jab && player classes
         if ((document.myform.skill.value == 3) && (document.myform.char.value < 7)) {
@@ -261,9 +267,9 @@ function berechneWerte() {
     if (attackSkill.rollback == 0) {
         // Dragon Talon
         if (document.myform.skill.value == 14) {
-            rollback1 = berechneFPA(4, acceleration, 0);
+            rollback1 = calcFPA(4, acceleration, 0);
             rollback1++;
-            rollback3 = berechneFPA(13, acceleration, 0);
+            rollback3 = calcFPA(13, acceleration, 0);
             if (rollback3 == 7) {
                 document.myform.AnzMax.value = "further IAS useless";
             }
@@ -273,13 +279,13 @@ function berechneWerte() {
         // Fury
         if (document.myform.skill.value == 29) {
             frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-            rollback1 = berechneFPA(frames, acceleration, 0);
-            if (rollback1 > berechneFPA(frames, 175, 0)) {
+            rollback1 = calcFPA(frames, acceleration, 0);
+            if (rollback1 > calcFPA(frames, 175, 0)) {
                 isMaxIas = false;
             }
             rollback1++;
-            rollback3 = berechneFPA(frames, acceleration, 1);
-            if (rollback3 > berechneFPA(frames, 175, 1)) {
+            rollback3 = calcFPA(frames, acceleration, 1);
+            if (rollback3 > calcFPA(frames, 175, 1)) {
                 isMaxIas = false;
             }
             if (isMaxIas) {
@@ -301,13 +307,13 @@ function berechneWerte() {
                 frames = 7;
             }
             console.debug(frames);
-            rollback1 = berechneFPA(frames, acceleration, start);
-            if (rollback1 > berechneFPA(frames, 175, start)) {
+            rollback1 = calcFPA(frames, acceleration, start);
+            if (rollback1 > calcFPA(frames, 175, start)) {
                 isMaxIas = false;
             }
             rollback1++;
-            rollback2 = berechneFPA(frames, acceleration, 0);
-            if (rollback2 > berechneFPA(frames, 175, 0)) {
+            rollback2 = calcFPA(frames, acceleration, 0);
+            if (rollback2 > calcFPA(frames, 175, 0)) {
                 isMaxIas = false;
             }
             rollback2++;
@@ -316,8 +322,8 @@ function berechneWerte() {
             if (isBarbTwoHandedSwordAsOneHanded) {
                 frames = 16;
             }
-            rollback3 = berechneFPA(frames, acceleration, 0);
-            if (rollback3 > berechneFPA(frames, 175, 0)) {
+            rollback3 = calcFPA(frames, acceleration, 0);
+            if (rollback3 > calcFPA(frames, 175, 0)) {
                 isMaxIas = false;
             }
             if (isMaxIas) {
@@ -337,33 +343,33 @@ function berechneWerte() {
         if (acceleration > 149) {
             acceleration = 149;
         }
-        rollback1 = berechneFPA(frames, acceleration, start);
-        if (rollback1 > berechneFPA(frames, 149, start)) {
+        rollback1 = calcFPA(frames, acceleration, start);
+        if (rollback1 > calcFPA(frames, 149, start)) {
             isMaxIas = false;
         }
         rollback1++;
         rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
-        rollback2 = berechneFPA(frames, acceleration, rollbackframe);
-        if (rollback2 > berechneFPA(frames, 149, rollbackframe)) {
+        rollback2 = calcFPA(frames, acceleration, rollbackframe);
+        if (rollback2 > calcFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
         }
         rollback2++;
         rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
-        rollback3 = berechneFPA(frames, acceleration, rollbackframe);
-        if (rollback3 > berechneFPA(frames, 149, rollbackframe)) {
+        rollback3 = calcFPA(frames, acceleration, rollbackframe);
+        if (rollback3 > calcFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
         }
         rollback3++;
         rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback3) / 256) * attackSkill.rollback / 100);
-        rollback4 = berechneFPA(frames, acceleration, rollbackframe);
-        if (rollback4 > berechneFPA(frames, 149, rollbackframe)) {
+        rollback4 = calcFPA(frames, acceleration, rollbackframe);
+        if (rollback4 > calcFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
         }
         rollback4++;
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
         rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * attackSkill.rollback / 100);
-        rollback5 = berechneFPA(frames, acceleration, rollbackframe);
-        if (rollback5 > berechneFPA(frames, 149, rollbackframe)) {
+        rollback5 = calcFPA(frames, acceleration, rollbackframe);
+        if (rollback5 > calcFPA(frames, 149, rollbackframe)) {
             isMaxIas = false;
         }
         if ((rollback2 == 5) && (rollback3 == 4)) {
@@ -380,21 +386,21 @@ function berechneWerte() {
     // Fend
     if (attackSkill.rollback == 40) {
         frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
-        rollback1 = berechneFPA(frames, acceleration, start);
-        if (rollback1 > berechneFPA(frames, 175, start)) {
+        rollback1 = calcFPA(frames, acceleration, start);
+        if (rollback1 > calcFPA(frames, 175, start)) {
             isMaxIas = false;
         }
         rollback1++;
         rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
-        rollback2 = berechneFPA(frames, acceleration, rollbackframe);
-        if (rollback2 > berechneFPA(frames, 175, rollbackframe)) {
+        rollback2 = calcFPA(frames, acceleration, rollbackframe);
+        if (rollback2 > calcFPA(frames, 175, rollbackframe)) {
             isMaxIas = false;
         }
         rollback2++;
         frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
         rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
-        rollback3 = berechneFPA(frames, acceleration, rollbackframe);
-        if (rollback3 > berechneFPA(frames, 175, rollbackframe)) {
+        rollback3 = calcFPA(frames, acceleration, rollbackframe);
+        if (rollback3 > calcFPA(frames, 175, rollbackframe)) {
             isMaxIas = false;
         }
         if (isMaxIas) {
@@ -425,7 +431,7 @@ function berechneWerte() {
 /// Show breakpoints popup
 function berechneBreakpoints() {
     console.log('show table');
-    var ergebnis; // result
+    var ergebnis; // result FPA
     var RBframe;
     var temp;
     var temp1;
@@ -462,8 +468,9 @@ function berechneBreakpoints() {
             || (attackSkill.animation == 4) 
             || (attackSkill.animation == 5)
             ) && (attackSkill.rollback == 100)) {
+            console.info("calc ias for most");
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                ergebnis = berechneFPA(frames, i, start);
+                ergebnis = calcFPA(frames, i, start);
                 if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMprimaer < 120)) {
                     breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - SIAS + WSMprimaer) / (120 - (i - 100 - SIAS + WSMprimaer))), ergebnis];
                     temp1 = ergebnis;
@@ -472,17 +479,18 @@ function berechneBreakpoints() {
         }
         // standard attack animation && no secondary weapon && standard rollback
         if ((attackSkill.animation == 1) && (document.myform.zweitwaffe.value == 0) && (attackSkill.rollback == 100)) {
+            console.info("calc ias for standard attack single");
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                     frames = 16;
                 }
-                ergebnis = berechneFPA(frames, i, start);
+                ergebnis = calcFPA(frames, i, start);
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][1];
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                     frames = 16;
                 }
-                temp = berechneFPA(frames, i, start);
+                temp = calcFPA(frames, i, start);
                 ergebnis = (ergebnis + temp) / 2;
                 if (document.myform.char.value == 9) {
                     ergebnis = ergebnis / 2;
@@ -495,17 +503,18 @@ function berechneBreakpoints() {
         }
         // standard attack animation && secondary weapon selected && standard rollback
         if ((attackSkill.animation == 1) && (document.myform.zweitwaffe.value > 0) && (attackSkill.rollback == 100)) {
+            console.info("calc ias for standard attack dual");
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                     frames = 16;
                 }
-                ergebnis = berechneFPA(frames, i, 0);
+                ergebnis = calcFPA(frames, i, 0);
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][1];
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                     frames = 16;
                 }
-                temp = berechneFPA(frames, i, 0);
+                temp = calcFPA(frames, i, 0);
                 ergebnis = (ergebnis + temp) / 2;
                 if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMprimaer < 120)) {
                     breakpoints1[breakpoints1.length] = [Math.ceil(120 * (i - 100 - SIAS + WSMprimaer) / (120 - (i - 100 - SIAS + WSMprimaer))) - IASprimaer, ergebnis];
@@ -522,7 +531,7 @@ function berechneBreakpoints() {
             }
             temp1 = 0;
             for (i = Math.max(100 + SIAS - WSMsekundaer, 15); i <= 175; i++) {
-                ergebnis = berechneFPA(12, i, 0);
+                ergebnis = calcFPA(12, i, 0);
                 if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMsekundaer < 120)) {
                     breakpoints2[breakpoints2.length] = [Math.ceil(120 * (i - 100 - SIAS + WSMsekundaer) / (120 - (i - 100 - SIAS + WSMsekundaer))) - IASsekundaer, ergebnis];
                     temp1 = ergebnis;
@@ -554,9 +563,11 @@ function berechneBreakpoints() {
                 }
             }
         }
+        // Impale, Jab, Dragon Claw, Double Swing, Frenzy, Double Throw && not Whirlwind
         if ((attackSkill.animation == 7) && (document.myform.skill.value != 19)) {
+            console.info("calc ias for animation 7");
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                ergebnis = berechneFPA(frames, i, 0);
+                ergebnis = calcFPA(frames, i, 0);
                 ergebnis++;
                 if ((document.myform.skill.value == 3) && (document.myform.char.value < 7)) {
                     ergebnis = parseInt(100 * ergebnis / 3) / 100;
@@ -577,10 +588,12 @@ function berechneBreakpoints() {
             }
         }
         if (attackSkill.title == 'Whirlwind') {
+            console.info("calc ias for whirlwind");
             breakpoints[breakpoints.length] = [0, 4]; // classic whirlwind locked at 4fpa
         }
         // Dragon Talon, Zeal. Fury handled under wearform
         if (attackSkill.rollback == 0) {
+            console.info("calc ias for multiple attacks");
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 if (attackSkill.title == 'Dragon Talon') {
                     frames = 4;
@@ -591,9 +604,9 @@ function berechneBreakpoints() {
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                     frames = 7;
                 }
-                rollback1 = berechneFPA(frames, i, start);
+                rollback1 = calcFPA(frames, i, start);
                 rollback1++;
-                rollback2 = berechneFPA(frames, i, 0);
+                rollback2 = calcFPA(frames, i, 0);
                 rollback2++;
                 if (attackSkill.title == 'Dragon Talon') {
                     frames = 13;
@@ -604,7 +617,7 @@ function berechneBreakpoints() {
                 if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
                     frames = 16;
                 }
-                rollback3 = berechneFPA(frames, i, 0);
+                rollback3 = calcFPA(frames, i, 0);
                 ergebnis = rollback1 + rollback2 + rollback3;
                 if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMprimaer < 120)) {
                     breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - SIAS + WSMprimaer) / (120 - (i - 100 - SIAS + WSMprimaer))), rollback1 + "/" + rollback2 + "/" + rollback2 + "/" + rollback2 + "/" + rollback3];
@@ -614,22 +627,23 @@ function berechneBreakpoints() {
             }
         }
         if (attackSkill.title == 'Strafe') {
+            console.info("calc ias for strafe");
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 149; i++) {
                 frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
-                rollback1 = berechneFPA(frames, i, start);
+                rollback1 = calcFPA(frames, i, start);
                 rollback1++;
                 RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
-                rollback2 = berechneFPA(frames, i, RBframe);
+                rollback2 = calcFPA(frames, i, RBframe);
                 rollback2++;
                 RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * attackSkill.rollback / 100);
-                rollback3 = berechneFPA(frames, i, RBframe);
+                rollback3 = calcFPA(frames, i, RBframe);
                 rollback3++;
                 RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback3) / 256) * attackSkill.rollback / 100);
-                rollback4 = berechneFPA(frames, i, RBframe);
+                rollback4 = calcFPA(frames, i, RBframe);
                 rollback4++;
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
                 RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback4) / 256) * attackSkill.rollback / 100);
-                rollback5 = berechneFPA(frames, i, RBframe);
+                rollback5 = calcFPA(frames, i, RBframe);
                 if ((rollback2 == rollback3) || (rollback3 == rollback4)) {
                     ergebnis = rollback1 + rollback2 + rollback3 + rollback4 + rollback5;
                 }
@@ -641,16 +655,17 @@ function berechneBreakpoints() {
             }
         }
         if (attackSkill.title == 'Fend') {
+            console.info("calc ias for fend");
             for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                 frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
-                rollback1 = berechneFPA(frames, i, start);
+                rollback1 = calcFPA(frames, i, start);
                 rollback1++;
                 RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
-                rollback2 = berechneFPA(frames, i, RBframe);
+                rollback2 = calcFPA(frames, i, RBframe);
                 rollback2++;
                 frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
                 RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * attackSkill.rollback / 100);
-                rollback3 = berechneFPA(frames, i, RBframe);
+                rollback3 = calcFPA(frames, i, RBframe);
                 ergebnis = rollback1 + rollback2 + rollback3;
                 if (temp1 != ergebnis) {
                     breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - SIAS + WSMprimaer) / (120 - (i - 100 - SIAS + WSMprimaer))), rollback1 + "/" + rollback2 + "/" + rollback3];
@@ -812,7 +827,7 @@ function berechneBreakpoints() {
     cap = 1;
 }
 
-/// Write Data
+/// "Write Data". Adds header to breakpoint window
 function SchreibeDaten() {
     TabFenster.document.write('<html><head><style type="text/css">');
     TabFenster.document.write('body { background-color:#000000; color:#FFFFFF; } .title { background-color:#45070E; color:#FFFFFF; font-weight:bold; } .wertitle { background-color:EBBE00; color:FFFFFF; font-weight:bold; } .auswahl { background-color:#BEBEBE; color:#FFFFFF; } .iaswahl { background-color:#45070E; color:#FFFFFF; }');
