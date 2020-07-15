@@ -447,20 +447,12 @@ function berechneBreakpoints() {
         fenster = true;
     }
     cap = 0;
+    breakpoints = [];
+    breakpoints1 = [];
+    breakpoints2 = [];
+    breakpointsAPS = [];
     // Unshifted
     if (document.myform.charform.value == 0) {
-        while (breakpoints.length > 0) {
-            breakpoints.length = breakpoints.length - 1;
-        }
-        while (breakpoints1.length > 0) {
-            breakpoints1.length = breakpoints1.length - 1;
-        }
-        while (breakpoints2.length > 0) {
-            breakpoints2.length = breakpoints2.length - 1;
-        }
-        while (breakpointsAPS.length > 0) {
-            breakpointsAPS.length = breakpointsAPS.length - 1;
-        }
         temp1 = 0;
         if (((attackSkill.animation == 0) 
             || (attackSkill.animation == 2) 
@@ -700,12 +692,6 @@ function berechneBreakpoints() {
     if (document.myform.charform.value > 0) {
         while (parseInt(OIAS / 5) != parseFloat(OIAS / 5)) {
             OIAS--;
-        }
-        while (breakpoints.length > 0) {
-            breakpoints.length = breakpoints.length - 1;
-        }
-        while (breakpoints2.length > 0) {
-            breakpoints2.length = breakpoints2.length - 1;
         }
         // unarmed || (duel wield && standard attack animation)
         if (document.myform.waffe.value == 0) {
