@@ -21,40 +21,40 @@
                         <v-col cols="12" sm="8" md="4">
                             <form name=myform>
                                 <v-select name=char @input="changedCharacter" :items="characters" label="Character"
-                                    v-model="charactersSelected"></v-select>
+                                    v-model="charactersSelected" dense></v-select>
                                 <v-select name=charform @input="changedShifted" :items="shapeShiftForms"
-                                    label="Shape Shift" v-model="shapeShiftFormsSelected"></v-select>
+                                    label="Shape Shift" v-model="shapeShiftFormsSelected" dense></v-select>
                                 <v-select name=waffe @input="changedPrimaryWeapon" :items="weaponsPrimary"
-                                    label="Primary Weapon" v-model="weaponsPrimarySelected"></v-select>
+                                    label="Primary Weapon" v-model="weaponsPrimarySelected" dense></v-select>
                                 <v-select name=barbschwert @input="changedBarbWeaponHandedness"
                                     :items="weaponsPrimaryBarbHandedness" label="Handedness"
-                                    v-model="weaponsPrimaryBarbHandednessSelected"></v-select>
+                                    v-model="weaponsPrimaryBarbHandednessSelected" dense></v-select>
                                 <p>{{ weaponInfoPrimary.description }} [{{ weaponInfoPrimary.wsm }}]</p>
                                 <v-text-field name=wIAS1 type="number" @input="calculateBreakpoint"
-                                    label="Primary Weapon IAS%" v-model.number="iasWeaponPrimary"></v-text-field>
+                                    label="Primary Weapon IAS%" v-model.number="iasWeaponPrimary" dense></v-text-field>
                                 <v-checkbox name="enableWsmBug" @input="calculateBreakpoint" label="Apply WSM Bug"
-                                    v-model="isWsmBug"></v-checkbox>
+                                    v-model="isWsmBug" dense></v-checkbox>
                                 <v-select name=zweitwaffe @input="changedSecondaryWeapon" :items="weaponsSecondary"
-                                    label="Secondary Weapon" v-model="weaponsSecondarySelected"></v-select>
+                                    label="Secondary Weapon" v-model="weaponsSecondarySelected" dense></v-select>
                                 <p v-if="weaponsSecondary.length > 1">{{ weaponInfoSecondary.description }}
                                     [{{ weaponInfoSecondary.wsm }}]</p>
                                 <v-text-field name=wIAS2 type="number" @input="calculateBreakpoint"
-                                    label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary"></v-text-field>
+                                    label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary" dense></v-text-field>
                                 <v-text-field name=IAS type="number" @input="calculateBreakpoint"
-                                    label="Off-Weapon IAS%" v-model.number="iasOffWeapon"></v-text-field>
-                                <v-select name=skill @input="calculateBreakpoint" :items="skills" label="Skill" v-model="skillsSelected"></v-select>
+                                    label="Off-Weapon IAS%" v-model.number="iasOffWeapon" dense></v-text-field>
+                                <v-select name=skill @input="calculateBreakpoint" :items="skills" label="Skill" v-model="skillsSelected" dense></v-select>
                                 <v-select name=fana @input="calculateBreakpoint" :items="fanaticism"
-                                    label="Fanaticism Level" v-model="fanaticismSkillIAS"></v-select>
+                                    label="Fanaticism Level" v-model="fanaticismSkillIAS" dense></v-select>
                                 <v-select name=frenzy @input="calculateBreakpoint" :items="frenzy" label="Frenzy Level"
-                                    v-model="frenzySkillIAS"></v-select>
+                                    v-model="frenzySkillIAS" dense></v-select>
                                 <v-select name=wolf size=1 @input="calculateBreakpoint" :items="werewolf"
-                                    label="Werewolf Level" v-model="werewolfSkillIAS"></v-select>
+                                    label="Werewolf Level" v-model="werewolfSkillIAS" dense></v-select>
                                 <v-select name=tempo size=1 @input="calculateBreakpoint" :items="burstOfSpeed"
-                                    label="Burst of Speed Level" v-model="burstOfSpeedSkillIAS"></v-select>
+                                    label="Burst of Speed Level" v-model="burstOfSpeedSkillIAS" dense></v-select>
                                 <v-select name=holyfrost @input="calculateBreakpoint" :items="holyFreeze"
-                                    label="Holy Freeze Level" v-model="holyFreezeSkillIAS"></v-select>
+                                    label="Holy Freeze Level" v-model="holyFreezeSkillIAS" dense></v-select>
                                 <v-checkbox name=altern @input="calculateBreakpoint" label="Decrepify"
-                                    v-model="isDecrepify"></v-checkbox>
+                                    v-model="isDecrepify" dense></v-checkbox>
                                 <v-btn color="primary" @click="showIasTable">Show IAS Table</v-btn>
                             </form>
                             <h2>Results</h2>
