@@ -40,9 +40,9 @@ function calcFPA(FramesPerDirection, Acceleration, StartingFrame) {
     console.debug('Starting frame ' + StartingFrame);
     var Acceleration;
     var AnimationSpeed = 256;
-    var attackSkill = data.attack[document.myform.skill.value];
+    var attackSkill = data.attack[app.skillsSelected];
     // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
-    if ((document.myform.char.value == 1) && (lookupWeapon[document.myform.waffe.value][2] == 1)) {
+    if ((app.charactersSelected == 1) && (lookupWeapon[app.weaponsPrimarySelected][2] == 1)) {
         AnimationSpeed = 208;
     }
     // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
@@ -56,11 +56,11 @@ function calcFPA(FramesPerDirection, Acceleration, StartingFrame) {
         AnimationSpeed = 128;
     }
     // Bear
-    if (document.myform.charform.value == 1) {
-        if (lookupWeapon[document.myform.waffe.value][2] == 3) { // 2-hand swords
-            FramesPerDirection = waffengattung[2][document.myform.char.value][0]; //1-hand swinging weapon
+    if (app.shapeShiftFormsSelected == 1) {
+        if (lookupWeapon[app.weaponsPrimarySelected][2] == 3) { // 2-hand swords
+            FramesPerDirection = waffengattung[2][app.charactersSelected][0]; //1-hand swinging weapon
         }
-        AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(document.myform.IAS.value) - lookupWeapon[document.myform.waffe.value][1]) * AnimationSpeed / 100)));
+        AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(app.iasOffWeapon) - lookupWeapon[app.weaponsPrimarySelected][1]) * AnimationSpeed / 100)));
         FramesPerDirection = 12;
         if (attackSkill.animation == 6) {
             FramesPerDirection = 10;
@@ -68,13 +68,13 @@ function calcFPA(FramesPerDirection, Acceleration, StartingFrame) {
         StartingFrame = 0;
     }
     // Wolf
-    if (document.myform.charform.value == 2) {
-        if (lookupWeapon[document.myform.waffe.value][2] == 3) { // 2-hand swords
-            FramesPerDirection = waffengattung[2][document.myform.char.value][0]; //1-hand swinging weapon
+    if (app.shapeShiftFormsSelected == 2) {
+        if (lookupWeapon[app.weaponsPrimarySelected][2] == 3) { // 2-hand swords
+            FramesPerDirection = waffengattung[2][app.charactersSelected][0]; //1-hand swinging weapon
         }
-        AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(document.myform.IAS.value) - lookupWeapon[document.myform.waffe.value][1]) * AnimationSpeed / 100)));
+        AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(app.iasOffWeapon) - lookupWeapon[app.weaponsPrimarySelected][1]) * AnimationSpeed / 100)));
         FramesPerDirection = 13;
-        if ((document.myform.skill.value == 29) && (StartingFrame == 0)) { // Fury
+        if ((app.skillsSelected == 29) && (StartingFrame == 0)) { // Fury
             FramesPerDirection = 7;
         }
         if (attackSkill.animation == 6) {
@@ -84,18 +84,18 @@ function calcFPA(FramesPerDirection, Acceleration, StartingFrame) {
     }
     var FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * Acceleration / 100)) - 1;
     FPAmax = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * 175 / 100)) - 1;
-    if (document.myform.skill.value == 19) { // whirlwind
+    if (app.skillsSelected == 19) { // whirlwind
         FPA = Math.floor(256 * FramesPerDirection / Math.floor(AnimationSpeed * Acceleration / 100));
         FPAmax = 0;
     }
-    if (document.myform.skill.value == 26) { // Feral Rage
+    if (app.skillsSelected == 26) { // Feral Rage
         FPA = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * Acceleration / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100))) / (2 * Math.floor(AnimationSpeed * Acceleration / 100))) - 1;
         FPAmax = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * 175 / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100))) / (2 * Math.floor(AnimationSpeed * 175 / 100))) - 1;
     }
     if (cap == 1) {
-        document.myform.AnzMax.value = "";
+        app.isCurrentFpaMaxed = false;
         if ((attackSkill.rollback == 100) && (attackSkill.animation != 1) && (FPA <= FPAmax)) {
-            document.myform.AnzMax.value = "further IAS useless";
+            app.isCurrentFpaMaxed = true;
         }
     }
     console.debug('FPA ' + FPA);
@@ -111,7 +111,7 @@ function calcFPA(FramesPerDirection, Acceleration, StartingFrame) {
 function berechneWerte() {
     var ergebnis; // "result" FPA
     var temp;
-    var attackSkill = data.attack[document.myform.skill.value];
+    var attackSkill = data.attack[app.skillsSelected];
     console.debug('Calculating breakpoints for: ' + attackSkill.title);
     berechneSIAS();
     berechneEIAS();
@@ -119,12 +119,12 @@ function berechneWerte() {
     var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
     var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
     start = 0;
-    if (((document.myform.char.value == 0) || (document.myform.char.value == 6)) && (attackSkill.animation < 2)) {
-        start = startframe[lookupWeapon[document.myform.waffe.value][2]];
+    if (((app.charactersSelected == 0) || (app.charactersSelected == 6)) && (attackSkill.animation < 2)) {
+        start = startframe[lookupWeapon[app.weaponsPrimarySelected][2]];
     }
     if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
-        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
+        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
             frames = 16;
         }
         ergebnis = calcFPA(frames, acceleration, start);
@@ -132,8 +132,8 @@ function berechneWerte() {
     // standard attack
     if ((attackSkill.animation == 1) && (attackSkill.rollback == 100)) {
         console.debug('standard attack');
-        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
+        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
             frames = 16;
         }
         ergebnis = calcFPA(frames, acceleration, start);
@@ -141,14 +141,14 @@ function berechneWerte() {
             isMaxIas = false;
         }
         // Unshifted
-        if (document.myform.charform.value == 0) {
+        if (app.shapeShiftFormsSelected == 0) {
             console.debug('unshifted');
             temp = ergebnis;
-            var weaponTypeNum = lookupWeapon[document.myform.waffe.value][2];
+            var weaponTypeNum = lookupWeapon[app.weaponsPrimarySelected][2];
             console.debug(weaponTypeNum);
-            frames = waffengattung[weaponTypeNum][document.myform.char.value][1];
+            frames = waffengattung[weaponTypeNum][app.charactersSelected][1];
             console.debug(frames);
-            if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+            if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
                 frames = 16;
             }
             ergebnis = calcFPA(frames, acceleration, start);
@@ -158,10 +158,10 @@ function berechneWerte() {
             ergebnis = (ergebnis + temp) / 2;
         }
         // act 5 merc
-        if (document.myform.char.value == 9) {
+        if (app.charactersSelected == 9) {
             ergebnis = ergebnis / 2;
         }
-        if (document.myform.zweitwaffe.value > 0) {
+        if (app.weaponsSecondarySelected > 0) {
             temp = ergebnis;
             ergebnis = calcFPA(12, acceleration2, 0);
             if (ergebnis > calcFPA(12, 175, 0)) {
@@ -170,7 +170,7 @@ function berechneWerte() {
             ergebnis = (ergebnis + temp) / 2;
         }
         if (isMaxIas) {
-            document.myform.AnzMax.value = "further IAS useless";
+            app.isCurrentFpaMaxed = true;
         }
         isMaxIas = true;
     }
@@ -178,7 +178,7 @@ function berechneWerte() {
         && (attackSkill.animation <= 5) 
         && (attackSkill.rollback == 100)) {
         if (attackSkill.animation == 2) { // Throw
-            frames = waffengattung[9][document.myform.char.value];
+            frames = waffengattung[9][app.charactersSelected];
         }
         if (attackSkill.animation == 3) {
             frames = 13;
@@ -193,25 +193,25 @@ function berechneWerte() {
     }
     // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
     // && not whirlwind && rollback normal
-    if ((attackSkill.animation == 7) && (document.myform.skill.value != 19) && (attackSkill.rollback == 100)) {
-        frames = sequences[attackSkill.sequence][lookupWeapon[document.myform.waffe.value][2]];
+    if ((attackSkill.animation == 7) && (app.skillsSelected != 19) && (attackSkill.rollback == 100)) {
+        frames = sequences[attackSkill.sequence][lookupWeapon[app.weaponsPrimarySelected][2]];
         // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
-        if ((document.myform.skill.value > 8) && (document.myform.skill.value < 13) && (document.myform.zweitwaffe.value > 0)) {
+        if ((app.skillsSelected > 8) && (app.skillsSelected < 13) && (app.weaponsSecondarySelected > 0)) {
             frames = 16;
         }
         // merc act 2
-        if (document.myform.char.value == 8) {
+        if (app.charactersSelected == 8) {
             frames = 14;
         }
         start = 0;
         ergebnis = calcFPA(frames, acceleration, start);
         ergebnis++;
         // 3 Jab && player classes
-        if ((document.myform.skill.value == 3) && (document.myform.char.value < 7)) {
+        if ((app.skillsSelected == 3) && (app.charactersSelected < 7)) {
             ergebnis = parseInt(100 * ergebnis / 3) / 100;
         }
         // merc act 2
-        if (document.myform.char.value == 8) {
+        if (app.charactersSelected == 8) {
             ergebnis = ergebnis / 2;
         }
         if (attackSkill.title === "Frenzy") {
@@ -231,11 +231,11 @@ function berechneWerte() {
             // WSM2 = (WSM_primary + WSM_secondary)/2
 
             // if (document.myform.primaerwaffe[0].checked == true) {
-            //     WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
-            //     WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.zweitwaffe.value][1] - lookupWeapon[document.myform.waffe.value][1];
+            //     WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
+            //     WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsSecondarySelected][1] - lookupWeapon[app.weaponsPrimarySelected][1];
             // } else {
-            //     WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.waffe.value][1] - lookupWeapon[document.myform.zweitwaffe.value][1];
-            //     WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
+            //     WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsPrimarySelected][1] - lookupWeapon[app.weaponsSecondarySelected][1];
+            //     WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
             // }
 
             // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
@@ -247,38 +247,38 @@ function berechneWerte() {
             // fpa = fpa_1 + fpa_2
 
             ergebnis = ergebnis / 2;
-        } else if ((document.myform.skill.value > 15) && (document.myform.skill.value < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw 
+        } else if ((app.skillsSelected > 15) && (app.skillsSelected < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw 
             ergebnis = ergebnis / 2;
         }
         // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
-        if ((document.myform.skill.value > 8) && (document.myform.skill.value < 13) && (document.myform.zweitwaffe.value > 0)) {
+        if ((app.skillsSelected > 8) && (app.skillsSelected < 13) && (app.weaponsSecondarySelected > 0)) {
             ergebnis = ergebnis / 2;
         }
     }
     // Whirlwind
-    if (document.myform.skill.value == 19) {
+    if (app.skillsSelected == 19) {
         ergebnis = 4; // uses classic whirlwind locked at 4 frame attack for all weapons
         isMaxIas = true;
         if (isMaxIas) {
-            document.myform.AnzMax.value = "further IAS useless";
+            app.isCurrentFpaMaxed = true;
         }
     }
     // Dragon Talon, Zeal, Fury
     if (attackSkill.rollback == 0) {
         // Dragon Talon
-        if (document.myform.skill.value == 14) {
+        if (app.skillsSelected == 14) {
             rollback1 = calcFPA(4, acceleration, 0);
             rollback1++;
             rollback3 = calcFPA(13, acceleration, 0);
             if (rollback3 == 7) {
-                document.myform.AnzMax.value = "further IAS useless";
+                app.isCurrentFpaMaxed = true;
             }
-            document.myform.AnzFPA.value = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
-            document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
+            app.currentFpa = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
+            app.currentAps = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
         }
         // Fury
-        if (document.myform.skill.value == 29) {
-            frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
+        if (app.skillsSelected == 29) {
+            frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
             rollback1 = calcFPA(frames, acceleration, 0);
             if (rollback1 > calcFPA(frames, 175, 0)) {
                 isMaxIas = false;
@@ -289,17 +289,17 @@ function berechneWerte() {
                 isMaxIas = false;
             }
             if (isMaxIas) {
-                document.myform.AnzMax.value = "further IAS useless";
+                app.isCurrentFpaMaxed = true;
             }
             isMaxIas = true;
-            document.myform.AnzFPA.value = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
-            document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
+            app.currentFpa = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
+            app.currentAps = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
         }
         // Zeal
-        if (document.myform.skill.value == 24) {
-            var weaponTypeNum = lookupWeapon[document.myform.waffe.value][2];
+        if (app.skillsSelected == 24) {
+            var weaponTypeNum = lookupWeapon[app.weaponsPrimarySelected][2];
             console.debug(weaponTypeNum);
-            frames = aktionsframe[weaponTypeNum][document.myform.char.value];
+            frames = aktionsframe[weaponTypeNum][app.charactersSelected];
             // 2-h sword && barb single handed
             var isBarbTwoHandedSwordAsOneHanded = false;
             if ((weaponTypeNum == 3) && (document.myform.barbschwert.value == 1)) {
@@ -317,7 +317,7 @@ function berechneWerte() {
                 isMaxIas = false;
             }
             rollback2++;
-            frames = waffengattung[weaponTypeNum][document.myform.char.value][0];
+            frames = waffengattung[weaponTypeNum][app.charactersSelected][0];
             console.debug(frames);
             if (isBarbTwoHandedSwordAsOneHanded) {
                 frames = 16;
@@ -327,19 +327,19 @@ function berechneWerte() {
                 isMaxIas = false;
             }
             if (isMaxIas) {
-                document.myform.AnzMax.value = "further IAS useless";
+                app.isCurrentFpaMaxed = true;
             }
             isMaxIas = true;
-            document.myform.AnzFPA.value = rollback1 + "/" + rollback2 + "/" + rollback2 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
+            app.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback2 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
             // Zeal
-            if (document.myform.skill.value == 24) {
-                document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 * 3 + rollback3) / 5)) / 100 + " attacks per second";
+            if (app.skillsSelected == 24) {
+                app.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 * 3 + rollback3) / 5)) / 100 + " attacks per second";
             }
         }
     }
     // Strafe
     if (attackSkill.rollback == 50) {
-        frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
+        frames = aktionsframe[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected];
         if (acceleration > 149) {
             acceleration = 149;
         }
@@ -366,7 +366,7 @@ function berechneWerte() {
             isMaxIas = false;
         }
         rollback4++;
-        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
+        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
         rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * attackSkill.rollback / 100);
         rollback5 = calcFPA(frames, acceleration, rollbackframe);
         if (rollback5 > calcFPA(frames, 149, rollbackframe)) {
@@ -377,15 +377,15 @@ function berechneWerte() {
             rollback5 = 13;
         }
         if (isMaxIas) {
-            document.myform.AnzMax.value = "further IAS useless";
+            app.isCurrentFpaMaxed = true;
         }
         isMaxIas = true;
-        document.myform.AnzFPA.value = rollback1 + "/" + rollback2 + "/" + rollback3 + "/" + rollback4 + "/" + rollback5 + " frames per attack";
-        document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3 * 4 + rollback4 * 3 + rollback5) / 10)) / 100 + " attacks per second";
+        app.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback3 + "/" + rollback4 + "/" + rollback5 + " frames per attack";
+        app.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3 * 4 + rollback4 * 3 + rollback5) / 10)) / 100 + " attacks per second";
     }
     // Fend
     if (attackSkill.rollback == 40) {
-        frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
+        frames = aktionsframe[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected];
         rollback1 = calcFPA(frames, acceleration, start);
         if (rollback1 > calcFPA(frames, 175, start)) {
             isMaxIas = false;
@@ -397,33 +397,33 @@ function berechneWerte() {
             isMaxIas = false;
         }
         rollback2++;
-        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
+        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
         rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
         rollback3 = calcFPA(frames, acceleration, rollbackframe);
         if (rollback3 > calcFPA(frames, 175, rollbackframe)) {
             isMaxIas = false;
         }
         if (isMaxIas) {
-            document.myform.AnzMax.value = "further IAS useless";
+            app.isCurrentFpaMaxed = true;
         }
         isMaxIas = true;
-        document.myform.AnzFPA.value = rollback1 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
-        document.myform.AnzFre.value = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3) / 2)) / 100 + " attacks per second";
+        app.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
+        app.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3) / 2)) / 100 + " attacks per second";
     }
     // Most attacks
     if (attackSkill.rollback == 100) {
-        document.myform.AnzFPA.value = ergebnis + " frames per attack";
-        document.myform.AnzFre.value = parseInt(100 * 25 / ergebnis) / 100 + " attacks per second";
-        if (document.myform.char.value > 6) {
-            document.myform.AnzFre.value = parseInt(100 * 25 / (ergebnis + 2)) / 100 + " attacks per second";
+        app.currentFpa = ergebnis + " frames per attack";
+        app.currentAps = parseInt(100 * 25 / ergebnis) / 100 + " attacks per second";
+        if (app.charactersSelected > 6) {
+            app.currentAps = parseInt(100 * 25 / (ergebnis + 2)) / 100 + " attacks per second";
         }
-        if (((document.myform.char.value == 8) && (document.myform.skill.value == 3)) || ((document.myform.char.value == 9) && (document.myform.skill.value == 0))) {
-            document.myform.AnzFre.value = parseInt(100 * 25 / (ergebnis + 1)) / 100 + " attacks per second";
+        if (((app.charactersSelected == 8) && (app.skillsSelected == 3)) || ((app.charactersSelected == 9) && (app.skillsSelected == 0))) {
+            app.currentAps = parseInt(100 * 25 / (ergebnis + 1)) / 100 + " attacks per second";
         }
         // Shape Shifted && off-hand weapon not unarmed && standard attack
-        if ((document.myform.charform.value > 0) && (document.myform.zweitwaffe.value > 0) && (document.myform.skill.value == 0)) {
-            document.myform.AnzFPA.value = "Calculation makes no sense";
-            document.myform.AnzFre.value = "";
+        if ((app.shapeShiftFormsSelected > 0) && (app.weaponsSecondarySelected > 0) && (app.skillsSelected == 0)) {
+            app.currentFpa = "Calculation makes no sense";
+            app.currentAps = "";
         }
     }
 }
@@ -433,35 +433,35 @@ function SchreibeDaten() {
     TabFenster.document.write('<html><head><style type="text/css">');
     TabFenster.document.write('body { background-color:#000000; color:#FFFFFF; } .title { background-color:#45070E; color:#FFFFFF; font-weight:bold; } .wertitle { background-color:EBBE00; color:FFFFFF; font-weight:bold; } .auswahl { background-color:#BEBEBE; color:#FFFFFF; } .iaswahl { background-color:#45070E; color:#FFFFFF; }');
     TabFenster.document.write('</style></head><body><br><table align="center" border="0" cellpadding="0" cellspacing="5">');
-    TabFenster.document.write('<tr><td class="title" colspan="2" align="center"><b>Data:</b></td></tr><tr><td width="130">Character:</td><td>' + document.myform.char.options[document.myform.char.selectedIndex].text + '</td></tr>');
+    TabFenster.document.write('<tr><td class="title" colspan="2" align="center"><b>Data:</b></td></tr><tr><td width="130">Character:</td><td>' + app.characters[app.charactersSelected].text + '</td></tr>');
     // Unshifted
-    if (document.myform.charform.value > 0) {
-        TabFenster.document.write('<tr><td>Wereform:</td><td>' + document.myform.charform.options[document.myform.charform.selectedIndex].text + '</td></tr>');
+    if (app.shapeShiftFormsSelected > 0) {
+        TabFenster.document.write('<tr><td>Wereform:</td><td>' + app.shapeShiftForms[app.shapeShiftFormsSelected].text + '</td></tr>');
     }
-    TabFenster.document.write('<tr><td>Primary Weapon:</td><td>' + document.myform.waffe.options[document.myform.waffe.selectedIndex].text + '</td></tr>');
-    if (document.myform.zweitwaffe.value > 0) {
-        TabFenster.document.write('<tr><td>Secondary Weapon:</td><td>' + document.myform.zweitwaffe.options[document.myform.zweitwaffe.selectedIndex].text + '</td></tr>');
+    TabFenster.document.write('<tr><td>Primary Weapon:</td><td>' + app.weaponInfoPrimary.text + '</td></tr>');
+    if (app.weaponsSecondarySelected > 0) {
+        TabFenster.document.write('<tr><td>Secondary Weapon:</td><td>' + app.weaponInfoSecondary.text + '</td></tr>');
     }
-    TabFenster.document.write('<tr><td>Skill:</td><td>' + document.myform.skill.options[document.myform.skill.selectedIndex].text + '</td></tr>');
-    TabFenster.document.write('<tr><td>IAS:</td><td>' + document.myform.IAS.options[document.myform.IAS.selectedIndex].text + '</td></tr>');
-    if ((document.myform.waffe.value > 0) && (document.myform.zweitwaffe.value == 0)) {
-        TabFenster.document.write('<tr><td>Weapon-IAS:</td><td>' + document.myform.wIAS1.options[document.myform.wIAS1.selectedIndex].text + '</td></tr>');
+    TabFenster.document.write('<tr><td>Skill:</td><td>' + app.skills.find(s => s.value == app.skillsSelected).text + '</td></tr>');
+    TabFenster.document.write('<tr><td>IAS:</td><td>' + app.iasOffWeapon + '</td></tr>');
+    if ((app.weaponsPrimarySelected > 0) && (app.weaponsSecondarySelected == 0)) {
+        TabFenster.document.write('<tr><td>Weapon-IAS:</td><td>' + app.iasWeaponPrimary + '</td></tr>');
     }
-    if ((document.myform.waffe.value > 0) && (document.myform.zweitwaffe.value > 0)) {
-        TabFenster.document.write('<tr><td>Weapon-IAS:</td><td>' + document.myform.wIAS1.options[document.myform.wIAS1.selectedIndex].text + ' / ' + document.myform.wIAS2.options[document.myform.wIAS2.selectedIndex].text + '</td></tr>');
+    if ((app.weaponsPrimarySelected > 0) && (app.weaponsSecondarySelected > 0)) {
+        TabFenster.document.write('<tr><td>Weapon-IAS:</td><td>' + app.iasWeaponPrimary + ' / ' + app.iasWeaponSecondary + '</td></tr>');
     }
-    if (document.myform.fana.selectedIndex > 0) {
-        TabFenster.document.write('<tr><td>Fanaticism:</td><td> Level ' + document.myform.fana.options[document.myform.fana.selectedIndex].text + '</td></tr>');
+    if (app.fanaticismSkillIAS > 0) {
+        TabFenster.document.write('<tr><td>Fanaticism IAS:</td><td>' + app.fanaticismSkillIAS + '</td></tr>');
     }
-    if (document.myform.frenzy.selectedIndex > 0) {
-        TabFenster.document.write('<tr><td>Frenzy:</td><td> Level ' + document.myform.frenzy.options[document.myform.frenzy.selectedIndex].text + '</td></tr>');
+    if (app.frenzySkillIAS > 0) {
+        TabFenster.document.write('<tr><td>Frenzy IAS:</td><td>' + app.frenzySkillIAS + '</td></tr>');
     }
     // Werewolf
-    if ((document.myform.charform.value == 2) && (document.myform.wolf.selectedIndex > 0)) {
-        TabFenster.document.write('<tr><td>Werewolf:</td><td> Level ' + document.myform.wolf.options[document.myform.wolf.selectedIndex].text + '</td></tr>');
+    if ((app.shapeShiftFormsSelected == 2) && (app.werewolfSkillIAS > 0)) {
+        TabFenster.document.write('<tr><td>Werewolf IAS:</td><td> ' + app.werewolfSkillIAS + '</td></tr>');
     }
-    if (document.myform.tempo.selectedIndex > 0) {
-        TabFenster.document.write('<tr><td>Burst of Speed:</td><td> Level ' + document.myform.tempo.options[document.myform.tempo.selectedIndex].text + '</td></tr>');
+    if (app.burstOfSpeedSkillIAS > 0) {
+        TabFenster.document.write('<tr><td>Burst of Speed IAS:</td><td>' + app.burstOfSpeedSkillIAS + '</td></tr>');
     }
 }
 
@@ -493,22 +493,22 @@ function wirbelwind(temp) {
 /// Calc WSM
 function berechneWSM() {
     // not assasin and not barbarian
-    if ((document.myform.char.value != 1) && (document.myform.char.value != 2)) {
-        WSMprimaer = lookupWeapon[document.myform.waffe.value][1];
+    if ((app.charactersSelected != 1) && (app.charactersSelected != 2)) {
+        WSMprimaer = lookupWeapon[app.weaponsPrimarySelected][1];
     }
     // (assasin or barbarian) and no offhand weapon
-    if (((document.myform.char.value == 1) || (document.myform.char.value == 2)) && (document.myform.zweitwaffe.selectedIndex == 0)) {
-        WSMprimaer = lookupWeapon[document.myform.waffe.value][1];
+    if (((app.charactersSelected == 1) || (app.charactersSelected == 2)) && (app.weaponsSecondarySelected == 0)) {
+        WSMprimaer = lookupWeapon[app.weaponsPrimarySelected][1];
     }
     // (assasin or barbarian) with offhand weapon
-    if (((document.myform.char.value == 1) || (document.myform.char.value == 2)) && (document.myform.zweitwaffe.value > 0)) {
-        if (document.myform.enableWsmBug.checked) {
+    if (((app.charactersSelected == 1) || (app.charactersSelected == 2)) && (app.weaponsSecondarySelected > 0)) {
+        if (app.isWsmBug) {
             console.log('applying wsm bug');
-            WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.waffe.value][1] - lookupWeapon[document.myform.zweitwaffe.value][1];
-            WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
+            WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsPrimarySelected][1] - lookupWeapon[app.weaponsSecondarySelected][1];
+            WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
         } else {
-            WSMprimaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2);
-            WSMsekundaer = parseInt((lookupWeapon[document.myform.waffe.value][1] + lookupWeapon[document.myform.zweitwaffe.value][1]) / 2) + lookupWeapon[document.myform.zweitwaffe.value][1] - lookupWeapon[document.myform.waffe.value][1];
+            WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
+            WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsSecondarySelected][1] - lookupWeapon[app.weaponsPrimarySelected][1];
         }
         console.log('average primary wsm: ' + WSMprimaer);
         console.log('average secondary wsm: ' + WSMsekundaer);
@@ -517,15 +517,15 @@ function berechneWSM() {
 
 /// Calc Effective IAS
 function berechneEIAS() {
-    if (document.myform.waffe.value == 0) {
-        IASprimaer = parseInt(document.myform.IAS.value);
+    if (app.weaponsPrimarySelected == 0) {
+        IASprimaer = parseInt(app.iasOffWeapon);
     }
-    if ((document.myform.waffe.value > 0) && (document.myform.zweitwaffe.value == 0)) {
-        IASprimaer = parseInt(document.myform.IAS.value) + parseInt(document.myform.wIAS1.value);
+    if ((app.weaponsPrimarySelected > 0) && (app.weaponsSecondarySelected == 0)) {
+        IASprimaer = parseInt(app.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
     }
-    if (document.myform.zweitwaffe.value > 0) {
-        IASprimaer = parseInt(document.myform.IAS.value) + parseInt(document.myform.wIAS1.value);
-        IASsekundaer = parseInt(document.myform.IAS.value) + parseInt(document.myform.wIAS2.value);
+    if (app.weaponsSecondarySelected > 0) {
+        IASprimaer = parseInt(app.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
+        IASsekundaer = parseInt(app.iasOffWeapon) + parseInt(document.myform.wIAS2.value);
     }
     EIASprimaer = Math.floor(120 * IASprimaer / (120 + IASprimaer));
     EIASsekundaer = Math.floor(120 * IASsekundaer / (120 + IASsekundaer));
@@ -533,164 +533,44 @@ function berechneEIAS() {
 
 /// Calc Skill IAS
 function berechneSIAS() {
-    var fana = parseInt(document.myform.fana.value);
-    var frenzy = parseInt(document.myform.frenzy.value);
-    var wolf = parseInt(document.myform.wolf.value);
-    var tempo = parseInt(document.myform.tempo.value);
-    var holyfrost = parseInt(document.myform.holyfrost.value);
-    var attackSkill = data.attack[document.myform.skill.value];
+    var fana = parseInt(app.fanaticismSkillIAS);
+    var frenzy = parseInt(app.frenzySkillIAS);
+    var wolf = parseInt(app.werewolfSkillIAS);
+    var tempo = parseInt(app.burstOfSpeedSkillIAS);
+    var holyfrost = parseInt(app.holyFreezeSkillIAS);
+    var attackSkill = data.attack[app.skillsSelected];
     // != Wolf
-    if (document.myform.charform.value != 2) wolf = 0;
+    if (app.shapeShiftFormsSelected != 2) wolf = 0;
     SIAS = fana + frenzy + wolf + tempo - holyfrost;
-    if (document.myform.skill.value == 16) {
+    if (app.skillsSelected == 16) {
         SIAS = SIAS + 50;
     }
-    if (document.myform.skill.value == 13) {
+    if (app.skillsSelected == 13) {
         SIAS = SIAS - 40;
     }
-    if (document.myform.altern.checked == true) {
+    if (app.isDecrepify) {
         SIAS = SIAS - 50;
     }
-    if ((attackSkill.animation == 7) && (document.myform.char.value < 7)) {
+    if ((attackSkill.animation == 7) && (app.charactersSelected < 7)) {
         SIAS = SIAS - 30;
     }
 }
 
-/// update shape shift options
-function setzeCharform() {
-    tempForm = document.myform.charform.value;
-    while (document.myform.charform.length > 0) document.myform.charform.options[0] = null;
-    if (document.myform.char.value < 7) {
-        for (i = 0; i < werform.length; i++) {
-            neuElement = new Option(unescape(werform[i]), i);
-            document.myform.charform.options[document.myform.charform.length] = neuElement;
-        }
-        if ((document.myform.char.value != 2) && (document.myform.char.value != 3)) document.myform.charform.options[document.myform.charform.length - 1] = null;
-    } else {
-        neuElement = new Option(werform[0], 0);
-        document.myform.charform.options[document.myform.charform.length] = neuElement;
-    }
-    for (i = 0; i < document.myform.charform.length; i++) {
-        if (document.myform.charform.options[i].value == tempForm) {
-            document.myform.charform.selectedIndex = i;
-        }
-    }
-}
-
-/// set primary weapon options
-function setzeWaffe() {
-    console.debug('set primary weapon options');
-    tempWaffe = document.myform.waffe.value;
-    while (document.myform.waffe.length > 0) document.myform.waffe.options[0] = null;
-    for (i = 0; i < lookupWeapon.length; i++) {
-        if ((lookupWeapon[i][3] < 0) || (lookupWeapon[i][3] == document.myform.char.value)) {
-            if (
-                    (document.myform.char.value < 7) // player characters
-                || ((document.myform.char.value == 7) && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8)) // Act 1 Merc
-                || ((document.myform.char.value == 8) && ((lookupWeapon[i][4] == 8) || (lookupWeapon[i][4] == 2))) // Act 2 Merc
-                || ((document.myform.char.value == 9) && (lookupWeapon[i][4] == 9)) // Act 5 Merc
-                || ((document.myform.char.value == 10) && (lookupWeapon[i][4] == 9) && (lookupWeapon[i][2] == 2)) // Act 3 Merc
-                ) {
-                neuElement = new Option(unescape(lookupWeapon[i][0]), i);
-                document.myform.waffe.options[document.myform.waffe.length] = neuElement;
-            }
-        }
-    }
-    for (i = 0; i < document.myform.waffe.length; i++) {
-        if (document.myform.waffe.options[i].value == tempWaffe) {
-            document.myform.waffe.selectedIndex = i;
-        }
-    }
-}
-
-/// 
-function setzeBarbschwert() {
-    tempBarbschwert = document.myform.barbschwert.value;
-    while (document.myform.barbschwert.length > 0) document.myform.barbschwert.options[0] = null;
-    if ((document.myform.char.value == 2) && (lookupWeapon[document.myform.waffe.value][2] == 3)) {
-        neuElement = new Option("two-handed", 0);
-        document.myform.barbschwert.options[document.myform.barbschwert.length] = neuElement;
-        neuElement = new Option("single-handed", 1);
-        document.myform.barbschwert.options[document.myform.barbschwert.length] = neuElement;
-    } else {
-        neuElement = new Option("-", -1);
-        document.myform.barbschwert.options[document.myform.barbschwert.length] = neuElement;
-    }
-    for (i = 0; i < document.myform.barbschwert.length; i++) {
-        if (document.myform.barbschwert.options[i].value == tempBarbschwert) {
-            document.myform.barbschwert.selectedIndex = i;
-        }
-    }
-}
-
-/// set secondary weapon options
-function setzeZweitwaffe() {
-    tempZweitwaffe = document.myform.zweitwaffe.value;
-    while (document.myform.zweitwaffe.length > 0) document.myform.zweitwaffe.options[0] = null;
-    switch (document.myform.char.value) {
-        case "1":
-            if (lookupWeapon[document.myform.waffe.value][2] == 1) {
-                for (i = 0; i < lookupWeapon.length; i++) {
-                    if ((lookupWeapon[i][3] == 1) || (lookupWeapon[i][2] == 0)) {
-                        neuElement = new Option(unescape(lookupWeapon[i][0]), i);
-                        document.myform.zweitwaffe.options[document.myform.zweitwaffe.length] = neuElement;
-                    }
-                }
-            } else {
-                neuElement = new Option("-", "0");
-                document.myform.zweitwaffe.options[document.myform.zweitwaffe.length] = neuElement;
-            }
-            break;
-        case "2":
-            if (((lookupWeapon[document.myform.waffe.value][2] == 2) || (lookupWeapon[document.myform.waffe.value][2] == 4)) || ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1))) {
-                for (i = 0; i < lookupWeapon.length; i++) {
-                    if ((lookupWeapon[i][2] == 0) || (lookupWeapon[i][2] == 3) || (((lookupWeapon[i][2] == 2) || (lookupWeapon[i][2] == 4)) && (lookupWeapon[i][3] == -1))) {
-                        neuElement = new Option(unescape(lookupWeapon[i][0]), i);
-                        document.myform.zweitwaffe.options[document.myform.zweitwaffe.length] = neuElement;
-                    }
-                }
-            } else {
-                neuElement = new Option("-", "0");
-                document.myform.zweitwaffe.options[document.myform.zweitwaffe.length] = neuElement;
-            }
-            break;
-        default:
-            neuElement = new Option("-", "0");
-            document.myform.zweitwaffe.options[document.myform.zweitwaffe.length] = neuElement;
-            break;
-    }
-    for (i = 0; i < document.myform.zweitwaffe.length; i++) {
-        if (document.myform.zweitwaffe.options[i].value == tempZweitwaffe) {
-            document.myform.zweitwaffe.selectedIndex = i;
-        }
-    }
-}
-
-/// Updates the weapon info box with weapon type and wsm
-function waffenInfo() {
-    document.myform.infoWaffe1.value = unescape(waffengattung[lookupWeapon[document.myform.waffe.value][2]][11]) + " [" + lookupWeapon[document.myform.waffe.value][1] + "]";
-    if (document.myform.zweitwaffe.value > 0) {
-        document.myform.infoWaffe2.value = unescape(waffengattung[lookupWeapon[document.myform.zweitwaffe.value][2]][11]) + " [" + lookupWeapon[document.myform.zweitwaffe.value][1] + "]";
-    } else {
-        document.myform.infoWaffe2.value = "";
-    }
-}
-
-/// set weapon ias options
+/// set weapon ias and off-weapon ias options
 function setzeIAS() {
     var weaponIasOptionCount = 32; // up from 24
     if (statischIAS == true) { // is ias unset bool
         statischIAS = false;
-        while (document.myform.IAS.length > 0) document.myform.IAS.options[0] = null;
-        for (i = 0; i <= 30 * mIAS; i++) {
-            if (mIAS == 1) {
-                neuElement = new Option(5 * i, 5 * i)
-            };
-            if (mIAS == 5) {
-                neuElement = new Option(i, i)
-            };
-            document.myform.IAS.options[document.myform.IAS.length] = neuElement;
-        }
+        // while (document.myform.IAS.length > 0) document.myform.IAS.options[0] = null;
+        // for (i = 0; i <= 30 * mIAS; i++) {
+        //     if (mIAS == 1) {
+        //         neuElement = new Option(5 * i, 5 * i)
+        //     };
+        //     if (mIAS == 5) {
+        //         neuElement = new Option(i, i)
+        //     };
+        //     document.myform.IAS.options[document.myform.IAS.length] = neuElement;
+        // }
         while (document.myform.wIAS1.length > 0) document.myform.wIAS1.options[0] = null;
         for (i = 0; i <= weaponIasOptionCount * mIAS; i++) {
             if (mIAS == 1) {
@@ -714,273 +594,6 @@ function setzeIAS() {
     }
 }
 
-function skillOptionElement(title)
-{
-    var skill = data.attack.find(a => a.title === title);
-    return new Option(skill.title, skill.index);
-}
-
-/// update available attack skills
-function setzeSkill() {
-    tempSkill = document.myform.skill.value; // save current skill selection
-    while (document.getElementsByName("skill")[0].hasChildNodes()) document.getElementsByName("skill")[0].removeChild(document.getElementsByName("skill")[0].firstChild);
-    var optgroup1 = document.createElement("optgroup");
-    var optgroup2 = document.createElement("optgroup");
-    optgroup1.label = "native attacks";
-    optgroup2.label = "non-class skills";
-
-    switch (document.myform.char.value) {
-        case "0": // Amazon
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            if (document.myform.charform.value == 0) {
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    optgroup1.appendChild(skillOptionElement("Throw"));
-                }
-                if (lookupWeapon[document.myform.waffe.value][4] == 1) {
-                    optgroup1.appendChild(skillOptionElement("Strafe"));
-                }
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][2] == 5)) {
-                    optgroup1.appendChild(skillOptionElement("Impale"));
-                    optgroup1.appendChild(skillOptionElement("Jab"));
-                    optgroup1.appendChild(skillOptionElement("Fend"));
-                }
-                if (lookupWeapon[document.myform.waffe.value][5] == 1) {
-                    optgroup2.appendChild(skillOptionElement("Zeal"));
-                }
-            }
-            break;
-        case "1": // Assassin
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            // not shapeshifted
-            if (document.myform.charform.value == 0) {
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    optgroup1.appendChild(skillOptionElement("Throw"));
-                }
-                optgroup1.appendChild(skillOptionElement("Laying Traps"));
-                if (isAssasinClaw(document.myform.waffe.value) || isDagger(document.myform.waffe.value)) {
-                    optgroup1.appendChild(skillOptionElement("Fists of Ember"));
-                    optgroup1.appendChild(skillOptionElement("Fists of Thunder"));
-                    optgroup1.appendChild(skillOptionElement("Blades of Ice"));
-                }
-                if ((lookupWeapon[document.myform.waffe.value][2] == 1) && (lookupWeapon[document.myform.zweitwaffe.value][2] == 1)) {
-                    optgroup1.appendChild(skillOptionElement("Dragon Claw"));
-                }
-                optgroup1.appendChild(skillOptionElement("Dragon Tail"));
-                optgroup1.appendChild(skillOptionElement("Dragon Talon"));
-                // should be weapons that can be passion runeword || POD chaos, any sin claw
-                if (lookupWeapon[document.myform.waffe.value][5] == 1 || isAssasinClaw(document.myform.waffe.value)) {
-                    optgroup2.appendChild(skillOptionElement("Zeal"));
-                }
-            }
-            break;
-        case "2": // Barbarian
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            if (document.myform.charform.value == 0) {
-                // primary throwing weapon
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    optgroup1.appendChild(skillOptionElement("Throw"));
-                }
-                // offhand weapon
-                if (document.myform.zweitwaffe.value > 0) {
-                    optgroup1.appendChild(skillOptionElement("Double Swing"));
-                    optgroup1.appendChild(skillOptionElement("Frenzy"));
-                }
-                // primary throwing and offhand throwing
-                if (((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) && ((lookupWeapon[document.myform.zweitwaffe.value][4] == 2) || (lookupWeapon[document.myform.zweitwaffe.value][4] == 3))) {
-                    optgroup1.appendChild(skillOptionElement("Double Throw"));
-                }
-                // not bow or xbow
-                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    optgroup1.appendChild(skillOptionElement("Whirlwind"));
-                    optgroup1.appendChild(skillOptionElement("Concentrate"));
-                    optgroup1.appendChild(skillOptionElement("Berserk"));
-                    optgroup1.appendChild(skillOptionElement("Bash"));
-                    optgroup1.appendChild(skillOptionElement("Stun"));
-                    optgroup1.appendChild(skillOptionElement("Cleave"));
-                }
-                // can zeal
-                if ((lookupWeapon[document.myform.waffe.value][5] == 1) || (lookupWeapon[document.myform.zweitwaffe.value][5] == 1)) {
-                    optgroup2.appendChild(skillOptionElement("Zeal"));
-                }
-            }
-            // bear barb
-            if (document.myform.charform.value == 1) {
-                // not bow or xbow
-                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    optgroup1.appendChild(skillOptionElement("Cleave"));
-                }
-            }
-            // wolf barb
-            if (document.myform.charform.value == 2) {
-                optgroup1.appendChild(skillOptionElement("Feral Rage"));
-                // not bow or xbow
-                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    optgroup1.appendChild(skillOptionElement("Cleave"));
-                }
-            }
-            break;
-        case "3": // Druid
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            if (document.myform.charform.value == 0) {
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    optgroup1.appendChild(skillOptionElement("Throw"));
-                }
-                if (lookupWeapon[document.myform.waffe.value][5] == 1) {
-                    optgroup2.appendChild(skillOptionElement("Zeal"));
-                }
-            }
-            if (document.myform.charform.value == 1) {
-                optgroup1.appendChild(skillOptionElement("Hunger"));
-            }
-            if (document.myform.charform.value == 2) {
-                optgroup1.appendChild(skillOptionElement("Feral Rage"));
-                optgroup1.appendChild(skillOptionElement("Hunger"));
-                optgroup1.appendChild(skillOptionElement("Rabies"));
-                optgroup1.appendChild(skillOptionElement("Fury"));
-            }
-            break;
-        case "5": // Paladin
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            if (document.myform.charform.value == 0) {
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    optgroup1.appendChild(skillOptionElement("Throw"));
-                }
-                // not bow or xbow
-                if (lookupWeapon[document.myform.waffe.value][4] != 1) {
-                    optgroup1.appendChild(skillOptionElement("Zeal"));
-                    optgroup1.appendChild(skillOptionElement("Sacrifice"));
-                    optgroup1.appendChild(skillOptionElement("Vengeance"));
-                    optgroup1.appendChild(skillOptionElement("Conversion"));
-                }
-                if ((lookupWeapon[document.myform.waffe.value][2] == 0) || (lookupWeapon[document.myform.waffe.value][2] == 2) || (lookupWeapon[document.myform.waffe.value][2] == 4)) {
-                    optgroup1.appendChild(skillOptionElement("Smite"));
-                }
-            }
-            break;
-        case "7": // Merc - Rogue
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            break;
-        case "8": // Merc - Town Guard
-            optgroup1.appendChild(skillOptionElement("Jab"));
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            break;
-        case "9": // Merc - Barbarian
-            optgroup1.appendChild(skillOptionElement("Bash"));
-            break;
-        case "10": // Merc - Iron Wolves
-            optgroup1.appendChild(skillOptionElement("Vengeance"));
-            break;
-        default: // Necromancer & Sorceress
-            optgroup1.appendChild(skillOptionElement("Standard"));
-            if (document.myform.charform.value == 0) {
-                if ((lookupWeapon[document.myform.waffe.value][4] == 2) || (lookupWeapon[document.myform.waffe.value][4] == 3)) {
-                    optgroup1.appendChild(skillOptionElement("Throw"));
-                }
-                if (lookupWeapon[document.myform.waffe.value][5] == 1) {
-                    optgroup2.appendChild(skillOptionElement("Zeal"));
-                }
-            }
-            break;
-    }
-    // add options
-    if (optgroup1.hasChildNodes()) {
-        document.myform.skill.appendChild(optgroup1);
-    }
-    if (optgroup2.hasChildNodes()) {
-        document.myform.skill.appendChild(optgroup2);
-    }
-    // retain selected skill if still available
-    for (i = 0; i < document.myform.skill.length; i++) {
-        if ((document.myform.skill.options[i].value == tempSkill) && (document.myform.char.value != 8)) {
-            document.myform.skill.selectedIndex = i;
-        }
-    }
-}
-
-/// set skill ias
-function setzeSIAS() {
-    // fanaticisim
-    if (statischFana == true) { 
-        statischFana = false;
-        while (document.myform.fana.length > 0) document.myform.fana.options[0] = null;
-        updateFanaValues();
-    }
-    // frenzy
-    while (document.myform.frenzy.length > 0) document.myform.frenzy.options[0] = null;
-    if (document.myform.char.value == 2) {
-        updateFrenzyValues();
-    } else {
-        neuElement = new Option("-", 0);
-        document.myform.frenzy.options[document.myform.frenzy.length] = neuElement;
-    }
-    // wearwolf
-    while (document.myform.wolf.length > 0) document.myform.wolf.options[0] = null;
-    if ((document.myform.char.value == 2) || (document.myform.char.value == 3)) {
-        updateWolfValues();
-    } else {
-        neuElement = new Option("-", 0);
-        document.myform.wolf.options[document.myform.wolf.length] = neuElement;
-    }
-    // burst of speed
-    while (document.myform.tempo.length > 0) document.myform.tempo.options[0] = null;
-    if (document.myform.char.value == 1) {
-        for (i = 0; i <= 50; i++) {
-            neuElement = new Option(i, Math.floor(Math.floor((110 * i) / (6 + i)) * (60 - 15) / 100) + 15);
-            document.myform.tempo.options[document.myform.tempo.length] = neuElement;
-            if (i == 0) {
-                document.myform.tempo.options[document.myform.tempo.length - 1].value = 0;
-            }
-        }
-    } else {
-        neuElement = new Option("-", 0);
-        document.myform.tempo.options[document.myform.tempo.length] = neuElement;
-    }
-    // holy freeze
-    if (statischFrost == true) {
-        statischFrost = false;
-        while (document.myform.holyfrost.length > 0) document.myform.holyfrost.options[0] = null;
-        updateHolyFreezeValues();
-    }
-}
-
-function replaceSkillSelectOptions($select, values) {
-    $select.empty();
-    for (let i = 0; i < values.length; i++) {
-        $select.append('<option value="' + values[i] + '">' + i + '</option>');
-    }
-}
-
-function updateFanaValues() {
-    var values = [];
-    for (i = 0; i <= 50; i++) {
-        var v = Math.floor(Math.floor((110 * i) / (6 + i)) * (40 - 10) / 100) + 10;
-        if (i == 0) { 
-            v = 0;
-        }
-        values.push(v);
-    }
-    var $select = jQuery("select[name=fana]");
-    replaceSkillSelectOptions($select, values);
-}
-
-function updateFrenzyValues() {
-    var values = [0,9,13,15,18,20,21,22,23,24,25,26,26,27,28,28,29,29,29,29,30];
-    var $select = jQuery("select[name=frenzy]");
-    replaceSkillSelectOptions($select, values);
-}
-
-function updateWolfValues() {
-    var values = [0,36,45,52,58,62,66,69,71,74,76,78,79,81,82,83,85,85,86,87,88];
-    var $select = jQuery("select[name=wolf]");
-    replaceSkillSelectOptions($select, values);
-}
-
-function updateHolyFreezeValues() {
-    var values = [0,14,18,20,23,25,26,27,28,29,30,31,31,32,33,33,34,34,34,34,35];
-    var $select = jQuery("select[name=holyfrost]");
-    replaceSkillSelectOptions($select, values);
-}
-
 /// changes the interval of ias selection drop downs between 1 and 5 
 function IASabstufung() {
     statischIAS = true;
@@ -992,7 +605,6 @@ function IASabstufung() {
     setzeIAS();
 }
 
-var werform = ["unchanged", "Werebear", "Werewolf"]
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0]
 // first level is weapon type number
 // second level is char value
@@ -1673,48 +1285,84 @@ var data = {
 
 var app = new Vue({
     el: '#app',
+    vuetify: new Vuetify({
+        theme: {
+            dark: false,
+        },
+    }),
     data: {
-        message: 'Hello Vue!'
+        characters: [
+            { value: 0, text: 'Amazon' },
+            { value: 1, text: 'Assassin' },
+            { value: 2, text: 'Barbarian' },
+            { value: 3, text: 'Druid' },
+            { value: 4, text: 'Necromancer' },
+            { value: 5, text: 'Paladin' },
+            { value: 6, text: 'Sorceress' },
+            { value: 7, text: 'Act 1 Merc - Rogue' },
+            { value: 8, text: 'Act 2 Merc - Town Guard' },
+            { value: 9, text: 'Act 5 Merc - Barbarian' },
+            { value: 10,text: 'Act 3 Merc - Iron Wolves' },
+        ],
+        charactersSelected: 0,
+        shapeShiftFormsSelected: 0,
+        fanaticismSkillIAS: 0,
+        frenzySkillIAS: 0,
+        werewolfSkillIAS: 0,
+        burstOfSpeedSkillIAS: 0,
+        holyFreezeSkillIAS: 0,
+        isDecrepify: false,
+        weaponsPrimarySelected: 0,
+        weaponsSecondarySelected: 0,
+        weaponsPrimaryBarbHandednessSelected: -1,
+        skillsSelected: 0,
+        iasOffWeapon: 0,
+        iasWeaponPrimary: 0,
+        iasWeaponSecondary: 0,
+        isWsmBug: false,
+        currentFpa: '',
+        isCurrentFpaMaxed: false,
+        currentAps: '',
     },
     methods: {
         changedCharacter: function () {
-            setzeCharform();
-            setzeWaffe();
-            setzeBarbschwert();
-            setzeZweitwaffe();
-            setzeSIAS();
-            setzeSkill();
-            setzeIAS();
-            waffenInfo();
+            //this.updateShapeShiftForms();
+            //setzeWaffe();
+            //setzeBarbschwert();
+            //setzeZweitwaffe();
+            //this.updateSkillIasValues();
+            //setzeSkill();
+            //setzeIAS();
+            //waffenInfo();
             berechneWerte();
         },
         changedShifted: function () {
-            setzeSkill();
+            //setzeSkill();
             berechneWerte();
         },
         changedPrimaryWeapon: function () {
-            setzeBarbschwert();
-            setzeZweitwaffe();
-            setzeSkill();
-            waffenInfo();
+            //setzeBarbschwert();
+            //setzeZweitwaffe();
+            //setzeSkill();
+            //waffenInfo();
             berechneWerte();
         },
         changedBarbWeaponHandedness: function () {
-            setzeZweitwaffe();
-            waffenInfo();
+            //setzeZweitwaffe();
+            //waffenInfo();
             berechneWerte();
         },
         changedSecondaryWeapon: function () {
-            setzeSkill();
-            waffenInfo();
-            berechneWerte();
-        },
-        changedIasSteps: function () {
-            IASabstufung();
+            //setzeSkill();
+            //waffenInfo();
             berechneWerte();
         },
         calculateBreakpoint: function () {
             berechneWerte();
+        },
+        getSkillOptionData: function (title) {
+            var skill = data.attack.find(a => a.title === title);
+            return { value: skill.index, text: skill.title };
         },
         showIasTable: function () {
             console.log('show table');
@@ -1722,24 +1370,25 @@ var app = new Vue({
             var RBframe;
             var temp;
             var temp1;
-            var OIAS = document.myform.IAS.value;
+            var OIAS = this.iasOffWeapon;
             var WIAS = document.myform.wIAS1.value;
-            var attackSkill = data.attack[document.myform.skill.value];
+            var attackSkill = data.attack[app.skillsSelected];
             if (fenster == false) {
-                TabFenster.close();
+                if (typeof(TabFenster) !== "undefined") TabFenster.close();
             }
             fenster = false;
             // Shape Shifted && (|| &&)
-            if ((document.myform.charform.value > 0) && ((document.myform.waffe.value == 0) || ((document.myform.zweitwaffe.value > 0) && (document.myform.skill.value == 0)))) {
+            if ((app.shapeShiftFormsSelected > 0) && ((app.weaponsPrimarySelected == 0) || ((app.weaponsSecondarySelected > 0) && (app.skillsSelected == 0)))) {
                 fenster = true;
             }
             cap = 0;
+            console.log(breakpoints2);
             breakpoints = [];
             breakpoints1 = [];
-            breakpoints2 = [];
+            breakpoints2.length = 0;
             breakpointsAPS = [];
             // Unshifted
-            if (document.myform.charform.value == 0) {
+            if (app.shapeShiftFormsSelected == 0) {
                 temp1 = 0;
                 if (((attackSkill.animation == 0)
                     || (attackSkill.animation == 2)
@@ -1757,21 +1406,21 @@ var app = new Vue({
                     }
                 }
                 // standard attack animation && no secondary weapon && standard rollback
-                if ((attackSkill.animation == 1) && (document.myform.zweitwaffe.value == 0) && (attackSkill.rollback == 100)) {
+                if ((attackSkill.animation == 1) && (app.weaponsSecondarySelected == 0) && (attackSkill.rollback == 100)) {
                     console.info("calc ias for standard attack single");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-                        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
                             frames = 16;
                         }
                         ergebnis = calcFPA(frames, i, start);
-                        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][1];
-                        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][1];
+                        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
                             frames = 16;
                         }
                         temp = calcFPA(frames, i, start);
                         ergebnis = (ergebnis + temp) / 2;
-                        if (document.myform.char.value == 9) {
+                        if (this.charactersSelected == 9) {
                             ergebnis = ergebnis / 2;
                         }
                         if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMprimaer < 120)) {
@@ -1781,16 +1430,18 @@ var app = new Vue({
                     }
                 }
                 // standard attack animation && secondary weapon selected && standard rollback
-                if ((attackSkill.animation == 1) && (document.myform.zweitwaffe.value > 0) && (attackSkill.rollback == 100)) {
+                if ((attackSkill.animation == 1) && (app.weaponsSecondarySelected > 0) && (attackSkill.rollback == 100)) {
                     console.info("calc ias for standard attack dual");
+                    console.log(SIAS);
+                    console.log(WSMprimaer);
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-                        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
                             frames = 16;
                         }
                         ergebnis = calcFPA(frames, i, 0);
-                        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][1];
-                        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][1];
+                        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
                             frames = 16;
                         }
                         temp = calcFPA(frames, i, 0);
@@ -1810,6 +1461,7 @@ var app = new Vue({
                     }
                     temp1 = 0;
                     for (i = Math.max(100 + SIAS - WSMsekundaer, 15); i <= 175; i++) {
+                        console.log('calc breakpoints2');
                         ergebnis = calcFPA(12, i, 0);
                         if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMsekundaer < 120)) {
                             breakpoints2[breakpoints2.length] = [Math.ceil(120 * (i - 100 - SIAS + WSMsekundaer) / (120 - (i - 100 - SIAS + WSMsekundaer))) - IASsekundaer, ergebnis];
@@ -1825,6 +1477,7 @@ var app = new Vue({
                         }
                     }
                     var IASmax1 = breakpoints1[breakpoints1.length - 1][0]
+                    console.log(breakpoints2);
                     var IASmax2 = breakpoints2[breakpoints2.length - 1][0]
                     for (i = 0; i <= Math.max(IASmax1, IASmax2); i++) {
                         if ((breakpoints1.length > 1) && (breakpoints1[1][0] == i)) {
@@ -1843,21 +1496,21 @@ var app = new Vue({
                     }
                 }
                 // Impale, Jab, Dragon Claw, Double Swing, Frenzy, Double Throw && not Whirlwind
-                if ((attackSkill.animation == 7) && (document.myform.skill.value != 19)) {
+                if ((attackSkill.animation == 7) && (app.skillsSelected != 19)) {
                     console.info("calc ias for animation 7");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                         ergebnis = calcFPA(frames, i, 0);
                         ergebnis++;
-                        if ((document.myform.skill.value == 3) && (document.myform.char.value < 7)) {
+                        if ((app.skillsSelected == 3) && (this.charactersSelected < 7)) {
                             ergebnis = parseInt(100 * ergebnis / 3) / 100;
                         }
-                        if (document.myform.char.value == 8) {
+                        if (this.charactersSelected == 8) {
                             ergebnis = ergebnis / 2;
                         }
-                        if ((document.myform.skill.value > 15) && (document.myform.skill.value < 19)) {
+                        if ((app.skillsSelected > 15) && (app.skillsSelected < 19)) {
                             ergebnis = ergebnis / 2;
                         }
-                        if ((document.myform.skill.value > 8) && (document.myform.skill.value < 13) && (document.myform.zweitwaffe.value > 0)) {
+                        if ((app.skillsSelected > 8) && (app.skillsSelected < 13) && (app.weaponsSecondarySelected > 0)) {
                             ergebnis = ergebnis / 2;
                         }
                         if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMprimaer < 120)) {
@@ -1878,9 +1531,9 @@ var app = new Vue({
                             frames = 4;
                         }
                         if (attackSkill.title == 'Zeal') {
-                            frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
+                            frames = aktionsframe[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected];
                         }
-                        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
                             frames = 7;
                         }
                         rollback1 = calcFPA(frames, i, start);
@@ -1891,9 +1544,9 @@ var app = new Vue({
                             frames = 13;
                         }
                         if (attackSkill.title == 'Zeal') {
-                            frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
+                            frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][0];
                         }
-                        if ((lookupWeapon[document.myform.waffe.value][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
                             frames = 16;
                         }
                         rollback3 = calcFPA(frames, i, 0);
@@ -1908,7 +1561,7 @@ var app = new Vue({
                 if (attackSkill.title == 'Strafe') {
                     console.info("calc ias for strafe");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 149; i++) {
-                        frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
+                        frames = aktionsframe[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected];
                         rollback1 = calcFPA(frames, i, start);
                         rollback1++;
                         RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
@@ -1920,7 +1573,7 @@ var app = new Vue({
                         RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback3) / 256) * attackSkill.rollback / 100);
                         rollback4 = calcFPA(frames, i, RBframe);
                         rollback4++;
-                        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
+                        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][0];
                         RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback4) / 256) * attackSkill.rollback / 100);
                         rollback5 = calcFPA(frames, i, RBframe);
                         if ((rollback2 == rollback3) || (rollback3 == rollback4)) {
@@ -1936,13 +1589,13 @@ var app = new Vue({
                 if (attackSkill.title == 'Fend') {
                     console.info("calc ias for fend");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                        frames = aktionsframe[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value];
+                        frames = aktionsframe[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected];
                         rollback1 = calcFPA(frames, i, start);
                         rollback1++;
                         RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
                         rollback2 = calcFPA(frames, i, RBframe);
                         rollback2++;
-                        frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
+                        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][0];
                         RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * attackSkill.rollback / 100);
                         rollback3 = calcFPA(frames, i, RBframe);
                         ergebnis = rollback1 + rollback2 + rollback3;
@@ -1957,10 +1610,10 @@ var app = new Vue({
                 SchreibeDaten();
                 TabFenster.document.write('</table><br><table align="center" cellpadding="0" cellspacing="0"><tr class="title"><td height="30" width="70" align="center">IAS</td><td width="150" align="center">attack speed [ticks]</td><td width="180" align="center">attacks per second</td></tr>');
                 var aidel = 0;
-                if (document.myform.char.value > 6) {
+                if (this.charactersSelected > 6) {
                     aidel = 2;
                 }
-                if (((document.myform.char.value == 8) && (document.myform.skill.value == 3)) || ((document.myform.char.value == 9) && (document.myform.skill.value == 0))) {
+                if (((this.charactersSelected == 8) && (app.skillsSelected == 3)) || ((this.charactersSelected == 9) && (app.skillsSelected == 0))) {
                     aidel = 1;
                 }
                 if (attackSkill.rollback == 100) {
@@ -1976,22 +1629,22 @@ var app = new Vue({
                 TabFenster.document.write('>');
             }
             // wereform table
-            if (document.myform.charform.value > 0) {
+            if (app.shapeShiftFormsSelected > 0) {
                 while (parseInt(OIAS / 5) != parseFloat(OIAS / 5)) {
                     OIAS--;
                 }
                 // unarmed || (duel wield && standard attack animation)
-                if (document.myform.waffe.value == 0) {
+                if (app.weaponsPrimarySelected == 0) {
                     alert("Please choose a weapon to use.");
-                } else if ((document.myform.zweitwaffe.value > 0) && (attackSkill.animation == 1)) {
+                } else if ((app.weaponsSecondarySelected > 0) && (attackSkill.animation == 1)) {
                     alert("There's a problem regarding the standard attack while using two weapons in wereform, so that speed won't be calculated here.");
                 } else {
-                    frames = waffengattung[lookupWeapon[document.myform.waffe.value][2]][document.myform.char.value][0];
-                    if (lookupWeapon[document.myform.waffe.value][2] == 3) {
-                        frames = waffengattung[2][document.myform.char.value][0];
+                    frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                    if (lookupWeapon[app.weaponsPrimarySelected][2] == 3) {
+                        frames = waffengattung[2][this.charactersSelected][0];
                     }
                     var AnimSpeed = 256;
-                    if (lookupWeapon[document.myform.waffe.value][2] == 1) { // assasin claws?
+                    if (lookupWeapon[app.weaponsPrimarySelected][2] == 1) { // assasin claws?
                         AnimSpeed = 208;
                     }
                     var iasRows = 50; // x + 1 rows shown. increased from 24 to show higher ias values
@@ -2021,7 +1674,7 @@ var app = new Vue({
                                 var tempframe = 12;
                                 var tempframe2 = 10;
                                 // Bear
-                                if (document.myform.charform.value == 2) {
+                                if (app.shapeShiftFormsSelected == 2) {
                                     tempframe = 13;
                                     tempframe2 = 9;
                                 }
@@ -2036,17 +1689,17 @@ var app = new Vue({
                         }
                     }
                     for (k = 0; k <= 14; k++) {
-                        if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (document.myform.skill.value == 26)) {
+                        if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (app.skillsSelected == 26)) {
                             breakpoints[breakpoints.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) - 1;
                         }
-                        if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (document.myform.skill.value == 29)) {
+                        if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (app.skillsSelected == 29)) {
                             temp = (Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 175) / 100)) * 4 + Math.ceil(256 * 13 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 175) / 100)) - 1) / 5;
                             if (parseInt(temp) == parseFloat(temp)) {
                                 temp = temp + ".0";
                             }
                             breakpoints[breakpoints.length] = temp;
                         }
-                        if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (document.myform.skill.value != 26) && (document.myform.skill.value != 29)) {
+                        if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (app.skillsSelected != 26) && (app.skillsSelected != 29)) {
                             breakpoints[breakpoints.length] = Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) - 1;
                         }
                     }
@@ -2099,6 +1752,372 @@ var app = new Vue({
             }
             cap = 1;
         }
+    },
+    computed: {
+        canShapeShiftWerewolf: function () {
+            if (this.charactersSelected == 2 || this.charactersSelected == 3) return true;
+            return false;
+        },
+        shapeShiftForms: function () {
+            var values = [
+                { value: 0, text: 'Unchanged' },
+                { value: 1, text: 'Werebear' }
+            ];
+            if (this.canShapeShiftWerewolf) values.push({ value: 2, text: 'Werewolf' });
+            return values;
+        },
+        fanaticism: function () {
+            var values = [];
+            for (i = 0; i <= 50; i++) {
+                var v = Math.floor(Math.floor((110 * i) / (6 + i)) * (40 - 10) / 100) + 10;
+                if (i == 0) {
+                    v = 0;
+                }
+                values.push({ value: v, text: i });
+            }
+            return values;
+        },
+        frenzy: function () {
+            if (this.charactersSelected == 2) { // barb
+                return [
+                    { value: 0,  text: 0 },
+                    { value: 9,  text: 1 },
+                    { value: 13, text: 2 },
+                    { value: 15, text: 3 },
+                    { value: 18, text: 4 },
+                    { value: 20, text: 5 },
+                    { value: 21, text: 6 },
+                    { value: 22, text: 7 },
+                    { value: 23, text: 8 },
+                    { value: 24, text: 9 },
+                    { value: 25, text: 10 },
+                    { value: 26, text: 11 },
+                    { value: 26, text: 12 },
+                    { value: 27, text: 13 },
+                    { value: 28, text: 14 },
+                    { value: 28, text: 15 },
+                    { value: 29, text: 16 },
+                    { value: 29, text: 17 },
+                    { value: 29, text: 18 },
+                    { value: 29, text: 19 },
+                    { value: 30, text: 20 },
+                ];
+            } else {
+                return [{ value: 0, text: '-' }];
+            }
+        },
+        werewolf: function () {
+            if (this.canShapeShiftWerewolf) {
+                return [
+                    { value: 0,  text: 0 },
+                    { value: 36, text: 1 },
+                    { value: 45, text: 2 },
+                    { value: 52, text: 3 },
+                    { value: 58, text: 4 },
+                    { value: 62, text: 5 },
+                    { value: 66, text: 6 },
+                    { value: 69, text: 7 },
+                    { value: 71, text: 8 },
+                    { value: 74, text: 9 },
+                    { value: 76, text: 10 },
+                    { value: 78, text: 11 },
+                    { value: 79, text: 12 },
+                    { value: 81, text: 13 },
+                    { value: 82, text: 14 },
+                    { value: 83, text: 15 },
+                    { value: 85, text: 16 },
+                    { value: 85, text: 17 },
+                    { value: 86, text: 18 },
+                    { value: 87, text: 19 },
+                    { value: 88, text: 20 },
+                ];
+            } else {
+                return [{ value: 0, text: '-' }];
+            }
+        },
+        burstOfSpeed: function () {
+            if (this.charactersSelected == 1) { // sin
+                var values = [];
+                for (i = 0; i <= 50; i++) {
+                    var v = Math.floor(Math.floor((110 * i) / (6 + i)) * (60 - 15) / 100) + 15;
+                    if (i == 0) {
+                        v = 0;
+                    }
+                    values.push({ value: v, text: i });
+                }
+                return values;
+            } else {
+                return [{ value: 0, text: '-' }];
+            }
+        },
+        holyFreeze: function () {
+            return [
+                { value: 0,  text: 0 },
+                { value: 14, text: 1 },
+                { value: 18, text: 2 },
+                { value: 20, text: 3 },
+                { value: 23, text: 4 },
+                { value: 25, text: 5 },
+                { value: 26, text: 6 },
+                { value: 27, text: 7 },
+                { value: 28, text: 8 },
+                { value: 29, text: 9 },
+                { value: 30, text: 10 },
+                { value: 31, text: 11 },
+                { value: 31, text: 12 },
+                { value: 32, text: 13 },
+                { value: 33, text: 14 },
+                { value: 33, text: 15 },
+                { value: 34, text: 16 },
+                { value: 34, text: 17 },
+                { value: 34, text: 18 },
+                { value: 34, text: 19 },
+                { value: 35, text: 20 },
+            ];
+        },
+        weaponsPrimary: function() {
+            var values = [];
+            for (i = 0; i < lookupWeapon.length; i++) {
+                if ((lookupWeapon[i][3] < 0) || (lookupWeapon[i][3] == this.charactersSelected)) {
+                    if (this.charactersSelected < 7 // player characters
+                        || (this.charactersSelected == 7  && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8))   // Act 1 Merc
+                        || (this.charactersSelected == 8  && (lookupWeapon[i][4] == 8 || lookupWeapon[i][4] == 2))   // Act 2 Merc
+                        || (this.charactersSelected == 9  &&  lookupWeapon[i][4] == 9)                               // Act 5 Merc
+                        || (this.charactersSelected == 10 &&  lookupWeapon[i][4] == 9 && lookupWeapon[i][2] == 2)    // Act 3 Merc
+                    ) {
+                        values.push({ value: i, text: lookupWeapon[i][0] });
+                    }
+                }
+            }
+            return values;
+        },
+        weaponsPrimaryBarbHandedness: function () {
+            var values = [];
+            if (this.charactersSelected == 2 && lookupWeapon[this.weaponsPrimarySelected][2] == 3) {
+                values.push({ value: 0, text: 'two-handed' });
+                values.push({ value: 1, text: 'single-handed' });
+            } else {
+                values.push({ value: -1, text: '-' });
+            }
+            return values;
+        },
+        weaponsSecondary: function () {
+            var values = [];
+            if (this.weaponsPrimarySelected == null) return values;
+            switch (this.charactersSelected) {
+                case 1: // sin
+                    if (lookupWeapon[this.weaponsPrimarySelected][2] == 1) {
+                        for (i = 0; i < lookupWeapon.length; i++) {
+                            if ((lookupWeapon[i][3] == 1) || (lookupWeapon[i][2] == 0)) {
+                                values.push({ value: i, text: lookupWeapon[i][0] });
+                            }
+                        }
+                    } else {
+                        values.push({ value: 0, text: '-' });
+                    }
+                    break;
+                case 2: // barb
+                    if ((lookupWeapon[this.weaponsPrimarySelected][2] == 2 || lookupWeapon[this.weaponsPrimarySelected][2] == 4) || (lookupWeapon[this.weaponsPrimarySelected][2] == 3 && this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        for (i = 0; i < lookupWeapon.length; i++) {
+                            if ((lookupWeapon[i][2] == 0) || (lookupWeapon[i][2] == 3) || (((lookupWeapon[i][2] == 2) || (lookupWeapon[i][2] == 4)) && (lookupWeapon[i][3] == -1))) {
+                                values.push({ value: i, text: lookupWeapon[i][0] });
+                            }
+                        }
+                    } else {
+                        values.push({ value: 0, text: '-' });
+                    }
+                    break;
+                default:
+                    values.push({ value: 0, text: '-' });
+                    break;
+            }
+            return values;
+        },
+        weaponInfoPrimary: function () {
+            return {
+                old: unescape(waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][11]) + " [" + lookupWeapon[this.weaponsPrimarySelected][1] + "]",
+                description: waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][11],
+                wsm: lookupWeapon[this.weaponsPrimarySelected][1],
+                value: this.weaponsPrimarySelected,
+                text: this.weaponsPrimary.find(w => w.value == this.weaponsPrimarySelected).text,
+            }
+        },
+        weaponInfoSecondary: function () {
+            if (this.weaponsSecondarySelected != null) { 
+                return {
+                    description: waffengattung[lookupWeapon[this.weaponsSecondarySelected][2]][11],
+                    wsm: lookupWeapon[this.weaponsSecondarySelected][1],
+                    value: this.weaponsPrimarySelected,
+                    text: this.weaponsPrimary.find(w => w.value == this.weaponsPrimarySelected).text,
+                }
+            }
+            return {
+                description: '',
+                wsm: 0,
+                value: 0,
+                text: '',
+            };
+        },
+        skills: function () {
+            var values = [];
+            var valuesNonNative = [];
+            // optgroup1.label = "native attacks";
+            // optgroup2.label = "non-class skills";
+            switch (this.charactersSelected) {
+                case 0: // Amazon
+                    values.push(this.getSkillOptionData("Standard"));
+                    if (this.shapeShiftFormsSelected == 0) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                            values.push(this.getSkillOptionData("Throw"));
+                        }
+                        if (lookupWeapon[this.weaponsPrimarySelected][4] == 1) {
+                            values.push(this.getSkillOptionData("Strafe"));
+                        }
+                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][2] == 5)) {
+                            values.push(this.getSkillOptionData("Impale"));
+                            values.push(this.getSkillOptionData("Jab"));
+                            values.push(this.getSkillOptionData("Fend"));
+                        }
+                        if (lookupWeapon[this.weaponsPrimarySelected][5] == 1) {
+                            valuesNonNative.push(this.getSkillOptionData("Zeal"));
+                        }
+                    }
+                    break;
+                case 1: // Assassin
+                    values.push(this.getSkillOptionData("Standard"));
+                    // not shapeshifted
+                    if (this.shapeShiftFormsSelected == 0) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                            values.push(this.getSkillOptionData("Throw"));
+                        }
+                        values.push(this.getSkillOptionData("Laying Traps"));
+                        if (isAssasinClaw(this.weaponsPrimarySelected) || isDagger(this.weaponsPrimarySelected)) {
+                            values.push(this.getSkillOptionData("Fists of Ember"));
+                            values.push(this.getSkillOptionData("Fists of Thunder"));
+                            values.push(this.getSkillOptionData("Blades of Ice"));
+                        }
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 1) && (lookupWeapon[this.weaponsSecondarySelected][2] == 1)) {
+                            values.push(this.getSkillOptionData("Dragon Claw"));
+                        }
+                        values.push(this.getSkillOptionData("Dragon Tail"));
+                        values.push(this.getSkillOptionData("Dragon Talon"));
+                        // should be weapons that can be passion runeword || POD chaos, any sin claw
+                        if (lookupWeapon[this.weaponsPrimarySelected][5] == 1 || isAssasinClaw(this.weaponsPrimarySelected)) {
+                            valuesNonNative.push(this.getSkillOptionData("Zeal"));
+                        }
+                    }
+                    break;
+                case 2: // Barbarian
+                    values.push(this.getSkillOptionData("Standard"));
+                    if (this.shapeShiftFormsSelected == 0) {
+                        // primary throwing weapon
+                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                            values.push(this.getSkillOptionData("Throw"));
+                        }
+                        // offhand weapon
+                        if (this.weaponsSecondarySelected > 0) {
+                            values.push(this.getSkillOptionData("Double Swing"));
+                            values.push(this.getSkillOptionData("Frenzy"));
+                        }
+                        // primary throwing and offhand throwing
+                        if (((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) && ((lookupWeapon[this.weaponsSecondarySelected][4] == 2) || (lookupWeapon[this.weaponsSecondarySelected][4] == 3))) {
+                            values.push(this.getSkillOptionData("Double Throw"));
+                        }
+                        // not bow or xbow
+                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                            values.push(this.getSkillOptionData("Whirlwind"));
+                            values.push(this.getSkillOptionData("Concentrate"));
+                            values.push(this.getSkillOptionData("Berserk"));
+                            values.push(this.getSkillOptionData("Bash"));
+                            values.push(this.getSkillOptionData("Stun"));
+                            values.push(this.getSkillOptionData("Cleave"));
+                        }
+                        // can zeal
+                        if ((lookupWeapon[this.weaponsPrimarySelected][5] == 1) || (lookupWeapon[this.weaponsSecondarySelected][5] == 1)) {
+                            valuesNonNative.push(this.getSkillOptionData("Zeal"));
+                        }
+                    }
+                    // bear barb
+                    if (this.shapeShiftFormsSelected == 1) {
+                        // not bow or xbow
+                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                            values.push(this.getSkillOptionData("Cleave"));
+                        }
+                    }
+                    // wolf barb
+                    if (this.shapeShiftFormsSelected == 2) {
+                        valuesNonNative.push(this.getSkillOptionData("Feral Rage"));
+                        // not bow or xbow
+                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                            values.push(this.getSkillOptionData("Cleave"));
+                        }
+                    }
+                    break;
+                case 3: // Druid
+                    values.push(this.getSkillOptionData("Standard"));
+                    if (this.shapeShiftFormsSelected == 0) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                            values.push(this.getSkillOptionData("Throw"));
+                        }
+                        if (lookupWeapon[this.weaponsPrimarySelected][5] == 1) {
+                            valuesNonNative.push(this.getSkillOptionData("Zeal"));
+                        }
+                    }
+                    if (this.shapeShiftFormsSelected == 1) {
+                        values.push(this.getSkillOptionData("Hunger"));
+                    }
+                    if (this.shapeShiftFormsSelected == 2) {
+                        values.push(this.getSkillOptionData("Feral Rage"));
+                        values.push(this.getSkillOptionData("Hunger"));
+                        values.push(this.getSkillOptionData("Rabies"));
+                        values.push(this.getSkillOptionData("Fury"));
+                    }
+                    break;
+                case 5: // Paladin
+                    values.push(this.getSkillOptionData("Standard"));
+                    if (this.shapeShiftFormsSelected == 0) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                            values.push(this.getSkillOptionData("Throw"));
+                        }
+                        // not bow or xbow
+                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                            values.push(this.getSkillOptionData("Zeal"));
+                            values.push(this.getSkillOptionData("Sacrifice"));
+                            values.push(this.getSkillOptionData("Vengeance"));
+                            values.push(this.getSkillOptionData("Conversion"));
+                        }
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 0) || (lookupWeapon[this.weaponsPrimarySelected][2] == 2) || (lookupWeapon[this.weaponsPrimarySelected][2] == 4)) {
+                            values.push(this.getSkillOptionData("Smite"));
+                        }
+                    }
+                    break;
+                case 7: // Merc - Rogue
+                    values.push(this.getSkillOptionData("Standard"));
+                    break;
+                case 8: // Merc - Town Guard
+                    values.push(this.getSkillOptionData("Jab"));
+                    values.push(this.getSkillOptionData("Standard"));
+                    break;
+                case 9: // Merc - Barbarian
+                    values.push(this.getSkillOptionData("Bash"));
+                    break;
+                case 10: // Merc - Iron Wolves
+                    values.push(this.getSkillOptionData("Vengeance"));
+                    break;
+                default: // Necromancer & Sorceress
+                    values.push(this.getSkillOptionData("Standard"));
+                    if (this.shapeShiftFormsSelected == 0) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                            values.push(this.getSkillOptionData("Throw"));
+                        }
+                        if (lookupWeapon[app.weaponsPrimarySelected][5] == 1) {
+                            valuesNonNative.push(this.getSkillOptionData("Zeal"));
+                        }
+                    }
+                    break;
+            }
+            return values.concat(valuesNonNative);
+        },
     }
 });
 

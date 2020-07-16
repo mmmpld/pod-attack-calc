@@ -1,164 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Path of Diablo Attack Calculator</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="main.css" >
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
-        <form name=myform>
-            <table>
-                <tr>
-                    <th colspan=2>
-                        <h3>Calculation</h3>
-                    </th>
-                </tr>
-                <tr>
-                    <td class=w50>Character</td>
-                    <td class=w50>
-                        <select class=w50-10 name=char size=1 @change="changedCharacter">
-                            <option value=0>Amazon</option>
-                            <option value=1>Assassin</option>
-                            <option value=2>Barbarian</option>
-                            <option value=3>Druid</option>
-                            <option value=4>Necromancer</option>
-                            <option value=5 selected>Paladin</option>
-                            <option value=6>Sorceress</option>
-                            <option value=7>Merc - Rogue</option>
-                            <option value=8>Merc - Town Guard</option>
-                            <option value=9>Merc - Barbarian</option>
-                            <option value=10>Merc - Iron Wolves</option>
-                        </select>
-                        <select class=w50-10 name=charform size=1 @change="changedShifted"></select>
-                    </td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Primary Weapon</td>
-                    <td>
-                        <select class=w50-10 name=waffe size=1 @change="changedPrimaryWeapon"></select><!-- Primary Weapon select-->
-                        <select class=w50-10 name=barbschwert size=1 @change="changedBarbWeaponHandedness"></select><!-- barb 1 or 2-handed -->
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type=text name=infoWaffe1 size=32 value="Waffenlos [0]" readonly><!-- Primary Weapon base type and speed display -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>Weapon-IAS<br><small>in %</small></td>
-                    <td>
-                        <select name=wIAS1 size=1 @change="calculateBreakpoint"></select><!-- Primary Weapon ias -->
-                        <label><input type=checkbox name=IASstufen @change="changedIasSteps"><!-- Toggle ias interval between 1 and 5 -->show single increments</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Secondary Weapon<br>
-                        <small>
-                            <label>
-                                <input type="checkbox" name="enableWsmBug" @change="calculateBreakpoint"> Apply WSM Bug
-                            </label>
-                        </small>
-                    </td>
-                    <td>
-                        <select name=zweitwaffe size=1 @change="changedSecondaryWeapon"></select><!-- Secondary Weapon select-->
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input class=info type=text name=infoWaffe2 size=32 readonly><!-- Secondary Weapon base type and speed display -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>Weapon-IAS<br><small>in %</small></td>
-                    <td>
-                        <select name=wIAS2 size=1 @change="calculateBreakpoint"></select><!-- Secondary Weapon ias -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>IAS<br><small>in %</small></td>
-                    </th>
-                    <td>
-                        <select name=IAS size=1 @change="calculateBreakpoint"></select><!-- Off Weapon ias -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>Skill</td>
-                    <td>
-                        <select name=skill size=1 @change="calculateBreakpoint"></select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Fanaticism<br><small>Level</small></td>
-                    <td>
-                        <select name=fana size=1 @change="calculateBreakpoint">
-                            <option value=0 selected>-</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Frenzy<br><small>Level</small></td>
-                    <td>
-                        <select name=frenzy size=1 @change="calculateBreakpoint">
-                            <option value=0 selected>-</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Werewolf<br><small>Level</small></td>
-                    <td>
-                        <select name=wolf size=1 @change="calculateBreakpoint">
-                            <option value=0 selected>-</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Burst of Speed<br><small>Level</small></td>
-                    <td>
-                        <select name=tempo size=1 @change="calculateBreakpoint">
-                            <option value=0 selected>-</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Holy Freeze<br><small>Level</small></td>
-                    <td>
-                        <select name=holyfrost size=1 @change="calculateBreakpoint">
-                            <option value=0 selected>-</option>
-                        </select>
-                        <label><input type=checkbox name=altern @change="calculateBreakpoint">Decrepify</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan=2>
-                        <button type="button" @click="showIasTable" class=" btn">Show IAS Table</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan=2>
-                        <h3>Results</h3>
-                    </th>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>
-                        <input class=w50-10 type=text name=AnzFPA size=32 maxlength="" readonly>
-                        <input class=w50-10 type=text name=AnzMax size=32 maxlength="" readonly style="display: none"><!-- hidden as it currently lies -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>Frequency</td>
-                    <td><input class=daten type=text name=AnzFre size=32 maxlength="" readonly></td>
-                </tr>
-            </table>
-        </form>
+        <v-app>
+            <v-main>
+                <v-container class="fill-height" fluid>
+                    <v-row align="center" justify="center">
+                        <h1>Path of Diablo Attack Speed Calculator</h1>
+                    </v-row>
+                    <v-row align="center" justify="center">
+                        <v-col cols="12" sm="8" md="4">
+                            <form name=myform>
+                                <v-select name=char @input="changedCharacter" :items="characters" label="Character"
+                                    v-model="charactersSelected"></v-select>
+                                <v-select name=charform @input="changedShifted" :items="shapeShiftForms"
+                                    label="Shape Shift" v-model="shapeShiftFormsSelected"></v-select>
+                                <v-select name=waffe @input="changedPrimaryWeapon" :items="weaponsPrimary"
+                                    label="Primary Weapon" v-model="weaponsPrimarySelected"></v-select>
+                                <v-select name=barbschwert @input="changedBarbWeaponHandedness"
+                                    :items="weaponsPrimaryBarbHandedness" label="Handedness"
+                                    v-model="weaponsPrimaryBarbHandednessSelected"></v-select>
+                                <p>{{ weaponInfoPrimary.description }} [{{ weaponInfoPrimary.wsm }}]</p>
+                                <v-text-field name=wIAS1 type="number" @input="calculateBreakpoint"
+                                    label="Primary Weapon IAS%" v-model.number="iasWeaponPrimary"></v-text-field>
+                                <v-checkbox name="enableWsmBug" @input="calculateBreakpoint" label="Apply WSM Bug"
+                                    v-model="isWsmBug"></v-checkbox>
+                                <v-select name=zweitwaffe @input="changedSecondaryWeapon" :items="weaponsSecondary"
+                                    label="Secondary Weapon" v-model="weaponsSecondarySelected"></v-select>
+                                <p v-if="weaponsSecondary.length > 1">{{ weaponInfoSecondary.description }}
+                                    [{{ weaponInfoSecondary.wsm }}]</p>
+                                <v-text-field name=wIAS2 type="number" @input="calculateBreakpoint"
+                                    label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary"></v-text-field>
+                                <v-text-field name=IAS type="number" @input="calculateBreakpoint"
+                                    label="Off-Weapon IAS%" v-model.number="iasOffWeapon"></v-text-field>
+                                <v-select name=skill @input="calculateBreakpoint" :items="skills" label="Skill" v-model="skillsSelected"></v-select>
+                                <v-select name=fana @input="calculateBreakpoint" :items="fanaticism"
+                                    label="Fanaticism Level" v-model="fanaticismSkillIAS"></v-select>
+                                <v-select name=frenzy @input="calculateBreakpoint" :items="frenzy" label="Frenzy Level"
+                                    v-model="frenzySkillIAS"></v-select>
+                                <v-select name=wolf size=1 @input="calculateBreakpoint" :items="werewolf"
+                                    label="Werewolf Level" v-model="werewolfSkillIAS"></v-select>
+                                <v-select name=tempo size=1 @input="calculateBreakpoint" :items="burstOfSpeed"
+                                    label="Burst of Speed Level" v-model="burstOfSpeedSkillIAS"></v-select>
+                                <v-select name=holyfrost @input="calculateBreakpoint" :items="holyFreeze"
+                                    label="Holy Freeze Level" v-model="holyFreezeSkillIAS"></v-select>
+                                <v-checkbox name=altern @input="calculateBreakpoint" label="Decrepify"
+                                    v-model="isDecrepify"></v-checkbox>
+                                <v-btn color="primary" @click="showIasTable">Show IAS Table</v-btn>
+                            </form>
+                            <h2>Results</h2>
+                            <p>Speed: {{ currentFpa }}{{ isCurrentFpaMaxed ? ', further IAS useless' : '' }}</p>
+                            <p>Frequency: {{ currentAps }}</p>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-main>
+        </v-app>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="calc.js"></script>
 </body>
 
