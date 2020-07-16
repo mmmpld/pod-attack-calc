@@ -1934,21 +1934,32 @@ var app = new Vue({
             return values;
         },
         weaponInfoPrimary: function () {
-            return {
-                old: unescape(waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][11]) + " [" + lookupWeapon[this.weaponsPrimarySelected][1] + "]",
-                description: waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][11],
-                wsm: lookupWeapon[this.weaponsPrimarySelected][1],
-                value: this.weaponsPrimarySelected,
-                text: this.weaponsPrimary.find(w => w.value == this.weaponsPrimarySelected).text,
+            var weapon = this.weaponsPrimary.find(w => w.value == this.weaponsPrimarySelected);
+            if (weapon != null) {
+                return {
+                    description: waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][11],
+                    wsm: lookupWeapon[this.weaponsPrimarySelected][1],
+                    value: this.weaponsPrimarySelected,
+                    text: weapon.text,
+                }
             }
+            return {
+                description: '',
+                wsm: 0,
+                value: 0,
+                text: '',
+            };
         },
         weaponInfoSecondary: function () {
-            if (this.weaponsSecondarySelected != null) { 
-                return {
-                    description: waffengattung[lookupWeapon[this.weaponsSecondarySelected][2]][11],
-                    wsm: lookupWeapon[this.weaponsSecondarySelected][1],
-                    value: this.weaponsPrimarySelected,
-                    text: this.weaponsPrimary.find(w => w.value == this.weaponsPrimarySelected).text,
+            if (this.weaponsSecondarySelected != null) {
+                var weapon = this.weaponsSecondary.find(w => w.value == this.weaponsSecondarySelected);
+                if (weapon != null) {
+                    return {
+                        description: waffengattung[lookupWeapon[this.weaponsSecondarySelected][2]][11],
+                        wsm: lookupWeapon[this.weaponsSecondarySelected][1],
+                        value: this.weaponsSecondarySelected,
+                        text: weapon.text,
+                    }
                 }
             }
             return {
