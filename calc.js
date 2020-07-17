@@ -1,5 +1,5 @@
 var frames;
-var start = 0;
+var start = 1; // starting frame
 var statischFana = true;
 var statischFrost = true;
 var statischIAS = true;
@@ -31,498 +31,6 @@ var breakpoints = new Array();
 var breakpoints1 = new Array();
 var breakpoints2 = new Array();
 var breakpointsAPS = new Array();
-
-/// Calc FPA
-function calcFPA(FramesPerDirection, Acceleration, StartingFrame) {
-    console.warn('legacy calcFPA');
-    console.debug('calc FPA');
-    console.debug('FramesPerDirection ' + FramesPerDirection);
-    console.debug('Acceleration ' + Acceleration);
-    console.debug('Starting frame ' + StartingFrame);
-    var Acceleration;
-    var AnimationSpeed = 256;
-    var attackSkill = data.attack[app.skillsSelected];
-    // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
-    if ((app.charactersSelected == 1) && (lookupWeapon[app.weaponsPrimarySelected][2] == 1)) {
-        AnimationSpeed = 208;
-    }
-    // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
-    console.debug("attack skill");
-    console.debug(attackSkill);
-    if (((attackSkill.animation == 3) || (attackSkill.animation == 7)) && (attackSkill.title !== "Whirlwind")) {
-        AnimationSpeed = 256;
-    }
-    // Laying Traps
-    if (attackSkill.animation == 5) {
-        AnimationSpeed = 128;
-    }
-    // Bear
-    if (app.shapeShiftFormsSelected == 1) {
-        if (lookupWeapon[app.weaponsPrimarySelected][2] == 3) { // 2-hand swords
-            FramesPerDirection = waffengattung[2][app.charactersSelected][0]; //1-hand swinging weapon
-        }
-        AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(app.iasOffWeapon) - lookupWeapon[app.weaponsPrimarySelected][1]) * AnimationSpeed / 100)));
-        FramesPerDirection = 12;
-        if (attackSkill.animation == 6) {
-            FramesPerDirection = 10;
-        }
-        StartingFrame = 0;
-    }
-    // Wolf
-    if (app.shapeShiftFormsSelected == 2) {
-        if (lookupWeapon[app.weaponsPrimarySelected][2] == 3) { // 2-hand swords
-            FramesPerDirection = waffengattung[2][app.charactersSelected][0]; //1-hand swinging weapon
-        }
-        AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(app.iasOffWeapon) - lookupWeapon[app.weaponsPrimarySelected][1]) * AnimationSpeed / 100)));
-        FramesPerDirection = 13;
-        if ((app.skillsSelected == 29) && (StartingFrame == 0)) { // Fury
-            FramesPerDirection = 7;
-        }
-        if (attackSkill.animation == 6) {
-            FramesPerDirection = 10;
-        }
-        StartingFrame = 0;
-    }
-    var FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * Acceleration / 100)) - 1;
-    FPAmax = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * 175 / 100)) - 1;
-    if (app.skillsSelected == 19) { // whirlwind
-        FPA = Math.floor(256 * FramesPerDirection / Math.floor(AnimationSpeed * Acceleration / 100));
-        FPAmax = 0;
-    }
-    if (app.skillsSelected == 26) { // Feral Rage
-        FPA = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * Acceleration / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100))) / (2 * Math.floor(AnimationSpeed * Acceleration / 100))) - 1;
-        FPAmax = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * 175 / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100))) / (2 * Math.floor(AnimationSpeed * 175 / 100))) - 1;
-    }
-    if (cap == 1) {
-        app.isCurrentFpaMaxed = false;
-        if ((attackSkill.rollback == 100) && (attackSkill.animation != 1) && (FPA <= FPAmax)) {
-            app.isCurrentFpaMaxed = true;
-        }
-    }
-    console.debug('FPA ' + FPA);
-    return FPA;
-}
-
-/// Calculate a breakpoint.
-/* Modifies the following variables: 
- * start
- * frames
- * isMaxIas
- */ 
-function berechneWerte() {
-    console.warn('legacy berechneWerte');
-    var ergebnis; // "result" FPA
-    var temp;
-    var attackSkill = data.attack[app.skillsSelected];
-    console.debug('Calculating breakpoints for: ' + attackSkill.title);
-    berechneSIAS();
-    berechneEIAS();
-    app.berechneWSM();
-    var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
-    var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
-    start = 0;
-    if (((app.charactersSelected == 0) || (app.charactersSelected == 6)) && (attackSkill.animation < 2)) {
-        start = startframe[lookupWeapon[app.weaponsPrimarySelected][2]];
-    }
-    if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
-        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
-        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
-            frames = 16;
-        }
-        ergebnis = calcFPA(frames, acceleration, start);
-    }
-    // standard attack
-    if ((attackSkill.animation == 1) && (attackSkill.rollback == 100)) {
-        console.debug('standard attack');
-        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
-        if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
-            frames = 16;
-        }
-        ergebnis = calcFPA(frames, acceleration, start);
-        if (ergebnis > calcFPA(frames, 175, start)) {
-            isMaxIas = false;
-        }
-        // Unshifted
-        if (app.shapeShiftFormsSelected == 0) {
-            console.debug('unshifted');
-            temp = ergebnis;
-            var weaponTypeNum = lookupWeapon[app.weaponsPrimarySelected][2];
-            console.debug(weaponTypeNum);
-            frames = waffengattung[weaponTypeNum][app.charactersSelected][1];
-            console.debug(frames);
-            if ((lookupWeapon[app.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
-                frames = 16;
-            }
-            ergebnis = calcFPA(frames, acceleration, start);
-            if (ergebnis > calcFPA(frames, 175, start)) {
-                isMaxIas = false;
-            }
-            ergebnis = (ergebnis + temp) / 2;
-        }
-        // act 5 merc
-        if (app.charactersSelected == 9) {
-            ergebnis = ergebnis / 2;
-        }
-        if (app.weaponsSecondarySelected > 0) {
-            temp = ergebnis;
-            ergebnis = calcFPA(12, acceleration2, 0);
-            if (ergebnis > calcFPA(12, 175, 0)) {
-                isMaxIas = false;
-            }
-            ergebnis = (ergebnis + temp) / 2;
-        }
-        if (isMaxIas) {
-            app.isCurrentFpaMaxed = true;
-        }
-        isMaxIas = true;
-    }
-    if ((attackSkill.animation >= 2)
-        && (attackSkill.animation <= 5) 
-        && (attackSkill.rollback == 100)) {
-        if (attackSkill.animation == 2) { // Throw
-            frames = waffengattung[9][app.charactersSelected];
-        }
-        if (attackSkill.animation == 3) {
-            frames = 13;
-        }
-        if (attackSkill.animation == 4) {
-            frames = 12;
-        }
-        if (attackSkill.animation == 5) {
-            frames = 8;
-        }
-        ergebnis = calcFPA(frames, acceleration, start);
-    }
-    // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
-    // && not whirlwind && rollback normal
-    if ((attackSkill.animation == 7) && (app.skillsSelected != 19) && (attackSkill.rollback == 100)) {
-        frames = sequences[attackSkill.sequence][lookupWeapon[app.weaponsPrimarySelected][2]];
-        // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
-        if ((app.skillsSelected > 8) && (app.skillsSelected < 13) && (app.weaponsSecondarySelected > 0)) {
-            frames = 16;
-        }
-        // merc act 2
-        if (app.charactersSelected == 8) {
-            frames = 14;
-        }
-        start = 0;
-        ergebnis = calcFPA(frames, acceleration, start);
-        ergebnis++;
-        // 3 Jab && player classes
-        if ((app.skillsSelected == 3) && (app.charactersSelected < 7)) {
-            ergebnis = parseInt(100 * ergebnis / 3) / 100;
-        }
-        // merc act 2
-        if (app.charactersSelected == 8) {
-            ergebnis = ergebnis / 2;
-        }
-        if (attackSkill.title === "Frenzy") {
-            console.debug("special case frenzy");
-            console.debug("WSM1: " + WSMprimaer);
-            console.debug("WSM2: " + WSMsekundaer);
-
-            
-            // var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
-            // var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
-
-            // If the primary weapon is equipped in the left weapon slot:
-            // WSM1 = WSM_primary + WSM_secondary - (WSM_primary + WSM_secondary)/2
-            // WSM2 = 2*WSM_secondary - (WSM_primary + WSM_secondary)/2
-            // If the primary weapon is equipped in the right weapon slot:
-            // WSM1 = (WSM_primary + WSM_secondary)/2 + WSM_primary - WSM_secondary
-            // WSM2 = (WSM_primary + WSM_secondary)/2
-
-            // if (document.myform.primaerwaffe[0].checked == true) {
-            //     WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
-            //     WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsSecondarySelected][1] - lookupWeapon[app.weaponsPrimarySelected][1];
-            // } else {
-            //     WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsPrimarySelected][1] - lookupWeapon[app.weaponsSecondarySelected][1];
-            //     WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
-            // }
-
-            // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
-            // EIAS2 = [120*(OIAS + IASsecondary)/(120 + OIAS + IASsecondary)]
-            // Acceleration1 = 70 + SIAS + EIAS1 - WSM1
-            // Acceleration2 = 70 + SIAS + EIAS2 - WSM2
-            // fpa_1 = {256*9/[256*Acceleration1/100]} - 1
-            // fpa_2 = {(256*17 - fpa_1*[256*Acceleration1/100])/[256*Acceleration2/100]}
-            // fpa = fpa_1 + fpa_2
-
-            ergebnis = ergebnis / 2;
-        } else if ((app.skillsSelected > 15) && (app.skillsSelected < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw 
-            ergebnis = ergebnis / 2;
-        }
-        // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
-        if ((app.skillsSelected > 8) && (app.skillsSelected < 13) && (app.weaponsSecondarySelected > 0)) {
-            ergebnis = ergebnis / 2;
-        }
-    }
-    // Whirlwind
-    if (app.skillsSelected == 19) {
-        ergebnis = 4; // uses classic whirlwind locked at 4 frame attack for all weapons
-        isMaxIas = true;
-        if (isMaxIas) {
-            app.isCurrentFpaMaxed = true;
-        }
-    }
-    // Dragon Talon, Zeal, Fury
-    if (attackSkill.rollback == 0) {
-        // Dragon Talon
-        if (app.skillsSelected == 14) {
-            rollback1 = calcFPA(4, acceleration, 0);
-            rollback1++;
-            rollback3 = calcFPA(13, acceleration, 0);
-            if (rollback3 == 7) {
-                app.isCurrentFpaMaxed = true;
-            }
-            app.currentFpa = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
-            app.currentAps = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
-        }
-        // Fury
-        if (app.skillsSelected == 29) {
-            frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
-            rollback1 = calcFPA(frames, acceleration, 0);
-            if (rollback1 > calcFPA(frames, 175, 0)) {
-                isMaxIas = false;
-            }
-            rollback1++;
-            rollback3 = calcFPA(frames, acceleration, 1);
-            if (rollback3 > calcFPA(frames, 175, 1)) {
-                isMaxIas = false;
-            }
-            if (isMaxIas) {
-                app.isCurrentFpaMaxed = true;
-            }
-            isMaxIas = true;
-            app.currentFpa = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
-            app.currentAps = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
-        }
-        // Zeal
-        if (app.skillsSelected == 24) {
-            var weaponTypeNum = lookupWeapon[app.weaponsPrimarySelected][2];
-            console.debug(weaponTypeNum);
-            frames = aktionsframe[weaponTypeNum][app.charactersSelected];
-            // 2-h sword && barb single handed
-            var isBarbTwoHandedSwordAsOneHanded = false;
-            if ((weaponTypeNum == 3) && (document.myform.barbschwert.value == 1)) {
-                isBarbTwoHandedSwordAsOneHanded = true;
-                frames = 7;
-            }
-            console.debug(frames);
-            rollback1 = calcFPA(frames, acceleration, start);
-            if (rollback1 > calcFPA(frames, 175, start)) {
-                isMaxIas = false;
-            }
-            rollback1++;
-            rollback2 = calcFPA(frames, acceleration, 0);
-            if (rollback2 > calcFPA(frames, 175, 0)) {
-                isMaxIas = false;
-            }
-            rollback2++;
-            frames = waffengattung[weaponTypeNum][app.charactersSelected][0];
-            console.debug(frames);
-            if (isBarbTwoHandedSwordAsOneHanded) {
-                frames = 16;
-            }
-            rollback3 = calcFPA(frames, acceleration, 0);
-            if (rollback3 > calcFPA(frames, 175, 0)) {
-                isMaxIas = false;
-            }
-            if (isMaxIas) {
-                app.isCurrentFpaMaxed = true;
-            }
-            isMaxIas = true;
-            app.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback2 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
-            // Zeal
-            if (app.skillsSelected == 24) {
-                app.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 * 3 + rollback3) / 5)) / 100 + " attacks per second";
-            }
-        }
-    }
-    // Strafe
-    if (attackSkill.rollback == 50) {
-        frames = aktionsframe[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected];
-        if (acceleration > 149) {
-            acceleration = 149;
-        }
-        rollback1 = calcFPA(frames, acceleration, start);
-        if (rollback1 > calcFPA(frames, 149, start)) {
-            isMaxIas = false;
-        }
-        rollback1++;
-        rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
-        rollback2 = calcFPA(frames, acceleration, rollbackframe);
-        if (rollback2 > calcFPA(frames, 149, rollbackframe)) {
-            isMaxIas = false;
-        }
-        rollback2++;
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
-        rollback3 = calcFPA(frames, acceleration, rollbackframe);
-        if (rollback3 > calcFPA(frames, 149, rollbackframe)) {
-            isMaxIas = false;
-        }
-        rollback3++;
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback3) / 256) * attackSkill.rollback / 100);
-        rollback4 = calcFPA(frames, acceleration, rollbackframe);
-        if (rollback4 > calcFPA(frames, 149, rollbackframe)) {
-            isMaxIas = false;
-        }
-        rollback4++;
-        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * attackSkill.rollback / 100);
-        rollback5 = calcFPA(frames, acceleration, rollbackframe);
-        if (rollback5 > calcFPA(frames, 149, rollbackframe)) {
-            isMaxIas = false;
-        }
-        if ((rollback2 == 5) && (rollback3 == 4)) {
-            rollback3 = 5;
-            rollback5 = 13;
-        }
-        if (isMaxIas) {
-            app.isCurrentFpaMaxed = true;
-        }
-        isMaxIas = true;
-        app.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback3 + "/" + rollback4 + "/" + rollback5 + " frames per attack";
-        app.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3 * 4 + rollback4 * 3 + rollback5) / 10)) / 100 + " attacks per second";
-    }
-    // Fend
-    if (attackSkill.rollback == 40) {
-        frames = aktionsframe[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected];
-        rollback1 = calcFPA(frames, acceleration, start);
-        if (rollback1 > calcFPA(frames, 175, start)) {
-            isMaxIas = false;
-        }
-        rollback1++;
-        rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
-        rollback2 = calcFPA(frames, acceleration, rollbackframe);
-        if (rollback2 > calcFPA(frames, 175, rollbackframe)) {
-            isMaxIas = false;
-        }
-        rollback2++;
-        frames = waffengattung[lookupWeapon[app.weaponsPrimarySelected][2]][app.charactersSelected][0];
-        rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
-        rollback3 = calcFPA(frames, acceleration, rollbackframe);
-        if (rollback3 > calcFPA(frames, 175, rollbackframe)) {
-            isMaxIas = false;
-        }
-        if (isMaxIas) {
-            app.isCurrentFpaMaxed = true;
-        }
-        isMaxIas = true;
-        app.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
-        app.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3) / 2)) / 100 + " attacks per second";
-    }
-    // Most attacks
-    if (attackSkill.rollback == 100) {
-        app.currentFpa = ergebnis + " frames per attack";
-        app.currentAps = parseInt(100 * 25 / ergebnis) / 100 + " attacks per second";
-        if (app.charactersSelected > 6) {
-            app.currentAps = parseInt(100 * 25 / (ergebnis + 2)) / 100 + " attacks per second";
-        }
-        if (((app.charactersSelected == 8) && (app.skillsSelected == 3)) || ((app.charactersSelected == 9) && (app.skillsSelected == 0))) {
-            app.currentAps = parseInt(100 * 25 / (ergebnis + 1)) / 100 + " attacks per second";
-        }
-        // Shape Shifted && off-hand weapon not unarmed && standard attack
-        if ((app.shapeShiftFormsSelected > 0) && (app.weaponsSecondarySelected > 0) && (app.skillsSelected == 0)) {
-            app.currentFpa = "Calculation makes no sense";
-            app.currentAps = "";
-        }
-    }
-}
-
-/// Whirlwind
-function wirbelwind(temp) {
-    console.warn('legacy wirbelwind');
-    var temp;
-    var ergebnis = 4;
-    if (temp > 11) {
-        ergebnis = 6;
-    }
-    if (temp > 14) {
-        ergebnis = 8;
-    }
-    if (temp > 17) {
-        ergebnis = 10;
-    }
-    if (temp > 19) {
-        ergebnis = 12;
-    }
-    if (temp > 22) {
-        ergebnis = 14;
-    }
-    if (temp > 25) {
-        ergebnis = 16;
-    }
-    return ergebnis;
-}
-
-/// Calc WSM
-// function berechneWSM() {
-//     // not assasin and not barbarian
-//     if ((app.charactersSelected != 1) && (app.charactersSelected != 2)) {
-//         WSMprimaer = lookupWeapon[app.weaponsPrimarySelected][1];
-//     }
-//     // (assasin or barbarian) and no offhand weapon
-//     if (((app.charactersSelected == 1) || (app.charactersSelected == 2)) && (app.weaponsSecondarySelected == 0)) {
-//         WSMprimaer = lookupWeapon[app.weaponsPrimarySelected][1];
-//     }
-//     // (assasin or barbarian) with offhand weapon
-//     if (((app.charactersSelected == 1) || (app.charactersSelected == 2)) && (app.weaponsSecondarySelected > 0)) {
-//         if (app.isWsmBug) {
-//             console.log('applying wsm bug');
-//             WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsPrimarySelected][1] - lookupWeapon[app.weaponsSecondarySelected][1];
-//             WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
-//         } else {
-//             WSMprimaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2);
-//             WSMsekundaer = parseInt((lookupWeapon[app.weaponsPrimarySelected][1] + lookupWeapon[app.weaponsSecondarySelected][1]) / 2) + lookupWeapon[app.weaponsSecondarySelected][1] - lookupWeapon[app.weaponsPrimarySelected][1];
-//         }
-//         console.log('average primary wsm: ' + WSMprimaer);
-//         console.log('average secondary wsm: ' + WSMsekundaer);
-//     }
-// }
-
-/// Calc Effective IAS
-function berechneEIAS() {
-    console.warn('legacy berechneEIAS');
-    if (app.weaponsPrimarySelected == 0) {
-        IASprimaer = parseInt(app.iasOffWeapon);
-    }
-    if ((app.weaponsPrimarySelected > 0) && (app.weaponsSecondarySelected == 0)) {
-        IASprimaer = parseInt(app.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
-    }
-    if (app.weaponsSecondarySelected > 0) {
-        IASprimaer = parseInt(app.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
-        IASsekundaer = parseInt(app.iasOffWeapon) + parseInt(document.myform.wIAS2.value);
-    }
-    EIASprimaer = Math.floor(120 * IASprimaer / (120 + IASprimaer));
-    EIASsekundaer = Math.floor(120 * IASsekundaer / (120 + IASsekundaer));
-}
-
-/// Calc Skill IAS
-function berechneSIAS() {
-    console.warn('legacy berechneSIAS');
-    var fana = parseInt(app.fanaticismSkillIAS);
-    var frenzy = parseInt(app.frenzySkillIAS);
-    var wolf = parseInt(app.werewolfSkillIAS);
-    var tempo = parseInt(app.burstOfSpeedSkillIAS);
-    var holyfrost = parseInt(app.holyFreezeSkillIAS);
-    var attackSkill = data.attack[app.skillsSelected];
-    // != Wolf
-    if (app.shapeShiftFormsSelected != 2) wolf = 0;
-    SIAS = fana + frenzy + wolf + tempo - holyfrost;
-    if (app.skillsSelected == 16) {
-        SIAS = SIAS + 50;
-    }
-    if (app.skillsSelected == 13) {
-        SIAS = SIAS - 40;
-    }
-    if (app.isDecrepify) {
-        SIAS = SIAS - 50;
-    }
-    if ((attackSkill.animation == 7) && (app.charactersSelected < 7)) {
-        SIAS = SIAS - 30;
-    }
-}
 
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0]
 // first level is weapon type number
@@ -1289,7 +797,7 @@ var app = new Vue({
     },
     methods: {
         updateCurrent: function () {
-            berechneWerte();
+            this.berechneWerte();
         },
         getSkillOptionData: function (title) {
             var skill = data.attack.find(a => a.title === title);
@@ -1409,6 +917,362 @@ var app = new Vue({
             console.debug('FPA ' + FPA);
             return FPA;
         },
+        berechneWerte: function () {
+            var ergebnis; // "result" FPA
+            var temp;
+            var attackSkill = data.attack[this.skillsSelected];
+            console.debug('Calculating breakpoints for: ' + attackSkill.title);
+            this.berechneSIAS();
+            this.berechneEIAS();
+            this.berechneWSM();
+            var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
+            var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
+            start = 0;
+            if (((this.charactersSelected == 0) || (this.charactersSelected == 6)) && (attackSkill.animation < 2)) {
+                start = startframe[lookupWeapon[this.weaponsPrimarySelected][2]];
+            }
+            if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
+                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                    frames = 16;
+                }
+                ergebnis = this.calcFPA(frames, acceleration, start);
+            }
+            // standard attack
+            if ((attackSkill.animation == 1) && (attackSkill.rollback == 100)) {
+                console.debug('standard attack');
+                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                    frames = 16;
+                }
+                ergebnis = this.calcFPA(frames, acceleration, start);
+                if (ergebnis > this.calcFPA(frames, 175, start)) {
+                    isMaxIas = false;
+                }
+                // Unshifted
+                if (this.shapeShiftFormsSelected == 0) {
+                    console.debug('unshifted');
+                    temp = ergebnis;
+                    var weaponTypeNum = lookupWeapon[this.weaponsPrimarySelected][2];
+                    console.debug(weaponTypeNum);
+                    frames = waffengattung[weaponTypeNum][this.charactersSelected][1];
+                    console.debug(frames);
+                    if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        frames = 16;
+                    }
+                    ergebnis = this.calcFPA(frames, acceleration, start);
+                    if (ergebnis > this.calcFPA(frames, 175, start)) {
+                        isMaxIas = false;
+                    }
+                    ergebnis = (ergebnis + temp) / 2;
+                }
+                // act 5 merc
+                if (this.charactersSelected == 9) {
+                    ergebnis = ergebnis / 2;
+                }
+                if (this.weaponsSecondarySelected > 0) {
+                    temp = ergebnis;
+                    ergebnis = this.calcFPA(12, acceleration2, 0);
+                    if (ergebnis > this.calcFPA(12, 175, 0)) {
+                        isMaxIas = false;
+                    }
+                    ergebnis = (ergebnis + temp) / 2;
+                }
+                if (isMaxIas) {
+                    this.isCurrentFpaMaxed = true;
+                }
+                isMaxIas = true;
+            }
+            if ((attackSkill.animation >= 2)
+                && (attackSkill.animation <= 5) 
+                && (attackSkill.rollback == 100)) {
+                if (attackSkill.animation == 2) { // Throw
+                    frames = waffengattung[9][this.charactersSelected];
+                }
+                if (attackSkill.animation == 3) {
+                    frames = 13;
+                }
+                if (attackSkill.animation == 4) {
+                    frames = 12;
+                }
+                if (attackSkill.animation == 5) {
+                    frames = 8;
+                }
+                ergebnis = this.calcFPA(frames, acceleration, start);
+            }
+            // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
+            // && not whirlwind && rollback normal
+            if ((attackSkill.animation == 7) && (this.skillsSelected != 19) && (attackSkill.rollback == 100)) {
+                frames = sequences[attackSkill.sequence][lookupWeapon[this.weaponsPrimarySelected][2]];
+                // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
+                if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
+                    frames = 16;
+                }
+                // merc act 2
+                if (this.charactersSelected == 8) {
+                    frames = 14;
+                }
+                start = 0;
+                ergebnis = this.calcFPA(frames, acceleration, start);
+                ergebnis++;
+                // 3 Jab && player classes
+                if ((this.skillsSelected == 3) && (this.charactersSelected < 7)) {
+                    ergebnis = parseInt(100 * ergebnis / 3) / 100;
+                }
+                // merc act 2
+                if (this.charactersSelected == 8) {
+                    ergebnis = ergebnis / 2;
+                }
+                if (attackSkill.title === "Frenzy") {
+                    console.debug("special case frenzy");
+                    console.debug("WSM1: " + WSMprimaer);
+                    console.debug("WSM2: " + WSMsekundaer);
+        
+                    
+                    // var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
+                    // var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
+        
+                    // If the primary weapon is equipped in the left weapon slot:
+                    // WSM1 = WSM_primary + WSM_secondary - (WSM_primary + WSM_secondary)/2
+                    // WSM2 = 2*WSM_secondary - (WSM_primary + WSM_secondary)/2
+                    // If the primary weapon is equipped in the right weapon slot:
+                    // WSM1 = (WSM_primary + WSM_secondary)/2 + WSM_primary - WSM_secondary
+                    // WSM2 = (WSM_primary + WSM_secondary)/2
+        
+                    // if (document.myform.primaerwaffe[0].checked == true) {
+                    //     WSMprimaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
+                    //     WSMsekundaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsSecondarySelected][1] - lookupWeapon[this.weaponsPrimarySelected][1];
+                    // } else {
+                    //     WSMprimaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsPrimarySelected][1] - lookupWeapon[this.weaponsSecondarySelected][1];
+                    //     WSMsekundaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
+                    // }
+        
+                    // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
+                    // EIAS2 = [120*(OIAS + IASsecondary)/(120 + OIAS + IASsecondary)]
+                    // Acceleration1 = 70 + SIAS + EIAS1 - WSM1
+                    // Acceleration2 = 70 + SIAS + EIAS2 - WSM2
+                    // fpa_1 = {256*9/[256*Acceleration1/100]} - 1
+                    // fpa_2 = {(256*17 - fpa_1*[256*Acceleration1/100])/[256*Acceleration2/100]}
+                    // fpa = fpa_1 + fpa_2
+        
+                    ergebnis = ergebnis / 2;
+                } else if ((this.skillsSelected > 15) && (this.skillsSelected < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw 
+                    ergebnis = ergebnis / 2;
+                }
+                // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
+                if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
+                    ergebnis = ergebnis / 2;
+                }
+            }
+            // Whirlwind
+            if (this.skillsSelected == 19) {
+                ergebnis = 4; // uses classic whirlwind locked at 4 frame attack for all weapons
+                isMaxIas = true;
+                if (isMaxIas) {
+                    this.isCurrentFpaMaxed = true;
+                }
+            }
+            // Dragon Talon, Zeal, Fury
+            if (attackSkill.rollback == 0) {
+                // Dragon Talon
+                if (this.skillsSelected == 14) {
+                    rollback1 = this.calcFPA(4, acceleration, 0);
+                    rollback1++;
+                    rollback3 = this.calcFPA(13, acceleration, 0);
+                    if (rollback3 == 7) {
+                        this.isCurrentFpaMaxed = true;
+                    }
+                    this.currentFpa = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
+                    this.currentAps = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
+                }
+                // Fury
+                if (this.skillsSelected == 29) {
+                    frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                    rollback1 = this.calcFPA(frames, acceleration, 0);
+                    if (rollback1 > this.calcFPA(frames, 175, 0)) {
+                        isMaxIas = false;
+                    }
+                    rollback1++;
+                    rollback3 = this.calcFPA(frames, acceleration, 1);
+                    if (rollback3 > this.calcFPA(frames, 175, 1)) {
+                        isMaxIas = false;
+                    }
+                    if (isMaxIas) {
+                        this.isCurrentFpaMaxed = true;
+                    }
+                    isMaxIas = true;
+                    this.currentFpa = rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback1 + "/" + rollback3 + " frames per attack";
+                    this.currentAps = parseInt(100 * 25 / ((rollback1 * 4 + rollback3) / 5)) / 100 + " attacks per second";
+                }
+                // Zeal
+                if (this.skillsSelected == 24) {
+                    var weaponTypeNum = lookupWeapon[this.weaponsPrimarySelected][2];
+                    console.debug(weaponTypeNum);
+                    frames = aktionsframe[weaponTypeNum][this.charactersSelected];
+                    // 2-h sword && barb single handed
+                    var isBarbTwoHandedSwordAsOneHanded = false;
+                    if ((weaponTypeNum == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        isBarbTwoHandedSwordAsOneHanded = true;
+                        frames = 7;
+                    }
+                    console.debug(frames);
+                    rollback1 = this.calcFPA(frames, acceleration, start);
+                    if (rollback1 > this.calcFPA(frames, 175, start)) {
+                        isMaxIas = false;
+                    }
+                    rollback1++;
+                    rollback2 = this.calcFPA(frames, acceleration, 0);
+                    if (rollback2 > this.calcFPA(frames, 175, 0)) {
+                        isMaxIas = false;
+                    }
+                    rollback2++;
+                    frames = waffengattung[weaponTypeNum][this.charactersSelected][0];
+                    console.debug(frames);
+                    if (isBarbTwoHandedSwordAsOneHanded) {
+                        frames = 16;
+                    }
+                    rollback3 = this.calcFPA(frames, acceleration, 0);
+                    if (rollback3 > this.calcFPA(frames, 175, 0)) {
+                        isMaxIas = false;
+                    }
+                    if (isMaxIas) {
+                        this.isCurrentFpaMaxed = true;
+                    }
+                    isMaxIas = true;
+                    this.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback2 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
+                    // Zeal
+                    if (this.skillsSelected == 24) {
+                        this.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 * 3 + rollback3) / 5)) / 100 + " attacks per second";
+                    }
+                }
+            }
+            // Strafe
+            if (attackSkill.rollback == 50) {
+                frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
+                if (acceleration > 149) {
+                    acceleration = 149;
+                }
+                rollback1 = this.calcFPA(frames, acceleration, start);
+                if (rollback1 > this.calcFPA(frames, 149, start)) {
+                    isMaxIas = false;
+                }
+                rollback1++;
+                rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
+                rollback2 = this.calcFPA(frames, acceleration, rollbackframe);
+                if (rollback2 > this.calcFPA(frames, 149, rollbackframe)) {
+                    isMaxIas = false;
+                }
+                rollback2++;
+                rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
+                rollback3 = this.calcFPA(frames, acceleration, rollbackframe);
+                if (rollback3 > this.calcFPA(frames, 149, rollbackframe)) {
+                    isMaxIas = false;
+                }
+                rollback3++;
+                rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback3) / 256) * attackSkill.rollback / 100);
+                rollback4 = this.calcFPA(frames, acceleration, rollbackframe);
+                if (rollback4 > this.calcFPA(frames, 149, rollbackframe)) {
+                    isMaxIas = false;
+                }
+                rollback4++;
+                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * attackSkill.rollback / 100);
+                rollback5 = this.calcFPA(frames, acceleration, rollbackframe);
+                if (rollback5 > this.calcFPA(frames, 149, rollbackframe)) {
+                    isMaxIas = false;
+                }
+                if ((rollback2 == 5) && (rollback3 == 4)) {
+                    rollback3 = 5;
+                    rollback5 = 13;
+                }
+                if (isMaxIas) {
+                    this.isCurrentFpaMaxed = true;
+                }
+                isMaxIas = true;
+                this.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback3 + "/" + rollback4 + "/" + rollback5 + " frames per attack";
+                this.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3 * 4 + rollback4 * 3 + rollback5) / 10)) / 100 + " attacks per second";
+            }
+            // Fend
+            if (attackSkill.rollback == 40) {
+                frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
+                rollback1 = this.calcFPA(frames, acceleration, start);
+                if (rollback1 > this.calcFPA(frames, 175, start)) {
+                    isMaxIas = false;
+                }
+                rollback1++;
+                rollbackframe = Math.floor(Math.floor((256 * start + Math.floor(256 * acceleration / 100) * rollback1) / 256) * attackSkill.rollback / 100);
+                rollback2 = this.calcFPA(frames, acceleration, rollbackframe);
+                if (rollback2 > this.calcFPA(frames, 175, rollbackframe)) {
+                    isMaxIas = false;
+                }
+                rollback2++;
+                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
+                rollback3 = this.calcFPA(frames, acceleration, rollbackframe);
+                if (rollback3 > this.calcFPA(frames, 175, rollbackframe)) {
+                    isMaxIas = false;
+                }
+                if (isMaxIas) {
+                    this.isCurrentFpaMaxed = true;
+                }
+                isMaxIas = true;
+                this.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback3 + " frames per attack";
+                this.currentAps = parseInt(100 * 25 / ((rollback1 + rollback2 + rollback3) / 2)) / 100 + " attacks per second";
+            }
+            // Most attacks
+            if (attackSkill.rollback == 100) {
+                this.currentFpa = ergebnis + " frames per attack";
+                this.currentAps = parseInt(100 * 25 / ergebnis) / 100 + " attacks per second";
+                if (this.charactersSelected > 6) {
+                    this.currentAps = parseInt(100 * 25 / (ergebnis + 2)) / 100 + " attacks per second";
+                }
+                if (((this.charactersSelected == 8) && (this.skillsSelected == 3)) || ((this.charactersSelected == 9) && (this.skillsSelected == 0))) {
+                    this.currentAps = parseInt(100 * 25 / (ergebnis + 1)) / 100 + " attacks per second";
+                }
+                // Shape Shifted && off-hand weapon not unarmed && standard attack
+                if ((this.shapeShiftFormsSelected > 0) && (this.weaponsSecondarySelected > 0) && (this.skillsSelected == 0)) {
+                    this.currentFpa = "Calculation makes no sense";
+                    this.currentAps = "";
+                }
+            }
+        },
+        berechneEIAS: function () {
+            if (this.weaponsPrimarySelected == 0) {
+                IASprimaer = parseInt(this.iasOffWeapon);
+            }
+            if ((this.weaponsPrimarySelected > 0) && (this.weaponsSecondarySelected == 0)) {
+                IASprimaer = parseInt(this.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
+            }
+            if (this.weaponsSecondarySelected > 0) {
+                IASprimaer = parseInt(this.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
+                IASsekundaer = parseInt(this.iasOffWeapon) + parseInt(document.myform.wIAS2.value);
+            }
+            EIASprimaer = Math.floor(120 * IASprimaer / (120 + IASprimaer));
+            EIASsekundaer = Math.floor(120 * IASsekundaer / (120 + IASsekundaer));
+        },
+        berechneSIAS: function () {
+            var fana = parseInt(this.fanaticismSkillIAS);
+            var frenzy = parseInt(this.frenzySkillIAS);
+            var wolf = parseInt(this.werewolfSkillIAS);
+            var tempo = parseInt(this.burstOfSpeedSkillIAS);
+            var holyfrost = parseInt(this.holyFreezeSkillIAS);
+            var attackSkill = data.attack[this.skillsSelected];
+            // != Wolf
+            if (this.shapeShiftFormsSelected != 2) wolf = 0;
+            SIAS = fana + frenzy + wolf + tempo - holyfrost;
+            if (this.skillsSelected == 16) {
+                SIAS = SIAS + 50;
+            }
+            if (this.skillsSelected == 13) {
+                SIAS = SIAS - 40;
+            }
+            if (this.isDecrepify) {
+                SIAS = SIAS - 50;
+            }
+            if ((attackSkill.animation == 7) && (this.charactersSelected < 7)) {
+                SIAS = SIAS - 30;
+            }
+        }
     },
     computed: {
         canShapeShiftWerewolf: function () {
@@ -1833,12 +1697,12 @@ var app = new Vue({
                     console.info("calc ias for standard attack single");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                         frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         ergebnis = this.calcFPA(frames, i, start);
                         frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][1];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         temp = this.calcFPA(frames, i, start);
@@ -1857,12 +1721,12 @@ var app = new Vue({
                     console.info("calc ias for standard attack dual");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                         frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         ergebnis = this.calcFPA(frames, i, 0);
                         frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][1];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         temp = this.calcFPA(frames, i, 0);
@@ -1953,7 +1817,7 @@ var app = new Vue({
                         if (attackSkill.title == 'Zeal') {
                             frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
                         }
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 7;
                         }
                         rollback1 = this.calcFPA(frames, i, start);
@@ -1966,7 +1830,7 @@ var app = new Vue({
                         if (attackSkill.title == 'Zeal') {
                             frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
                         }
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (document.myform.barbschwert.value == 1)) {
+                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         rollback3 = this.calcFPA(frames, i, 0);
@@ -2090,7 +1954,6 @@ var app = new Vue({
                     // add current ias breakpoints if not a multiple of 5
                     for (k = 0; k <= 14; k++) {
                         if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (this.skillsSelected == 26)) {
-                            breakpoints[breakpoints.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) - 1;
                             nonStandardWeapon.push(Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) - 1);
                         }
                         if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (this.skillsSelected == 29)) {
@@ -2098,11 +1961,9 @@ var app = new Vue({
                             if (parseInt(temp) == parseFloat(temp)) {
                                 temp = temp + ".0";
                             }
-                            breakpoints[breakpoints.length] = temp;
                             nonStandardWeapon.push(temp);
                         }
                         if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (this.skillsSelected != 26) && (this.skillsSelected != 29)) {
-                            breakpoints[breakpoints.length] = Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) - 1;
                             nonStandardWeapon.push(Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) - 1)
                         }
                     }
