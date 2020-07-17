@@ -731,6 +731,7 @@ Vue.component('breakpoints-table', {
         'werewolfSkillIas',
         'burstOfSpeedSkillIas',
         'breakpoints',
+        'currentFpa',
     ],
     data: function () {
         return { 
@@ -854,7 +855,7 @@ var app = new Vue({
             console.debug('FramesPerDirection ' + FramesPerDirection);
             console.debug('Acceleration ' + Acceleration);
             console.debug('Starting frame ' + StartingFrame);
-            var Acceleration;
+            //var Acceleration; // dunno why this is declared again
             var AnimationSpeed = 256;
             var attackSkill = data.attack[this.skillsSelected];
             // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
@@ -1241,11 +1242,11 @@ var app = new Vue({
                 IASprimaer = parseInt(this.iasOffWeapon);
             }
             if ((this.weaponsPrimarySelected > 0) && (this.weaponsSecondarySelected == 0)) {
-                IASprimaer = parseInt(this.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
+                IASprimaer = parseInt(this.iasOffWeapon) + parseInt(this.iasWeaponPrimary);
             }
             if (this.weaponsSecondarySelected > 0) {
-                IASprimaer = parseInt(this.iasOffWeapon) + parseInt(document.myform.wIAS1.value);
-                IASsekundaer = parseInt(this.iasOffWeapon) + parseInt(document.myform.wIAS2.value);
+                IASprimaer = parseInt(this.iasOffWeapon) + parseInt(this.iasWeaponPrimary);
+                IASsekundaer = parseInt(this.iasOffWeapon) + parseInt(this.iasWeaponPrimary);
             }
             EIASprimaer = Math.floor(120 * IASprimaer / (120 + IASprimaer));
             EIASsekundaer = Math.floor(120 * IASsekundaer / (120 + IASsekundaer));
@@ -1275,6 +1276,13 @@ var app = new Vue({
         }
     },
     computed: {
+        isPlayableClass: function () {
+            return this.charactersSelected <= 6;
+        },
+        canDualWield: function () {
+            if (this.charactersSelected == 1 || this.charactersSelected == 2) return true;
+            return false;
+        },
         canShapeShiftWerewolf: function () {
             if (this.charactersSelected == 2 || this.charactersSelected == 3) return true;
             return false;
@@ -1282,9 +1290,10 @@ var app = new Vue({
         shapeShiftForms: function () {
             var values = [
                 { value: 0, text: 'Unchanged' },
-                { value: 1, text: 'Werebear' }
             ];
+            if (this.isPlayableClass) values.push({ value: 1, text: 'Werebear' });
             if (this.canShapeShiftWerewolf) values.push({ value: 2, text: 'Werewolf' });
+            if (typeof(values.find(v => v.value == this.shapeShiftFormsSelected)) === "undefined") this.shapeShiftFormsSelected = 0;
             return values;
         },
         fanaticism: function () {
@@ -1326,6 +1335,12 @@ var app = new Vue({
             } else {
                 return [{ value: 0, text: '-' }];
             }
+        },
+        canFrenzy: function() {
+            return this.charactersSelected == 2;
+        },
+        canWerewolf: function() {
+            return this.shapeShiftFormsSelected == 2;
         },
         werewolf: function () {
             if (this.canShapeShiftWerewolf) {
@@ -1371,6 +1386,9 @@ var app = new Vue({
                 return [{ value: 0, text: '-' }];
             }
         },
+        canBurstOfSpeed: function() {
+            return this.charactersSelected == 1;
+        },
         holyFreeze: function () {
             return [
                 { value: 0,  text: 0 },
@@ -1412,9 +1430,12 @@ var app = new Vue({
             }
             return values;
         },
+        isWeaponsPrimaryBarbHandednessNeeded: function() {
+            return this.charactersSelected == 2 && lookupWeapon[this.weaponsPrimarySelected][2] == 3;
+        },
         weaponsPrimaryBarbHandedness: function () {
             var values = [];
-            if (this.charactersSelected == 2 && lookupWeapon[this.weaponsPrimarySelected][2] == 3) {
+            if (this.isWeaponsPrimaryBarbHandednessNeeded) {
                 values.push({ value: 0, text: 'two-handed' });
                 values.push({ value: 1, text: 'single-handed' });
             } else {
@@ -1896,10 +1917,8 @@ var app = new Vue({
                 while (parseInt(OIAS / 5) != parseFloat(OIAS / 5)) {
                     OIAS--;
                 }
-                // unarmed || (duel wield && standard attack animation)
-                if (this.weaponsPrimarySelected == 0) {
-                    alert("Please choose a weapon to use.");
-                } else if ((this.weaponsSecondarySelected > 0) && (attackSkill.animation == 1)) {
+                // duel wield && standard attack animation)
+                if ((this.weaponsSecondarySelected > 0) && (attackSkill.animation == 1)) {
                     alert("There's a problem regarding the standard attack while using two weapons in wereform, so that speed won't be calculated here.");
                 } else {
                     frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];

@@ -7,6 +7,25 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <style>
+        .breakpoint-table .v-data-table__wrapper table {
+            width: auto;
+            text-align: right;
+        }
+        .breakpoint-table .vertical-label {
+            writing-mode: vertical-lr;
+            transform:  rotate(180deg);
+        }
+        .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr > th.horizontal-label {
+            text-align: center;
+        }
+        .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr > th.border-off {
+            border-bottom: 0;
+        }
+        .breakpoint-table tr.highlight-current {
+            background-color: #F9FBE7;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,43 +39,59 @@
                     <v-row justify="center">
                         <v-col cols="12" lg="2" md="4" class="px-8 grey lighten-5">
                             <h2>Character</h2>
-                            <form name=myform>
-                                <v-select name=char @input="updateCurrent" :items="characters" label="Class"
-                                    v-model="charactersSelected" dense></v-select>
-                                <v-select name=charform @input="updateCurrent" :items="shapeShiftForms"
-                                    label="Shape Shift" v-model="shapeShiftFormsSelected" dense></v-select>
-                                <v-select name=waffe @input="updateCurrent" :items="weaponsPrimary"
-                                    label="Primary Weapon" v-model="weaponsPrimarySelected" dense></v-select>
-                                <v-select name=barbschwert @input="updateCurrent"
-                                    :items="weaponsPrimaryBarbHandedness" label="Handedness"
-                                    v-model="weaponsPrimaryBarbHandednessSelected" dense></v-select>
-                                <p>{{ weaponInfoPrimary.description }} [{{ weaponInfoPrimary.wsm }}]</p>
-                                <v-text-field name=wIAS1 type="number" @input="updateCurrent"
-                                    label="Primary Weapon IAS%" v-model.number="iasWeaponPrimary" dense></v-text-field>
-                                <v-checkbox name="enableWsmBug" @input="updateCurrent" label="Apply WSM Bug"
-                                    v-model="isWsmBug" dense></v-checkbox>
-                                <v-select name=zweitwaffe @input="updateCurrent" :items="weaponsSecondary"
-                                    label="Secondary Weapon" v-model="weaponsSecondarySelected" dense></v-select>
-                                <p v-if="weaponsSecondary.length > 1">{{ weaponInfoSecondary.description }}
-                                    [{{ weaponInfoSecondary.wsm }}]</p>
-                                <v-text-field name=wIAS2 type="number" @input="updateCurrent"
-                                    label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary" dense></v-text-field>
-                                <v-text-field name=IAS type="number" @input="updateCurrent"
-                                    label="Off-Weapon IAS%" v-model.number="iasOffWeapon" dense></v-text-field>
-                                <v-select name=skill @input="updateCurrent" :items="skills" label="Skill" v-model="skillsSelected" dense></v-select>
-                                <v-select name=fana @input="updateCurrent" :items="fanaticism"
-                                    label="Fanaticism Level" v-model="fanaticismSkillIAS" dense></v-select>
-                                <v-select name=frenzy @input="updateCurrent" :items="frenzy" label="Frenzy Level"
-                                    v-model="frenzySkillIAS" dense></v-select>
-                                <v-select name=wolf size=1 @input="updateCurrent" :items="werewolf"
-                                    label="Werewolf Level" v-model="werewolfSkillIAS" dense></v-select>
-                                <v-select name=tempo size=1 @input="updateCurrent" :items="burstOfSpeed"
-                                    label="Burst of Speed Level" v-model="burstOfSpeedSkillIAS" dense></v-select>
-                                <v-select name=holyfrost @input="updateCurrent" :items="holyFreeze"
-                                    label="Holy Freeze Level" v-model="holyFreezeSkillIAS" dense></v-select>
-                                <v-checkbox name=altern @input="updateCurrent" label="Decrepify"
-                                    v-model="isDecrepify" dense></v-checkbox>
-                            </form>
+                            <v-form name=myform>
+                                <div>
+                                    <h3>Basics</h3>
+                                    <v-select name=char @input="updateCurrent" :items="characters" label="Class"
+                                        v-model="charactersSelected" dense class="my-3"></v-select>
+                                    <v-select name=charform @input="updateCurrent" :items="shapeShiftForms"
+                                        label="Shape Shift" v-model="shapeShiftFormsSelected" dense
+                                        :disabled="!isPlayableClass" class="my-3"></v-select>
+                                    <v-select name=skill @input="updateCurrent" :items="skills" label="Skill"
+                                        v-model="skillsSelected" dense class="my-3"></v-select>
+                                    <v-text-field name=IAS type="number" @input="updateCurrent" label="Off-Weapon IAS%"
+                                        v-model.number="iasOffWeapon" dense min="0" step="5" class="my-3"></v-text-field>
+                                </div>
+                                <div>
+                                    <h3>Primary Weapon</h3>
+                                    <v-autocomplete name=waffe @input="updateCurrent" :items="weaponsPrimary"
+                                        label="Primary Weapon" v-model="weaponsPrimarySelected" dense persistent-hint :hint="`${weaponInfoPrimary.description} [${weaponInfoPrimary.wsm}]`" class="my-3"></v-autocomplete>
+                                    <v-select v-if="isWeaponsPrimaryBarbHandednessNeeded" name=barbschwert @input="updateCurrent"
+                                        :items="weaponsPrimaryBarbHandedness" label="Handedness"
+                                        v-model="weaponsPrimaryBarbHandednessSelected" dense class="my-3"></v-select>
+                                    <v-text-field name=wIAS1 type="number" @input="updateCurrent"
+                                        label="Primary Weapon IAS%" v-model.number="iasWeaponPrimary" min="0" step="5" dense class="mt-6 mb-3">
+                                    </v-text-field>
+                                </div>
+                                <div v-if="canDualWield == true">
+                                    <h3>Secondary Weapon</h3>
+                                    <v-autocomplete name=zweitwaffe @input="updateCurrent" :items="weaponsSecondary"
+                                        label="Secondary Weapon" v-model="weaponsSecondarySelected" dense persistent-hint :hint="`${weaponInfoSecondary.description} [${weaponInfoSecondary.wsm}]`" class="my-3"></v-autocomplete>
+                                    <v-text-field name=wIAS2 type="number" @input="updateCurrent"
+                                        label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary" dense min="0" step="5" class="mt-6 mb-0">
+                                    </v-text-field>
+                                    <v-checkbox name="enableWsmBug" @input="updateCurrent" label="Apply WSM Bug"
+                                        v-model="isWsmBug" dense class="my-0"></v-checkbox>
+                                </div>
+                                <div>
+                                    <h3>Speed Increasing Skills</h3>
+                                    <v-select name=fana @input="updateCurrent" :items="fanaticism"
+                                        label="Fanaticism Level" v-model="fanaticismSkillIAS" dense class="my-3"></v-select>
+                                    <v-select v-if="canFrenzy" name=frenzy @input="updateCurrent" :items="frenzy" label="Frenzy Level"
+                                        v-model="frenzySkillIAS" dense class="my-3"></v-select>
+                                    <v-select v-if="canWerewolf" name=wolf size=1 @input="updateCurrent" :items="werewolf"
+                                        label="Werewolf Level" v-model="werewolfSkillIAS" dense class="my-3"></v-select>
+                                    <v-select v-if="canBurstOfSpeed" name=tempo size=1 @input="updateCurrent" :items="burstOfSpeed"
+                                        label="Burst of Speed Level" v-model="burstOfSpeedSkillIAS" dense class="my-3"></v-select>
+                                </div>
+                                <div>
+                                    <h3>Speed Slowdown</h3>
+                                    <v-select name=holyfrost @input="updateCurrent" :items="holyFreeze"
+                                        label="Holy Freeze Level" v-model="holyFreezeSkillIAS" dense class="mt-3 mb-0"></v-select>
+                                    <v-checkbox name=altern @input="updateCurrent" label="Decrepify"
+                                        v-model="isDecrepify" dense class="my-0"></v-checkbox>
+                                </div>
+                            </v-form>
                         </v-col>
                         <v-divider vertical></v-divider>
                         <v-col class="px-8">
@@ -67,26 +102,18 @@
                                 Frequency: {{ currentAps }}
                             </p>
                             <h3>Table</h3>
-                            <breakpoints-table lazy 
-                                :characters="characters" 
-                                :characters-selected="charactersSelected"
+                            <breakpoints-table lazy :characters="characters" :characters-selected="charactersSelected"
                                 :shape-Shift-Forms="shapeShiftForms"
                                 :shape-Shift-Forms-Selected="shapeShiftFormsSelected"
-                                :weapon-Info-Primary="weaponInfoPrimary"
-                                :weapon-Info-Secondary="weaponInfoSecondary"
-                                :skills="skills"
-                                :skills-Selected="skillsSelected"
-                                :ias-Off-Weapon="iasOffWeapon"
+                                :weapon-Info-Primary="weaponInfoPrimary" :weapon-Info-Secondary="weaponInfoSecondary"
+                                :skills="skills" :skills-Selected="skillsSelected" :ias-Off-Weapon="iasOffWeapon"
                                 :weapons-Primary-Selected="weaponsPrimarySelected"
                                 :weapons-Secondary-Selected="weaponsSecondarySelected"
-                                :ias-Weapon-Primary="iasWeaponPrimary"
-                                :ias-Weapon-Secondary="iasWeaponSecondary"
-                                :fanaticism-Skill-Ias="fanaticismSkillIAS"
-                                :frenzy-Skill-Ias="frenzySkillIAS"
-                                :werewolf-Skill-Ias="werewolfSkillIAS"
-                                :burst-Of-Speed-Skill-Ias="burstOfSpeedSkillIAS"
+                                :ias-Weapon-Primary="iasWeaponPrimary" :ias-Weapon-Secondary="iasWeaponSecondary"
+                                :fanaticism-Skill-Ias="fanaticismSkillIAS" :frenzy-Skill-Ias="frenzySkillIAS"
+                                :werewolf-Skill-Ias="werewolfSkillIAS" :burst-Of-Speed-Skill-Ias="burstOfSpeedSkillIAS"
                                 :breakpoints="breakpoints"
-                                >
+                                :current-fpa="currentFpa">
                             </breakpoints-table>
                         </v-col>
                     </v-row>
@@ -113,31 +140,38 @@
                 <tr v-if="burstOfSpeedSkillIas > 0"><td>Burst of Speed IAS:</td><td>{{ burstOfSpeedSkillIas }}</td></tr>
             </table> -->
             <!-- <p align="center">Your primary weapon&rsquo;s WIAS is plotted vertically, your equipment&rsquo;s IAS is plotted horizontally.</p> -->
-            <v-simple-table v-if="shapeShiftFormsSelected" dense>
+            <v-simple-table v-if="shapeShiftFormsSelected" dense class="breakpoint-table">
                 <template v-slot:default>
                     <thead>
                         <tr>
-                            <th>-</th>
-                            <th v-for="i in 15">{{5 * (i-1)}}</th><!-- i = 0; i <= 14; i++ -->
+                            <th colspan="17 + (breakpoints.oIas > 70 ? 1 : 0)" class="horizontal-label">
+                                Off-Weapon IAS
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="border-off"></th>
+                            <th></th>
+                            <th v-for="i in 15">{{5 * (i-1)}}</th>
                             <th v-if="breakpoints.oIas > 70">{{breakpoints.oIas}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="j in iasRows + 1">
-                            <td>{{5 * (j-1)}}</td>
+                        <th :rowspan="iasRows + 2 + (iasWeaponPrimary % 5 != 0 ? 1 : 0)" class="vertical-label">Primary Weapon IAS</th>
+                        <tr v-for="j in iasRows + 1" :class="5 * (j-1) == iasWeaponPrimary ? 'highlight-current' : ''">
+                            <th>{{5 * (j-1)}}</th>
                             <template v-for="(breakpoint, index) in breakpoints.breakpoints.slice((j-1)*15,((j-1)*15)+15)">
                                 <td>{{breakpoint}}</td>
                             </template>
                             <td v-if="breakpoints.oIas > 70">{{breakpoints.nonStandardOffWeapon[j-1]}}</td>
                         </tr>
-                        <tr v-if="iasWeaponPrimary % 5 != 0">
-                            <td>{{iasWeaponPrimary}}</td>
+                        <tr v-if="iasWeaponPrimary % 5 != 0" class="highlight-current">
+                            <th>{{iasWeaponPrimary}}</th>
                             <td v-for="(breakpoint, index) in breakpoints.nonStandardWeapon">{{breakpoint}}</td>
                         </tr>
                     </tbody>
                 </template>
             </v-simple-table>
-            <v-simple-table v-else dense>
+            <v-simple-table v-else dense class="breakpoint-table">
                 <template v-slot:default>
                     <thead>
                         <tr>
@@ -147,16 +181,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-if="attackSkill.rollback == 100" v-for="(breakpoint, index) in breakpoints.breakpoints">
-                            <td>{{ breakpoint[0] }}</td>
-                            <td>{{ breakpoint[1] }}</td>
-                            <td>{{ parseInt(2500 / (aidel + breakpoint[1])) / 100 }}</td>
-                        </tr>
-                        <tr v-else v-for="(breakpoint, index) in breakpoints.breakpoints">
-                            <td>{{ breakpoint[0] }}</td>
-                            <td>{{ breakpoint[1] }}</td>
-                            <td>{{ breakpoints.breakpointsAPS[index] }}</td>
-                        </tr>
+                        <template v-if="attackSkill.rollback == 100">
+                            <tr v-for="(breakpoint, index) in breakpoints.breakpoints" :class="breakpoint[1] + ' frames per attack' == currentFpa ? 'highlight-current' : ''">
+                                <td>{{ breakpoint[0] }}</td>
+                                <td>{{ breakpoint[1] }}</td>
+                                <td>{{ parseInt(2500 / (aidel + breakpoint[1])) / 100 }}</td>
+                            </tr>
+                        </template>
+                        <template v-else>
+                            <tr v-for="(breakpoint, index) in breakpoints.breakpoints" :class="breakpoint[1] + ' frames per attack' == currentFpa ? 'highlight-current' : ''">
+                                <td>{{ breakpoint[0] }}</td>
+                                <td>{{ breakpoint[1] }}</td>
+                                <td>{{ breakpoints.breakpointsAPS[index] }}</td>
+                            </tr>
+                        </template>
                     </tbody>
                 </template>
             </v-simple-table>
