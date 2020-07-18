@@ -34,7 +34,7 @@ var breakpointsAPS = new Array();
 
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0]
 // first level is weapon type number
-// second level is char value
+// second level is char value, or [11] for the description
 // third level: first value is "FramesPerDirection" (shape shifted frames? Zeal rollback3), second value is "frames" (full animation frames?)
 var waffengattung = [
     [
@@ -44,7 +44,12 @@ var waffengattung = [
         [16, 16],
         [15, 15],
         [14, 14],
-        [16, 16], 0, 0, 0, 0, "unarmed"
+        [16, 16], 
+        [15, 15], 
+        [16, 16], 
+        [16, 16], 
+        [15, 15], 
+        "unarmed"
     ],
     [
         [0, 0],
@@ -143,7 +148,7 @@ var sequences = [
     [0, 0, 17, 17, 17, 0, 0, 0, 0],
     [0, 0, 12, 0, 12, 0, 0, 0, 0]
 ]
-// name, speed, weapon type, , weapon class, passion zeal
+// name, speed, weapon type, class item (-1 for all, or class number), weapon class, passion zeal
 /* weapon types:
  * 0 = unarmed
  * 1 = claw
@@ -1273,6 +1278,10 @@ var app = new Vue({
             if ((attackSkill.animation == 7) && (this.charactersSelected < 7)) {
                 SIAS = SIAS - 30;
             }
+        },
+        sanitiseSelected: function (selected, values) {
+            if (typeof(values.find(v => v.value == selected)) === "undefined") selected = values[0].value;
+            return selected;
         }
     },
     computed: {
@@ -1293,7 +1302,7 @@ var app = new Vue({
             ];
             if (this.isPlayableClass) values.push({ value: 1, text: 'Werebear' });
             if (this.canShapeShiftWerewolf) values.push({ value: 2, text: 'Werewolf' });
-            if (typeof(values.find(v => v.value == this.shapeShiftFormsSelected)) === "undefined") this.shapeShiftFormsSelected = 0;
+            this.shapeShiftFormsSelected = this.sanitiseSelected(this.shapeShiftFormsSelected, values);
             return values;
         },
         fanaticism: function () {
@@ -1417,17 +1426,20 @@ var app = new Vue({
         weaponsPrimary: function() {
             var values = [];
             for (i = 0; i < lookupWeapon.length; i++) {
+                // -1 all classes || this class's item 
                 if ((lookupWeapon[i][3] < 0) || (lookupWeapon[i][3] == this.charactersSelected)) {
-                    if (this.charactersSelected < 7 // player characters
-                        || (this.charactersSelected == 7  && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8))   // Act 1 Merc
-                        || (this.charactersSelected == 8  && (lookupWeapon[i][4] == 8 || lookupWeapon[i][4] == 2))   // Act 2 Merc
-                        || (this.charactersSelected == 9  &&  lookupWeapon[i][4] == 9)                               // Act 5 Merc
-                        || (this.charactersSelected == 10 &&  lookupWeapon[i][4] == 9 && lookupWeapon[i][2] == 2)    // Act 3 Merc
+                    if (this.isPlayableClass
+                        || i == 0 // unarmed
+                        || (this.charactersSelected == 7  && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8))   // Act 1 Merc - bow or xbow
+                        || (this.charactersSelected == 8  && (lookupWeapon[i][4] == 8 || lookupWeapon[i][4] == 2))   // Act 2 Merc - pole or spear
+                        || (this.charactersSelected == 9  &&  lookupWeapon[i][4] == 9)                               // Act 5 Merc - swords
+                        || (this.charactersSelected == 10 &&  lookupWeapon[i][4] == 9 && lookupWeapon[i][2] == 2)    // Act 3 Merc - swords and one handed swinging
                     ) {
                         values.push({ value: i, text: lookupWeapon[i][0] });
                     }
                 }
             }
+            this.weaponsPrimarySelected = this.sanitiseSelected(this.weaponsPrimarySelected, values);
             return values;
         },
         isWeaponsPrimaryBarbHandednessNeeded: function() {
@@ -1669,7 +1681,9 @@ var app = new Vue({
                     }
                     break;
             }
-            return values.concat(valuesNonNative);
+            values.concat(valuesNonNative);
+            this.skillsSelected = this.sanitiseSelected(this.skillsSelected, values);
+            return values;
         },
         breakpoints: function () {
             var ergebnis; // result FPA
