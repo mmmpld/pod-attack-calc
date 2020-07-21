@@ -151,15 +151,24 @@ var sequences = [
 ];
 
 const weaponTypes = Object.freeze({
-    "unarmed": 0,
-    "claw": 1,
-    "one-handed swinging weapon": 2,
-    "two-handed sword": 3,
-    "one-handed thrusting weapon": 4,
-    "spear": 5,
-    "two-handed weapon": 6,
-    "bow": 7,
-    "crossbow": 8,
+    unarmed: 0,
+    claw: 1,
+    oneHandedSwingingWeapon: 2,
+    twoHandedSword: 3,
+    oneHandedThrustingWeapon: 4,
+    spear: 5,
+    twoHandedWeapon: 6,
+    bow: 7,
+    crossbow: 8,
+});
+
+const weaponCategories = Object.freeze({
+    other: 0,
+    bowOrXbow: 1,
+    spearOrJavalin: 2,
+    throwing: 3,
+    polearm: 8,
+    swords: 9,
 });
 
 // name, speed (wsm), weapon type, class item (-1 for all, or class number), weapon class, passion zeal
@@ -456,23 +465,316 @@ var lookupWeapon = [
     ["Yew Wand",            10, 2, -1, 0, 0],
     ["Zweihander",         -10, 3, -1, 9, 1]
 ];
+var lookupWeapon2 = [
+    {name: "[unarmed]",           wsm:  0, type:0, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Ancient Axe",         wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Ancient Sword",       wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Arbalest",            wsm:-10, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Archon Staff",        wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Ashwood Bow",         wsm:  0, type:7, classItem: 0, weaponCategory:1, canZeal:0},
+    {name: "Ataghan",             wsm:-20, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Axe",                 wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Balanced Axe",        wsm:-10, type:2, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Balanced Knife",      wsm:-20, type:4, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Ballista",            wsm: 10, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Balrog Blade",        wsm:  0, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Balrog Spear",        wsm: 10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Barbed Club",         wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Bardiche",            wsm: 10, type:6, classItem:-1, weaponCategory:8, canZeal:0},
+    {name: "Bastard Sword",       wsm: 10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Battle Axe",          wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Battle Cestus",       wsm:-10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Battle Dart",         wsm:  0, type:4, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Battle Hammer",       wsm: 20, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Battle Scythe",       wsm:-10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Battle Staff",        wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Battle Sword",        wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Bearded Axe",         wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Bec-de-Corbin",       wsm:  0, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Berserker Axe",       wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Bill",                wsm:  0, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Blade Bow",           wsm:-10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Blade Talons",        wsm:-20, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Blade",               wsm:-10, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Bone Knife",          wsm:-20, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Bone Wand",           wsm:-20, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Brandistock",         wsm:-20, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Broad Axe",           wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Broad Sword",         wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Burnt Wand",          wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Caduceus",            wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Cedar Bow",           wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Cedar Staff",         wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Ceremonial Bow",      wsm: 10, type:7, classItem: 0, weaponCategory:1, canZeal:0},
+    {name: "Ceremonial Javelin",  wsm:-10, type:4, classItem: 0, weaponCategory:2, canZeal:0},
+    {name: "Ceremonial Pike",     wsm: 20, type:5, classItem: 0, weaponCategory:8, canZeal:1},
+    {name: "Ceremonial Spear",    wsm:  0, type:5, classItem: 0, weaponCategory:8, canZeal:1},
+    {name: "Cestus",              wsm:  0, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Champion Axe",        wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Champion Sword",      wsm:-10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Chu-Ko-Nu",           wsm:-60, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Cinquedeas",          wsm:-20, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Clasped Orb",         wsm:  0, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Claws",               wsm:-10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Claymore",            wsm: 10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Cleaver",             wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Cloudy Sphere",       wsm:  0, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Club",                wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Colossus Blade",      wsm:  5, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Colossus Crossbow",   wsm: 10, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Colossus Sword",      wsm: 10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Colossus Voulge",     wsm: 10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Composite Bow",       wsm:-10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Conquest Sword",      wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Crossbow",            wsm:  0, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Crowbill",            wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Crusader Bow",        wsm: 10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Cryptic Axe",         wsm: 10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Cryptic Sword",       wsm:-10, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Crystal Sword",       wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Crystalline Globe",   wsm:-10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Cudgel",              wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Cutlass",             wsm:-30, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Dacian Falx",         wsm: 10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Dagger",              wsm:-20, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Decapitator",         wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Demon Crossbow",      wsm:-60, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Demon Heart",         wsm:  0, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Devil Star",          wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Diamond Bow",         wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Dimensional Blade",   wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Dimensional Shard",   wsm: 10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Dirk",                wsm:  0, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Divine Scepter",      wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Double Axe",          wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Double Bow",          wsm:-10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Eagle Orb",           wsm:-10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Edge Bow",            wsm:  5, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Elder Staff",         wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Eldritch Orb",        wsm:-10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Elegant Blade",       wsm:-10, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Espandon",            wsm:  0, type:3, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Ettin Axe",           wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Executioner Sword",   wsm: 10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Falcata",             wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Falchion",            wsm: 20, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Fanged Knife",        wsm:-20, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Fascia",              wsm: 10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Feral Axe",           wsm:-15, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Feral Claws",         wsm:-20, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Flail",               wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Flamberge",           wsm:-10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Flanged Mace",        wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Flying Axe",          wsm: 10, type:2, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Francisca",           wsm: 10, type:2, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Fuscina",             wsm:  0, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Ghost Glaive",        wsm: 20, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Ghost Spear",         wsm:  0, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Ghost Wand",          wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Giant Axe",           wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Giant Sword",         wsm:  0, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Giant Thresher",      wsm:-10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Gladius",             wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Glaive",              wsm: 20, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Glorious Axe",        wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Glowing Orb",         wsm:-10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Gnarled Staff",       wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Gorgon Crossbow",     wsm:  0, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Gothic Axe",          wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Gothic Bow",          wsm: 10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Gothic Staff",        wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Gothic Sword",        wsm: 10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Grand Matron Bow",    wsm: 10, type:7, classItem: 0, weaponCategory:1, canZeal:0},
+    {name: "Grand Scepter",       wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Grave Wand",          wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Great Axe",           wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Great Bow",           wsm:-10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Great Maul",          wsm: 20, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Great Pilum",         wsm:  0, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Great Poleaxe",       wsm:  0, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Great Sword",         wsm: 10, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Greater Claws",       wsm:-20, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Greater Talons",      wsm:-30, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Grim Scythe",         wsm:-10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Grim Wand",           wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Halberd",             wsm:  0, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Hand Axe",            wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Hand Scythe",         wsm:-10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Harpoon",             wsm:-10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Hatchet Hands",       wsm: 10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Hatchet",             wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Heavenly Stone",      wsm:-10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Heavy Crossbow",      wsm: 10, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Highland Blade",      wsm: -5, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Holy Water Sprinkler",wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Hunter's Bow",        wsm:-10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Hurlbat",             wsm:-10, type:2, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Hydra Bow",           wsm: 10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Hydra Edge",          wsm: 10, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Hyperion Javelin",    wsm:-10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Hyperion Spear",      wsm:-10, type:5, classItem:-1, weaponCategory:8, canZeal:0},
+    {name: "Jagged Star",         wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Jared's Stone",       wsm: 10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Javelin",             wsm:-10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Jo Staff",            wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Katar",               wsm:-10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Knout",               wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Kris",                wsm:-20, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Lance",               wsm: 20, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Large Axe",           wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Large Siege Bow",     wsm: 10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Legend Spike",        wsm:-10, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Legend Sword",        wsm:-15, type:3, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Legendary Mallet",    wsm: 20, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Lich Wand",           wsm:-20, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Light Crossbow",      wsm:-10, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Lochaber Axe",        wsm: 10, type:6, classItem:-1, weaponCategory:8, canZeal:0},
+    {name: "Long Battle Bow",     wsm: 10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Long Bow",            wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Long Staff",          wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Long Sword",          wsm:-10, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Long War Bow",        wsm: 10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Mace",                wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Maiden Javelin",      wsm:-10, type:4, classItem: 0, weaponCategory:2, canZeal:0},
+    {name: "Maiden Pike",         wsm: 10, type:5, classItem: 0, weaponCategory:8, canZeal:1},
+    {name: "Maiden Spear",        wsm:  0, type:5, classItem: 0, weaponCategory:8, canZeal:1},
+    {name: "Mancatcher",          wsm:-20, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Martel de Fer",       wsm: 20, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Matriarchal Bow",     wsm:-10, type:7, classItem: 0, weaponCategory:1, canZeal:0},
+    {name: "Matriarchal Javelin", wsm:-10, type:4, classItem: 0, weaponCategory:2, canZeal:0},
+    {name: "Matriarchal Pike",    wsm: 20, type:5, classItem: 0, weaponCategory:8, canZeal:1},
+    {name: "Matriarchal Spear",   wsm:  0, type:5, classItem: 0, weaponCategory:8, canZeal:1},
+    {name: "Maul",                wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Mighty Scepter",      wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Military Axe",        wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Military Pick",       wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Mithril Point",       wsm:  0, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Morning Star",        wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Mythical Sword",      wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Naga",                wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Ogre Axe",            wsm:  0, type:6, classItem:-1, weaponCategory:8, canZeal:0},
+    {name: "Ogre Maul",           wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Partizan",            wsm: 10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Pellet Bow",          wsm:-10, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Petrified Wand",      wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Phaseblade",          wsm:-30, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Pike",                wsm: 20, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Pilum",               wsm:  0, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Poignard",            wsm:-20, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Poleaxe",             wsm: 10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Polished Wand",       wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Quarterstaff",        wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Quhab",               wsm:  0, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Razor Bow",           wsm:-10, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Reflex Bow",          wsm: 10, type:7, classItem: 0, weaponCategory:1, canZeal:0},
+    {name: "Reinforced Mace",     wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Repeating Crossbow",  wsm:-40, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Rondel",              wsm:  0, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Rune Bow",            wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Rune Scepter",        wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Rune Staff",          wsm: 20, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Rune Sword",          wsm:-10, type:2, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Runic Talons",        wsm:-30, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Sabre",               wsm:-10, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Sacred Globe",        wsm:-10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Scepter",             wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Scimitar",            wsm:-20, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Scissors Katar",      wsm:-10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Scissors Quhab",      wsm:  0, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Scissors Suwayyah",   wsm:  0, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Scourge",             wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Scythe",              wsm:-10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Seraph Rod",          wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Shadow Bow",          wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Shamshir",            wsm:-10, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Shillelagh",          wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Short Battle Bow",    wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Short Bow",           wsm:  5, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Short Siege Bow",     wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Short Spear",         wsm: 10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Short Staff",         wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Short Sword",         wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Short War Bow",       wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Siege Crossbow",      wsm:  0, type:8, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Silver-edged Axe",    wsm:  0, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Simbilan",            wsm: 10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Small Crescent",      wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Smoked Sphere",       wsm:  0, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Sparkling Ball",      wsm:  0, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Spear",               wsm:-10, type:5, classItem:-1, weaponCategory:8, canZeal:0},
+    {name: "Spetum",              wsm:  0, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Spiculum",            wsm: 20, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Spider Bow",          wsm:  5, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Spiked Club",         wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Stag Bow",            wsm:  0, type:7, classItem: 0, weaponCategory:1, canZeal:0},
+    {name: "Stalagmite",          wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Stiletto",            wsm:-10, type:4, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Stygian Pike",        wsm:  0, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Stygian Pilum",       wsm:  0, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Suwayyah",            wsm:  0, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Swirling Crystal",    wsm: 10, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Tabar",               wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Thresher",            wsm:-10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Throwing Axe",        wsm: 10, type:2, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Throwing Knife",      wsm:  0, type:4, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Throwing Spear",      wsm:-10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Thunder Maul",        wsm: 20, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Tomahawk",            wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Tomb Wand",           wsm:-20, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Trident",             wsm:  0, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Truncheon",           wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Tulwar",              wsm: 20, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Tusk Sword",          wsm:  0, type:3, classItem:-1, weaponCategory:9, canZeal:1},
+    {name: "Twin Axe",            wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "Two-Handed Sword",    wsm:  0, type:3, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Tyrant Club",         wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Unearthed Wand",      wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Vortex Orb",          wsm:  0, type:2, classItem: 6, weaponCategory:0, canZeal:0},
+    {name: "Voulge",              wsm:  0, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Walking Stick",       wsm:-10, type:6, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Wand",                wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "War Axe",             wsm:  0, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "War Club",            wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "War Dart",            wsm:-20, type:4, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "War Fist",            wsm: 10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "War Fork",            wsm:-20, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "War Hammer",          wsm: 20, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "War Javelin",         wsm:-10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "War Pike",            wsm: 20, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "War Scepter",         wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "War Scythe",          wsm:-10, type:6, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "War Spear",           wsm:-10, type:5, classItem:-1, weaponCategory:8, canZeal:0},
+    {name: "War Spike",           wsm:-10, type:2, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "War Staff",           wsm: 20, type:6, classItem:-1, weaponCategory:0, canZeal:1},
+    {name: "War Sword",           wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:0},
+    {name: "Ward Bow",            wsm:  0, type:7, classItem:-1, weaponCategory:1, canZeal:0},
+    {name: "Winged Axe",          wsm:-10, type:2, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Winged Harpoon",      wsm:-10, type:4, classItem:-1, weaponCategory:2, canZeal:0},
+    {name: "Winged Knife",        wsm:-20, type:4, classItem:-1, weaponCategory:3, canZeal:0},
+    {name: "Wrist Blade",         wsm:  0, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Wrist Spike",         wsm:-10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Wrist Sword",         wsm:-10, type:1, classItem: 1, weaponCategory:0, canZeal:0},
+    {name: "Yari",                wsm:  0, type:5, classItem:-1, weaponCategory:8, canZeal:1},
+    {name: "Yew Wand",            wsm: 10, type:2, classItem:-1, weaponCategory:0, canZeal:0},
+    {name: "Zweihander",          wsm:-10, type:3, classItem:-1, weaponCategory:9, canZeal:1}
+];
 
 function isDagger(weaponId) {
-    var weap = lookupWeapon[weaponId];
-    if (weap[2] == 4 && weap[4] == 0) {
+    var weap = lookupWeapon2[weaponId];
+    if (weap.type == weaponTypes.oneHandedThrustingWeapon && weap.weaponCategory == weaponCategories.other) {
         return true;
     }
     return false;
 }
 
 function isAssasinClaw(weaponId) {
-    var weap = lookupWeapon[weaponId];
-    return weap[2] == 1;
+    var weap = lookupWeapon2[weaponId];
+    return weap.type == weaponTypes.claw;
 }
 
 function isBowOrXbow(weaponId) {
-    var weap = lookupWeapon[weaponId];
-    return weap[4] == 1;
+    var weap = lookupWeapon2[weaponId];
+    return weap.weaponCategory == weaponCategories.bowOrXbow;
 }
 
 var data = {
@@ -836,29 +1138,32 @@ var app = new Vue({
             }
         },
         berechneWSM: function () {
+            var weapPrimary =   lookupWeapon[this.weaponsPrimarySelected];
+            var weapSecondary = lookupWeapon[this.weaponsSecondarySelected];
             // not assasin and not barbarian
             if ((this.charactersSelected != 1) && (this.charactersSelected != 2)) {
-                WSMprimaer = lookupWeapon[this.weaponsPrimarySelected][1];
+                WSMprimaer = weapPrimary[1];
             }
             // (assasin or barbarian) and no offhand weapon
             if (((this.charactersSelected == 1) || (this.charactersSelected == 2)) && (this.weaponsSecondarySelected == 0)) {
-                WSMprimaer = lookupWeapon[this.weaponsPrimarySelected][1];
+                WSMprimaer = weapPrimary[1];
             }
             // (assasin or barbarian) with offhand weapon
             if (((this.charactersSelected == 1) || (this.charactersSelected == 2)) && (this.weaponsSecondarySelected > 0)) {
                 if (this.isWsmBug) {
                     console.log('applying wsm bug');
-                    WSMprimaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsPrimarySelected][1] - lookupWeapon[this.weaponsSecondarySelected][1];
-                    WSMsekundaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
+                    WSMprimaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2) + weapPrimary[1] - weapSecondary[1];
+                    WSMsekundaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2);
                 } else {
-                    WSMprimaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
-                    WSMsekundaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsSecondarySelected][1] - lookupWeapon[app.weaponsPrimarySelected][1];
+                    WSMprimaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2);
+                    WSMsekundaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2) + weapSecondary[1] - lookupWeapon[app.weaponsPrimarySelected][1];
                 }
                 console.log('average primary wsm: ' + WSMprimaer);
                 console.log('average secondary wsm: ' + WSMsekundaer);
             }
         },
         calcFPA: function (FramesPerDirection, Acceleration, StartingFrame) {
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
             console.debug('calc FPA');
             console.debug('FramesPerDirection ' + FramesPerDirection);
             console.debug('Acceleration ' + Acceleration);
@@ -867,7 +1172,7 @@ var app = new Vue({
             var AnimationSpeed = 256;
             var attackSkill = data.attack[this.skillsSelected];
             // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
-            if ((this.charactersSelected == 1) && (lookupWeapon[this.weaponsPrimarySelected][2] == 1)) {
+            if ((this.charactersSelected == 1) && (weapPrimary[2] == 1)) {
                 AnimationSpeed = 208;
             }
             // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
@@ -882,10 +1187,10 @@ var app = new Vue({
             }
             // Bear
             if (this.shapeShiftFormsSelected == 1) {
-                if (lookupWeapon[this.weaponsPrimarySelected][2] == 3) { // 2-hand swords
+                if (weapPrimary[2] == 3) { // 2-hand swords
                     FramesPerDirection = waffengattung[2][this.charactersSelected][0]; //1-hand swinging weapon
                 }
-                AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - lookupWeapon[this.weaponsPrimarySelected][1]) * AnimationSpeed / 100)));
+                AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary[1]) * AnimationSpeed / 100)));
                 FramesPerDirection = 12;
                 if (attackSkill.animation == 6) {
                     FramesPerDirection = 10;
@@ -894,10 +1199,10 @@ var app = new Vue({
             }
             // Wolf
             if (this.shapeShiftFormsSelected == 2) {
-                if (lookupWeapon[this.weaponsPrimarySelected][2] == 3) { // 2-hand swords
+                if (weapPrimary[2] == 3) { // 2-hand swords
                     FramesPerDirection = waffengattung[2][this.charactersSelected][0]; //1-hand swinging weapon
                 }
-                AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - lookupWeapon[this.weaponsPrimarySelected][1]) * AnimationSpeed / 100)));
+                AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary[1]) * AnimationSpeed / 100)));
                 FramesPerDirection = 13;
                 if ((this.skillsSelected == 29) && (StartingFrame == 0)) { // Fury
                     FramesPerDirection = 7;
@@ -927,6 +1232,7 @@ var app = new Vue({
             return FPA;
         },
         berechneWerte: function () {
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
             var ergebnis; // "result" FPA
             var temp;
             var attackSkill = data.attack[this.skillsSelected];
@@ -938,11 +1244,11 @@ var app = new Vue({
             var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
             start = 0;
             if (((this.charactersSelected == 0) || (this.charactersSelected == 6)) && (attackSkill.animation < 2)) {
-                start = startframe[lookupWeapon[this.weaponsPrimarySelected][2]];
+                start = startframe[weapPrimary[2]];
             }
             if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
-                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
-                if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
+                if ((weapPrimary[2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                     frames = 16;
                 }
                 ergebnis = this.calcFPA(frames, acceleration, start);
@@ -950,8 +1256,8 @@ var app = new Vue({
             // standard attack
             if ((attackSkill.animation == 1) && (attackSkill.rollback == 100)) {
                 console.debug('standard attack');
-                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
-                if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
+                if ((weapPrimary[2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                     frames = 16;
                 }
                 ergebnis = this.calcFPA(frames, acceleration, start);
@@ -962,11 +1268,11 @@ var app = new Vue({
                 if (this.shapeShiftFormsSelected == 0) {
                     console.debug('unshifted');
                     temp = ergebnis;
-                    var weaponTypeNum = lookupWeapon[this.weaponsPrimarySelected][2];
+                    var weaponTypeNum = weapPrimary[2];
                     console.debug(weaponTypeNum);
                     frames = waffengattung[weaponTypeNum][this.charactersSelected][1];
                     console.debug(frames);
-                    if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                    if ((weapPrimary[2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                         frames = 16;
                     }
                     ergebnis = this.calcFPA(frames, acceleration, start);
@@ -1012,7 +1318,7 @@ var app = new Vue({
             // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
             // && not whirlwind && rollback normal
             if ((attackSkill.animation == 7) && (this.skillsSelected != 19) && (attackSkill.rollback == 100)) {
-                frames = sequences[attackSkill.sequence][lookupWeapon[this.weaponsPrimarySelected][2]];
+                frames = sequences[attackSkill.sequence][weapPrimary[2]];
                 // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
                 if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
                     frames = 16;
@@ -1049,11 +1355,11 @@ var app = new Vue({
                     // WSM2 = (WSM_primary + WSM_secondary)/2
         
                     // if (document.myform.primaerwaffe[0].checked == true) {
-                    //     WSMprimaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
-                    //     WSMsekundaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsSecondarySelected][1] - lookupWeapon[this.weaponsPrimarySelected][1];
+                    //     WSMprimaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
+                    //     WSMsekundaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsSecondarySelected][1] - weapPrimary[1];
                     // } else {
-                    //     WSMprimaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsPrimarySelected][1] - lookupWeapon[this.weaponsSecondarySelected][1];
-                    //     WSMsekundaer = parseInt((lookupWeapon[this.weaponsPrimarySelected][1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
+                    //     WSMprimaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + weapPrimary[1] - lookupWeapon[this.weaponsSecondarySelected][1];
+                    //     WSMsekundaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
                     // }
         
                     // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
@@ -1096,7 +1402,7 @@ var app = new Vue({
                 }
                 // Fury
                 if (this.skillsSelected == 29) {
-                    frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                    frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
                     rollback1 = this.calcFPA(frames, acceleration, 0);
                     if (rollback1 > this.calcFPA(frames, 175, 0)) {
                         isMaxIas = false;
@@ -1115,7 +1421,7 @@ var app = new Vue({
                 }
                 // Zeal
                 if (this.skillsSelected == 24) {
-                    var weaponTypeNum = lookupWeapon[this.weaponsPrimarySelected][2];
+                    var weaponTypeNum = weapPrimary[2];
                     console.debug(weaponTypeNum);
                     frames = aktionsframe[weaponTypeNum][this.charactersSelected];
                     // 2-h sword && barb single handed
@@ -1157,7 +1463,7 @@ var app = new Vue({
             }
             // Strafe
             if (attackSkill.rollback == 50) {
-                frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
+                frames = aktionsframe[weapPrimary[2]][this.charactersSelected];
                 if (acceleration > 149) {
                     acceleration = 149;
                 }
@@ -1184,7 +1490,7 @@ var app = new Vue({
                     isMaxIas = false;
                 }
                 rollback4++;
-                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
                 rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * attackSkill.rollback / 100);
                 rollback5 = this.calcFPA(frames, acceleration, rollbackframe);
                 if (rollback5 > this.calcFPA(frames, 149, rollbackframe)) {
@@ -1203,7 +1509,7 @@ var app = new Vue({
             }
             // Fend
             if (attackSkill.rollback == 40) {
-                frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
+                frames = aktionsframe[weapPrimary[2]][this.charactersSelected];
                 rollback1 = this.calcFPA(frames, acceleration, start);
                 if (rollback1 > this.calcFPA(frames, 175, start)) {
                     isMaxIas = false;
@@ -1215,7 +1521,7 @@ var app = new Vue({
                     isMaxIas = false;
                 }
                 rollback2++;
-                frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
                 rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
                 rollback3 = this.calcFPA(frames, acceleration, rollbackframe);
                 if (rollback3 > this.calcFPA(frames, 175, rollbackframe)) {
