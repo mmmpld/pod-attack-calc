@@ -17,6 +17,7 @@
             transform:  rotate(180deg);
 	        color: rgba(0,0,0,.6);
             font-size: .75rem;
+            user-select: none;
         }
         .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr > th.horizontal-label {
             text-align: center;
@@ -158,7 +159,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <th :rowspan="iasRows + 2 + (iasWeaponPrimary % 5 != 0 ? 1 : 0)" class="vertical-label">Primary Weapon IAS</th>
+                        <th :rowspan="iasRows + 2 + (iasWeaponPrimary % 5 != 0 ? 1 : 0)"><span class="vertical-label">Primary Weapon IAS</span></th>
                         <tr v-for="j in iasRows + 1" :class="5 * (j-1) == iasWeaponPrimary ? 'highlight-current' : ''">
                             <th>{{5 * (j-1)}}</th>
                             <template v-for="(breakpoint, index) in breakpoints.breakpoints.slice((j-1)*15,((j-1)*15)+15)">
