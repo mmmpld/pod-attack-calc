@@ -1991,6 +1991,7 @@ var app = new Vue({
                     break;
             }
             values.concat(valuesNonNative);
+            values = values.concat(valuesNonNative);
             this.skillsSelected = this.sanitiseSelected(this.skillsSelected, values);
             return values;
         },
