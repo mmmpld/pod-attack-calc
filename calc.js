@@ -33,8 +33,10 @@ var breakpoints2 = new Array();
 var breakpointsAPS = new Array();
 
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0];
-// first level is weapon type number
-// second level is char value, or [11] for the description
+
+// "weapon type"
+// first level is weapon "type" from lookupweapon
+// second level is char class value, or [11] for the description
 // third level: first value is "FramesPerDirection" (shape shifted frames? Zeal rollback3), second value is "frames" (full animation frames?)
 var waffengattung = [
     [
@@ -142,12 +144,14 @@ var aktionsframe = [
     [ 9, 10, 10, 10, 11, 10, 11]
 ];
 
+// first level attackSkill.sequence
+// second level weaponType
 var sequences = [
-    [0, 0, 0, 0, 21, 24, 0, 0, 0],
-    [0, 0, 0, 0, 18, 21, 0, 0, 0],
-    [12, 12, 16, 0, 0, 0, 0, 0, 0],
-    [0, 0, 17, 17, 17, 0, 0, 0, 0],
-    [0, 0, 12, 0, 12, 0, 0, 0, 0]
+    [ 0,  0,  0,  0, 21, 24, 0, 0, 0],
+    [ 0,  0,  0,  0, 18, 21, 0, 0, 0],
+    [12, 12, 16,  0,  0,  0, 0, 0, 0],
+    [ 0,  0, 17, 17, 17,  0, 0, 0, 0],
+    [ 0,  0, 12,  0, 12,  0, 0, 0, 0]
 ];
 
 const weaponTypes = Object.freeze({
@@ -171,301 +175,7 @@ const weaponCategories = Object.freeze({
     swords: 9,
 });
 
-// name, speed (wsm), weapon type, class item (-1 for all, or class number), weapon class, passion zeal
 var lookupWeapon = [
-    ["[unarmed]",            0, 0, -1, 0, 0],
-    ["Ancient Axe",         10, 6, -1, 0, 1],
-    ["Ancient Sword",        0, 2, -1, 9, 0],
-    ["Arbalest",           -10, 8, -1, 1, 0],
-    ["Archon Staff",        10, 6, -1, 0, 1],
-    ["Ashwood Bow",          0, 7,  0, 1, 0],
-    ["Ataghan",            -20, 2, -1, 9, 0],
-    ["Axe",                 10, 2, -1, 0, 1],
-    ["Balanced Axe",       -10, 2, -1, 3, 0],
-    ["Balanced Knife",     -20, 4, -1, 3, 0],
-    ["Ballista",            10, 8, -1, 1, 0],
-    ["Balrog Blade",         0, 3, -1, 9, 1],
-    ["Balrog Spear",        10, 4, -1, 2, 0],
-    ["Barbed Club",          0, 2, -1, 0, 0],
-    ["Bardiche",            10, 6, -1, 8, 0],
-    ["Bastard Sword",       10, 3, -1, 9, 1],
-    ["Battle Axe",          10, 6, -1, 0, 1],
-    ["Battle Cestus",      -10, 1,  1, 0, 0],
-    ["Battle Dart",          0, 4, -1, 3, 0],
-    ["Battle Hammer",       20, 2, -1, 0, 1],
-    ["Battle Scythe",      -10, 6, -1, 8, 1],
-    ["Battle Staff",         0, 6, -1, 0, 1],
-    ["Battle Sword",         0, 2, -1, 9, 1],
-    ["Bearded Axe",          0, 6, -1, 0, 1],
-    ["Bec-de-Corbin",        0, 6, -1, 8, 1],
-    ["Berserker Axe",        0, 2, -1, 0, 1],
-    ["Bill",                 0, 6, -1, 8, 1],
-    ["Blade Bow",          -10, 7, -1, 1, 0],
-    ["Blade Talons",       -20, 1,  1, 0, 0],
-    ["Blade",              -10, 4, -1, 0, 0],
-    ["Bone Knife",         -20, 4, -1, 0, 0],
-    ["Bone Wand",          -20, 2, -1, 0, 0],
-    ["Brandistock",        -20, 5, -1, 8, 1],
-    ["Broad Axe",            0, 6, -1, 0, 1],
-    ["Broad Sword",          0, 2, -1, 9, 1],
-    ["Burnt Wand",           0, 2, -1, 0, 0],
-    ["Caduceus",           -10, 2, -1, 0, 1],
-    ["Cedar Bow",            0, 7, -1, 1, 0],
-    ["Cedar Staff",         10, 6, -1, 0, 1],
-    ["Ceremonial Bow",      10, 7,  0, 1, 0],
-    ["Ceremonial Javelin", -10, 4,  0, 2, 0],
-    ["Ceremonial Pike",     20, 5,  0, 8, 1],
-    ["Ceremonial Spear",     0, 5,  0, 8, 1],
-    ["Cestus",               0, 1,  1, 0, 0],
-    ["Champion Axe",       -10, 6, -1, 0, 1],
-    ["Champion Sword",     -10, 3, -1, 9, 1],
-    ["Chu-Ko-Nu",          -60, 8, -1, 1, 0],
-    ["Cinquedeas",         -20, 4, -1, 0, 0],
-    ["Clasped Orb",          0, 2,  6, 0, 0],
-    ["Claws",              -10, 1,  1, 0, 0],
-    ["Claymore",            10, 3, -1, 9, 1],
-    ["Cleaver",             10, 2, -1, 0, 1],
-    ["Cloudy Sphere",        0, 2,  6, 0, 0],
-    ["Club",               -10, 2, -1, 0, 0],
-    ["Colossus Blade",       5, 3, -1, 9, 1],
-    ["Colossus Crossbow",   10, 8, -1, 1, 0],
-    ["Colossus Sword",      10, 3, -1, 9, 1],
-    ["Colossus Voulge",     10, 6, -1, 8, 1],
-    ["Composite Bow",      -10, 7, -1, 1, 0],
-    ["Conquest Sword",       0, 2, -1, 9, 1],
-    ["Crossbow",             0, 8, -1, 1, 0],
-    ["Crowbill",           -10, 2, -1, 0, 1],
-    ["Crusader Bow",        10, 7, -1, 1, 0],
-    ["Cryptic Axe",         10, 6, -1, 8, 1],
-    ["Cryptic Sword",      -10, 2, -1, 9, 1],
-    ["Crystal Sword",        0, 2, -1, 9, 1],
-    ["Crystalline Globe",  -10, 2,  6, 0, 0],
-    ["Cudgel",             -10, 2, -1, 0, 0],
-    ["Cutlass",            -30, 2, -1, 9, 0],
-    ["Dacian Falx",         10, 3, -1, 9, 1],
-    ["Dagger",             -20, 4, -1, 0, 0],
-    ["Decapitator",         10, 6, -1, 0, 1],
-    ["Demon Crossbow",     -60, 8, -1, 1, 0],
-    ["Demon Heart",          0, 2,  6, 0, 0],
-    ["Devil Star",          10, 2, -1, 0, 0],
-    ["Diamond Bow",          0, 7, -1, 1, 0],
-    ["Dimensional Blade",    0, 2, -1, 9, 1],
-    ["Dimensional Shard",   10, 2,  6, 0, 0],
-    ["Dirk",                 0, 4, -1, 0, 0],
-    ["Divine Scepter",     -10, 2, -1, 0, 1],
-    ["Double Axe",          10, 2, -1, 0, 1],
-    ["Double Bow",         -10, 7, -1, 1, 0],
-    ["Eagle Orb",          -10, 2,  6, 0, 0],
-    ["Edge Bow",             5, 7, -1, 1, 0],
-    ["Elder Staff",          0, 6, -1, 0, 1],
-    ["Eldritch Orb",       -10, 2,  6, 0, 0],
-    ["Elegant Blade",      -10, 2, -1, 9, 0],
-    ["Espandon",             0, 3, -1, 9, 0],
-    ["Ettin Axe",           10, 2, -1, 0, 1],
-    ["Executioner Sword",   10, 3, -1, 9, 1],
-    ["Falcata",              0, 2, -1, 9, 0],
-    ["Falchion",            20, 2, -1, 9, 0],
-    ["Fanged Knife",       -20, 4, -1, 0, 0],
-    ["Fascia",              10, 1,  1, 0, 0],
-    ["Feral Axe",          -15, 6, -1, 0, 1],
-    ["Feral Claws",        -20, 1,  1, 0, 0],
-    ["Flail",              -10, 2, -1, 0, 1],
-    ["Flamberge",          -10, 3, -1, 9, 1],
-    ["Flanged Mace",         0, 2, -1, 0, 0],
-    ["Flying Axe",          10, 2, -1, 3, 0],
-    ["Francisca",           10, 2, -1, 3, 0],
-    ["Fuscina",              0, 5, -1, 8, 1],
-    ["Ghost Glaive",        20, 4, -1, 2, 0],
-    ["Ghost Spear",          0, 5, -1, 8, 1],
-    ["Ghost Wand",          10, 2, -1, 0, 0],
-    ["Giant Axe",           10, 6, -1, 0, 1],
-    ["Giant Sword",          0, 3, -1, 9, 1],
-    ["Giant Thresher",     -10, 6, -1, 8, 1],
-    ["Gladius",              0, 2, -1, 9, 0],
-    ["Glaive",              20, 4, -1, 2, 0],
-    ["Glorious Axe",        10, 6, -1, 0, 1],
-    ["Glowing Orb",        -10, 2,  6, 0, 0],
-    ["Gnarled Staff",       10, 6, -1, 0, 1],
-    ["Gorgon Crossbow",      0, 8, -1, 1, 0],
-    ["Gothic Axe",         -10, 6, -1, 0, 1],
-    ["Gothic Bow",          10, 7, -1, 1, 0],
-    ["Gothic Staff",         0, 6, -1, 0, 1],
-    ["Gothic Sword",        10, 3, -1, 9, 1],
-    ["Grand Matron Bow",    10, 7,  0, 1, 0],
-    ["Grand Scepter",       10, 2, -1, 0, 0],
-    ["Grave Wand",           0, 2, -1, 0, 0],
-    ["Great Axe",          -10, 6, -1, 0, 1],
-    ["Great Bow",          -10, 7, -1, 1, 0],
-    ["Great Maul",          20, 6, -1, 0, 1],
-    ["Great Pilum",          0, 4, -1, 2, 0],
-    ["Great Poleaxe",        0, 6, -1, 8, 1],
-    ["Great Sword",         10, 3, -1, 9, 1],
-    ["Greater Claws",      -20, 1,  1, 0, 0],
-    ["Greater Talons",     -30, 1,  1, 0, 0],
-    ["Grim Scythe",        -10, 6, -1, 8, 1],
-    ["Grim Wand",            0, 2, -1, 0, 0],
-    ["Halberd",              0, 6, -1, 8, 1],
-    ["Hand Axe",             0, 2, -1, 0, 0],
-    ["Hand Scythe",        -10, 1,  1, 0, 0],
-    ["Harpoon",            -10, 4, -1, 2, 0],
-    ["Hatchet Hands",       10, 1,  1, 0, 0],
-    ["Hatchet",              0, 2, -1, 0, 0],
-    ["Heavenly Stone",     -10, 2,  6, 0, 0],
-    ["Heavy Crossbow",      10, 8, -1, 1, 0],
-    ["Highland Blade",      -5, 3, -1, 9, 1],
-    ["Holy Water Sprinkler",10, 2, -1, 0, 0],
-    ["Hunter's Bow",       -10, 7, -1, 1, 0],
-    ["Hurlbat",            -10, 2, -1, 3, 0],
-    ["Hydra Bow",           10, 7, -1, 1, 0],
-    ["Hydra Edge",          10, 2, -1, 9, 0],
-    ["Hyperion Javelin",   -10, 4, -1, 2, 0],
-    ["Hyperion Spear",     -10, 5, -1, 8, 0],
-    ["Jagged Star",         10, 2, -1, 0, 0],
-    ["Jared's Stone",       10, 2,  6, 0, 0],
-    ["Javelin",            -10, 4, -1, 2, 0],
-    ["Jo Staff",           -10, 6, -1, 0, 0],
-    ["Katar",              -10, 1,  1, 0, 0],
-    ["Knout",              -10, 2, -1, 0, 1],
-    ["Kris",               -20, 4, -1, 0, 0],
-    ["Lance",               20, 5, -1, 8, 1],
-    ["Large Axe",          -10, 6, -1, 0, 1],
-    ["Large Siege Bow",     10, 7, -1, 1, 0],
-    ["Legend Spike",       -10, 4, -1, 0, 0],
-    ["Legend Sword",       -15, 3, -1, 9, 0],
-    ["Legendary Mallet",    20, 2, -1, 0, 1],
-    ["Lich Wand",          -20, 2, -1, 0, 0],
-    ["Light Crossbow",     -10, 8, -1, 1, 0],
-    ["Lochaber Axe",        10, 6, -1, 8, 0],
-    ["Long Battle Bow",     10, 7, -1, 1, 0],
-    ["Long Bow",             0, 7, -1, 1, 0],
-    ["Long Staff",           0, 6, -1, 0, 0],
-    ["Long Sword",         -10, 2, -1, 9, 1],
-    ["Long War Bow",        10, 7, -1, 1, 0],
-    ["Mace",                 0, 2, -1, 0, 0],
-    ["Maiden Javelin",     -10, 4,  0, 2, 0],
-    ["Maiden Pike",         10, 5,  0, 8, 1],
-    ["Maiden Spear",         0, 5,  0, 8, 1],
-    ["Mancatcher",         -20, 5, -1, 8, 1],
-    ["Martel de Fer",       20, 6, -1, 0, 1],
-    ["Matriarchal Bow",    -10, 7,  0, 1, 0],
-    ["Matriarchal Javelin",-10, 4,  0, 2, 0],
-    ["Matriarchal Pike",    20, 5,  0, 8, 1],
-    ["Matriarchal Spear",    0, 5,  0, 8, 1],
-    ["Maul",                10, 6, -1, 0, 1],
-    ["Mighty Scepter",       0, 2, -1, 0, 0],
-    ["Military Axe",       -10, 6, -1, 0, 1],
-    ["Military Pick",      -10, 2, -1, 0, 1],
-    ["Mithril Point",        0, 4, -1, 0, 0],
-    ["Morning Star",        10, 2, -1, 0, 0],
-    ["Mythical Sword",       0, 2, -1, 9, 0],
-    ["Naga",                 0, 2, -1, 0, 1],
-    ["Ogre Axe",             0, 6, -1, 8, 0],
-    ["Ogre Maul",           10, 6, -1, 0, 1],
-    ["Partizan",            10, 6, -1, 8, 1],
-    ["Pellet Bow",         -10, 8, -1, 1, 0],
-    ["Petrified Wand",      10, 2, -1, 0, 0],
-    ["Phaseblade",         -30, 2, -1, 9, 1],
-    ["Pike",                20, 5, -1, 8, 1],
-    ["Pilum",                0, 4, -1, 2, 0],
-    ["Poignard",           -20, 4, -1, 0, 0],
-    ["Poleaxe",             10, 6, -1, 8, 1],
-    ["Polished Wand",        0, 2, -1, 0, 0],
-    ["Quarterstaff",         0, 6, -1, 0, 0],
-    ["Quhab",                0, 1,  1, 0, 0],
-    ["Razor Bow",          -10, 7, -1, 1, 0],
-    ["Reflex Bow",          10, 7,  0, 1, 0],
-    ["Reinforced Mace",      0, 2, -1, 0, 0],
-    ["Repeating Crossbow", -40, 8, -1, 1, 0],
-    ["Rondel",               0, 4, -1, 0, 0],
-    ["Rune Bow",             0, 7, -1, 1, 0],
-    ["Rune Scepter",         0, 2, -1, 0, 0],
-    ["Rune Staff",          20, 6, -1, 0, 1],
-    ["Rune Sword",         -10, 2, -1, 9, 1],
-    ["Runic Talons",       -30, 1,  1, 0, 0],
-    ["Sabre",              -10, 2, -1, 9, 0],
-    ["Sacred Globe",       -10, 2,  6, 0, 0],
-    ["Scepter",              0, 2, -1, 0, 0],
-    ["Scimitar",           -20, 2, -1, 9, 0],
-    ["Scissors Katar",     -10, 1,  1, 0, 0],
-    ["Scissors Quhab",       0, 1,  1, 0, 0],
-    ["Scissors Suwayyah",    0, 1,  1, 0, 0],
-    ["Scourge",            -10, 2, -1, 0, 1],
-    ["Scythe",             -10, 6, -1, 8, 1],
-    ["Seraph Rod",          10, 2, -1, 0, 0],
-    ["Shadow Bow",           0, 7, -1, 1, 0],
-    ["Shamshir",           -10, 2, -1, 9, 0],
-    ["Shillelagh",           0, 6, -1, 0, 1],
-    ["Short Battle Bow",     0, 7, -1, 1, 0],
-    ["Short Bow",            5, 7, -1, 1, 0],
-    ["Short Siege Bow",      0, 7, -1, 1, 0],
-    ["Short Spear",         10, 4, -1, 2, 0],
-    ["Short Staff",        -10, 6, -1, 0, 0],
-    ["Short Sword",          0, 2, -1, 9, 0],
-    ["Short War Bow",        0, 7, -1, 1, 0],
-    ["Siege Crossbow",       0, 8, -1, 1, 0],
-    ["Silver-edged Axe",     0, 6, -1, 0, 1],
-    ["Simbilan",            10, 4, -1, 2, 0],
-    ["Small Crescent",      10, 2, -1, 0, 1],
-    ["Smoked Sphere",        0, 2,  6, 0, 0],
-    ["Sparkling Ball",       0, 2,  6, 0, 0],
-    ["Spear",              -10, 5, -1, 8, 0],
-    ["Spetum",               0, 5, -1, 8, 1],
-    ["Spiculum",            20, 4, -1, 2, 0],
-    ["Spider Bow",           5, 7, -1, 1, 0],
-    ["Spiked Club",          0, 2, -1, 0, 0],
-    ["Stag Bow",             0, 7,  0, 1, 0],
-    ["Stalagmite",          10, 6, -1, 0, 0],
-    ["Stiletto",           -10, 4, -1, 0, 0],
-    ["Stygian Pike",         0, 5, -1, 8, 1],
-    ["Stygian Pilum",        0, 4, -1, 2, 0],
-    ["Suwayyah",             0, 1,  1, 0, 0],
-    ["Swirling Crystal",    10, 2,  6, 0, 0],
-    ["Tabar",               10, 6, -1, 0, 1],
-    ["Thresher",           -10, 6, -1, 8, 1],
-    ["Throwing Axe",        10, 2, -1, 3, 0],
-    ["Throwing Knife",       0, 4, -1, 3, 0],
-    ["Throwing Spear",     -10, 4, -1, 2, 0],
-    ["Thunder Maul",        20, 6, -1, 0, 1],
-    ["Tomahawk",             0, 2, -1, 0, 0],
-    ["Tomb Wand",          -20, 2, -1, 0, 0],
-    ["Trident",              0, 5, -1, 8, 1],
-    ["Truncheon",          -10, 2, -1, 0, 0],
-    ["Tulwar",              20, 2, -1, 9, 0],
-    ["Tusk Sword",           0, 3, -1, 9, 1],
-    ["Twin Axe",            10, 2, -1, 0, 1],
-    ["Two-Handed Sword",     0, 3, -1, 9, 0],
-    ["Tyrant Club",          0, 2, -1, 0, 0],
-    ["Unearthed Wand",       0, 2, -1, 0, 0],
-    ["Vortex Orb",           0, 2,  6, 0, 0],
-    ["Voulge",               0, 6, -1, 8, 1],
-    ["Walking Stick",      -10, 6, -1, 0, 0],
-    ["Wand",                 0, 2, -1, 0, 0],
-    ["War Axe",              0, 2, -1, 0, 1],
-    ["War Club",            10, 6, -1, 0, 0],
-    ["War Dart",           -20, 4, -1, 3, 0],
-    ["War Fist",            10, 1,  1, 0, 0],
-    ["War Fork",           -20, 5, -1, 8, 1],
-    ["War Hammer",          20, 2, -1, 0, 1],
-    ["War Javelin",        -10, 4, -1, 2, 0],
-    ["War Pike",            20, 5, -1, 8, 1],
-    ["War Scepter",        -10, 2, -1, 0, 1],
-    ["War Scythe",         -10, 6, -1, 8, 1],
-    ["War Spear",          -10, 5, -1, 8, 0],
-    ["War Spike",          -10, 2, -1, 0, 1],
-    ["War Staff",           20, 6, -1, 0, 1],
-    ["War Sword",            0, 2, -1, 9, 0],
-    ["Ward Bow",             0, 7, -1, 1, 0],
-    ["Winged Axe",         -10, 2, -1, 3, 0],
-    ["Winged Harpoon",     -10, 4, -1, 2, 0],
-    ["Winged Knife",       -20, 4, -1, 3, 0],
-    ["Wrist Blade",          0, 1,  1, 0, 0],
-    ["Wrist Spike",        -10, 1,  1, 0, 0],
-    ["Wrist Sword",        -10, 1,  1, 0, 0],
-    ["Yari",                 0, 5, -1, 8, 1],
-    ["Yew Wand",            10, 2, -1, 0, 0],
-    ["Zweihander",         -10, 3, -1, 9, 1]
-];
-var lookupWeapon2 = [
     {name: "[unarmed]",           wsm:  0, type:0, classItem:-1, weaponCategory:0, canZeal:0},
     {name: "Ancient Axe",         wsm: 10, type:6, classItem:-1, weaponCategory:0, canZeal:1},
     {name: "Ancient Sword",       wsm:  0, type:2, classItem:-1, weaponCategory:9, canZeal:0},
@@ -760,7 +470,7 @@ var lookupWeapon2 = [
 ];
 
 function isDagger(weaponId) {
-    var weap = lookupWeapon2[weaponId];
+    var weap = lookupWeapon[weaponId];
     if (weap.type == weaponTypes.oneHandedThrustingWeapon && weap.weaponCategory == weaponCategories.other) {
         return true;
     }
@@ -768,12 +478,12 @@ function isDagger(weaponId) {
 }
 
 function isAssasinClaw(weaponId) {
-    var weap = lookupWeapon2[weaponId];
+    var weap = lookupWeapon[weaponId];
     return weap.type == weaponTypes.claw;
 }
 
 function isBowOrXbow(weaponId) {
-    var weap = lookupWeapon2[weaponId];
+    var weap = lookupWeapon[weaponId];
     return weap.weaponCategory == weaponCategories.bowOrXbow;
 }
 
@@ -1138,25 +848,25 @@ var app = new Vue({
             }
         },
         berechneWSM: function () {
-            var weapPrimary =   lookupWeapon[this.weaponsPrimarySelected];
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
             var weapSecondary = lookupWeapon[this.weaponsSecondarySelected];
             // not assasin and not barbarian
             if ((this.charactersSelected != 1) && (this.charactersSelected != 2)) {
-                WSMprimaer = weapPrimary[1];
+                WSMprimaer = weapPrimary.wsm;
             }
             // (assasin or barbarian) and no offhand weapon
             if (((this.charactersSelected == 1) || (this.charactersSelected == 2)) && (this.weaponsSecondarySelected == 0)) {
-                WSMprimaer = weapPrimary[1];
+                WSMprimaer = weapPrimary.wsm;
             }
             // (assasin or barbarian) with offhand weapon
             if (((this.charactersSelected == 1) || (this.charactersSelected == 2)) && (this.weaponsSecondarySelected > 0)) {
                 if (this.isWsmBug) {
                     console.log('applying wsm bug');
-                    WSMprimaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2) + weapPrimary[1] - weapSecondary[1];
-                    WSMsekundaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2);
+                    WSMprimaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2) + weapPrimary.wsm - weapSecondary.wsm;
+                    WSMsekundaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2);
                 } else {
-                    WSMprimaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2);
-                    WSMsekundaer = parseInt((weapPrimary[1] + weapSecondary[1]) / 2) + weapSecondary[1] - lookupWeapon[app.weaponsPrimarySelected][1];
+                    WSMprimaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2);
+                    WSMsekundaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2) + weapSecondary.wsm - weapPrimary.wsm;
                 }
                 console.log('average primary wsm: ' + WSMprimaer);
                 console.log('average secondary wsm: ' + WSMsekundaer);
@@ -1172,7 +882,7 @@ var app = new Vue({
             var AnimationSpeed = 256;
             var attackSkill = data.attack[this.skillsSelected];
             // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
-            if ((this.charactersSelected == 1) && (weapPrimary[2] == 1)) {
+            if ((this.charactersSelected == 1) && (weapPrimary.type == weaponTypes.claw)) {
                 AnimationSpeed = 208;
             }
             // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
@@ -1187,10 +897,10 @@ var app = new Vue({
             }
             // Bear
             if (this.shapeShiftFormsSelected == 1) {
-                if (weapPrimary[2] == 3) { // 2-hand swords
+                if (weapPrimary.type == weaponTypes.twoHandedSword) { // 2-hand swords
                     FramesPerDirection = waffengattung[2][this.charactersSelected][0]; //1-hand swinging weapon
                 }
-                AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary[1]) * AnimationSpeed / 100)));
+                AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * AnimationSpeed / 100)));
                 FramesPerDirection = 12;
                 if (attackSkill.animation == 6) {
                     FramesPerDirection = 10;
@@ -1199,10 +909,10 @@ var app = new Vue({
             }
             // Wolf
             if (this.shapeShiftFormsSelected == 2) {
-                if (weapPrimary[2] == 3) { // 2-hand swords
+                if (weapPrimary.type == weaponTypes.twoHandedSword) { // 2-hand swords
                     FramesPerDirection = waffengattung[2][this.charactersSelected][0]; //1-hand swinging weapon
                 }
-                AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary[1]) * AnimationSpeed / 100)));
+                AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * AnimationSpeed / 100)));
                 FramesPerDirection = 13;
                 if ((this.skillsSelected == 29) && (StartingFrame == 0)) { // Fury
                     FramesPerDirection = 7;
@@ -1244,11 +954,11 @@ var app = new Vue({
             var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
             start = 0;
             if (((this.charactersSelected == 0) || (this.charactersSelected == 6)) && (attackSkill.animation < 2)) {
-                start = startframe[weapPrimary[2]];
+                start = startframe[weapPrimary.type];
             }
             if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
-                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
-                if ((weapPrimary[2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
+                if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                     frames = 16;
                 }
                 ergebnis = this.calcFPA(frames, acceleration, start);
@@ -1256,8 +966,8 @@ var app = new Vue({
             // standard attack
             if ((attackSkill.animation == 1) && (attackSkill.rollback == 100)) {
                 console.debug('standard attack');
-                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
-                if ((weapPrimary[2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
+                if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                     frames = 16;
                 }
                 ergebnis = this.calcFPA(frames, acceleration, start);
@@ -1268,11 +978,9 @@ var app = new Vue({
                 if (this.shapeShiftFormsSelected == 0) {
                     console.debug('unshifted');
                     temp = ergebnis;
-                    var weaponTypeNum = weapPrimary[2];
-                    console.debug(weaponTypeNum);
-                    frames = waffengattung[weaponTypeNum][this.charactersSelected][1];
+                    frames = waffengattung[weapPrimary.type][this.charactersSelected][1];
                     console.debug(frames);
-                    if ((weapPrimary[2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                    if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                         frames = 16;
                     }
                     ergebnis = this.calcFPA(frames, acceleration, start);
@@ -1318,7 +1026,7 @@ var app = new Vue({
             // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
             // && not whirlwind && rollback normal
             if ((attackSkill.animation == 7) && (this.skillsSelected != 19) && (attackSkill.rollback == 100)) {
-                frames = sequences[attackSkill.sequence][weapPrimary[2]];
+                frames = sequences[attackSkill.sequence][weapPrimary.type];
                 // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
                 if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
                     frames = 16;
@@ -1355,11 +1063,11 @@ var app = new Vue({
                     // WSM2 = (WSM_primary + WSM_secondary)/2
         
                     // if (document.myform.primaerwaffe[0].checked == true) {
-                    //     WSMprimaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
-                    //     WSMsekundaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + lookupWeapon[this.weaponsSecondarySelected][1] - weapPrimary[1];
+                    //     WSMprimaer = parseInt((weapPrimary.wsm + lookupWeapon[this.weaponsSecondarySelected].wsm) / 2);
+                    //     WSMsekundaer = parseInt((weapPrimary.wsm + lookupWeapon[this.weaponsSecondarySelected].wsm) / 2) + lookupWeapon[this.weaponsSecondarySelected].wsm - weapPrimary.wsm;
                     // } else {
-                    //     WSMprimaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2) + weapPrimary[1] - lookupWeapon[this.weaponsSecondarySelected][1];
-                    //     WSMsekundaer = parseInt((weapPrimary[1] + lookupWeapon[this.weaponsSecondarySelected][1]) / 2);
+                    //     WSMprimaer = parseInt((weapPrimary.wsm + lookupWeapon[this.weaponsSecondarySelected].wsm) / 2) + weapPrimary.wsm - lookupWeapon[this.weaponsSecondarySelected].wsm;
+                    //     WSMsekundaer = parseInt((weapPrimary.wsm + lookupWeapon[this.weaponsSecondarySelected].wsm) / 2);
                     // }
         
                     // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
@@ -1402,7 +1110,7 @@ var app = new Vue({
                 }
                 // Fury
                 if (this.skillsSelected == 29) {
-                    frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
+                    frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                     rollback1 = this.calcFPA(frames, acceleration, 0);
                     if (rollback1 > this.calcFPA(frames, 175, 0)) {
                         isMaxIas = false;
@@ -1421,12 +1129,10 @@ var app = new Vue({
                 }
                 // Zeal
                 if (this.skillsSelected == 24) {
-                    var weaponTypeNum = weapPrimary[2];
-                    console.debug(weaponTypeNum);
-                    frames = aktionsframe[weaponTypeNum][this.charactersSelected];
+                    frames = aktionsframe[weapPrimary.type][this.charactersSelected];
                     // 2-h sword && barb single handed
                     var isBarbTwoHandedSwordAsOneHanded = false;
-                    if ((weaponTypeNum == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                    if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                         isBarbTwoHandedSwordAsOneHanded = true;
                         frames = 7;
                     }
@@ -1441,7 +1147,7 @@ var app = new Vue({
                         isMaxIas = false;
                     }
                     rollback2++;
-                    frames = waffengattung[weaponTypeNum][this.charactersSelected][0];
+                    frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                     console.debug(frames);
                     if (isBarbTwoHandedSwordAsOneHanded) {
                         frames = 16;
@@ -1463,7 +1169,7 @@ var app = new Vue({
             }
             // Strafe
             if (attackSkill.rollback == 50) {
-                frames = aktionsframe[weapPrimary[2]][this.charactersSelected];
+                frames = aktionsframe[weapPrimary.type][this.charactersSelected];
                 if (acceleration > 149) {
                     acceleration = 149;
                 }
@@ -1490,7 +1196,7 @@ var app = new Vue({
                     isMaxIas = false;
                 }
                 rollback4++;
-                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
+                frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                 rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback4) / 256) * attackSkill.rollback / 100);
                 rollback5 = this.calcFPA(frames, acceleration, rollbackframe);
                 if (rollback5 > this.calcFPA(frames, 149, rollbackframe)) {
@@ -1509,7 +1215,7 @@ var app = new Vue({
             }
             // Fend
             if (attackSkill.rollback == 40) {
-                frames = aktionsframe[weapPrimary[2]][this.charactersSelected];
+                frames = aktionsframe[weapPrimary.type][this.charactersSelected];
                 rollback1 = this.calcFPA(frames, acceleration, start);
                 if (rollback1 > this.calcFPA(frames, 175, start)) {
                     isMaxIas = false;
@@ -1521,7 +1227,7 @@ var app = new Vue({
                     isMaxIas = false;
                 }
                 rollback2++;
-                frames = waffengattung[weapPrimary[2]][this.charactersSelected][0];
+                frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                 rollbackframe = Math.floor(Math.floor((256 * rollbackframe + Math.floor(256 * acceleration / 100) * rollback2) / 256) * attackSkill.rollback / 100);
                 rollback3 = this.calcFPA(frames, acceleration, rollbackframe);
                 if (rollback3 > this.calcFPA(frames, 175, rollbackframe)) {
@@ -1735,16 +1441,17 @@ var app = new Vue({
         weaponsPrimary: function() {
             var values = [];
             for (i = 0; i < lookupWeapon.length; i++) {
+                var weapPrimary = lookupWeapon[i];
                 // -1 all classes || this class's item 
-                if ((lookupWeapon[i][3] < 0) || (lookupWeapon[i][3] == this.charactersSelected)) {
+                if ((weapPrimary.classItem < 0) || (weapPrimary.classItem == this.charactersSelected)) {
                     if (this.isPlayableClass
                         || i == 0 // unarmed
-                        || (this.charactersSelected == 7  && (lookupWeapon[i][2] == 7 || lookupWeapon[i][2] == 8))   // Act 1 Merc - bow or xbow
-                        || (this.charactersSelected == 8  && (lookupWeapon[i][4] == 8 || lookupWeapon[i][4] == 2))   // Act 2 Merc - pole or spear
-                        || (this.charactersSelected == 9  &&  lookupWeapon[i][4] == 9)                               // Act 5 Merc - swords
-                        || (this.charactersSelected == 10 &&  lookupWeapon[i][4] == 9 && lookupWeapon[i][2] == 2)    // Act 3 Merc - swords and one handed swinging
+                        || (this.charactersSelected == 7  && (weapPrimary.type == weaponTypes.bow || weapPrimary.type == weaponTypes.crossbow))                                         // Act 1 Merc
+                        || (this.charactersSelected == 8  && (weapPrimary.weaponCategory == weaponCategories.polearm || weapPrimary.weaponCategory == weaponCategories.spearOrJavalin)) // Act 2 Merc
+                        || (this.charactersSelected == 9  &&  weapPrimary.weaponCategory == weaponCategories.swords)                                                                    // Act 5 Merc
+                        || (this.charactersSelected == 10 &&  weapPrimary.weaponCategory == weaponCategories.swords && weapPrimary.type == weaponTypes.oneHandedSwingingWeapon)         // Act 3 Merc
                     ) {
-                        values.push({ value: i, text: lookupWeapon[i][0] });
+                        values.push({ value: i, text: weapPrimary.name });
                     }
                 }
             }
@@ -1752,7 +1459,7 @@ var app = new Vue({
             return values;
         },
         isWeaponsPrimaryBarbHandednessNeeded: function() {
-            return this.charactersSelected == 2 && lookupWeapon[this.weaponsPrimarySelected][2] == 3;
+            return this.charactersSelected == 2 && lookupWeapon[this.weaponsPrimarySelected].type == weaponTypes.twoHandedSword;
         },
         weaponsPrimaryBarbHandedness: function () {
             var values = [];
@@ -1767,12 +1474,14 @@ var app = new Vue({
         weaponsSecondary: function () {
             var values = [];
             if (this.weaponsPrimarySelected == null) return values;
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
             switch (this.charactersSelected) {
                 case 1: // sin
-                    if (lookupWeapon[this.weaponsPrimarySelected][2] == 1) {
+                    if (weapPrimary.type == weaponTypes.claw) {
                         for (i = 0; i < lookupWeapon.length; i++) {
-                            if ((lookupWeapon[i][3] == 1) || (lookupWeapon[i][2] == 0)) {
-                                values.push({ value: i, text: lookupWeapon[i][0] });
+                            var weapLookup = lookupWeapon[i];
+                            if (weapLookup.classItem == 1 || weapLookup.type == weaponTypes.unarmed) {
+                                values.push({ value: i, text: weapLookup.name });
                             }
                         }
                     } else {
@@ -1780,10 +1489,13 @@ var app = new Vue({
                     }
                     break;
                 case 2: // barb
-                    if ((lookupWeapon[this.weaponsPrimarySelected][2] == 2 || lookupWeapon[this.weaponsPrimarySelected][2] == 4) || (lookupWeapon[this.weaponsPrimarySelected][2] == 3 && this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                    if ((weapPrimary.type == weaponTypes.oneHandedSwingingWeapon || weapPrimary.type == weaponTypes.oneHandedThrustingWeapon) || (weapPrimary.type == weaponTypes.twoHandedSword && this.weaponsPrimaryBarbHandednessSelected == 1)) {
                         for (i = 0; i < lookupWeapon.length; i++) {
-                            if ((lookupWeapon[i][2] == 0) || (lookupWeapon[i][2] == 3) || (((lookupWeapon[i][2] == 2) || (lookupWeapon[i][2] == 4)) && (lookupWeapon[i][3] == -1))) {
-                                values.push({ value: i, text: lookupWeapon[i][0] });
+                            var weapLookup = lookupWeapon[i];
+                            if (weapLookup.type == weaponTypes.unarmed 
+                                || weapLookup.type == weaponTypes.twoHandedSword 
+                                || ((weapLookup.type == weaponTypes.oneHandedSwingingWeapon || weapLookup.type == weaponTypes.oneHandedThrustingWeapon) && weapLookup.classItem == -1)) {
+                                values.push({ value: i, text: weapLookup.name });
                             }
                         }
                     } else {
@@ -1800,8 +1512,8 @@ var app = new Vue({
             var weapon = this.weaponsPrimary.find(w => w.value == this.weaponsPrimarySelected);
             if (weapon != null) {
                 return {
-                    description: waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][11],
-                    wsm: lookupWeapon[this.weaponsPrimarySelected][1],
+                    description: waffengattung[lookupWeapon[this.weaponsPrimarySelected].type][11],
+                    wsm: lookupWeapon[this.weaponsPrimarySelected].wsm,
                     value: this.weaponsPrimarySelected,
                     text: weapon.text,
                 }
@@ -1818,8 +1530,8 @@ var app = new Vue({
                 var weapon = this.weaponsSecondary.find(w => w.value == this.weaponsSecondarySelected);
                 if (weapon != null) {
                     return {
-                        description: waffengattung[lookupWeapon[this.weaponsSecondarySelected][2]][11],
-                        wsm: lookupWeapon[this.weaponsSecondarySelected][1],
+                        description: waffengattung[lookupWeapon[this.weaponsSecondarySelected].type][11],
+                        wsm: lookupWeapon[this.weaponsSecondarySelected].wsm,
                         value: this.weaponsSecondarySelected,
                         text: weapon.text,
                     }
@@ -1837,22 +1549,24 @@ var app = new Vue({
             var valuesNonNative = [];
             // optgroup1.label = "native attacks";
             // optgroup2.label = "non-class skills";
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
+            var weapSecondary = lookupWeapon[this.weaponsSecondarySelected];
             switch (this.charactersSelected) {
                 case 0: // Amazon
                     values.push(this.getSkillOptionData("Standard"));
                     if (this.shapeShiftFormsSelected == 0) {
-                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
-                            values.push(this.getSkillOptionData("Throw"));
+                        if ((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == weaponCategories.throwing)) {
+                            values.push(this.getSkillOptionData("Throw")); // spears shouldn't be included here as throwable
                         }
-                        if (lookupWeapon[this.weaponsPrimarySelected][4] == 1) {
+                        if (weapPrimary.weaponCategory == weaponCategories.bowOrXbow) {
                             values.push(this.getSkillOptionData("Strafe"));
                         }
-                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][2] == 5)) {
+                        if ((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.type == weaponTypes.spear)) {
                             values.push(this.getSkillOptionData("Impale"));
                             values.push(this.getSkillOptionData("Jab"));
                             values.push(this.getSkillOptionData("Fend"));
                         }
-                        if (lookupWeapon[this.weaponsPrimarySelected][5] == 1) {
+                        if (weapPrimary.canZeal == 1) {
                             valuesNonNative.push(this.getSkillOptionData("Zeal"));
                         }
                     }
@@ -1861,7 +1575,7 @@ var app = new Vue({
                     values.push(this.getSkillOptionData("Standard"));
                     // not shapeshifted
                     if (this.shapeShiftFormsSelected == 0) {
-                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                        if ((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == weaponCategories.throwing)) {
                             values.push(this.getSkillOptionData("Throw"));
                         }
                         values.push(this.getSkillOptionData("Laying Traps"));
@@ -1870,13 +1584,13 @@ var app = new Vue({
                             values.push(this.getSkillOptionData("Fists of Thunder"));
                             values.push(this.getSkillOptionData("Blades of Ice"));
                         }
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 1) && (lookupWeapon[this.weaponsSecondarySelected][2] == 1)) {
+                        if ((weapPrimary.type == weaponTypes.claw) && (weapSecondary.type == weaponTypes.claw)) {
                             values.push(this.getSkillOptionData("Dragon Claw"));
                         }
                         values.push(this.getSkillOptionData("Dragon Tail"));
                         values.push(this.getSkillOptionData("Dragon Talon"));
                         // should be weapons that can be passion runeword || POD chaos, any sin claw
-                        if (lookupWeapon[this.weaponsPrimarySelected][5] == 1 || isAssasinClaw(this.weaponsPrimarySelected)) {
+                        if (weapPrimary.canZeal == 1 || isAssasinClaw(this.weaponsPrimarySelected)) {
                             valuesNonNative.push(this.getSkillOptionData("Zeal"));
                         }
                     }
@@ -1885,7 +1599,7 @@ var app = new Vue({
                     values.push(this.getSkillOptionData("Standard"));
                     if (this.shapeShiftFormsSelected == 0) {
                         // primary throwing weapon
-                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                        if ((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == weaponCategories.throwing)) {
                             values.push(this.getSkillOptionData("Throw"));
                         }
                         // offhand weapon
@@ -1894,11 +1608,11 @@ var app = new Vue({
                             values.push(this.getSkillOptionData("Frenzy"));
                         }
                         // primary throwing and offhand throwing
-                        if (((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) && ((lookupWeapon[this.weaponsSecondarySelected][4] == 2) || (lookupWeapon[this.weaponsSecondarySelected][4] == 3))) {
+                        if (((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == weaponCategories.throwing)) && ((weapSecondary.weaponCategory == weaponCategories.spearOrJavalin) || (weapSecondary.weaponCategory == weaponCategories.throwing))) {
                             values.push(this.getSkillOptionData("Double Throw"));
                         }
                         // not bow or xbow
-                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                        if (weapPrimary.weaponCategory != weaponCategories.bowOrXbow) {
                             values.push(this.getSkillOptionData("Whirlwind"));
                             values.push(this.getSkillOptionData("Concentrate"));
                             values.push(this.getSkillOptionData("Berserk"));
@@ -1907,14 +1621,14 @@ var app = new Vue({
                             values.push(this.getSkillOptionData("Cleave"));
                         }
                         // can zeal
-                        if ((lookupWeapon[this.weaponsPrimarySelected][5] == 1) || (lookupWeapon[this.weaponsSecondarySelected][5] == 1)) {
+                        if (weapPrimary.canZeal == 1 || weapSecondary.canZeal == 1) {
                             valuesNonNative.push(this.getSkillOptionData("Zeal"));
                         }
                     }
                     // bear barb
                     if (this.shapeShiftFormsSelected == 1) {
                         // not bow or xbow
-                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                        if (weapPrimary.weaponCategory != weaponCategories.bowOrXbow) {
                             values.push(this.getSkillOptionData("Cleave"));
                         }
                     }
@@ -1922,7 +1636,7 @@ var app = new Vue({
                     if (this.shapeShiftFormsSelected == 2) {
                         valuesNonNative.push(this.getSkillOptionData("Feral Rage"));
                         // not bow or xbow
-                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                        if (weapPrimary.weaponCategory != weaponCategories.bowOrXbow) {
                             values.push(this.getSkillOptionData("Cleave"));
                         }
                     }
@@ -1930,10 +1644,10 @@ var app = new Vue({
                 case 3: // Druid
                     values.push(this.getSkillOptionData("Standard"));
                     if (this.shapeShiftFormsSelected == 0) {
-                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                        if ((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == weaponCategories.throwing)) {
                             values.push(this.getSkillOptionData("Throw"));
                         }
-                        if (lookupWeapon[this.weaponsPrimarySelected][5] == 1) {
+                        if (weapPrimary.canZeal == 1) {
                             valuesNonNative.push(this.getSkillOptionData("Zeal"));
                         }
                     }
@@ -1950,17 +1664,17 @@ var app = new Vue({
                 case 5: // Paladin
                     values.push(this.getSkillOptionData("Standard"));
                     if (this.shapeShiftFormsSelected == 0) {
-                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                        if ((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == weaponCategories.throwing)) {
                             values.push(this.getSkillOptionData("Throw"));
                         }
                         // not bow or xbow
-                        if (lookupWeapon[this.weaponsPrimarySelected][4] != 1) {
+                        if (weapPrimary.weaponCategory != weaponCategories.bowOrXbow) {
                             values.push(this.getSkillOptionData("Zeal"));
                             values.push(this.getSkillOptionData("Sacrifice"));
                             values.push(this.getSkillOptionData("Vengeance"));
                             values.push(this.getSkillOptionData("Conversion"));
                         }
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 0) || (lookupWeapon[this.weaponsPrimarySelected][2] == 2) || (lookupWeapon[this.weaponsPrimarySelected][2] == 4)) {
+                        if ((weapPrimary.type == weaponTypes.unarmed) || (weapPrimary.type == weaponTypes.oneHandedSwingingWeapon) || (weapPrimary.type == weaponTypes.oneHandedThrustingWeapon)) {
                             values.push(this.getSkillOptionData("Smite"));
                         }
                     }
@@ -1981,16 +1695,15 @@ var app = new Vue({
                 default: // Necromancer & Sorceress
                     values.push(this.getSkillOptionData("Standard"));
                     if (this.shapeShiftFormsSelected == 0) {
-                        if ((lookupWeapon[this.weaponsPrimarySelected][4] == 2) || (lookupWeapon[this.weaponsPrimarySelected][4] == 3)) {
+                        if ((weapPrimary.weaponCategory == weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == weaponCategories.throwing)) {
                             values.push(this.getSkillOptionData("Throw"));
                         }
-                        if (lookupWeapon[this.weaponsPrimarySelected][5] == 1) {
+                        if (weapPrimary.canZeal == 1) {
                             valuesNonNative.push(this.getSkillOptionData("Zeal"));
                         }
                     }
                     break;
             }
-            values.concat(valuesNonNative);
             values = values.concat(valuesNonNative);
             this.skillsSelected = this.sanitiseSelected(this.skillsSelected, values);
             return values;
@@ -2019,6 +1732,7 @@ var app = new Vue({
             var breakpoints2 = [];
             var breakpointsAPS = [];
             var nonStandardWeapon = [];
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
             // Unshifted
             if (this.shapeShiftFormsSelected == 0) {
                 temp1 = 0;
@@ -2041,13 +1755,13 @@ var app = new Vue({
                 if ((attackSkill.animation == 1) && (this.weaponsSecondarySelected == 0) && (attackSkill.rollback == 100)) {
                     console.info("calc ias for standard attack single");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                        frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
+                        if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         ergebnis = this.calcFPA(frames, i, start);
-                        frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][1];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        frames = waffengattung[weapPrimary.type][this.charactersSelected][1];
+                        if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         temp = this.calcFPA(frames, i, start);
@@ -2065,13 +1779,13 @@ var app = new Vue({
                 if ((attackSkill.animation == 1) && (this.weaponsSecondarySelected > 0) && (attackSkill.rollback == 100)) {
                     console.info("calc ias for standard attack dual");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                        frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
+                        if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         ergebnis = this.calcFPA(frames, i, 0);
-                        frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][1];
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        frames = waffengattung[weapPrimary.type][this.charactersSelected][1];
+                        if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         temp = this.calcFPA(frames, i, 0);
@@ -2160,9 +1874,9 @@ var app = new Vue({
                             frames = 4;
                         }
                         if (attackSkill.title == 'Zeal') {
-                            frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
+                            frames = aktionsframe[weapPrimary.type][this.charactersSelected];
                         }
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 7;
                         }
                         rollback1 = this.calcFPA(frames, i, start);
@@ -2173,9 +1887,9 @@ var app = new Vue({
                             frames = 13;
                         }
                         if (attackSkill.title == 'Zeal') {
-                            frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                            frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                         }
-                        if ((lookupWeapon[this.weaponsPrimarySelected][2] == 3) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                             frames = 16;
                         }
                         rollback3 = this.calcFPA(frames, i, 0);
@@ -2190,7 +1904,7 @@ var app = new Vue({
                 if (attackSkill.title == 'Strafe') {
                     console.info("calc ias for strafe");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 149; i++) {
-                        frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
+                        frames = aktionsframe[weapPrimary.type][this.charactersSelected];
                         rollback1 = this.calcFPA(frames, i, start);
                         rollback1++;
                         RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
@@ -2202,7 +1916,7 @@ var app = new Vue({
                         RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback3) / 256) * attackSkill.rollback / 100);
                         rollback4 = this.calcFPA(frames, i, RBframe);
                         rollback4++;
-                        frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                        frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                         RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback4) / 256) * attackSkill.rollback / 100);
                         rollback5 = this.calcFPA(frames, i, RBframe);
                         if ((rollback2 == rollback3) || (rollback3 == rollback4)) {
@@ -2218,13 +1932,13 @@ var app = new Vue({
                 if (attackSkill.title == 'Fend') {
                     console.info("calc ias for fend");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
-                        frames = aktionsframe[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected];
+                        frames = aktionsframe[weapPrimary.type][this.charactersSelected];
                         rollback1 = this.calcFPA(frames, i, start);
                         rollback1++;
                         RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * rollback1) / 256) * attackSkill.rollback / 100);
                         rollback2 = this.calcFPA(frames, i, RBframe);
                         rollback2++;
-                        frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
+                        frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                         RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * rollback2) / 256) * attackSkill.rollback / 100);
                         rollback3 = this.calcFPA(frames, i, RBframe);
                         ergebnis = rollback1 + rollback2 + rollback3;
@@ -2245,12 +1959,12 @@ var app = new Vue({
                 if ((this.weaponsSecondarySelected > 0) && (attackSkill.animation == 1)) {
                     alert("There's a problem regarding the standard attack while using two weapons in wereform, so that speed won't be calculated here.");
                 } else {
-                    frames = waffengattung[lookupWeapon[this.weaponsPrimarySelected][2]][this.charactersSelected][0];
-                    if (lookupWeapon[this.weaponsPrimarySelected][2] == 3) {
+                    frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
+                    if (weapPrimary.type == weaponTypes.twoHandedSword) {
                         frames = waffengattung[2][this.charactersSelected][0];
                     }
                     var AnimSpeed = 256;
-                    if (lookupWeapon[this.weaponsPrimarySelected][2] == 1) { // assasin claws?
+                    if (weapPrimary.type == 1) { // assasin claws?
                         AnimSpeed = 208;
                     }
                     var iasRows = 50; // x + 1 rows shown. increased from 24 to show higher ias values
