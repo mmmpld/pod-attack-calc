@@ -1,17 +1,11 @@
 var frames;
 var start = 1; // starting frame
-var statischFana = true;
-var statischFrost = true;
-var statischIAS = true;
-var mIAS = 1; // IAS drop down interval
-var statischWaffe = true;
-var statischZweitwaffe = true;
 var WSMprimaer;
 var WSMsekundaer;
 var IASprimaer;
-var IASsekundaer;
-var EIASprimaer;
-var EIASsekundaer;
+var IASsekundaer; // few references
+var EIASprimaer; // few references
+var EIASsekundaer; // few references
 var SIAS;
 var rollback1;
 var rollback2;
@@ -19,17 +13,8 @@ var rollback3;
 var rollback4;
 var rollback5;
 var rollbackframe;
-var tempSkill; // store selected skill when rebuilding skill options
-var tempWaffe;
-var tempZweitwaffe;
-var tempForm;
-var tempBarbschwert;
 var isMaxIas = true; // true if further ias is useless
-var cap = 1;
-var breakpoints = new Array();
-var breakpoints1 = new Array();
-var breakpoints2 = new Array();
-var breakpointsAPS = new Array();
+var isAtFpaCap = true; // the same as isMaxIas?
 
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0];
 
@@ -931,7 +916,7 @@ var app = new Vue({
                 FPA = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * Acceleration / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100))) / (2 * Math.floor(AnimationSpeed * Acceleration / 100))) - 1;
                 FPAmax = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * 175 / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100))) / (2 * Math.floor(AnimationSpeed * 175 / 100))) - 1;
             }
-            if (cap == 1) {
+            if (isAtFpaCap) {
                 this.isCurrentFpaMaxed = false;
                 if ((attackSkill.rollback == 100) && (attackSkill.animation != 1) && (FPA <= FPAmax)) {
                     this.isCurrentFpaMaxed = true;
@@ -1206,7 +1191,7 @@ var app = new Vue({
                     rollback5 = 13;
                 }
                 if (isMaxIas) {
-                    this.isCurrentFpaMaxed = true;
+                    this.isCurrentFpaMaxed = true; // strafe
                 }
                 isMaxIas = true;
                 this.currentFpa = rollback1 + "/" + rollback2 + "/" + rollback3 + "/" + rollback4 + "/" + rollback5 + " frames per attack";
@@ -1717,7 +1702,7 @@ var app = new Vue({
             var attackSkill = data.attack[this.skillsSelected];
             this.calculateSkillIas();
             this.calculateWsm();
-            cap = 0;
+            isAtFpaCap = false;
             var breakpoints = [];
             var breakpoints1 = [];
             var breakpoints2 = [];
@@ -2018,7 +2003,7 @@ var app = new Vue({
                     }
                 }
             }
-            cap = 1;
+            isAtFpaCap = true;
             return {
                 breakpoints: breakpoints,
                 breakpoints1: breakpoints1,
