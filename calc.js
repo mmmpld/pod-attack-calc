@@ -1744,6 +1744,7 @@ var app = new Vue({
                 ) && (attackSkill.rollback == 100)) {
                     console.info("calc ias for most");
                     for (i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
+                        frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
                         ergebnis = this.calcFPA(frames, i, start);
                         if ((temp1 != ergebnis) && (i - 100 - SIAS + WSMprimaer < 120)) {
                             breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - SIAS + WSMprimaer) / (120 - (i - 100 - SIAS + WSMprimaer))), ergebnis];
