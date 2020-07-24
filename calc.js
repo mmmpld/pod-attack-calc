@@ -1507,6 +1507,7 @@ var app = new Vue({
                     values.push({ value: 0, text: '-' });
                     break;
             }
+            this.weaponsSecondarySelected = this.sanitiseSelected(this.weaponsSecondarySelected, values);
             return values;
         },
         weaponInfoPrimary: function () {
