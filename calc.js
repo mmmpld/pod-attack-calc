@@ -1,5 +1,4 @@
 var frames;
-var start = 1; // starting frame
 var WSMprimaer;
 var WSMsekundaer;
 var IASprimaer;
@@ -13,8 +12,7 @@ var rollback3;
 var rollback4;
 var rollback5;
 var rollbackframe;
-var isMaxIas = true; // true if further ias is useless
-var isAtFpaCap = true; // the same as isMaxIas?
+var isAtFpaCap = true; // the same as isMaxIas but referenced from different places
 
 var startframe = [1, 0, 2, 2, 2, 2, 2, 0, 0];
 
@@ -943,6 +941,7 @@ var app = new Vue({
             return FPA;
         },
         calculateValues: function () {
+            var isMaxIas = true; // true if further ias is useless
             var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
             var ergebnis; // "result" FPA
             var temp;
@@ -953,9 +952,10 @@ var app = new Vue({
             this.calculateWsm();
             var acceleration = Math.max(Math.min(100 + SIAS + EIASprimaer - WSMprimaer, 175), 15);
             var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
-            start = 0;
+            var start = this.startingFrame;
+            console.info('would have set start to 0. it is currently: ' + start); // start = 0;
             if (((this.charactersSelected == 0) || (this.charactersSelected == 6)) && (attackSkill.animation < 2)) {
-                start = startframe[weapPrimary.type];
+                console.info('would have set start to ' + startframe[weapPrimary.type] + '. it is currently: ' + start); // start = startframe[weapPrimary.type];
             }
             if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
                 frames = waffengattung[weapPrimary.type][this.charactersSelected][0];
@@ -1036,7 +1036,7 @@ var app = new Vue({
                 if (this.charactersSelected == 8) {
                     frames = 14;
                 }
-                start = 0;
+                console.info('would have set start to zero. it is currently: ' + start); //start = 0;
                 ergebnis = this.calcFPA(frames, acceleration, start);
                 ergebnis++;
                 // 3 Jab && player classes
@@ -1711,6 +1711,20 @@ var app = new Vue({
             this.skillsSelected = this.sanitiseSelected(this.skillsSelected, values);
             return values;
         },
+        startingFrame: function () {
+            var start = 0;
+            var attackSkill = data.attack[this.skillsSelected];
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
+            if (((this.charactersSelected == 0) || (this.charactersSelected == 6)) && (attackSkill.animation < 2)) {
+                start = startframe[weapPrimary.type];
+            }
+            // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
+            // && not whirlwind && rollback normal
+            if ((attackSkill.animation == 7) && (this.skillsSelected != 19) && (attackSkill.rollback == 100)) {
+                start = 0;
+            }
+            return start;
+        },
         breakpoints: function () {
             var ergebnis; // result FPA
             var RBframe;
@@ -1720,6 +1734,7 @@ var app = new Vue({
             var WIAS = this.iasWeaponPrimary;
             var attackSkill = data.attack[this.skillsSelected];
             this.calculateSkillIas();
+            this.calculateEffectiveIas(); // usually set by calculateValues
             this.calculateWsm();
             isAtFpaCap = false;
             var breakpoints = [];
@@ -1728,6 +1743,8 @@ var app = new Vue({
             var breakpointsAPS = [];
             var nonStandardWeapon = [];
             var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
+            var start = this.startingFrame;
+
             // Unshifted
             if (this.shapeShiftFormsSelected == 0) {
                 temp1 = 0;
@@ -1770,6 +1787,9 @@ var app = new Vue({
                             temp1 = ergebnis;
                         }
                     }
+                }
+                if (attackSkill.title === "Blades of Ice") {
+                    console.log('BoI special case');
                 }
                 // standard attack animation && secondary weapon selected && standard rollback
                 if ((attackSkill.animation == 1) && (this.weaponsSecondarySelected > 0) && (attackSkill.rollback == 100)) {
