@@ -715,6 +715,27 @@ var data = {
             animation: 1,
             sequence: 0,
             rollback: 100
+        },
+        {
+            title: "Fists of Ice",
+            index: 34,
+            animation: 1,
+            sequence: 2,
+            rollback: 100
+        },
+        {
+            title: "Static Strike",
+            index: 35,
+            animation: 1,
+            sequence: 2,
+            rollback: 100
+        },
+        {
+            title: "Emberstorm",
+            index: 36,
+            animation: 1,
+            sequence: 2,
+            rollback: 100
         }
     ]
 };
@@ -841,7 +862,7 @@ var app = new Vue({
             if (this.isDecrepify) {
                 SIAS = SIAS - 50;
             }
-            if ((attackSkill.animation == 7) && (this.charactersSelected < 7)) {
+            if ((attackSkill.animation == 7) && (this.isPlayableClass)) {
                 SIAS = SIAS - 30;
             }
         },
@@ -870,35 +891,53 @@ var app = new Vue({
                 console.log('average secondary wsm: ' + WSMsekundaer);
             }
         },
-        calcFPA: function (FramesPerDirection, Acceleration, StartingFrame) {
+        animationSpeed: function (FramesPerDirection) {
+            // First, you must know that the game logic speed is hardcoded to 25 ticks per second. Now, this
+            // number in the “AnimationSpeed” column is a relative speed. 256 means that the animation will
+            // be displayed at 100% the rate of 25 fps, 128 will be at 50%, 64 will be at 25%, 512 will be at
+            // 200%, and so on… If you wonder why we find 1/256th instead of %, that’s because it’s easier
+            // for computers to count with numbers of power of 2, but also to have an extra precision.
+            // -- http://paul.siramy.free.fr/_divers2/Extracting%20Diablo%20II%20Animations.pdf
+            var animationSpeed = 256;
             var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
-            console.debug('calc FPA');
-            console.debug('FramesPerDirection ' + FramesPerDirection);
-            console.debug('Acceleration ' + Acceleration);
-            console.debug('Starting frame ' + StartingFrame);
-            //var Acceleration; // dunno why this is declared again
-            var AnimationSpeed = 256;
             var attackSkill = data.attack[this.skillsSelected];
             // Assassin && Battle Cestus, Blade Talons, Cestus, Claws, Fascia, Feral Claws, Greater Claws, Greater Talons, Hand Scythe, Hatchet Hands, Katar, Quhab, Runic Talons, Scissors Katar, Scissors Quhab, Scissors Suwayyah, Suwayyah, War Fist, Wrist Blade, Wrist Spike, Wrist Sword
             if ((this.charactersSelected == 1) && (weapPrimary.type == weaponTypes.claw)) {
-                AnimationSpeed = 208;
+                animationSpeed = 208;
             }
             // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
-            console.debug("attack skill");
-            console.debug(attackSkill);
             if (((attackSkill.animation == 3) || (attackSkill.animation == 7)) && (attackSkill.title !== "Whirlwind")) {
-                AnimationSpeed = 256;
+                animationSpeed = 256;
             }
             // Laying Traps
             if (attackSkill.animation == 5) {
-                AnimationSpeed = 128;
+                animationSpeed = 128;
             }
             // Bear
             if (this.shapeShiftFormsSelected == 1) {
                 if (weapPrimary.type == weaponTypes.twoHandedSword) { // 2-hand swords
                     FramesPerDirection = weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
                 }
-                AnimationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * AnimationSpeed / 100)));
+                animationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
+            }
+            // Wolf
+            if (this.shapeShiftFormsSelected == 2) {
+                if (weapPrimary.type == weaponTypes.twoHandedSword) { // 2-hand swords
+                    FramesPerDirection = weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
+                }
+                animationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
+            }
+            return animationSpeed;
+        },
+        calcFPA: function (FramesPerDirection, Acceleration, StartingFrame) {
+            var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
+            var animationSpeed = this.animationSpeed(FramesPerDirection);
+            var attackSkill = data.attack[this.skillsSelected];
+            if (this.shapeShiftFormsSelected == 1) {
+                if (weapPrimary.type == weaponTypes.twoHandedSword) { // 2-hand swords
+                    FramesPerDirection = weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
+                }
+                //animationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
                 FramesPerDirection = 12;
                 if (attackSkill.animation == 6) {
                     FramesPerDirection = 10;
@@ -910,7 +949,7 @@ var app = new Vue({
                 if (weapPrimary.type == weaponTypes.twoHandedSword) { // 2-hand swords
                     FramesPerDirection = weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
                 }
-                AnimationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * AnimationSpeed / 100)));
+                //animationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
                 FramesPerDirection = 13;
                 if ((this.skillsSelected == 29) && (StartingFrame == 0)) { // Fury
                     FramesPerDirection = 7;
@@ -920,15 +959,15 @@ var app = new Vue({
                 }
                 StartingFrame = 0;
             }
-            var FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * Acceleration / 100)) - 1;
-            var FPAmax = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(AnimationSpeed * 175 / 100)) - 1;
+            var FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(animationSpeed * Acceleration / 100)) - 1;
+            var FPAmax = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(animationSpeed * 175 / 100)) - 1;
             if (this.skillsSelected == 19) { // whirlwind
-                FPA = Math.floor(256 * FramesPerDirection / Math.floor(AnimationSpeed * Acceleration / 100));
+                FPA = Math.floor(256 * FramesPerDirection / Math.floor(animationSpeed * Acceleration / 100));
                 FPAmax = 0;
             }
             if (this.skillsSelected == 26) { // Feral Rage
-                FPA = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * Acceleration / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * Acceleration / 100))) / (2 * Math.floor(AnimationSpeed * Acceleration / 100))) - 1;
-                FPAmax = Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100)) + Math.ceil((256 * 13 - Math.floor(AnimationSpeed * 175 / 100) * Math.ceil(256 * 7 / Math.floor(AnimationSpeed * 175 / 100))) / (2 * Math.floor(AnimationSpeed * 175 / 100))) - 1;
+                FPA = Math.ceil(256 * 7 / Math.floor(animationSpeed * Acceleration / 100)) + Math.ceil((256 * 13 - Math.floor(animationSpeed * Acceleration / 100) * Math.ceil(256 * 7 / Math.floor(animationSpeed * Acceleration / 100))) / (2 * Math.floor(animationSpeed * Acceleration / 100))) - 1;
+                FPAmax = Math.ceil(256 * 7 / Math.floor(animationSpeed * 175 / 100)) + Math.ceil((256 * 13 - Math.floor(animationSpeed * 175 / 100) * Math.ceil(256 * 7 / Math.floor(animationSpeed * 175 / 100))) / (2 * Math.floor(animationSpeed * 175 / 100))) - 1;
             }
             if (isAtFpaCap) {
                 this.isCurrentFpaMaxed = false;
@@ -936,7 +975,6 @@ var app = new Vue({
                     this.isCurrentFpaMaxed = true;
                 }
             }
-            console.debug('FPA ' + FPA);
             return FPA;
         },
         calculateValues: function () {
@@ -953,10 +991,6 @@ var app = new Vue({
             var acceleration2 = Math.max(Math.min(100 + SIAS + EIASsekundaer - WSMsekundaer, 175), 15);
             var start = this.startingFrame;  
             var rollbackframe;
-            console.info('would have set start to 0. it is currently: ' + start); // start = 0;
-            if (((this.charactersSelected == 0) || (this.charactersSelected == 6)) && (attackSkill.animation < 2)) {
-                console.info('would have set start to startframe lookup. it is currently: ' + start); // start = startframe[weapPrimary.type];
-            }
             if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
                 frames = weaponClassFrames[weapPrimary.type][this.charactersSelected][0];
                 if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
@@ -980,7 +1014,6 @@ var app = new Vue({
                     console.debug('unshifted');
                     temp = ergebnis;
                     frames = weaponClassFrames[weapPrimary.type][this.charactersSelected][1];
-                    console.debug(frames);
                     if ((weapPrimary.type == weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected == 1)) {
                         frames = 16;
                     }
@@ -1036,11 +1069,10 @@ var app = new Vue({
                 if (this.charactersSelected == 8) {
                     frames = 14;
                 }
-                console.info('would have set start to zero. it is currently: ' + start); //start = 0;
                 ergebnis = this.calcFPA(frames, acceleration, start);
                 ergebnis++;
                 // 3 Jab && player classes
-                if ((this.skillsSelected == 3) && (this.charactersSelected < 7)) {
+                if ((this.skillsSelected == 3) && (this.isPlayableClass)) {
                     ergebnis = parseInt(100 * ergebnis / 3) / 100;
                 }
                 // merc act 2
@@ -1291,7 +1323,7 @@ var app = new Vue({
             if (this.isDecrepify) {
                 SIAS = SIAS - 50;
             }
-            if ((attackSkill.animation == 7) && (this.charactersSelected < 7)) {
+            if ((attackSkill.animation == 7) && (this.isPlayableClass)) {
                 SIAS = SIAS - 30;
             }
         },
@@ -1582,7 +1614,10 @@ var app = new Vue({
                         if (isAssasinClaw(this.weaponsPrimarySelected) || isDagger(this.weaponsPrimarySelected)) {
                             values.push(this.getSkillOptionData("Fists of Ember"));
                             values.push(this.getSkillOptionData("Fists of Thunder"));
+                            values.push(this.getSkillOptionData("Fists of Ice"));
                             values.push(this.getSkillOptionData("Blades of Ice"));
+                            values.push(this.getSkillOptionData("Static Strike"));
+                            values.push(this.getSkillOptionData("Emberstorm"));
                         }
                         if ((weapPrimary.type == weaponTypes.claw) && (weapSecondary.type == weaponTypes.claw)) {
                             values.push(this.getSkillOptionData("Dragon Claw"));
@@ -1767,8 +1802,16 @@ var app = new Vue({
                         }
                     }
                 }
-                // standard attack animation && no secondary weapon && standard rollback
-                if ((attackSkill.animation == 1) && (this.weaponsSecondarySelected == 0) && (attackSkill.rollback == 100)) {
+                // standard attack animation && no secondary weapon (or primary only attacks) && standard rollback
+                if (attackSkill.animation == 1
+                    && attackSkill.rollback == 100
+                    && (this.weaponsSecondarySelected == 0
+                        || attackSkill.title === "Static Strike"
+                        || attackSkill.title === "Blades of Ice"
+                        || attackSkill.title === "Emberstorm"
+                        || attackSkill.title === "Fists of Ice"
+                        || attackSkill.title === "Fists of Ember"
+                        || attackSkill.title === "Fists of Thunder")) {
                     console.info("calc ias for standard attack single");
                     for (var i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                         frames = weaponClassFrames[weapPrimary.type][this.charactersSelected][0];
@@ -1790,12 +1833,8 @@ var app = new Vue({
                             temp1 = ergebnis;
                         }
                     }
-                }
-                if (attackSkill.title === "Blades of Ice") {
-                    console.log('BoI special case not implemented');
-                }
-                // standard attack animation && secondary weapon selected && standard rollback
-                if ((attackSkill.animation == 1) && (this.weaponsSecondarySelected > 0) && (attackSkill.rollback == 100)) {
+                } else if ((attackSkill.animation == 1) && (this.weaponsSecondarySelected > 0) && (attackSkill.rollback == 100)) {
+                    // standard attack animation && secondary weapon selected && standard rollback
                     console.info("calc ias for standard attack dual");
                     for (var i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                         frames = weaponClassFrames[weapPrimary.type][this.charactersSelected][0];
@@ -1862,7 +1901,7 @@ var app = new Vue({
                     for (var i = Math.max(100 + SIAS - WSMprimaer, 15); i <= 175; i++) {
                         ergebnis = this.calcFPA(frames, i, 0);
                         ergebnis++;
-                        if ((this.skillsSelected == 3) && (this.charactersSelected < 7)) {
+                        if ((this.skillsSelected == 3) && (this.isPlayableClass)) {
                             ergebnis = parseInt(100 * ergebnis / 3) / 100;
                         }
                         if (this.charactersSelected == 8) {
@@ -1987,7 +2026,7 @@ var app = new Vue({
                     }
                     var iasRows = 50; // x + 1 rows shown. increased from 24 to show higher ias values
                     for (var i = 0; i <= iasRows; i++) {
-                        for (j = 0; j <= 14; j++) {
+                        for (var j = 0; j <= 14; j++) {
                             if (attackSkill.title == 'Feral Rage') {
                                 breakpoints[breakpoints.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + 5 * i - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100))) - 1;
                                 if ((OIAS > 70) && (j == 0)) {
@@ -2027,7 +2066,7 @@ var app = new Vue({
                         }
                     }
                     // add current ias breakpoints if not a multiple of 5
-                    for (k = 0; k <= 14; k++) {
+                    for (var k = 0; k <= 14; k++) {
                         if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (this.skillsSelected == 26)) {
                             nonStandardWeapon.push(Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * frames / Math.floor((100 + parseInt(WIAS) - WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - WSMprimaer + SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) - 1);
                         }
