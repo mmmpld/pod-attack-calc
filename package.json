@@ -1,0 +1,28 @@
+{
+  "name": "pod-attack-calc",
+  "version": "1.0.0",
+  "description": "An attack speed calculator for Path of Diablo",
+  "main": "index.htm",
+  "dependencies": {
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmmpld/pod-attack-calc.git"
+  },
+  "keywords": [
+    "pod",
+    "calc",
+    "Path of Diablo"
+  ],
+  "author": "mmmpld",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mmmpld/pod-attack-calc/issues"
+  },
+  "homepage": "https://github.com/mmmpld/pod-attack-calc#readme"
+}
