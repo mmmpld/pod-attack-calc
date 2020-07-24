@@ -1531,8 +1531,6 @@ var app = new Vue({
         skills: function () {
             var values = [];
             var valuesNonNative = [];
-            // optgroup1.label = "native attacks";
-            // optgroup2.label = "non-class skills";
             var weapPrimary = lookupWeapon[this.weaponsPrimarySelected];
             var weapSecondary = lookupWeapon[this.weaponsSecondarySelected];
             switch (this.charactersSelected) {
@@ -1688,7 +1686,11 @@ var app = new Vue({
                     }
                     break;
             }
-            values = values.concat(valuesNonNative);
+            if (valuesNonNative.length > 0) {
+                values.unshift({ header: "native attacks" });
+                valuesNonNative.unshift({ header: "non-class skills" });
+                values = values.concat(valuesNonNative);
+            }
             this.skillsSelected = this.sanitiseSelected(this.skillsSelected, values);
             return values;
         },
