@@ -62,7 +62,7 @@
                                 </div>
                                 <div>
                                     <h3>Primary Weapon</h3>
-                                    <v-autocomplete name=waffe @input="updateCurrent" :items="weaponsPrimary"
+                                    <v-autocomplete name=waffe @input="updateCurrent" :items="weaponsPrimary" :filter="weaponFilter"
                                         label="Primary Weapon" v-model="weaponsPrimarySelected" dense persistent-hint :hint="`${weaponInfoPrimary.description} [${weaponInfoPrimary.wsm}]`" class="my-3"></v-autocomplete>
                                     <v-select v-if="isWeaponsPrimaryBarbHandednessNeeded" name=barbschwert @input="updateCurrent"
                                         :items="weaponsPrimaryBarbHandedness" label="Handedness"
@@ -73,7 +73,7 @@
                                 </div>
                                 <div v-if="canDualWield == true">
                                     <h3>Secondary Weapon</h3>
-                                    <v-autocomplete name=zweitwaffe @input="updateCurrent" :items="weaponsSecondary"
+                                    <v-autocomplete name=zweitwaffe @input="updateCurrent" :items="weaponsSecondary" :filter="weaponFilter"
                                         label="Secondary Weapon" v-model="weaponsSecondarySelected" dense persistent-hint :hint="`${weaponInfoSecondary.description} [${weaponInfoSecondary.wsm}]`" class="my-3"></v-autocomplete>
                                     <v-text-field name=wIAS2 type="number" @input="updateCurrent"
                                         label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary" dense min="0" step="5" class="mt-6 mb-0">
