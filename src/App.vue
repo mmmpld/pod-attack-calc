@@ -79,7 +79,7 @@
                         :shape-shift-forms="shapeShiftForms"
                         :shape-shift-forms-selected="shapeShiftFormsSelected"
                         :weapon-info-primary="weaponInfoPrimary" :weapon-info-secondary="weaponInfoSecondary"
-                        :skills="skills" :skills-Selected="skillsSelected" :ias-off-weapon="iasOffWeapon"
+                        :skills="skills" :skills-selected="skillsSelected" :ias-off-weapon="iasOffWeapon"
                         :weapons-primary-selected="weaponsPrimarySelected"
                         :weapons-secondary-selected="weaponsSecondarySelected"
                         :ias-weapon-primary="iasWeaponPrimary" :ias-weapon-secondary="iasWeaponSecondary"
@@ -1109,7 +1109,7 @@ export default {
               ) && (attackSkill.rollback == 100)) {
                   console.info("calc ias for most");
                   for (let i = Math.max(100 + this.SIAS - this.WSMprimaer, 15); i <= 175; i++) {
-                      this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][0];
+                      //this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][0]; // intentionally not set here as calculateValues sets it as a side-effect
                       ergebnis = this.calcFPA(this.animationFrames, i, start);
                       if ((temp1 != ergebnis) && (i - 100 - this.SIAS + this.WSMprimaer < 120)) {
                           breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))), ergebnis];
