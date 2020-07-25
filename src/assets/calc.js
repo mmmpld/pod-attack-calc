@@ -1,18 +1,3 @@
-export var animationFrames;
-export var WSMprimaer;
-export var WSMsekundaer;
-export var IASprimaer;
-export var IASsekundaer; // few references
-export var EIASprimaer; // few references
-export var EIASsekundaer; // few references
-export let SIAS = 0;
-export var rollback1;
-export var rollback2;
-export var rollback3;
-export var rollback4;
-export var rollback5;
-export var isAtFpaCap = true; // the same as isMaxIas but referenced from different places
-
 // "weapon type"
 // first level is weapon "type" from lookupweapon
 // second level is char class value, or [11] for the description
@@ -727,5 +712,3 @@ export var data = {
         }
     ]
 };
-
-//app.updateCurrent();
