@@ -23,7 +23,10 @@ jobs:
         uses: actions/setup-node@v1.1.0
         with:
           version:  14.x
-
+          
+      - name: Clean install dependencies
+        run: npm ci
+        
     # Runs a set of commands using the runners shell
       - name: Run deploy script
         run: npm run gh-pages-deploy
