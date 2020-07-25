@@ -117,3 +117,6 @@ out
 # local editor config
 .vscode/settings.json
 .vscode/launch.json
+
+# files built by github actions
+docs
