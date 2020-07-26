@@ -3,5 +3,5 @@ module.exports = {
     "vuetify"
   ],
   publicPath: "/pod-attack-calc/",
-  outputDir: "docs",
+  outputDir: "dist",
 }

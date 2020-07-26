@@ -1,12 +1,11 @@
 const execa = require("execa");
-const fs = require("fs");
 
 (async () => {
     try {
         await execa("git", ["checkout", "--orphan", "gh-pages"]);
         console.log("Building...");
         await execa("npm", ["run", "build"]);
-        const folderName = "docs";
+        const folderName = "dist";
         await execa("git", ["--work-tree", folderName, "add", "--all"]);
         await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
         console.log("Pushing to gh-pages...");
