@@ -15,7 +15,7 @@
                     <v-form name=myform>
                         <div>
                             <h3>Basics</h3>
-                            <v-select name=char @input="updateCurrent" :items="characters" label="Class"
+                            <v-select name=char id="charactersSelect" @input="updateCurrent" :items="characters" label="Class"
                                 v-model="charactersSelected" dense class="my-3"></v-select>
                             <v-select name=charform @input="updateCurrent" :items="shapeShiftForms"
                                 label="Shape Shift" v-model="shapeShiftFormsSelected" dense
@@ -71,7 +71,7 @@
                     <h2>Breakpoints</h2>
                     <h3>Current</h3>
                     <p>
-                        Speed: {{ currentFpa }}{{ isCurrentFpaMaxed ? shapeShiftFormsSelected > 0 ? ', further off-weapon IAS useless' : ', further IAS useless' : '' }}<br>
+                        Speed: <span id="currentFpa">{{ currentFpa }}</span>{{ isCurrentFpaMaxed ? shapeShiftFormsSelected > 0 ? ', further off-weapon IAS useless' : ', further IAS useless' : '' }}<br>
                         Frequency: {{ currentAps }}
                     </p>
                     <h3>Table</h3>

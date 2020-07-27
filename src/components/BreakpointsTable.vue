@@ -117,7 +117,7 @@ export default {
     "burstOfSpeedSkillIas",
     "breakpoints",
     "currentFpa",
-    "attackSkill"
+    "attackSkill",
   ],
   data: function () {
     return {

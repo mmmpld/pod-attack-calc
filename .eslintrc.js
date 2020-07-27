@@ -3,5 +3,6 @@ module.exports = {
         'no-console': 'off',
         'vue/no-side-effects-in-computed-properties': 'warn',
     },
-    "extends": ["plugin:vue/base"]
+    "extends": ["plugin:vue/base"],
+    "plugins": ["jest"],
 };
