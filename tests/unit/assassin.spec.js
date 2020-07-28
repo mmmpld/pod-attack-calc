@@ -48,4 +48,17 @@ describe('Assasin default values', () => {
         expect(wrapper.find('#currentAps').text()).toBe(standardAps);
         expect(singleLinehtml(wrapper.find('.breakpoint-table tbody').html())).toBe(standardTableBody);
     })
+
+    it('trap laying', async () => {
+        const wrapper = mount(App, {
+            localVue,
+            vuetify,
+        })
+
+        await wrapper.setData({ charactersSelected: characterId, skillsSelected: 15 });
+        await wrapper.vm.updateCurrent();
+        expect(wrapper.find('#currentFpa').text()).toBe('15 frames per attack');
+        expect(wrapper.find('#currentAps').text()).toBe('1.66 attacks per second');
+        expect(singleLinehtml(wrapper.find('.breakpoint-table tbody').html())).toBe('<tbody><tr class="highlight-current"><td>0</td><td>15</td><td>1.66</td></tr><tr class=""><td>9</td><td>14</td><td>1.78</td></tr><tr class=""><td>18</td><td>13</td><td>1.92</td></tr><tr class=""><td>30</td><td>12</td><td>2.08</td></tr><tr class=""><td>48</td><td>11</td><td>2.27</td></tr><tr class=""><td>78</td><td>10</td><td>2.5</td></tr><tr class=""><td>125</td><td>9</td><td>2.77</td></tr></tbody>');
+    })
 })
