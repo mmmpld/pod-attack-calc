@@ -72,7 +72,7 @@
                     <h3>Current</h3>
                     <p>
                         Speed: <span id="currentFpa">{{ currentFpa }}</span>{{ isCurrentFpaMaxed ? shapeShiftFormsSelected > 0 ? ', further off-weapon IAS useless' : ', further IAS useless' : '' }}<br>
-                        Frequency: {{ currentAps }}
+                        Frequency: <span id="currentAps">{{ currentAps }}</span>
                     </p>
                     <h3>Table</h3>
                     <breakpoints-table :characters="characters" :characters-selected="charactersSelected"
