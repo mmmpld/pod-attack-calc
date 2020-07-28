@@ -24,15 +24,3 @@ test('should set [data-app] attribute on outer most div', () => {
     const { container } = renderWithVuetify(App)
     expect(container.getAttribute('data-app')).toEqual('true')
 })
-
-// describe('ias changes current fpa', () => {
-//     describe('Behavior', () => {
-//         test('User should see 0 at the beginning', () => {
-//             const {container} = renderWithVuetify(App)
-//             //const { getByText } = render(App);
-//             const getByText = container.getByText;
-//             const textNumberWrapper = getByText(/Counter is:/);
-//             expect(textNumberWrapper).toHaveTextContent('Counter is: 0');
-//         });
-//     });
-// });
