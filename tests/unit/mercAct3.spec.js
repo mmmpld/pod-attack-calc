@@ -29,14 +29,14 @@ function singleLinehtml(htmlString) {
     return compactHtmlString;
 }
 
-describe('Character default values', () => {
+describe('Merc Act3 default values', () => {
     let vuetify
 
     beforeEach(() => {
         vuetify = new Vuetify()
     })
 
-    it('assassin standard attack', async () => {
+    it('vengeance attack', async () => {
         const wrapper = mount(App, {
             localVue,
             vuetify,

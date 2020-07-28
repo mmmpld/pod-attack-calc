@@ -29,14 +29,14 @@ function singleLinehtml(htmlString) {
     return compactHtmlString;
 }
 
-describe('Character default values', () => {
+describe('Druid default values', () => {
     let vuetify
 
     beforeEach(() => {
         vuetify = new Vuetify()
     })
 
-    it('assassin standard attack', async () => {
+    it('standard attack', async () => {
         const wrapper = mount(App, {
             localVue,
             vuetify,
