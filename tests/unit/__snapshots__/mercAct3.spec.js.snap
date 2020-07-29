@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Merc Act3 default values vengeance attack 1`] = `
+<tbody>
+  <tr class="highlight-current">
+    <td>0</td>
+    <td>14</td>
+    <td>1.56</td>
+  </tr>
+  <tr class="">
+    <td>9</td>
+    <td>13</td>
+    <td>1.66</td>
+  </tr>
+  <tr class="">
+    <td>19</td>
+    <td>12</td>
+    <td>1.78</td>
+  </tr>
+  <tr class="">
+    <td>32</td>
+    <td>11</td>
+    <td>1.92</td>
+  </tr>
+  <tr class="">
+    <td>54</td>
+    <td>10</td>
+    <td>2.08</td>
+  </tr>
+  <tr class="">
+    <td>86</td>
+    <td>9</td>
+    <td>2.27</td>
+  </tr>
+  <tr class="">
+    <td>152</td>
+    <td>8</td>
+    <td>2.5</td>
+  </tr>
+</tbody>
+`;
