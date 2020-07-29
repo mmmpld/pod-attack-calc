@@ -158,9 +158,9 @@ export default {
       weaponsSecondarySelected: 0,
       weaponsPrimaryBarbHandednessSelected: -1,
       skillsSelected: 0,
-      iasOffWeapon: 0,
-      iasWeaponPrimary: 0,
-      iasWeaponSecondary: 0,
+      iasOffWeaponRaw: 0,
+      iasWeaponPrimaryRaw: 0,
+      iasWeaponSecondaryRaw: 0,
       isWsmBug: false,
       currentFpa: '',
       isCurrentFpaMaxed: false,
@@ -652,6 +652,30 @@ export default {
       }
   },
   computed: {
+      iasOffWeapon: {
+        get () {
+            return this.iasOffWeaponRaw || 0;
+        },
+        set (value) {
+            this.iasOffWeaponRaw = parseInt(value) || 0;
+        }
+      },
+      iasWeaponPrimary: {
+        get () {
+            return this.iasWeaponPrimaryRaw || 0;
+        },
+        set (value) {
+            this.iasWeaponPrimaryRaw = parseInt(value) || 0;
+        }
+      },
+      iasWeaponSecondary: {
+        get () {
+            return this.iasWeaponSecondaryRaw || 0;
+        },
+        set (value) {
+            this.iasWeaponSecondaryRaw = parseInt(value) || 0;
+        }
+      },
       isPlayableClass: function () {
           return this.charactersSelected <= 6;
       },
