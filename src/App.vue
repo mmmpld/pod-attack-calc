@@ -168,7 +168,6 @@ export default {
   }),
   methods: {
       weaponFilter: function (item, queryText, itemText) {
-          console.debug(`searching: ${itemText}`);
           if (item.text.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true; // search in option text
           if (item.commonItems) { // search in common items
               for (let i = 0; i < item.commonItems.length; i++) {
@@ -187,6 +186,8 @@ export default {
       calculateWsm: function () {
           var weapPrimary = this.lookupWeapon[this.weaponsPrimarySelected];
           var weapSecondary = this.lookupWeapon[this.weaponsSecondarySelected];
+          if (weapPrimary === null) console.error('failed to lookup primary weapon: ' + this.weaponsPrimarySelected);
+          if (weapSecondary === null) console.error('failed to lookup secondary weapon: ' + this.weaponsSecondarySelected);
           // not assasin and not barbarian
           if ((this.charactersSelected != 1) && (this.charactersSelected != 2)) {
               this.WSMprimaer = weapPrimary.wsm;

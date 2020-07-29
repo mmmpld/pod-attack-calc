@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Amazon default values multishot 1`] = `
+<tbody>
+  <tr class="highlight-current">
+    <td>0</td>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+  <tr class="">
+    <td>7</td>
+    <td>10</td>
+    <td>2.5</td>
+  </tr>
+  <tr class="">
+    <td>23</td>
+    <td>9</td>
+    <td>2.77</td>
+  </tr>
+  <tr class="">
+    <td>48</td>
+    <td>8</td>
+    <td>3.12</td>
+  </tr>
+  <tr class="">
+    <td>95</td>
+    <td>7</td>
+    <td>3.57</td>
+  </tr>
+</tbody>
+`;
+
+exports[`Amazon default values standard attack 1`] = `
+<tbody>
+  <tr class="highlight-current">
+    <td>0</td>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+  <tr class="">
+    <td>11</td>
+    <td>10</td>
+    <td>2.5</td>
+  </tr>
+  <tr class="">
+    <td>26</td>
+    <td>9</td>
+    <td>2.77</td>
+  </tr>
+  <tr class="">
+    <td>48</td>
+    <td>8</td>
+    <td>3.12</td>
+  </tr>
+  <tr class="">
+    <td>86</td>
+    <td>7</td>
+    <td>3.57</td>
+  </tr>
+  <tr class="">
+    <td>180</td>
+    <td>6</td>
+    <td>4.16</td>
+  </tr>
+</tbody>
+`;
+
+exports[`Amazon default values strafe 1`] = `
+<tbody>
+  <tr class="highlight-current">
+    <td>0</td>
+    <td>7/4/4/4/12</td>
+    <td>4.9</td>
+  </tr>
+  <tr class="">
+    <td>3</td>
+    <td>7/4/4/4/11</td>
+    <td>5</td>
+  </tr>
+  <tr class="">
+    <td>11</td>
+    <td>6/3/3/3/10</td>
+    <td>6.25</td>
+  </tr>
+  <tr class="">
+    <td>26</td>
+    <td>6/3/3/3/9</td>
+    <td>6.41</td>
+  </tr>
+  <tr class="">
+    <td>42</td>
+    <td>5/3/3/3/9</td>
+    <td>6.57</td>
+  </tr>
+  <tr class="">
+    <td>46</td>
+    <td>5/3/3/3/8</td>
+    <td>6.75</td>
+  </tr>
+  <tr class="">
+    <td>80</td>
+    <td>5/3/3/3/7</td>
+    <td>6.94</td>
+  </tr>
+</tbody>
+`;
