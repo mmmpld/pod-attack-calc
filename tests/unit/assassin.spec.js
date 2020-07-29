@@ -9,4 +9,8 @@ describe('Assasin default values', () => {
     it('trap laying', async () => {
         await breakpoints('15', '1.66', { charactersSelected: characterId, skillsSelected: 15  });
     })
+
+    it('boi dual cestus', async () => {
+        await breakpoints('13.5', '1.85', { charactersSelected: characterId, skillsSelected: 11, weaponsPrimarySelected: 43, weaponsSecondarySelected: 43 });
+    })
 })

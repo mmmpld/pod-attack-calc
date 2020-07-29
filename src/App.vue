@@ -346,7 +346,14 @@ export default {
               if (this.charactersSelected == 9) {
                   resultFpa = resultFpa / 2;
               }
-              if (this.weaponsSecondarySelected > 0) {
+              if (this.weaponsSecondarySelected > 0
+                  && attackSkill.title !== "Static Strike"
+                  && attackSkill.title !== "Blades of Ice"
+                  && attackSkill.title !== "Emberstorm"
+                  && attackSkill.title !== "Fists of Ice"
+                  && attackSkill.title !== "Fists of Ember"
+                  && attackSkill.title !== "Fists of Thunder"
+              ) {
                   temp = resultFpa;
                   resultFpa = this.calcFPA(12, acceleration2, 0);
                   if (resultFpa > this.calcFPA(12, 175, 0)) {

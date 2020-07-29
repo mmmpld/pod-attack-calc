@@ -1,5 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Assasin default values boi dual cestus 1`] = `
+<tbody>
+  <tr class="highlight-current">
+    <td>0</td>
+    <td>13.5</td>
+    <td>1.85</td>
+  </tr>
+  <tr class="">
+    <td>6</td>
+    <td>13</td>
+    <td>1.92</td>
+  </tr>
+  <tr class="">
+    <td>7</td>
+    <td>12.5</td>
+    <td>2</td>
+  </tr>
+  <tr class="">
+    <td>15</td>
+    <td>12</td>
+    <td>2.08</td>
+  </tr>
+  <tr class="">
+    <td>16</td>
+    <td>11.5</td>
+    <td>2.17</td>
+  </tr>
+  <tr class="">
+    <td>30</td>
+    <td>10.5</td>
+    <td>2.38</td>
+  </tr>
+  <tr class="">
+    <td>50</td>
+    <td>10</td>
+    <td>2.5</td>
+  </tr>
+  <tr class="">
+    <td>52</td>
+    <td>9.5</td>
+    <td>2.63</td>
+  </tr>
+  <tr class="">
+    <td>83</td>
+    <td>9</td>
+    <td>2.77</td>
+  </tr>
+  <tr class="">
+    <td>89</td>
+    <td>8.5</td>
+    <td>2.94</td>
+  </tr>
+  <tr class="">
+    <td>142</td>
+    <td>8</td>
+    <td>3.12</td>
+  </tr>
+  <tr class="">
+    <td>168</td>
+    <td>7.5</td>
+    <td>3.33</td>
+  </tr>
+</tbody>
+`;
+
 exports[`Assasin default values standard attack 1`] = `
 <tbody>
   <tr class="highlight-current">
