@@ -1016,6 +1016,51 @@ exports[`Barbarian default values cleave wolf 1`] = `
 </tbody>
 `;
 
+exports[`Barbarian default values frenzy (first swing misses) 2x phaseblade 1`] = `
+<tbody>
+  <tr class="highlight-current">
+    <td>0</td>
+    <td>8.5</td>
+    <td>2.94</td>
+  </tr>
+  <tr class="">
+    <td>8</td>
+    <td>8</td>
+    <td>3.12</td>
+  </tr>
+  <tr class="">
+    <td>16</td>
+    <td>7.5</td>
+    <td>3.33</td>
+  </tr>
+  <tr class="">
+    <td>27</td>
+    <td>7</td>
+    <td>3.57</td>
+  </tr>
+  <tr class="">
+    <td>42</td>
+    <td>6.5</td>
+    <td>3.84</td>
+  </tr>
+  <tr class="">
+    <td>65</td>
+    <td>6</td>
+    <td>4.16</td>
+  </tr>
+  <tr class="">
+    <td>102</td>
+    <td>5.5</td>
+    <td>4.54</td>
+  </tr>
+  <tr class="">
+    <td>174</td>
+    <td>5</td>
+    <td>5</td>
+  </tr>
+</tbody>
+`;
+
 exports[`Barbarian default values standard attack 1`] = `
 <tbody>
   <tr class="highlight-current">

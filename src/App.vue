@@ -302,7 +302,7 @@ export default {
           var resultFpa;
           var temp;
           var attackSkill = this.data.attack[this.skillsSelected];
-          console.debug('Calculating breakpoints for: ' + attackSkill.title);
+          console.debug('Calculating initial values for: ' + attackSkill.title);
           this.calculateSkillIas();
           this.calculateEffectiveIas();
           this.calculateWsm();
@@ -405,38 +405,8 @@ export default {
               if (this.charactersSelected == 8) {
                   resultFpa = resultFpa / 2;
               }
-              if (attackSkill.title === "Frenzy") {
-                  console.debug("special case frenzy");
-                  console.debug("WSM1: " + this.WSMprimaer);
-                  console.debug("WSM2: " + this.WSMsekundaer);
-      
-                  
-                  // var acceleration = Math.max(Math.min(100 + this.SIAS + this.EIASprimaer - this.WSMprimaer, 175), 15);
-                  // var acceleration2 = Math.max(Math.min(100 + this.SIAS + this.EIASsekundaer - this.WSMsekundaer, 175), 15);
-      
-                  // If the primary weapon is equipped in the left weapon slot:
-                  // WSM1 = WSM_primary + WSM_secondary - (WSM_primary + WSM_secondary)/2
-                  // WSM2 = 2*WSM_secondary - (WSM_primary + WSM_secondary)/2
-                  // If the primary weapon is equipped in the right weapon slot:
-                  // WSM1 = (WSM_primary + WSM_secondary)/2 + WSM_primary - WSM_secondary
-                  // WSM2 = (WSM_primary + WSM_secondary)/2
-      
-                  // if (document.myform.primaerwaffe[0].checked == true) {
-                  //     this.WSMprimaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2);
-                  //     this.WSMsekundaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2) + this.lookupWeapon[this.weaponsSecondarySelected].wsm - weapPrimary.wsm;
-                  // } else {
-                  //     this.WSMprimaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2) + weapPrimary.wsm - this.lookupWeapon[this.weaponsSecondarySelected].wsm;
-                  //     this.WSMsekundaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2);
-                  // }
-      
-                  // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
-                  // EIAS2 = [120*(OIAS + IASsecondary)/(120 + OIAS + IASsecondary)]
-                  // Acceleration1 = 70 + this.SIAS + EIAS1 - WSM1
-                  // Acceleration2 = 70 + this.SIAS + EIAS2 - WSM2
-                  // fpa_1 = {256*9/[256*Acceleration1/100]} - 1
-                  // fpa_2 = {(256*17 - fpa_1*[256*Acceleration1/100])/[256*Acceleration2/100]}
-                  // fpa = fpa_1 + fpa_2
-      
+              if (attackSkill.title === "Frenzy (first swing hits)") {
+                  console.debug("special case frenzy hits");
                   resultFpa = resultFpa / 2;
               } else if ((this.skillsSelected > 15) && (this.skillsSelected < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw 
                   resultFpa = resultFpa / 2;
@@ -640,15 +610,18 @@ export default {
           // != Wolf
           if (this.shapeShiftFormsSelected != 2) wolf = 0;
           this.SIAS = fana + frenzy + wolf + tempo - holyfrost;
+          // double swing
           if (this.skillsSelected == 16) {
               this.SIAS = this.SIAS + 50;
           }
+          // dragon tail
           if (this.skillsSelected == 13) {
               this.SIAS = this.SIAS - 40;
           }
           if (this.isDecrepify) {
               this.SIAS = this.SIAS - 50;
           }
+          // impale, jab, dragon claw, double swing, double throw, frenzy, whirlwind
           if ((attackSkill.animation == 7) && (this.isPlayableClass)) {
               this.SIAS = this.SIAS - 30;
           }
@@ -987,7 +960,8 @@ export default {
                       // offhand weapon
                       if (this.weaponsSecondarySelected > 0) {
                           values.push(this.getSkillOptionData("Double Swing"));
-                          values.push(this.getSkillOptionData("Frenzy"));
+                          //values.push(this.getSkillOptionData("Frenzy (first swing hits)"));
+                          values.push(this.getSkillOptionData("Frenzy (first swing misses)"));
                       }
                       // primary throwing and offhand throwing
                       if (((weapPrimary.weaponCategory == this.weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory == this.weaponCategories.throwing)) && ((weapSecondary.weaponCategory == this.weaponCategories.spearOrJavalin) || (weapSecondary.weaponCategory == this.weaponCategories.throwing))) {
@@ -1242,7 +1216,43 @@ export default {
                   }
               }
               // Impale, Jab, Dragon Claw, Double Swing, Frenzy, Double Throw && not Whirlwind
-              if ((attackSkill.animation == 7) && (this.skillsSelected != 19)) {
+              if (attackSkill.title === 'Frenzy (first swing hits)') {
+                  console.debug('special case breakpoints for frenzy first swing hits');
+                  for (let i = Math.max(100 + this.SIAS - this.WSMprimaer, 15); i <= 175; i++) {
+                      resultFpa = this.calcFPA(this.animationFrames, i, 0);
+                      resultFpa++;
+                      resultFpa = resultFpa / 2;
+                      if ((temp1 != resultFpa) && (i - 100 - this.SIAS + this.WSMprimaer < 120)) {
+                          breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))), resultFpa];
+                          temp1 = resultFpa;
+                      }
+                  }
+                  // var acceleration = Math.max(Math.min(100 + this.SIAS + this.EIASprimaer - this.WSMprimaer, 175), 15);
+                  // var acceleration2 = Math.max(Math.min(100 + this.SIAS + this.EIASsekundaer - this.WSMsekundaer, 175), 15);
+      
+                  // If the primary weapon is equipped in the left weapon slot:
+                  // WSM1 = WSM_primary + WSM_secondary - (WSM_primary + WSM_secondary)/2
+                  // WSM2 = 2*WSM_secondary - (WSM_primary + WSM_secondary)/2
+                  // If the primary weapon is equipped in the right weapon slot:
+                  // WSM1 = (WSM_primary + WSM_secondary)/2 + WSM_primary - WSM_secondary
+                  // WSM2 = (WSM_primary + WSM_secondary)/2
+      
+                  // if (document.myform.primaerwaffe[0].checked == true) {
+                  //     this.WSMprimaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2);
+                  //     this.WSMsekundaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2) + this.lookupWeapon[this.weaponsSecondarySelected].wsm - weapPrimary.wsm;
+                  // } else {
+                  //     this.WSMprimaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2) + weapPrimary.wsm - this.lookupWeapon[this.weaponsSecondarySelected].wsm;
+                  //     this.WSMsekundaer = parseInt((weapPrimary.wsm + this.lookupWeapon[this.weaponsSecondarySelected].wsm) / 2);
+                  // }
+      
+                  // EIAS1 = [120*(OIAS + IASprimary)/(120 + OIAS + IASprimary)]
+                  // EIAS2 = [120*(OIAS + IASsecondary)/(120 + OIAS + IASsecondary)]
+                  // Acceleration1 = 70 + this.SIAS + EIAS1 - WSM1
+                  // Acceleration2 = 70 + this.SIAS + EIAS2 - WSM2
+                  // fpa_1 = {256*9/[256*Acceleration1/100]} - 1
+                  // fpa_2 = {(256*17 - fpa_1*[256*Acceleration1/100])/[256*Acceleration2/100]}
+                  // fpa = fpa_1 + fpa_2
+              } else if ((attackSkill.animation == 7) && (this.skillsSelected != 19)) {
                   console.info("calc ias for animation 7");
                   for (let i = Math.max(100 + this.SIAS - this.WSMprimaer, 15); i <= 175; i++) {
                       resultFpa = this.calcFPA(this.animationFrames, i, 0);

@@ -571,7 +571,7 @@ export var data = {
             rollback: 100
         },
         {
-            title: "Frenzy",
+            title: "Frenzy (first swing misses)",
             index: 17,
             animation: 7,
             sequence: 3,
@@ -708,6 +708,13 @@ export var data = {
             index: 36,
             animation: 1,
             sequence: 2,
+            rollback: 100
+        },
+        {
+            title: "Frenzy (first swing hits)",
+            index: 37,
+            animation: 7,
+            sequence: 3,
             rollback: 100
         }
     ]
