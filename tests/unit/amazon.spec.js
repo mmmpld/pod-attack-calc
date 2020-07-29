@@ -11,6 +11,6 @@ describe('Amazon default values', () => {
     })
 
     it('multishot', async () => {
-        await breakpoints('11', '2.27', { charactersSelected: characterId, skillsSelected: 0, weaponsPrimarySelected: 118, fanaticismSkillIAS: 32 });
+        await breakpoints('11', '2.27', { charactersSelected: characterId, skillsSelected: 0, weaponsPrimarySelected: 118, fanaticismSkillIas: 32 });
     })
 })

@@ -49,18 +49,18 @@
                         <div>
                             <h3>Speed Increasing Skills</h3>
                             <v-select name=fana @input="updateCurrent" :items="fanaticism"
-                                label="Fanaticism Level" v-model="fanaticismSkillIAS" dense class="my-3"></v-select>
+                                label="Fanaticism Level" v-model="fanaticismSkillIas" dense class="my-3"></v-select>
                             <v-select v-if="canFrenzy" name=frenzy @input="updateCurrent" :items="frenzy" label="Frenzy Level"
-                                v-model="frenzySkillIAS" dense class="my-3"></v-select>
+                                v-model="frenzySkillIas" dense class="my-3"></v-select>
                             <v-select v-if="canWerewolf" name=wolf size=1 @input="updateCurrent" :items="werewolf"
-                                label="Werewolf Level" v-model="werewolfSkillIAS" dense class="my-3"></v-select>
+                                label="Werewolf Level" v-model="werewolfSkillIas" dense class="my-3"></v-select>
                             <v-select v-if="canBurstOfSpeed" name=tempo size=1 @input="updateCurrent" :items="burstOfSpeed"
-                                label="Burst of Speed Level" v-model="burstOfSpeedSkillIAS" dense class="my-3"></v-select>
+                                label="Burst of Speed Level" v-model="burstOfSpeedSkillIas" dense class="my-3"></v-select>
                         </div>
                         <div>
                             <h3>Speed Slowdown</h3>
                             <v-select name=holyfrost @input="updateCurrent" :items="holyFreeze"
-                                label="Holy Freeze Level" v-model="holyFreezeSkillIAS" dense class="mt-3 mb-0"></v-select>
+                                label="Holy Freeze Level" v-model="holyFreezeSkillIas" dense class="mt-3 mb-0"></v-select>
                             <v-checkbox name=altern @input="updateCurrent" label="Decrepify"
                                 v-model="isDecrepify" dense class="my-0"></v-checkbox>
                         </div>
@@ -83,8 +83,8 @@
                         :weapons-primary-selected="weaponsPrimarySelected"
                         :weapons-secondary-selected="weaponsSecondarySelected"
                         :ias-weapon-primary="iasWeaponPrimary" :ias-weapon-secondary="iasWeaponSecondary"
-                        :fanaticism-skill-ias="fanaticismSkillIAS" :frenzy-skill-ias="frenzySkillIAS"
-                        :werewolf-skill-ias="werewolfSkillIAS" :burst-of-speed-skill-ias="burstOfSpeedSkillIAS"
+                        :fanaticism-skill-ias="fanaticismSkillIas" :frenzy-skill-ias="frenzySkillIas"
+                        :werewolf-skill-ias="werewolfSkillIas" :burst-of-speed-skill-ias="burstOfSpeedSkillIas"
                         :breakpoints="breakpoints"
                         :current-fpa="currentFpa"
                         :attack-skill="data.attack[this.skillsSelected]">
@@ -148,11 +148,11 @@ export default {
       ],
       charactersSelected: 0,
       shapeShiftFormsSelected: 0,
-      fanaticismSkillIAS: 0,
-      frenzySkillIAS: 0,
-      werewolfSkillIAS: 0,
-      burstOfSpeedSkillIAS: 0,
-      holyFreezeSkillIAS: 0,
+      fanaticismSkillIas: 0,
+      frenzySkillIas: 0,
+      werewolfSkillIas: 0,
+      burstOfSpeedSkillIas: 0,
+      holyFreezeSkillIas: 0,
       isDecrepify: false,
       weaponsPrimarySelected: 0,
       weaponsSecondarySelected: 0,
@@ -624,11 +624,11 @@ export default {
           this.EIASsekundaer = Math.floor(120 * this.IASsekundaer / (120 + this.IASsekundaer));
       },
       calculateSkillIas: function () {
-          var fana = parseInt(this.fanaticismSkillIAS);
-          var frenzy = parseInt(this.frenzySkillIAS);
-          var wolf = parseInt(this.werewolfSkillIAS);
-          var tempo = parseInt(this.burstOfSpeedSkillIAS);
-          var holyfrost = parseInt(this.holyFreezeSkillIAS);
+          var fana = parseInt(this.fanaticismSkillIas);
+          var frenzy = parseInt(this.frenzySkillIas);
+          var wolf = parseInt(this.werewolfSkillIas);
+          var tempo = parseInt(this.burstOfSpeedSkillIas);
+          var holyfrost = parseInt(this.holyFreezeSkillIas);
           var attackSkill = this.data.attack[this.skillsSelected];
           // != Wolf
           if (this.shapeShiftFormsSelected != 2) wolf = 0;

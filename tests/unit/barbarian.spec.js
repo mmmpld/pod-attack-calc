@@ -11,6 +11,6 @@ describe('Barbarian default values', () => {
     })
 
     it('cleave wolf', async () => {
-        await breakpoints('5', '5', { charactersSelected: characterId, shapeShiftFormsSelected: 2, skillsSelected: 33, weaponsPrimarySelected: 25, iasWeaponPrimary: 105, werewolfSkillIAS: 66});
+        await breakpoints('5', '5', { charactersSelected: characterId, shapeShiftFormsSelected: 2, skillsSelected: 33, weaponsPrimarySelected: 25, iasWeaponPrimary: 105, werewolfSkillIas: 66});
     })
 })
