@@ -17,4 +17,8 @@ describe('Barbarian default values', () => {
     it('frenzy (first swing misses) 2x phaseblade', async () => {
         await breakpoints('8.5', '2.94', { charactersSelected: characterId, skillsSelected: 17, weaponsPrimarySelected: 191, weaponsSecondarySelected: 191 });
     })
+
+    it('frenzy (first swing hits) phaseblade/colossus sword', async () => {
+        await breakpoints('8/12', '2.5', { charactersSelected: characterId, skillsSelected: 37, weaponsPrimarySelected: 191, weaponsSecondarySelected: 56, frenzySkillIas: 30 });
+    })
 })

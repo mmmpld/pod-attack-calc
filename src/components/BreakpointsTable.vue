@@ -66,7 +66,7 @@
           </tr>
         </thead>
         <tbody>
-          <template v-if="attackSkill.rollback == 100">
+          <template v-if="attackSkill.rollback == 100 && attackSkill.title !== 'Frenzy (first swing hits)'">
             <tr
               v-for="(breakpoint, index) in breakpoints.breakpoints"
               :class="breakpoint[1] + ' frames per attack' == currentFpa ? 'highlight-current' : ''"
