@@ -1528,33 +1528,39 @@ export default {
                   }
               }
               if (attackSkill.title == 'Strafe') {
-                  console.info("calc ias for strafe");
-                  let strafeI = Math.max(100 + this.SIAS - this.WSMprimaer, 15);
-                  for (let i = Math.max(100 + this.SIAS - this.WSMprimaer, 15); i <= 149; i++) {
-                      this.animationFrames = this.aktionsframe[weapPrimary.type][this.charactersSelected];
-                      this.rollback1 = this.calcFPA(this.animationFrames, i, start);
-                      this.rollback1++;
-                      RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * this.rollback1) / 256) * attackSkill.rollback / 100);
-                      this.rollback2 = this.calcFPA(this.animationFrames, i, RBframe);
-                      this.rollback2++;
-                      RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * this.rollback2) / 256) * attackSkill.rollback / 100);
-                      this.rollback3 = this.calcFPA(this.animationFrames, i, RBframe);
-                      this.rollback3++;
-                      RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * this.rollback3) / 256) * attackSkill.rollback / 100);
-                      this.rollback4 = this.calcFPA(this.animationFrames, i, RBframe);
-                      this.rollback4++;
-                      this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][0];
-                      RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * this.rollback4) / 256) * attackSkill.rollback / 100);
-                      this.rollback5 = this.calcFPA(this.animationFrames, i, RBframe);
-                      if ((this.rollback2 == this.rollback3) || (this.rollback3 == this.rollback4)) {
-                          resultFpa = this.rollback1 + this.rollback2 + this.rollback3 + this.rollback4 + this.rollback5;
-                      }
-                      if (temp1 != resultFpa) {
-                          breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))), this.rollback1 + "/" + this.rollback2 + "/" + this.rollback3 + "/" + this.rollback4 + "/" + this.rollback5];
-                          breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 + this.rollback3 * 4 + this.rollback4 * 3 + this.rollback5) / 10)) / 100;
-                          temp1 = resultFpa;
-                      }
-                  }
+                    console.info("calc ias for strafe");
+                    let strafeI = Math.max(100 + this.SIAS - this.WSMprimaer, 15);
+                    if (strafeI > 149) {
+                        strafeI = 149;
+                    }
+                    for (let i = strafeI; i <= 149; i++) {
+                        this.animationFrames = this.aktionsframe[weapPrimary.type][this.charactersSelected];
+                        this.rollback1 = this.calcFPA(this.animationFrames, i, start);
+                        this.rollback1++;
+                        RBframe = Math.floor(Math.floor((256 * start + Math.floor(256 * i / 100) * this.rollback1) / 256) * attackSkill.rollback / 100);
+                        this.rollback2 = this.calcFPA(this.animationFrames, i, RBframe);
+                        this.rollback2++;
+                        RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * this.rollback2) / 256) * attackSkill.rollback / 100);
+                        this.rollback3 = this.calcFPA(this.animationFrames, i, RBframe);
+                        this.rollback3++;
+                        RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * this.rollback3) / 256) * attackSkill.rollback / 100);
+                        this.rollback4 = this.calcFPA(this.animationFrames, i, RBframe);
+                        this.rollback4++;
+                        this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][0];
+                        RBframe = Math.floor(Math.floor((256 * RBframe + Math.floor(256 * i / 100) * this.rollback4) / 256) * attackSkill.rollback / 100);
+                        this.rollback5 = this.calcFPA(this.animationFrames, i, RBframe);
+                        if ((this.rollback2 == this.rollback3) || (this.rollback3 == this.rollback4)) {
+                            resultFpa = this.rollback1 + this.rollback2 + this.rollback3 + this.rollback4 + this.rollback5;
+                        }
+                        if (temp1 != resultFpa) {
+                            breakpoints[breakpoints.length] = [
+                                Math.max(Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))), 0),
+                                this.rollback1 + "/" + this.rollback2 + "/" + this.rollback3 + "/" + this.rollback4 + "/" + this.rollback5
+                            ];
+                            breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 + this.rollback3 * 4 + this.rollback4 * 3 + this.rollback5) / 10)) / 100;
+                            temp1 = resultFpa;
+                        }
+                    }
               }
               if (attackSkill.title == 'Fend') {
                   console.info("calc ias for fend");

@@ -104,3 +104,13 @@ exports[`Amazon default values strafe 1`] = `
   </tr>
 </tbody>
 `;
+
+exports[`Amazon default values strafe cho-ko-nu 1`] = `
+<tbody>
+  <tr class="highlight-current">
+    <td>0</td>
+    <td>7/3/4/4/10</td>
+    <td>5.2</td>
+  </tr>
+</tbody>
+`;
