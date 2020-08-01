@@ -33,7 +33,7 @@
                 <v-row>
                     <v-col class="py-0 pl-3"><h2>Character</h2></v-col>
                     <v-col class="py-0" align="right">
-                        <v-tooltip left color="green">
+                        <v-tooltip left color="green" transition="scroll-x-reverse-transition">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn icon color="green" 
                                        :href="shareLink"
@@ -1529,6 +1529,7 @@ export default {
               }
               if (attackSkill.title == 'Strafe') {
                   console.info("calc ias for strafe");
+                  let strafeI = Math.max(100 + this.SIAS - this.WSMprimaer, 15);
                   for (let i = Math.max(100 + this.SIAS - this.WSMprimaer, 15); i <= 149; i++) {
                       this.animationFrames = this.aktionsframe[weapPrimary.type][this.charactersSelected];
                       this.rollback1 = this.calcFPA(this.animationFrames, i, start);
