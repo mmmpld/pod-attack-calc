@@ -97,7 +97,7 @@
                         <v-select v-if="isWeaponsPrimaryBarbHandednessNeeded" name=barbschwert @input="updateCurrent"
                             :items="weaponsPrimaryBarbHandedness" label="Handedness"
                             v-model="weaponsPrimaryBarbHandednessSelected" dense class="my-3"></v-select>
-                        <v-text-field name=wIAS1 type="number" @input="updateCurrent"
+                        <v-text-field v-if="weaponsPrimarySelected" name=wIAS1 type="number" @input="updateCurrent"
                             label="Primary Weapon IAS%" v-model.number="iasWeaponPrimary" min="0" step="5" dense class="mt-6 mb-3">
                         </v-text-field>
                     </div>
@@ -127,7 +127,7 @@
                                 </v-list-item-content>
                             </template>
                         </v-autocomplete>
-                        <v-text-field name=wIAS2 type="number" @input="updateCurrent"
+                        <v-text-field v-if="weaponsSecondarySelected" name=wIAS2 type="number" @input="updateCurrent"
                             label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary" dense min="0" step="5" class="mt-6 mb-0">
                         </v-text-field>
                         <v-checkbox name="enableWsmBug" @input="updateCurrent" label="Apply WSM Bug"
@@ -173,8 +173,9 @@
                     :ias-weapon-primary="iasWeaponPrimary" :ias-weapon-secondary="iasWeaponSecondary"
                     :fanaticism-skill-ias="fanaticismSkillIas" :frenzy-skill-ias="frenzySkillIas"
                     :werewolf-skill-ias="werewolfSkillIas" :burst-of-speed-skill-ias="burstOfSpeedSkillIas"
-                    :breakpoints="breakpoints"
+                    :standardised-breakpoints="standardisedBreakpoints"
                     :current-fpa="currentFpa"
+                    :current-aps="currentAps"
                     :attack-skill="data.attack[this.skillsSelected]">
                 </breakpoints-table>
             </v-col>
@@ -342,8 +343,6 @@ export default {
                   this.WSMprimaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2);
                   this.WSMsekundaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2) + weapSecondary.wsm - weapPrimary.wsm;
               }
-              console.log('average primary wsm: ' + this.WSMprimaer);
-              console.log('average secondary wsm: ' + this.WSMsekundaer);
           }
       },
       animationSpeed: function (FramesPerDirection) {
@@ -448,9 +447,6 @@ export default {
             let SIAS = this.SIAS;
             let WSM1 = 0;
             let WSM2 = 0;
-            console.debug(`wsm primary: ${WSM_primary}`);
-            console.debug(`wsm secondary: ${WSM_secondary}`);
-            console.debug(`oias: ${OIAS}`);
             if (!this.isWsmBug) {
                 //If the primary weapon is equipped in the left weapon slot:
                 WSM1 = WSM_primary + WSM_secondary - (WSM_primary + WSM_secondary) / 2
@@ -467,7 +463,6 @@ export default {
             let fpa_1 = Math.ceil(256*9/Math.floor(256*Acceleration1/100)) - 1
             let fpa_2 = Math.ceil((256*17 - fpa_1*Math.floor(256*Acceleration1/100))/Math.floor(256*Acceleration2/100))
             let resultFpa = fpa_1 + fpa_2
-            console.debug(OIAS + ' : ' + fpa_1 + '+' + fpa_2 + '=' + resultFpa)
             return {
                 sum: resultFpa,
                 parts: [
@@ -1668,7 +1663,102 @@ export default {
               nonStandardWeapon: nonStandardWeapon,   // ias not a multiple of 5
               oIas: OIAS,
           }
-      }
+      },
+        standardisedBreakpoints: function() {
+            const iasRows = 50;
+            let bps = [];
+            if (this.shapeShiftFormsSelected) { // shifted
+                for (let j = 1; j < iasRows + 2; j++) {
+                    let ias = 5 * (j-1);
+                    let bpRow = this.breakpoints.breakpoints.slice((j-1)*15,((j-1)*15)+15);
+                    let frames = [];
+                    let aps = 0;
+                    for (let i = 0; i < bpRow.length; i++) {
+                        frames.push(bpRow[i]);
+                    }
+                    if (this.breakpoints.oIas > 70) {
+                        frames.push(this.breakpoints.nonStandardOffWeapon[j-1]);
+                    }
+                    bps.push({
+                        ias: ias,
+                        frames: frames,
+                        aps: aps,
+                        current: false
+                    });
+                }
+                if (this.iasWeaponPrimary % 5 != 0) {
+                    let ias = this.iasWeaponPrimary;
+                    let frames = this.breakpoints.nonStandardWeapon;
+                    let aps = 0;//this.currentAps.replace(" attacks per second", "");
+                    if (this.breakpoints.oIas > 70) {
+                        frames.push(null); // placeholder for uncalculated high off-weapon ias and non multiple of 5 weapon ias
+                    }
+                    bps.push({
+                        ias: ias,
+                        frames: frames,
+                        aps: aps,
+                        current: false
+                    });
+                }
+                // find the current ias
+                let currentBp = bps.find(bp => bp.ias === this.iasWeaponPrimary);
+                if (currentBp) {
+                    currentBp.current = true;
+                }
+            } else if (this.attackSkill.rollback == 100 && this.attackSkill.title !== 'Frenzy (first swing hits)') { // normal skills
+                for (let i = 0; i < this.breakpoints.breakpoints.length; i++) {
+                    let ias = this.breakpoints.breakpoints[i][0];
+                    let frames = [this.breakpoints.breakpoints[i][1]];
+                    let aps = parseInt(2500 / (this.aidel + this.breakpoints.breakpoints[i][1]), 10) / 100;
+                    bps.push({
+                        ias: ias,
+                        frames: frames,
+                        aps: aps,
+                        current: false
+                    });
+                }
+                // loop backwards and find the first ias lower than the current selected
+                for (let i = bps.length - 1; i >= 0; i--) {
+                    if(bps[i].ias <= this.iasWeaponPrimary + this.iasOffWeapon) {
+                        bps[i].current = true;
+                        break;
+                    }
+                }
+            } else { // multi hit skills
+                for (let i = 0; i < this.breakpoints.breakpoints.length; i++) {
+                    let ias = this.breakpoints.breakpoints[i][0];
+                    let frames = [this.breakpoints.breakpoints[i][1]];
+                    let aps = this.breakpoints.breakpointsAPS[i];
+                    bps.push({
+                        ias: ias,
+                        frames: frames,
+                        aps: aps,
+                        current: false
+                    });
+                }
+                // loop backwards and find the first ias lower than the current selected
+                for (let i = bps.length - 1; i >= 0; i--) {
+                    if(bps[i].ias <= this.iasWeaponPrimary + this.iasOffWeapon) {
+                        bps[i].current = true;
+                        break;
+                    }
+                }
+            }
+            return bps;
+        },
+        aidel: function () {
+            var aidel = 0;
+            if (this.charactersSelected > 6) {
+                aidel = 2;
+            }
+            if (
+                (this.charactersSelected == 8 && this.skillsSelected == 3) ||
+                (this.charactersSelected == 9 && this.skillsSelected == 0)
+            ) {
+                aidel = 1;
+            }
+            return aidel;
+        }
     },
     watch: {
         shapeShiftForms: function (newVal) {

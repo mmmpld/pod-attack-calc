@@ -16,12 +16,12 @@
             <tr v-if="burstOfSpeedSkillIas > 0"><td>Burst of Speed IAS:</td><td>{{ burstOfSpeedSkillIas }}</td></tr>
     </table>-->
     <!-- <p align="center">Your primary weapon&rsquo;s WIAS is plotted vertically, your equipment&rsquo;s IAS is plotted horizontally.</p> -->
-    <v-simple-table v-if="shapeShiftFormsSelected" dense class="breakpoint-table">
+    <v-simple-table dense class="breakpoint-table">
       <template v-slot:default>
-        <thead>
+        <thead v-if="shapeShiftFormsSelected !== 0">
           <tr>
             <th
-              colspan="17 + (breakpoints.oIas > 70 ? 1 : 0)"
+              :colspan="standardisedBreakpoints[0].frames.length + 2"
               class="horizontal-label"
             >Off-Weapon IAS</th>
           </tr>
@@ -29,65 +29,39 @@
             <th class="border-off"></th>
             <th></th>
             <th v-for="i in 15" :key="i">{{5 * (i-1)}}</th>
-            <th v-if="breakpoints.oIas > 70">{{breakpoints.oIas}}</th>
+            <th v-if="iasOffWeapon > 70">{{iasOffWeapon}}</th>
           </tr>
         </thead>
-        <tbody>
-          <th :rowspan="iasRows + 2 + (iasWeaponPrimary % 5 != 0 ? 1 : 0)">
-            <span class="vertical-label">Primary Weapon IAS</span>
-          </th>
-          <tr
-            v-for="j in iasRows + 1"
-            :class="5 * (j-1) == iasWeaponPrimary ? 'highlight-current' : ''"
-            :key="j"
-          >
-            <th>{{5 * (j-1)}}</th>
-            <template
-              v-for="(breakpoint, index) in breakpoints.breakpoints.slice((j-1)*15,((j-1)*15)+15)"
-            >
-              <td :key="index">{{breakpoint}}</td>
-            </template>
-            <td v-if="breakpoints.oIas > 70">{{breakpoints.nonStandardOffWeapon[j-1]}}</td>
-          </tr>
-          <tr v-if="iasWeaponPrimary % 5 != 0" class="highlight-current">
-            <th>{{iasWeaponPrimary}}</th>
-            <td v-for="(breakpoint, index) in breakpoints.nonStandardWeapon" :key="index">{{breakpoint}}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-    <v-simple-table v-else dense class="breakpoint-table">
-      <template v-slot:default>
-        <thead>
+        <thead v-else>
           <tr>
             <th>IAS</th>
-            <th>attack speed [frames]</th>
+            <th :colspan="standardisedBreakpoints[0].frames.length">attack speed [frames]</th>
             <th>attacks per second</th>
           </tr>
         </thead>
-        <tbody>
-          <template v-if="attackSkill.rollback == 100 && attackSkill.title !== 'Frenzy (first swing hits)'">
-            <tr
-              v-for="(breakpoint, index) in breakpoints.breakpoints"
-              :class="breakpoint[1] + ' frames per attack' == currentFpa ? 'highlight-current' : ''"
-              :key="index"
-            >
-              <td>{{ breakpoint[0] }}</td>
-              <td>{{ breakpoint[1] }}</td>
-              <td>{{ parseInt(2500 / (aidel + breakpoint[1])) / 100 }}</td>
-            </tr>
-          </template>
-          <template v-else>
-            <tr
-              v-for="(breakpoint, index) in breakpoints.breakpoints"
-              :class="breakpoint[1] + ' frames per attack' == currentFpa ? 'highlight-current' : ''"
-              :key="index"
-            >
-              <td>{{ breakpoint[0] }}</td>
-              <td>{{ breakpoint[1] }}</td>
-              <td>{{ breakpoints.breakpointsAPS[index] }}</td>
-            </tr>
-          </template>
+        <tbody v-if="shapeShiftFormsSelected !== 0">
+          <th :rowspan="standardisedBreakpoints.length + 1">
+            <span class="vertical-label">Primary Weapon IAS</span>
+          </th>
+          <tr
+            v-for="(breakpoint, index) in standardisedBreakpoints"
+            :key="index"
+            :class="breakpoint.current ? 'highlight-current' : ''"
+          >
+            <th>{{ breakpoint.ias }}</th>
+            <td v-for="(frame, index) in breakpoint.frames" :key="index">{{ frame }}</td>
+          </tr>
+        </tbody>
+        <tbody v-else>
+          <tr
+            v-for="(breakpoint, index) in standardisedBreakpoints"
+            :key="index"
+            :class="breakpoint.current ? 'highlight-current' : ''"
+          >
+            <td>{{ breakpoint.ias }}</td>
+            <td v-for="(frame, index) in breakpoint.frames" :key="index">{{ frame }}</td>
+            <td>{{ breakpoint.aps }}</td>
+          </tr>
         </tbody>
       </template>
     </v-simple-table>
@@ -115,8 +89,9 @@ export default {
     "frenzySkillIas",
     "werewolfSkillIas",
     "burstOfSpeedSkillIas",
-    "breakpoints",
+    "standardisedBreakpoints",
     "currentFpa",
+    "currentAps",
     "attackSkill",
   ],
   data: function () {
