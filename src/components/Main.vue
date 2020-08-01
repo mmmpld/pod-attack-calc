@@ -1581,15 +1581,19 @@ export default {
     watch: {
         shapeShiftForms: function (newVal) {
             this.shapeShiftFormsSelected = this.sanitiseSelected(this.shapeShiftFormsSelected, newVal);
+            this.updateCurrent();
         },
         weaponsPrimary: function (newVal) {
-            if (newVal) this.weaponsPrimarySelected = this.sanitiseSelected(this.weaponsPrimarySelected, newVal);
+            this.weaponsPrimarySelected = this.sanitiseSelected(this.weaponsPrimarySelected, newVal);
+            this.updateCurrent();
         },
         weaponsSecondary: function (newVal) {
             this.weaponsSecondarySelected = this.sanitiseSelected(this.weaponsSecondarySelected, newVal);
+            this.updateCurrent();
         },
         skills: function (newVal) {
             this.skillsSelected = this.sanitiseSelected(this.skillsSelected, newVal);
+            this.updateCurrent();
         },
     },
     created: function() {
