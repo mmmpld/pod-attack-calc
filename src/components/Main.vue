@@ -1,3 +1,24 @@
+<style scoped>
+    .quality-magic {
+        color: #8484f0 !important;
+    }
+    .quality-rare {
+        color: #fce874 !important;
+    }
+    .quality-set {
+        color: #18fc00 !important;
+    }
+    .quality-unique {
+        color: #bb955e !important;
+    }
+    .quality-crafted {
+        color: orange !important;
+    }
+    .quality-runeword {
+        color: #c0a080 !important;
+    }
+</style>
+
 <template>
     <v-container fluid class="pa-0">
         <v-row>
@@ -49,8 +70,30 @@
                     </div>
                     <div>
                         <h3>Primary Weapon</h3>
-                        <v-autocomplete name=waffe @input="updateCurrent" :items="weaponsPrimary" :filter="weaponFilter"
-                            label="Primary Weapon" v-model="weaponsPrimarySelected" dense persistent-hint :hint="`${weaponInfoPrimary.description} [${weaponInfoPrimary.wsm}]`" class="my-3"></v-autocomplete>
+                        <v-autocomplete
+                            name="waffe" 
+                            @input="updateCurrent" 
+                            :items="weaponsPrimary" 
+                            :filter="weaponFilter"
+                            label="Primary Weapon" 
+                            v-model="weaponsPrimarySelected" 
+                            dense 
+                            persistent-hint 
+                            :hint="`${weaponInfoPrimary.description} [${weaponInfoPrimary.wsm}]`" 
+                            class="my-3"
+                        >
+                            <template v-slot:item="data">
+                                <v-list-item-content>
+                                    <v-list-item-title v-text="data.item.text"></v-list-item-title>
+                                    <v-list-item-subtitle
+                                        v-for="(commonItem, index) in data.item.commonItems"
+                                        :key="index"
+                                        :class="getQualityColorClass(commonItem.quality)">
+                                        {{commonItem.title}}
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </template>
+                        </v-autocomplete>
                         <v-select v-if="isWeaponsPrimaryBarbHandednessNeeded" name=barbschwert @input="updateCurrent"
                             :items="weaponsPrimaryBarbHandedness" label="Handedness"
                             v-model="weaponsPrimaryBarbHandednessSelected" dense class="my-3"></v-select>
@@ -60,8 +103,30 @@
                     </div>
                     <div v-if="canDualWield == true">
                         <h3>Secondary Weapon</h3>
-                        <v-autocomplete name=zweitwaffe @input="updateCurrent" :items="weaponsSecondary" :filter="weaponFilter"
-                            label="Secondary Weapon" v-model="weaponsSecondarySelected" dense persistent-hint :hint="`${weaponInfoSecondary.description} [${weaponInfoSecondary.wsm}]`" class="my-3"></v-autocomplete>
+                        <v-autocomplete
+                            name="zweitwaffe" 
+                            @input="updateCurrent" 
+                            :items="weaponsSecondary" 
+                            :filter="weaponFilter"
+                            label="Secondary Weapon" 
+                            v-model="weaponsSecondarySelected" 
+                            dense 
+                            persistent-hint 
+                            :hint="`${weaponInfoSecondary.description} [${weaponInfoSecondary.wsm}]`" 
+                            class="my-3"
+                        >
+                            <template v-slot:item="data">
+                                <v-list-item-content>
+                                    <v-list-item-title v-text="data.item.text"></v-list-item-title>
+                                    <v-list-item-subtitle
+                                        v-for="(commonItem, index) in data.item.commonItems"
+                                        :key="index"
+                                        :class="getQualityColorClass(commonItem.quality)">
+                                        {{commonItem.title}}
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </template>
+                        </v-autocomplete>
                         <v-text-field name=wIAS2 type="number" @input="updateCurrent"
                             label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary" dense min="0" step="5" class="mt-6 mb-0">
                         </v-text-field>
@@ -208,6 +273,25 @@ export default {
       useVanillaSkillIas: false,
     }),
     methods: {
+        getQualityColorClass: function(quality) {
+            console.log(quality);
+            switch (quality) {
+                case this.qualities.magic:
+                    return 'quality-magic';
+                case this.qualities.rare:
+                    return 'quality-rare';
+                case this.qualities.set:
+                    return 'quality-set';
+                case this.qualities.unique:
+                    return 'quality-unique';
+                case this.qualities.crafted:
+                    return 'quality-crafted';
+                case this.qualities.runeword:
+                    return 'quality-runeword';
+                default:
+                    return 'quality-normal';
+            }
+        },
         updateUrl: function() {
             let query = this.doAddQueryString ? this.query : {} ;
             this.$router.push({ query }).catch(error => {}); // catch suppresses redundant navigation error in console
