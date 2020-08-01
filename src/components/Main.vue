@@ -307,6 +307,7 @@ export default {
           if (item.commonItems) { // search in common items
               for (let i = 0; i < item.commonItems.length; i++) {
                   if (item.commonItems[i].title.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true;
+                  if (item.commonItems[i].title.toLowerCase().replace(/\W/g, '').indexOf(queryText.toLowerCase()) > -1) return true; // with non-alphanumeric characters removed
               }
           }
           return false;
