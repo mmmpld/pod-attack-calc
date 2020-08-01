@@ -854,7 +854,7 @@ export default {
             return this.iasOffWeaponRaw || 0;
         },
         set (value) {
-            this.iasOffWeaponRaw = parseInt(value) || 0;
+            this.iasOffWeaponRaw = Math.max(parseInt(value, 10), 0) || 0;
         }
       },
       iasWeaponPrimary: {
@@ -862,7 +862,7 @@ export default {
             return this.iasWeaponPrimaryRaw || 0;
         },
         set (value) {
-            this.iasWeaponPrimaryRaw = parseInt(value) || 0;
+            this.iasWeaponPrimaryRaw = Math.max(parseInt(value, 10), 0) || 0;
         }
       },
       iasWeaponSecondary: {
@@ -870,7 +870,7 @@ export default {
             return this.iasWeaponSecondaryRaw || 0;
         },
         set (value) {
-            this.iasWeaponSecondaryRaw = parseInt(value) || 0;
+            this.iasWeaponSecondaryRaw = Math.max(parseInt(value, 10), 0) || 0;
         }
       },
       isPlayableClass: function () {
