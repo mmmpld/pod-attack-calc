@@ -1683,6 +1683,12 @@ export default {
             this.weaponsSecondarySelected = this.sanitiseSelected(this.weaponsSecondarySelected, newVal);
             this.updateCurrent();
         },
+        weaponsPrimarySelected: function (newVal) {
+            if (newVal === 0) this.iasWeaponPrimary = 0;
+        },
+        weaponsSecondarySelected: function (newVal) {
+            if (newVal === 0) this.iasWeaponSecondary = 0;
+        },
         skills: function (newVal) {
             this.skillsSelected = this.sanitiseSelected(this.skillsSelected, newVal);
             this.updateCurrent();
