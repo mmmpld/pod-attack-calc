@@ -1666,8 +1666,16 @@ export default {
       },
         standardisedBreakpoints: function() {
             const iasRows = 50;
-            let bps = [];
+            let bps = {
+                meta: {
+                    horizontalLabel: null,
+                    verticalLabel: null
+                },
+                rows: []
+            };
             if (this.shapeShiftFormsSelected) { // shifted
+                bps.meta.horizontalLabel = 'Off-Weapon IAS';
+                bps.meta.verticalLabel = 'Primary Weapon IAS';
                 for (let j = 1; j < iasRows + 2; j++) {
                     let ias = 5 * (j-1);
                     let bpRow = this.breakpoints.breakpoints.slice((j-1)*15,((j-1)*15)+15);
@@ -1679,7 +1687,7 @@ export default {
                     if (this.breakpoints.oIas > 70) {
                         frames.push(this.breakpoints.nonStandardOffWeapon[j-1]);
                     }
-                    bps.push({
+                    bps.rows.push({
                         ias: ias,
                         frames: frames,
                         aps: aps,
@@ -1693,7 +1701,7 @@ export default {
                     if (this.breakpoints.oIas > 70) {
                         frames.push(null); // placeholder for uncalculated high off-weapon ias and non multiple of 5 weapon ias
                     }
-                    bps.push({
+                    bps.rows.push({
                         ias: ias,
                         frames: frames,
                         aps: aps,
@@ -1701,16 +1709,18 @@ export default {
                     });
                 }
                 // find the current ias
-                let currentBp = bps.find(bp => bp.ias === this.iasWeaponPrimary);
+                let currentBp = bps.rows.find(bp => bp.ias === this.iasWeaponPrimary);
                 if (currentBp) {
                     currentBp.current = true;
                 }
             } else if (this.attackSkill.rollback == 100 && this.attackSkill.title !== 'Frenzy (first swing hits)') { // normal skills
+                bps.meta.verticalLabel = 'IAS';
+                bps.meta.horizontalLabel = 'attack speed [frames]';
                 for (let i = 0; i < this.breakpoints.breakpoints.length; i++) {
                     let ias = this.breakpoints.breakpoints[i][0];
                     let frames = [this.breakpoints.breakpoints[i][1]];
                     let aps = parseInt(2500 / (this.aidel + this.breakpoints.breakpoints[i][1]), 10) / 100;
-                    bps.push({
+                    bps.rows.push({
                         ias: ias,
                         frames: frames,
                         aps: aps,
@@ -1718,18 +1728,20 @@ export default {
                     });
                 }
                 // loop backwards and find the first ias lower than the current selected
-                for (let i = bps.length - 1; i >= 0; i--) {
-                    if(bps[i].ias <= this.iasWeaponPrimary + this.iasOffWeapon) {
-                        bps[i].current = true;
+                for (let i = bps.rows.length - 1; i >= 0; i--) {
+                    if(bps.rows[i].ias <= this.iasWeaponPrimary + this.iasOffWeapon) {
+                        bps.rows[i].current = true;
                         break;
                     }
                 }
             } else { // multi hit skills
+                bps.meta.verticalLabel = 'IAS';
+                bps.meta.horizontalLabel = 'attack speed [frames]';
                 for (let i = 0; i < this.breakpoints.breakpoints.length; i++) {
                     let ias = this.breakpoints.breakpoints[i][0];
                     let frames = [this.breakpoints.breakpoints[i][1]];
                     let aps = this.breakpoints.breakpointsAPS[i];
-                    bps.push({
+                    bps.rows.push({
                         ias: ias,
                         frames: frames,
                         aps: aps,
@@ -1737,9 +1749,9 @@ export default {
                     });
                 }
                 // loop backwards and find the first ias lower than the current selected
-                for (let i = bps.length - 1; i >= 0; i--) {
-                    if(bps[i].ias <= this.iasWeaponPrimary + this.iasOffWeapon) {
-                        bps[i].current = true;
+                for (let i = bps.rows.length - 1; i >= 0; i--) {
+                    if(bps.rows[i].ias <= this.iasWeaponPrimary + this.iasOffWeapon) {
+                        bps.rows[i].current = true;
                         break;
                     }
                 }

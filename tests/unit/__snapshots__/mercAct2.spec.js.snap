@@ -2,38 +2,39 @@
 
 exports[`Merc Act2 default values standard attack 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>15</td>
     <td>1.47</td>
   </tr>
   <tr class="">
-    <td>9</td>
+    <th>9</th>
     <td>14</td>
     <td>1.56</td>
   </tr>
   <tr class="">
-    <td>18</td>
+    <th>18</th>
     <td>13</td>
     <td>1.66</td>
   </tr>
   <tr class="">
-    <td>30</td>
+    <th>30</th>
     <td>12</td>
     <td>1.78</td>
   </tr>
   <tr class="">
-    <td>48</td>
+    <th>48</th>
     <td>11</td>
     <td>1.92</td>
   </tr>
   <tr class="">
-    <td>75</td>
+    <th>75</th>
     <td>10</td>
     <td>2.08</td>
   </tr>
   <tr class="">
-    <td>125</td>
+    <th>125</th>
     <td>9</td>
     <td>2.27</td>
   </tr>

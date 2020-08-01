@@ -2,28 +2,29 @@
 
 exports[`Amazon default values multishot 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>11</td>
     <td>2.27</td>
   </tr>
   <tr class="">
-    <td>7</td>
+    <th>7</th>
     <td>10</td>
     <td>2.5</td>
   </tr>
   <tr class="">
-    <td>23</td>
+    <th>23</th>
     <td>9</td>
     <td>2.77</td>
   </tr>
   <tr class="">
-    <td>48</td>
+    <th>48</th>
     <td>8</td>
     <td>3.12</td>
   </tr>
   <tr class="">
-    <td>95</td>
+    <th>95</th>
     <td>7</td>
     <td>3.57</td>
   </tr>
@@ -32,33 +33,34 @@ exports[`Amazon default values multishot 1`] = `
 
 exports[`Amazon default values standard attack 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>11</td>
     <td>2.27</td>
   </tr>
   <tr class="">
-    <td>11</td>
+    <th>11</th>
     <td>10</td>
     <td>2.5</td>
   </tr>
   <tr class="">
-    <td>26</td>
+    <th>26</th>
     <td>9</td>
     <td>2.77</td>
   </tr>
   <tr class="">
-    <td>48</td>
+    <th>48</th>
     <td>8</td>
     <td>3.12</td>
   </tr>
   <tr class="">
-    <td>86</td>
+    <th>86</th>
     <td>7</td>
     <td>3.57</td>
   </tr>
   <tr class="">
-    <td>180</td>
+    <th>180</th>
     <td>6</td>
     <td>4.16</td>
   </tr>
@@ -67,38 +69,39 @@ exports[`Amazon default values standard attack 1`] = `
 
 exports[`Amazon default values strafe 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>7/4/4/4/12</td>
     <td>4.9</td>
   </tr>
   <tr class="">
-    <td>3</td>
+    <th>3</th>
     <td>7/4/4/4/11</td>
     <td>5</td>
   </tr>
   <tr class="">
-    <td>11</td>
+    <th>11</th>
     <td>6/3/3/3/10</td>
     <td>6.25</td>
   </tr>
   <tr class="">
-    <td>26</td>
+    <th>26</th>
     <td>6/3/3/3/9</td>
     <td>6.41</td>
   </tr>
   <tr class="">
-    <td>42</td>
+    <th>42</th>
     <td>5/3/3/3/9</td>
     <td>6.57</td>
   </tr>
   <tr class="">
-    <td>46</td>
+    <th>46</th>
     <td>5/3/3/3/8</td>
     <td>6.75</td>
   </tr>
   <tr class="">
-    <td>80</td>
+    <th>80</th>
     <td>5/3/3/3/7</td>
     <td>6.94</td>
   </tr>
@@ -107,8 +110,9 @@ exports[`Amazon default values strafe 1`] = `
 
 exports[`Amazon default values strafe cho-ko-nu 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>7/3/4/4/10</td>
     <td>5.2</td>
   </tr>

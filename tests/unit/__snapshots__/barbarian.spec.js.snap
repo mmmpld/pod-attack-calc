@@ -2,38 +2,39 @@
 
 exports[`Barbarian default values cleave 1`] = `
 <tbody>
+  <!---->
   <tr class="">
-    <td>0</td>
+    <th>0</th>
     <td>15</td>
     <td>1.66</td>
   </tr>
   <tr class="">
-    <td>9</td>
+    <th>9</th>
     <td>14</td>
     <td>1.78</td>
   </tr>
   <tr class="">
-    <td>18</td>
+    <th>18</th>
     <td>13</td>
     <td>1.92</td>
   </tr>
   <tr class="">
-    <td>30</td>
+    <th>30</th>
     <td>12</td>
     <td>2.08</td>
   </tr>
   <tr class="">
-    <td>48</td>
+    <th>48</th>
     <td>11</td>
     <td>2.27</td>
   </tr>
   <tr class="highlight-current">
-    <td>75</td>
+    <th>75</th>
     <td>10</td>
     <td>2.5</td>
   </tr>
   <tr class="">
-    <td>125</td>
+    <th>125</th>
     <td>9</td>
     <td>2.77</td>
   </tr>
@@ -60,6 +61,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>13</td>
     <td>13</td>
     <td>13</td>
+    <!---->
   </tr>
   <tr class="">
     <th>5</th>
@@ -78,6 +80,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>12</td>
     <td>12</td>
     <td>12</td>
+    <!---->
   </tr>
   <tr class="">
     <th>10</th>
@@ -96,6 +99,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>11</td>
     <td>11</td>
     <td>11</td>
+    <!---->
   </tr>
   <tr class="">
     <th>15</th>
@@ -114,6 +118,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>10</td>
     <td>10</td>
     <td>10</td>
+    <!---->
   </tr>
   <tr class="">
     <th>20</th>
@@ -132,6 +137,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>10</td>
     <td>10</td>
     <td>10</td>
+    <!---->
   </tr>
   <tr class="">
     <th>25</th>
@@ -150,6 +156,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>9</td>
     <td>9</td>
     <td>9</td>
+    <!---->
   </tr>
   <tr class="">
     <th>30</th>
@@ -168,6 +175,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>9</td>
     <td>9</td>
     <td>9</td>
+    <!---->
   </tr>
   <tr class="">
     <th>35</th>
@@ -186,6 +194,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>9</td>
     <td>9</td>
     <td>9</td>
+    <!---->
   </tr>
   <tr class="">
     <th>40</th>
@@ -204,6 +213,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>9</td>
     <td>9</td>
     <td>9</td>
+    <!---->
   </tr>
   <tr class="">
     <th>45</th>
@@ -222,6 +232,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>9</td>
     <td>9</td>
     <td>9</td>
+    <!---->
   </tr>
   <tr class="">
     <th>50</th>
@@ -240,6 +251,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>8</td>
     <td>8</td>
     <td>8</td>
+    <!---->
   </tr>
   <tr class="">
     <th>55</th>
@@ -258,6 +270,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>8</td>
     <td>8</td>
     <td>8</td>
+    <!---->
   </tr>
   <tr class="">
     <th>60</th>
@@ -276,6 +289,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>8</td>
     <td>8</td>
     <td>8</td>
+    <!---->
   </tr>
   <tr class="">
     <th>65</th>
@@ -294,6 +308,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>7</td>
     <td>7</td>
     <td>7</td>
+    <!---->
   </tr>
   <tr class="">
     <th>70</th>
@@ -312,6 +327,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>7</td>
     <td>7</td>
     <td>7</td>
+    <!---->
   </tr>
   <tr class="">
     <th>75</th>
@@ -330,6 +346,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>7</td>
     <td>7</td>
     <td>7</td>
+    <!---->
   </tr>
   <tr class="">
     <th>80</th>
@@ -348,6 +365,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>6</td>
     <td>6</td>
     <td>6</td>
+    <!---->
   </tr>
   <tr class="">
     <th>85</th>
@@ -366,6 +384,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>6</td>
     <td>6</td>
     <td>6</td>
+    <!---->
   </tr>
   <tr class="">
     <th>90</th>
@@ -384,6 +403,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>6</td>
     <td>6</td>
     <td>6</td>
+    <!---->
   </tr>
   <tr class="">
     <th>95</th>
@@ -402,6 +422,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>6</td>
     <td>6</td>
     <td>6</td>
+    <!---->
   </tr>
   <tr class="">
     <th>100</th>
@@ -420,6 +441,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>6</td>
     <td>6</td>
     <td>6</td>
+    <!---->
   </tr>
   <tr class="highlight-current">
     <th>105</th>
@@ -438,6 +460,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>5</td>
     <td>5</td>
     <td>5</td>
+    <!---->
   </tr>
   <tr class="">
     <th>110</th>
@@ -456,6 +479,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>5</td>
     <td>5</td>
     <td>5</td>
+    <!---->
   </tr>
   <tr class="">
     <th>115</th>
@@ -474,6 +498,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>5</td>
     <td>5</td>
     <td>5</td>
+    <!---->
   </tr>
   <tr class="">
     <th>120</th>
@@ -492,6 +517,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>5</td>
     <td>5</td>
     <td>5</td>
+    <!---->
   </tr>
   <tr class="">
     <th>125</th>
@@ -510,6 +536,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>5</td>
     <td>5</td>
     <td>5</td>
+    <!---->
   </tr>
   <tr class="">
     <th>130</th>
@@ -528,6 +555,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>135</th>
@@ -546,6 +574,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>140</th>
@@ -564,6 +593,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>145</th>
@@ -582,6 +612,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>150</th>
@@ -600,6 +631,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>155</th>
@@ -618,6 +650,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>160</th>
@@ -636,6 +669,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>165</th>
@@ -654,6 +688,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>170</th>
@@ -672,6 +707,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>175</th>
@@ -690,6 +726,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>180</th>
@@ -708,6 +745,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>185</th>
@@ -726,6 +764,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>190</th>
@@ -744,6 +783,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>195</th>
@@ -762,6 +802,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>200</th>
@@ -780,6 +821,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>205</th>
@@ -798,6 +840,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>210</th>
@@ -816,6 +859,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>215</th>
@@ -834,6 +878,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>220</th>
@@ -852,6 +897,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>4</td>
     <td>4</td>
     <td>4</td>
+    <!---->
   </tr>
   <tr class="">
     <th>225</th>
@@ -870,6 +916,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>3</td>
     <td>3</td>
     <td>3</td>
+    <!---->
   </tr>
   <tr class="">
     <th>230</th>
@@ -888,6 +935,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>3</td>
     <td>3</td>
     <td>3</td>
+    <!---->
   </tr>
   <tr class="">
     <th>235</th>
@@ -906,6 +954,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>3</td>
     <td>3</td>
     <td>3</td>
+    <!---->
   </tr>
   <tr class="">
     <th>240</th>
@@ -924,6 +973,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>3</td>
     <td>3</td>
     <td>3</td>
+    <!---->
   </tr>
   <tr class="">
     <th>245</th>
@@ -942,6 +992,7 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>3</td>
     <td>3</td>
     <td>3</td>
+    <!---->
   </tr>
   <tr class="">
     <th>250</th>
@@ -960,79 +1011,81 @@ exports[`Barbarian default values cleave wolf 1`] = `
     <td>3</td>
     <td>3</td>
     <td>3</td>
+    <!---->
   </tr>
 </tbody>
 `;
 
 exports[`Barbarian default values frenzy (first swing hits) phaseblade/colossus sword 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>8/12</td>
     <td>2.5</td>
   </tr>
   <tr class="">
-    <td>4</td>
+    <th>4</th>
     <td>7/13</td>
     <td>2.5</td>
   </tr>
   <tr class="">
-    <td>6</td>
+    <th>6</th>
     <td>7/12</td>
     <td>2.63</td>
   </tr>
   <tr class="">
-    <td>11</td>
+    <th>11</th>
     <td>7/11</td>
     <td>2.77</td>
   </tr>
   <tr class="">
-    <td>16</td>
+    <th>16</th>
     <td>7/10</td>
     <td>2.94</td>
   </tr>
   <tr class="">
-    <td>23</td>
+    <th>23</th>
     <td>6/11</td>
     <td>2.94</td>
   </tr>
   <tr class="">
-    <td>27</td>
+    <th>27</th>
     <td>6/10</td>
     <td>3.12</td>
   </tr>
   <tr class="">
-    <td>37</td>
+    <th>37</th>
     <td>6/9</td>
     <td>3.33</td>
   </tr>
   <tr class="">
-    <td>50</td>
+    <th>50</th>
     <td>6/8</td>
     <td>3.57</td>
   </tr>
   <tr class="">
-    <td>60</td>
+    <th>60</th>
     <td>5/9</td>
     <td>3.57</td>
   </tr>
   <tr class="">
-    <td>75</td>
+    <th>75</th>
     <td>5/8</td>
     <td>3.84</td>
   </tr>
   <tr class="">
-    <td>105</td>
+    <th>105</th>
     <td>5/7</td>
     <td>4.16</td>
   </tr>
   <tr class="">
-    <td>152</td>
+    <th>152</th>
     <td>5/6</td>
     <td>4.54</td>
   </tr>
   <tr class="">
-    <td>174</td>
+    <th>174</th>
     <td>4/7</td>
     <td>4.54</td>
   </tr>
@@ -1041,43 +1094,44 @@ exports[`Barbarian default values frenzy (first swing hits) phaseblade/colossus 
 
 exports[`Barbarian default values frenzy (first swing misses) 2x phaseblade 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>8.5</td>
     <td>2.94</td>
   </tr>
   <tr class="">
-    <td>8</td>
+    <th>8</th>
     <td>8</td>
     <td>3.12</td>
   </tr>
   <tr class="">
-    <td>16</td>
+    <th>16</th>
     <td>7.5</td>
     <td>3.33</td>
   </tr>
   <tr class="">
-    <td>27</td>
+    <th>27</th>
     <td>7</td>
     <td>3.57</td>
   </tr>
   <tr class="">
-    <td>42</td>
+    <th>42</th>
     <td>6.5</td>
     <td>3.84</td>
   </tr>
   <tr class="">
-    <td>65</td>
+    <th>65</th>
     <td>6</td>
     <td>4.16</td>
   </tr>
   <tr class="">
-    <td>102</td>
+    <th>102</th>
     <td>5.5</td>
     <td>4.54</td>
   </tr>
   <tr class="">
-    <td>174</td>
+    <th>174</th>
     <td>5</td>
     <td>5</td>
   </tr>
@@ -1086,33 +1140,34 @@ exports[`Barbarian default values frenzy (first swing misses) 2x phaseblade 1`] 
 
 exports[`Barbarian default values standard attack 1`] = `
 <tbody>
+  <!---->
   <tr class="highlight-current">
-    <td>0</td>
+    <th>0</th>
     <td>11</td>
     <td>2.27</td>
   </tr>
   <tr class="">
-    <td>11</td>
+    <th>11</th>
     <td>10</td>
     <td>2.5</td>
   </tr>
   <tr class="">
-    <td>26</td>
+    <th>26</th>
     <td>9</td>
     <td>2.77</td>
   </tr>
   <tr class="">
-    <td>48</td>
+    <th>48</th>
     <td>8</td>
     <td>3.12</td>
   </tr>
   <tr class="">
-    <td>86</td>
+    <th>86</th>
     <td>7</td>
     <td>3.57</td>
   </tr>
   <tr class="">
-    <td>180</td>
+    <th>180</th>
     <td>6</td>
     <td>4.16</td>
   </tr>
