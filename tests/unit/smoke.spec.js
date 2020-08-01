@@ -1,26 +1,28 @@
-import '@testing-library/jest-dom'
-import Vue from 'vue'
-import { render, fireEvent } from '@testing-library/vue'
-import Vuetify from 'vuetify'
-import App from '@/App.vue'
-Vue.use(Vuetify)
-const renderWithVuetify = (component, options, callback) => {
-    const root = document.createElement('div')
-    root.setAttribute('data-app', 'true')
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+import VueRouter from 'vue-router';
+import router from "@/router"
+import App from '@/App';
+import Main from '@/components/Main.vue'
+import { mount, createLocalVue } from '@vue/test-utils';
+Vue.use(Vuetify);
+const localVue = createLocalVue();
+localVue.use(VueRouter);
+let vuetify = new Vuetify();
+const wrapper = mount(App, {
+    localVue,
+    vuetify,
+    router
+});
 
-    return render(
-        component,
-        {
-            container: document.body.appendChild(root),
-            // for Vuetify components that use the $vuetify instance property
-            vuetify: new Vuetify(),
-            ...options,
-        },
-        callback,
-    )
-}
+describe('should set [data-app] attribute on outer most div', () => {
+    it('data-attribute set', async () => {
+        expect(wrapper.attributes('data-app')).toStrictEqual("true");
+    })
 
-test('should set [data-app] attribute on outer most div', () => {
-    const { container } = renderWithVuetify(App)
-    expect(container.getAttribute('data-app')).toEqual('true')
+    it('main should have character and breakpoints header text', async () => {
+        let h2 = wrapper.findAll("h2");
+        expect(h2.at(0).text()).toStrictEqual("Character");
+        expect(h2.at(1).text()).toStrictEqual("Breakpoints");
+    })
 })
