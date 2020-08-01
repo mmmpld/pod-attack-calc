@@ -1619,6 +1619,25 @@ export default {
     },
     updated: function() {
         if (this.doAddQueryString) this.$router.push({ query: this.query }).catch(error => {}); // catch suppresses redundant navigation error in console
+    },
+    metaInfo: {
+        meta: [
+            {
+                property: 'og:site_name',
+                content: 'Path of Diablo Attack Speed Calculator',
+                vmid: 'og:site_name'
+            },
+            {
+                property: 'og:title',
+                content: 'Breakpoints Table',
+                vmid: 'og:title'
+            },
+            {
+                property: 'og:description',
+                content: 'Calculate attack speeds for the Diablo 2 mod Path of Diablo',
+                vmid: 'og:description'
+            },
+        ]
     }
 };
 </script>
