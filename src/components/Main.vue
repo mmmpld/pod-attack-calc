@@ -44,7 +44,7 @@
                                     <v-icon v-else>mdi-bookmark-outline</v-icon>
                                 </v-btn>
                             </template>
-                            <span>{{doAddQueryString ? 'show simple url' : 'show bookmarkable url'}}</span>
+                            <span>toggle bookmarkable url</span>
                         </v-tooltip>
                         <v-snackbar v-model="isShowingQuerySnackbar"
                                     timeout="4000"
