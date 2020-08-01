@@ -1756,6 +1756,7 @@ export default {
                     }
                 }
             }
+            bps.rows = bps.rows.sort((a, b) => (a.ias - b.ias));
             return bps;
         },
         aidel: function () {
