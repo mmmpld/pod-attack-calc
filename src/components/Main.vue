@@ -1,4 +1,4 @@
-<style scoped>
+<style>
     .quality-magic {
         color: #8484f0 !important;
     }
@@ -416,7 +416,7 @@ export default {
           var FPA = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(animationSpeed * Acceleration / 100)) - 1;
           var FPAmax = Math.ceil(256 * (FramesPerDirection - StartingFrame) / Math.floor(animationSpeed * 175 / 100)) - 1;
           if (attackSkill.title === 'Frenzy (first swing hits)') {
-                console.debug('special case fpa for frenzy first swing hits');
+                //console.debug('special case fpa for frenzy first swing hits');
                 FPA = this.frenzyFpa(this.iasOffWeapon).sum;
                 FPAmax = 0; // TODO what should this be?
           }
@@ -561,7 +561,7 @@ export default {
           // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
           // && not whirlwind && rollback normal
           if (attackSkill.title === "Frenzy (first swing hits)") {
-                console.debug("special case frenzy hits");
+                //console.debug("special case frenzy hits");
                 let frenzyFpa = this.frenzyFpa(this.iasOffWeapon, this.iasWeaponPrimary, this.iasWeaponSecondary);
                 this.rollback1 = frenzyFpa.parts[0];
                 this.rollback3 = frenzyFpa.parts[1];
@@ -1441,7 +1441,7 @@ export default {
               }
               // Impale, Jab, Dragon Claw, Double Swing, Frenzy, Double Throw && not Whirlwind
               if (attackSkill.title === 'Frenzy (first swing hits)') {
-                    console.debug('special case breakpoints for frenzy first swing hits');
+                    //console.debug('special case breakpoints for frenzy first swing hits');
                     let weapSecondary = this.lookupWeapon[this.weaponsSecondarySelected];
                     let frenzyTempParts = [0, 0];
                     for (let accel = 0; accel < 1000; accel++) {
@@ -1665,17 +1665,68 @@ export default {
           }
       },
         standardisedBreakpoints: function() {
-            const iasRows = 50;
             let bps = {
                 meta: {
                     horizontalLabel: null,
-                    verticalLabel: null
+                    verticalLabel: null,
+                    columnHeaders: [],
+                    columnCurrent: null
                 },
                 rows: []
             };
-            if (this.shapeShiftFormsSelected) { // shifted
+            // frenzy hits
+            if (this.attackSkill.title === 'Frenzy (first swing hits)') {
+                let maxPrimaryIasToCalculate = 250;
+                let maxSecondaryIasToCalculate = 70;
+                let rowIasIncrement = 5;
+                let numberOfRowsToCalculate = maxPrimaryIasToCalculate/rowIasIncrement;
+                bps.meta.horizontalLabel = `Secondary Weapon IAS with ${this.iasOffWeapon} Off-Weapon IAS`;
+                bps.meta.verticalLabel = `Primary Weapon IAS with ${this.iasOffWeapon} Off-Weapon IAS`;
+                bps.meta.columnCurrent = this.iasWeaponSecondary;
+                for (let i = 0; i <= numberOfRowsToCalculate; i++) { // itterate down the table
+                    let ias1 = i * rowIasIncrement;
+                    let frames = [];
+                    let aps = 0;
+                    for (let ias2 = 0; ias2 <= Math.max(maxSecondaryIasToCalculate, this.iasWeaponSecondary); ias2++) { // itterate across the table
+                        if ((ias2 % rowIasIncrement === 0 && ias2 <= maxSecondaryIasToCalculate) || ias2 === this.iasWeaponSecondary) {
+                            let bp = this.frenzyFpa(this.iasOffWeapon, ias1, ias2);
+                            frames.push(`${bp.parts[0]}/${bp.parts[1]}`);
+                            // add column headers on first row pass
+                            if (ias1 === 0) {
+                                bps.meta.columnHeaders.push(ias2);
+                            }
+                        }
+                    }
+                    bps.rows.push({
+                        ias: ias1,
+                        frames: frames,
+                        aps: aps,
+                        current: ias1 == this.iasWeaponPrimary
+                    });
+                }
+                // non-standard primary ias added at end and sorted later
+                if (this.iasWeaponPrimary % rowIasIncrement != 0 || this.iasWeaponPrimary > maxPrimaryIasToCalculate) {
+                    let ias1 = this.iasWeaponPrimary;
+                    let frames = [];
+                    let aps = 0;
+                    for (let ias2 = 0; ias2 <= Math.max(maxSecondaryIasToCalculate, this.iasWeaponSecondary); ias2++) { // itterate across the table
+                        if ((ias2 % rowIasIncrement === 0 && ias2 <= maxSecondaryIasToCalculate)  || ias2 === this.iasWeaponSecondary) {
+                            let bp = this.frenzyFpa(this.iasOffWeapon, ias1, ias2);
+                            frames.push(`${bp.parts[0]}/${bp.parts[1]}`);
+                        }
+                    }
+                    bps.rows.push({
+                        ias: ias1,
+                        frames: frames,
+                        aps: aps,
+                        current: true
+                    });
+                }
+            } else if (this.shapeShiftFormsSelected) { // shifted
+                const iasRows = 50;
                 bps.meta.horizontalLabel = 'Off-Weapon IAS';
                 bps.meta.verticalLabel = 'Primary Weapon IAS';
+                bps.meta.columnCurrent = this.iasOffWeapon;
                 for (let j = 1; j < iasRows + 2; j++) {
                     let ias = 5 * (j-1);
                     let bpRow = this.breakpoints.breakpoints.slice((j-1)*15,((j-1)*15)+15);
@@ -1683,9 +1734,17 @@ export default {
                     let aps = 0;
                     for (let i = 0; i < bpRow.length; i++) {
                         frames.push(bpRow[i]);
+                        // add column headers on first row pass
+                        if (j === 1) {
+                            bps.meta.columnHeaders.push(i * 5);
+                        }
                     }
-                    if (this.breakpoints.oIas > 70) {
+                    if (this.iasOffWeapon > 70) {
                         frames.push(this.breakpoints.nonStandardOffWeapon[j-1]);
+                        // add column headers on first row pass
+                        if (j === 1) {
+                            bps.meta.columnHeaders.push(this.iasOffWeapon);
+                        }
                     }
                     bps.rows.push({
                         ias: ias,
@@ -1697,8 +1756,8 @@ export default {
                 if (this.iasWeaponPrimary % 5 != 0) {
                     let ias = this.iasWeaponPrimary;
                     let frames = this.breakpoints.nonStandardWeapon;
-                    let aps = 0;//this.currentAps.replace(" attacks per second", "");
-                    if (this.breakpoints.oIas > 70) {
+                    let aps = 0;
+                    if (this.iasOffWeapon > 70) {
                         frames.push(null); // placeholder for uncalculated high off-weapon ias and non multiple of 5 weapon ias
                     }
                     bps.rows.push({
@@ -1713,9 +1772,10 @@ export default {
                 if (currentBp) {
                     currentBp.current = true;
                 }
-            } else if (this.attackSkill.rollback == 100 && this.attackSkill.title !== 'Frenzy (first swing hits)') { // normal skills
+            } else if (this.attackSkill.rollback == 100) { // normal skills
                 bps.meta.verticalLabel = 'IAS';
                 bps.meta.horizontalLabel = 'attack speed [frames]';
+                bps.meta.columnHeaders.push('IAS');
                 for (let i = 0; i < this.breakpoints.breakpoints.length; i++) {
                     let ias = this.breakpoints.breakpoints[i][0];
                     let frames = [this.breakpoints.breakpoints[i][1]];
@@ -1737,6 +1797,7 @@ export default {
             } else { // multi hit skills
                 bps.meta.verticalLabel = 'IAS';
                 bps.meta.horizontalLabel = 'attack speed [frames]';
+                bps.meta.columnHeaders.push('IAS');
                 for (let i = 0; i < this.breakpoints.breakpoints.length; i++) {
                     let ias = this.breakpoints.breakpoints[i][0];
                     let frames = [this.breakpoints.breakpoints[i][1]];

@@ -2,8 +2,7 @@
 
 exports[`Merc Act2 default values standard attack 1`] = `
 <tbody>
-  <!---->
-  <tr class="highlight-current">
+  <tr class="highlight-current-row">
     <th>0</th>
     <td>15</td>
     <td>1.47</td>

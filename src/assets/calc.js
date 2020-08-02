@@ -718,7 +718,7 @@ export var data = {
             animation: 7,
             sequence: 3,
             rollback: 100,
-            note: "Both weapons' IAS effects speed. Table shows off-weapon IAS."
+            note: "Your current off-weapon attack speed is included in the calculation."
         }
     ]
 };

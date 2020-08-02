@@ -2,7 +2,6 @@
 
 exports[`Barbarian default values cleave 1`] = `
 <tbody>
-  <!---->
   <tr class="">
     <th>0</th>
     <td>15</td>
@@ -28,7 +27,7 @@ exports[`Barbarian default values cleave 1`] = `
     <td>11</td>
     <td>2.27</td>
   </tr>
-  <tr class="highlight-current">
+  <tr class="highlight-current-row">
     <th>75</th>
     <td>10</td>
     <td>2.5</td>
@@ -43,1059 +42,1855 @@ exports[`Barbarian default values cleave 1`] = `
 
 exports[`Barbarian default values cleave wolf 1`] = `
 <tbody>
-  <th rowspan="52"><span class="vertical-label">Primary Weapon IAS</span></th>
+  <th rowspan="52" class="vertical-label"><span>Primary Weapon IAS</span></th>
   <tr class="">
     <th>0</th>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <td>13</td>
-    <!---->
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
+    <td scope="col">13</td>
   </tr>
   <tr class="">
     <th>5</th>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <td>12</td>
-    <!---->
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
+    <td scope="col">12</td>
   </tr>
   <tr class="">
     <th>10</th>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <td>11</td>
-    <!---->
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
+    <td scope="col">11</td>
   </tr>
   <tr class="">
     <th>15</th>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <!---->
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
   </tr>
   <tr class="">
     <th>20</th>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <td>10</td>
-    <!---->
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
+    <td scope="col">10</td>
   </tr>
   <tr class="">
     <th>25</th>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <!---->
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
   </tr>
   <tr class="">
     <th>30</th>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <!---->
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
   </tr>
   <tr class="">
     <th>35</th>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <!---->
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
   </tr>
   <tr class="">
     <th>40</th>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <!---->
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
   </tr>
   <tr class="">
     <th>45</th>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <td>9</td>
-    <!---->
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
+    <td scope="col">9</td>
   </tr>
   <tr class="">
     <th>50</th>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <!---->
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
   </tr>
   <tr class="">
     <th>55</th>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <!---->
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
   </tr>
   <tr class="">
     <th>60</th>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <td>8</td>
-    <!---->
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
+    <td scope="col">8</td>
   </tr>
   <tr class="">
     <th>65</th>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <!---->
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
   </tr>
   <tr class="">
     <th>70</th>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <!---->
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
   </tr>
   <tr class="">
     <th>75</th>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <td>7</td>
-    <!---->
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
+    <td scope="col">7</td>
   </tr>
   <tr class="">
     <th>80</th>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <!---->
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
   </tr>
   <tr class="">
     <th>85</th>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <!---->
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
   </tr>
   <tr class="">
     <th>90</th>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <!---->
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
   </tr>
   <tr class="">
     <th>95</th>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <!---->
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
   </tr>
   <tr class="">
     <th>100</th>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <td>6</td>
-    <!---->
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
+    <td scope="col">6</td>
   </tr>
-  <tr class="highlight-current">
+  <tr class="highlight-current-row">
     <th>105</th>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <!---->
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
   </tr>
   <tr class="">
     <th>110</th>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <!---->
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
   </tr>
   <tr class="">
     <th>115</th>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <!---->
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
   </tr>
   <tr class="">
     <th>120</th>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <!---->
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
   </tr>
   <tr class="">
     <th>125</th>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <td>5</td>
-    <!---->
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
+    <td scope="col">5</td>
   </tr>
   <tr class="">
     <th>130</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>135</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>140</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>145</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>150</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>155</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>160</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>165</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>170</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>175</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>180</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>185</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>190</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>195</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>200</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>205</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>210</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>215</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>220</th>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <td>4</td>
-    <!---->
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
+    <td scope="col">4</td>
   </tr>
   <tr class="">
     <th>225</th>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <!---->
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
   </tr>
   <tr class="">
     <th>230</th>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <!---->
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
   </tr>
   <tr class="">
     <th>235</th>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <!---->
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
   </tr>
   <tr class="">
     <th>240</th>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <!---->
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
   </tr>
   <tr class="">
     <th>245</th>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <!---->
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
   </tr>
   <tr class="">
     <th>250</th>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <td>3</td>
-    <!---->
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
+    <td scope="col">3</td>
   </tr>
 </tbody>
 `;
 
 exports[`Barbarian default values frenzy (first swing hits) phaseblade/colossus sword 1`] = `
 <tbody>
-  <!---->
-  <tr class="highlight-current">
+  <th rowspan="52" class="vertical-label"><span>Primary Weapon IAS with 0 Off-Weapon IAS</span></th>
+  <tr class="highlight-current-row">
     <th>0</th>
-    <td>8/12</td>
-    <td>2.5</td>
+    <td scope="col">8/12</td>
+    <td scope="col">8/12</td>
+    <td scope="col">8/11</td>
+    <td scope="col">8/10</td>
+    <td scope="col">8/10</td>
+    <td scope="col">8/10</td>
+    <td scope="col">8/9</td>
+    <td scope="col">8/9</td>
+    <td scope="col">8/9</td>
+    <td scope="col">8/9</td>
+    <td scope="col">8/8</td>
+    <td scope="col">8/8</td>
+    <td scope="col">8/8</td>
+    <td scope="col">8/8</td>
+    <td scope="col">8/8</td>
   </tr>
   <tr class="">
-    <th>4</th>
-    <td>7/13</td>
-    <td>2.5</td>
+    <th>5</th>
+    <td scope="col">7/13</td>
+    <td scope="col">7/13</td>
+    <td scope="col">7/12</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/8</td>
   </tr>
   <tr class="">
-    <th>6</th>
-    <td>7/12</td>
-    <td>2.63</td>
+    <th>10</th>
+    <td scope="col">7/13</td>
+    <td scope="col">7/12</td>
+    <td scope="col">7/12</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
   </tr>
   <tr class="">
-    <th>11</th>
-    <td>7/11</td>
-    <td>2.77</td>
+    <th>15</th>
+    <td scope="col">7/13</td>
+    <td scope="col">7/12</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
   </tr>
   <tr class="">
-    <th>16</th>
-    <td>7/10</td>
-    <td>2.94</td>
+    <th>20</th>
+    <td scope="col">7/12</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/11</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/10</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/9</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
+    <td scope="col">7/8</td>
   </tr>
   <tr class="">
-    <th>23</th>
-    <td>6/11</td>
-    <td>2.94</td>
+    <th>25</th>
+    <td scope="col">6/14</td>
+    <td scope="col">6/13</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
   </tr>
   <tr class="">
-    <th>27</th>
-    <td>6/10</td>
-    <td>3.12</td>
+    <th>30</th>
+    <td scope="col">6/13</td>
+    <td scope="col">6/13</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/8</td>
   </tr>
   <tr class="">
-    <th>37</th>
-    <td>6/9</td>
-    <td>3.33</td>
+    <th>35</th>
+    <td scope="col">6/13</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+  </tr>
+  <tr class="">
+    <th>40</th>
+    <td scope="col">6/13</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+  </tr>
+  <tr class="">
+    <th>45</th>
+    <td scope="col">6/13</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
   </tr>
   <tr class="">
     <th>50</th>
-    <td>6/8</td>
-    <td>3.57</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+  </tr>
+  <tr class="">
+    <th>55</th>
+    <td scope="col">6/12</td>
+    <td scope="col">6/12</td>
+    <td scope="col">6/11</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/10</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/9</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
+    <td scope="col">6/8</td>
   </tr>
   <tr class="">
     <th>60</th>
-    <td>5/9</td>
-    <td>3.57</td>
+    <td scope="col">5/14</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+  </tr>
+  <tr class="">
+    <th>65</th>
+    <td scope="col">5/14</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+  </tr>
+  <tr class="">
+    <th>70</th>
+    <td scope="col">5/14</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
   </tr>
   <tr class="">
     <th>75</th>
-    <td>5/8</td>
-    <td>3.84</td>
+    <td scope="col">5/14</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+  </tr>
+  <tr class="">
+    <th>80</th>
+    <td scope="col">5/14</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+  </tr>
+  <tr class="">
+    <th>85</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>90</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>95</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>100</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
   </tr>
   <tr class="">
     <th>105</th>
-    <td>5/7</td>
-    <td>4.16</td>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
   </tr>
   <tr class="">
-    <th>152</th>
-    <td>5/6</td>
-    <td>4.54</td>
+    <th>110</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
   </tr>
   <tr class="">
-    <th>174</th>
-    <td>4/7</td>
-    <td>4.54</td>
+    <th>115</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>120</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>125</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>130</th>
+    <td scope="col">5/13</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>135</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>140</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>145</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>150</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>155</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>160</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>165</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>170</th>
+    <td scope="col">5/12</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/11</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/10</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/9</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+    <td scope="col">5/8</td>
+  </tr>
+  <tr class="">
+    <th>175</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>180</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>185</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>190</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>195</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>200</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>205</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>210</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>215</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>220</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>225</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>230</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>235</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>240</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>245</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+  </tr>
+  <tr class="">
+    <th>250</th>
+    <td scope="col">4/14</td>
+    <td scope="col">4/13</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/12</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/11</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/10</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
+    <td scope="col">4/9</td>
   </tr>
 </tbody>
 `;
 
 exports[`Barbarian default values frenzy (first swing misses) 2x phaseblade 1`] = `
 <tbody>
-  <!---->
-  <tr class="highlight-current">
+  <tr class="highlight-current-row">
     <th>0</th>
     <td>8.5</td>
     <td>2.94</td>
@@ -1140,8 +1935,7 @@ exports[`Barbarian default values frenzy (first swing misses) 2x phaseblade 1`] 
 
 exports[`Barbarian default values standard attack 1`] = `
 <tbody>
-  <!---->
-  <tr class="highlight-current">
+  <tr class="highlight-current-row">
     <th>0</th>
     <td>11</td>
     <td>2.27</td>
