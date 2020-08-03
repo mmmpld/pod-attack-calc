@@ -18,6 +18,7 @@ describe('Barbarian default values', () => {
         await breakpoints('8.5', '2.94', { charactersSelected: characterId, skillsSelected: 17, weaponsPrimarySelected: 191, weaponsSecondarySelected: 191 });
     })
 
+    // http://localhost:8080/pod-attack-calc/?c=2&s=37&w1=191&w2=56&frenz=30
     it('frenzy (first swing hits) phaseblade/colossus sword', async () => {
         await breakpoints('8/12', '2.5', { charactersSelected: characterId, skillsSelected: 37, weaponsPrimarySelected: 191, weaponsSecondarySelected: 56, frenzySkillIas: 30 });
     })

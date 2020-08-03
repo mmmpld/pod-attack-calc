@@ -228,10 +228,6 @@ export default {
       animationFrames: 0,
       WSMprimaer: 0,
       WSMsekundaer: 0,
-      IASprimaer: 0,
-      IASsekundaer: 0,
-      EIASprimaer: 0,
-      EIASsekundaer: 0,
       SIAS: 0,
       rollback1: 0,
       rollback2: 0,
@@ -337,11 +333,11 @@ export default {
           if (((this.charactersSelected == 1) || (this.charactersSelected == 2)) && (this.weaponsSecondarySelected > 0)) {
               if (this.isWsmBug) {
                   console.log('applying wsm bug');
-                  this.WSMprimaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2) + weapPrimary.wsm - weapSecondary.wsm;
-                  this.WSMsekundaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2);
+                  this.WSMprimaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2, 10) + weapPrimary.wsm - weapSecondary.wsm;
+                  this.WSMsekundaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2, 10);
               } else {
-                  this.WSMprimaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2);
-                  this.WSMsekundaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2) + weapSecondary.wsm - weapPrimary.wsm;
+                  this.WSMprimaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2, 10);
+                  this.WSMsekundaer = parseInt((weapPrimary.wsm + weapSecondary.wsm) / 2, 10) + weapSecondary.wsm - weapPrimary.wsm;
               }
           }
       },
@@ -372,14 +368,14 @@ export default {
               if (weapPrimary.type == this.weaponTypes.twoHandedSword) { // 2-hand swords
                   FramesPerDirection = this.weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
               }
-              animationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
+              animationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.iasPrimaryAndOffWeapon - parseInt(this.iasOffWeapon, 10) - weapPrimary.wsm) * animationSpeed / 100)));
           }
           // Wolf
           if (this.shapeShiftFormsSelected == 2) {
               if (weapPrimary.type == this.weaponTypes.twoHandedSword) { // 2-hand swords
                   FramesPerDirection = this.weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
               }
-              animationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
+              animationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.iasPrimaryAndOffWeapon - parseInt(this.iasOffWeapon, 10) - weapPrimary.wsm) * animationSpeed / 100)));
           }
           return animationSpeed;
       },
@@ -387,11 +383,12 @@ export default {
           var weapPrimary = this.lookupWeapon[this.weaponsPrimarySelected];
           var animationSpeed = this.animationSpeed(FramesPerDirection);
           var attackSkill = this.data.attack[this.skillsSelected];
+          // bear
           if (this.shapeShiftFormsSelected == 1) {
               if (weapPrimary.type == this.weaponTypes.twoHandedSword) { // 2-hand swords
                   FramesPerDirection = this.weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
               }
-              //animationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
+              //animationSpeed = Math.floor(256 * 10 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.iasPrimaryAndOffWeapon - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
               FramesPerDirection = 12;
               if (attackSkill.animation == 6) {
                   FramesPerDirection = 10;
@@ -403,7 +400,7 @@ export default {
               if (weapPrimary.type == this.weaponTypes.twoHandedSword) { // 2-hand swords
                   FramesPerDirection = this.weaponClassFrames[2][this.charactersSelected][0]; //1-hand swinging weapon
               }
-              //animationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.IASprimaer - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
+              //animationSpeed = Math.floor(256 * 9 / Math.floor(256 * FramesPerDirection / Math.floor((100 + this.iasPrimaryAndOffWeapon - parseInt(this.iasOffWeapon) - weapPrimary.wsm) * animationSpeed / 100)));
               FramesPerDirection = 13;
               if ((this.skillsSelected == 29) && (StartingFrame == 0)) { // Fury
                   FramesPerDirection = 7;
@@ -418,7 +415,7 @@ export default {
           if (attackSkill.title === 'Frenzy (first swing hits)') {
                 //console.debug('special case fpa for frenzy first swing hits');
                 FPA = this.frenzyFpa(this.iasOffWeapon).sum;
-                FPAmax = 0; // TODO what should this be?
+                FPAmax = this.frenzyFpa(175).sum;
           }
           if (this.skillsSelected == 19) { // whirlwind
               FPA = Math.floor(256 * FramesPerDirection / Math.floor(animationSpeed * Acceleration / 100));
@@ -458,17 +455,19 @@ export default {
             }
             let EIAS1 = Math.floor(120 * (OIAS + IASprimary) / (120 + OIAS + IASprimary))
             let EIAS2 = Math.floor(120 * (OIAS + IASsecondary) / (120 + OIAS + IASsecondary))
-            let Acceleration1 = 100 + SIAS + EIAS1 - WSM1 // 100 is normally 70 here because of the sequence, -30 penalty is applied to the skill ias
-            let Acceleration2 = 100 + SIAS + EIAS2 - WSM2 // 100 is normally 70 here because of the sequence, -30 penalty is applied to the skill ias
-            let fpa_1 = Math.ceil(256*9/Math.floor(256*Acceleration1/100)) - 1
-            let fpa_2 = Math.ceil((256*17 - fpa_1*Math.floor(256*Acceleration1/100))/Math.floor(256*Acceleration2/100))
+            let acceleration1 = Math.max(Math.min(100 + SIAS + EIAS1 - WSM1, 175), 15); // 100 is normally 70 here because of the sequence, -30 penalty is applied to the skill ias
+            let acceleration2 = Math.max(Math.min(100 + SIAS + EIAS2 - WSM2, 175), 15); // 100 is normally 70 here because of the sequence, -30 penalty is applied to the skill ias
+            let fpa_1 = Math.ceil(256*9/Math.floor(256*acceleration1/100)) - 1
+            let fpa_2 = Math.ceil((256*17 - fpa_1*Math.floor(256*acceleration1/100))/Math.floor(256*acceleration2/100))
             let resultFpa = fpa_1 + fpa_2
             return {
                 sum: resultFpa,
                 parts: [
                     fpa_1,
                     fpa_2
-                ]
+                ],
+                isPrimaryFpaMaxed: acceleration1 === 175,
+                isSecondaryFpaMaxed: acceleration2 === 175,
             };
         },
       calculateValues: function () {
@@ -479,10 +478,9 @@ export default {
           var attackSkill = this.data.attack[this.skillsSelected];
           console.debug('Calculating initial values for: ' + attackSkill.title);
           this.calculateSkillIas();
-          this.calculateEffectiveIas();
           this.calculateWsm();
-          var acceleration = Math.max(Math.min(100 + this.SIAS + this.EIASprimaer - this.WSMprimaer, 175), 15);
-          var acceleration2 = Math.max(Math.min(100 + this.SIAS + this.EIASsekundaer - this.WSMsekundaer, 175), 15);
+          var acceleration = Math.max(Math.min(100 + this.SIAS + this.iasEffectivePrimary - this.WSMprimaer, 175), 15);
+          var acceleration2 = Math.max(Math.min(100 + this.SIAS + this.iasEffectiveSecondary - this.WSMsekundaer, 175), 15);
           var start = this.startingFrame;  
           var rollbackframe;
           if (((attackSkill.animation == 0) || (attackSkill.animation == 6)) && (attackSkill.rollback == 100)) {
@@ -565,11 +563,9 @@ export default {
                 let frenzyFpa = this.frenzyFpa(this.iasOffWeapon, this.iasWeaponPrimary, this.iasWeaponSecondary);
                 this.rollback1 = frenzyFpa.parts[0];
                 this.rollback3 = frenzyFpa.parts[1];
-                // if (this.rollback3 == 7) { // TODO what should this value be?
-                //     this.isCurrentFpaMaxed = true;
-                // }
+                this.isCurrentFpaMaxed = frenzyFpa.isPrimaryFpaMaxed && frenzyFpa.isSecondaryFpaMaxed;
                 this.currentFpa = this.rollback1 + "/" + this.rollback3 + " frames per attack";
-                this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback3) / 2)) / 100 + " attacks per second";
+                this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback3) / 2), 10) / 100 + " attacks per second";
           } else if ((attackSkill.animation == 7) && (this.skillsSelected != 19) && (attackSkill.rollback == 100)) {
               this.animationFrames = this.sequences[attackSkill.sequence][weapPrimary.type];
               // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
@@ -584,7 +580,7 @@ export default {
               resultFpa++;
               // 3 Jab && player classes
               if ((this.skillsSelected == 3) && (this.isPlayableClass)) {
-                  resultFpa = parseInt(100 * resultFpa / 3) / 100;
+                  resultFpa = parseInt(100 * resultFpa / 3, 10) / 100;
               }
               // merc act 2
               if (this.charactersSelected == 8) {
@@ -617,7 +613,7 @@ export default {
                       this.isCurrentFpaMaxed = true;
                   }
                   this.currentFpa = this.rollback1 + "/" + this.rollback1 + "/" + this.rollback1 + "/" + this.rollback1 + "/" + this.rollback3 + " frames per attack";
-                  this.currentAps = parseInt(100 * 25 / ((this.rollback1 * 4 + this.rollback3) / 5)) / 100 + " attacks per second";
+                  this.currentAps = parseInt(100 * 25 / ((this.rollback1 * 4 + this.rollback3) / 5), 10) / 100 + " attacks per second";
               }
               // Fury
               if (this.skillsSelected == 29) {
@@ -636,7 +632,7 @@ export default {
                   }
                   isMaxIas = true;
                   this.currentFpa = this.rollback1 + "/" + this.rollback1 + "/" + this.rollback1 + "/" + this.rollback1 + "/" + this.rollback3 + " frames per attack";
-                  this.currentAps = parseInt(100 * 25 / ((this.rollback1 * 4 + this.rollback3) / 5)) / 100 + " attacks per second";
+                  this.currentAps = parseInt(100 * 25 / ((this.rollback1 * 4 + this.rollback3) / 5), 10) / 100 + " attacks per second";
               }
               // Zeal
               if (this.skillsSelected == 24) {
@@ -674,7 +670,7 @@ export default {
                   this.currentFpa = this.rollback1 + "/" + this.rollback2 + "/" + this.rollback2 + "/" + this.rollback2 + "/" + this.rollback3 + " frames per attack";
                   // Zeal
                   if (this.skillsSelected == 24) {
-                      this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback2 * 3 + this.rollback3) / 5)) / 100 + " attacks per second";
+                      this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback2 * 3 + this.rollback3) / 5), 10) / 100 + " attacks per second";
                   }
               }
           }
@@ -722,7 +718,7 @@ export default {
               }
               isMaxIas = true;
               this.currentFpa = this.rollback1 + "/" + this.rollback2 + "/" + this.rollback3 + "/" + this.rollback4 + "/" + this.rollback5 + " frames per attack";
-              this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback2 + this.rollback3 * 4 + this.rollback4 * 3 + this.rollback5) / 10)) / 100 + " attacks per second";
+              this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback2 + this.rollback3 * 4 + this.rollback4 * 3 + this.rollback5) / 10), 10) / 100 + " attacks per second";
           }
           // Fend
           if (attackSkill.rollback == 40) {
@@ -749,17 +745,17 @@ export default {
               }
               isMaxIas = true;
               this.currentFpa = this.rollback1 + "/" + this.rollback2 + "/" + this.rollback3 + " frames per attack";
-              this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback2 + this.rollback3) / 2)) / 100 + " attacks per second";
+              this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback2 + this.rollback3) / 2), 10) / 100 + " attacks per second";
           }
           // Most attacks
           if (attackSkill.rollback == 100 && attackSkill.title !== "Frenzy (first swing hits)") {
               this.currentFpa = resultFpa + " frames per attack";
-              this.currentAps = parseInt(100 * 25 / resultFpa) / 100 + " attacks per second";
+              this.currentAps = parseInt(100 * 25 / resultFpa, 10) / 100 + " attacks per second";
               if (this.charactersSelected > 6) {
-                  this.currentAps = parseInt(100 * 25 / (resultFpa + 2)) / 100 + " attacks per second";
+                  this.currentAps = parseInt(100 * 25 / (resultFpa + 2), 10) / 100 + " attacks per second";
               }
               if (((this.charactersSelected == 8) && (this.skillsSelected == 3)) || ((this.charactersSelected == 9) && (this.skillsSelected == 0))) {
-                  this.currentAps = parseInt(100 * 25 / (resultFpa + 1)) / 100 + " attacks per second";
+                  this.currentAps = parseInt(100 * 25 / (resultFpa + 1), 10) / 100 + " attacks per second";
               }
               // Shape Shifted && off-hand weapon not unarmed && standard attack
               if ((this.shapeShiftFormsSelected > 0) && (this.weaponsSecondarySelected > 0) && (this.skillsSelected == 0)) {
@@ -768,26 +764,12 @@ export default {
               }
           }
       },
-      calculateEffectiveIas: function () {
-          if (this.weaponsPrimarySelected == 0) {
-              this.IASprimaer = parseInt(this.iasOffWeapon);
-          }
-          if ((this.weaponsPrimarySelected > 0) && (this.weaponsSecondarySelected == 0)) {
-              this.IASprimaer = parseInt(this.iasOffWeapon) + parseInt(this.iasWeaponPrimary);
-          }
-          if (this.weaponsSecondarySelected > 0) {
-              this.IASprimaer = parseInt(this.iasOffWeapon) + parseInt(this.iasWeaponPrimary);
-              this.IASsekundaer = parseInt(this.iasOffWeapon) + parseInt(this.iasWeaponPrimary);
-          }
-          this.EIASprimaer = Math.floor(120 * this.IASprimaer / (120 + this.IASprimaer));
-          this.EIASsekundaer = Math.floor(120 * this.IASsekundaer / (120 + this.IASsekundaer));
-      },
       calculateSkillIas: function () {
-          var fana = parseInt(this.fanaticismSkillIas);
-          var frenzy = parseInt(this.frenzySkillIas);
-          var wolf = parseInt(this.werewolfSkillIas);
-          var tempo = parseInt(this.burstOfSpeedSkillIas);
-          var holyfrost = parseInt(this.holyFreezeSkillIas);
+          var fana = parseInt(this.fanaticismSkillIas, 10);
+          var frenzy = parseInt(this.frenzySkillIas, 10);
+          var wolf = parseInt(this.werewolfSkillIas, 10);
+          var tempo = parseInt(this.burstOfSpeedSkillIas, 10);
+          var holyfrost = parseInt(this.holyFreezeSkillIas, 10);
           var attackSkill = this.data.attack[this.skillsSelected];
           // != Wolf
           if (this.shapeShiftFormsSelected != 2) wolf = 0;
@@ -814,6 +796,20 @@ export default {
       }
   },
   computed: {
+        iasPrimaryAndOffWeapon: function () {
+            if (this.weaponsPrimarySelected > 0) return this.iasOffWeapon + this.iasWeaponPrimary;
+            return this.iasOffWeapon;
+        },
+        iasSecondaryAndOffWeapon: function () {
+            if (this.weaponsSecondarySelected > 0) return this.iasOffWeapon + this.iasWeaponPrimary;
+            return 0;
+        },
+        iasEffectivePrimary: function () {
+            return Math.floor(120 * this.iasPrimaryAndOffWeapon / (120 + this.iasPrimaryAndOffWeapon));
+        },
+        iasEffectiveSecondary: function () {
+            return Math.floor(120 * this.iasSecondaryAndOffWeapon / (120 + this.iasSecondaryAndOffWeapon));
+        },
         query: function() {
             let query = {};
             query.c = this.charactersSelected;
@@ -1316,7 +1312,6 @@ export default {
           var WIAS = this.iasWeaponPrimary;
           var attackSkill = this.data.attack[this.skillsSelected];
           this.calculateSkillIas();
-          this.calculateEffectiveIas(); // usually set by calculateValues
           this.calculateWsm();
           this.isAtFpaCap = false;
           var breakpoints = [];
@@ -1345,6 +1340,11 @@ export default {
                           temp1 = resultFpa;
                       }
                   }
+              }
+              if (attackSkill.title === 'Frenzy (first swing hits)') {
+                    // this doesn't seem to get hit
+                    console.log('special case breakpoints for frenzy first swing hits returning early');
+                    return {};
               }
               // standard attack animation && no secondary weapon (or primary only attacks) && standard rollback
               if (attackSkill.animation == 1
@@ -1393,7 +1393,7 @@ export default {
                       temp = this.calcFPA(this.animationFrames, i, 0);
                       resultFpa = (resultFpa + temp) / 2;
                       if ((temp1 != resultFpa) && (i - 100 - this.SIAS + this.WSMprimaer < 120)) {
-                          breakpoints1[breakpoints1.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))) - this.IASprimaer, resultFpa];
+                          breakpoints1[breakpoints1.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))) - this.iasPrimaryAndOffWeapon, resultFpa];
                           temp1 = resultFpa;
                       }
                       if ((breakpoints1.length > 1) && (breakpoints1[1][0] < 0) && (breakpoints1[0][0] == 0)) {
@@ -1409,7 +1409,7 @@ export default {
                   for (let i = Math.max(100 + this.SIAS - this.WSMsekundaer, 15); i <= 175; i++) {
                       resultFpa = this.calcFPA(12, i, 0);
                       if ((temp1 != resultFpa) && (i - 100 - this.SIAS + this.WSMsekundaer < 120)) {
-                          breakpoints2[breakpoints2.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMsekundaer) / (120 - (i - 100 - this.SIAS + this.WSMsekundaer))) - this.IASsekundaer, resultFpa];
+                          breakpoints2[breakpoints2.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMsekundaer) / (120 - (i - 100 - this.SIAS + this.WSMsekundaer))) - this.iasSecondaryAndOffWeapon, resultFpa];
                           temp1 = resultFpa;
                       }
                       if ((breakpoints2.length > 1) && (breakpoints2[1][0] < 0) && (breakpoints2[0][0] == 0)) {
@@ -1440,33 +1440,13 @@ export default {
                   }
               }
               // Impale, Jab, Dragon Claw, Double Swing, Frenzy, Double Throw && not Whirlwind
-              if (attackSkill.title === 'Frenzy (first swing hits)') {
-                    //console.debug('special case breakpoints for frenzy first swing hits');
-                    let weapSecondary = this.lookupWeapon[this.weaponsSecondarySelected];
-                    let frenzyTempParts = [0, 0];
-                    for (let accel = 0; accel < 1000; accel++) {
-                        let frenzyFpa = this.frenzyFpa(accel);
-                        this.rollback1 = frenzyFpa.parts[0];
-                        this.rollback3 = frenzyFpa.parts[1];
-                        resultFpa = frenzyFpa.sum;
-                        if ((frenzyTempParts[0] != frenzyFpa.parts[0] || frenzyTempParts[1] != frenzyFpa.parts[1]) && (accel - 100 - this.SIAS + this.WSMprimaer < 120)) {
-                            let newBreakpoint = [
-                                accel,
-                                frenzyFpa.parts[0] + "/" + frenzyFpa.parts[1]//resultFpa
-                            ];
-                            breakpoints[breakpoints.length] = newBreakpoint;
-                            breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback3) / 2)) / 100;
-                            temp1 = resultFpa;
-                            frenzyTempParts = frenzyFpa.parts;
-                        }
-                    }
-              } else if ((attackSkill.animation == 7) && (this.skillsSelected != 19)) {
+              if ((attackSkill.animation == 7) && (this.skillsSelected != 19)) {
                   console.info("calc ias for animation 7");
                   for (let i = Math.max(100 + this.SIAS - this.WSMprimaer, 15); i <= 175; i++) {
                       resultFpa = this.calcFPA(this.animationFrames, i, 0);
                       resultFpa++;
                       if ((this.skillsSelected == 3) && (this.isPlayableClass)) {
-                          resultFpa = parseInt(100 * resultFpa / 3) / 100;
+                          resultFpa = parseInt(100 * resultFpa / 3, 10) / 100;
                       }
                       if (this.charactersSelected == 8) {
                           resultFpa = resultFpa / 2;
@@ -1517,7 +1497,7 @@ export default {
                       resultFpa = this.rollback1 + this.rollback2 + this.rollback3;
                       if ((temp1 != resultFpa) && (i - 100 - this.SIAS + this.WSMprimaer < 120)) {
                           breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))), this.rollback1 + "/" + this.rollback2 + "/" + this.rollback2 + "/" + this.rollback2 + "/" + this.rollback3];
-                          breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 * 3 + this.rollback3) / 5)) / 100;
+                          breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 * 3 + this.rollback3) / 5), 10) / 100;
                           temp1 = resultFpa;
                       }
                   }
@@ -1552,7 +1532,7 @@ export default {
                                 Math.max(Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))), 0),
                                 this.rollback1 + "/" + this.rollback2 + "/" + this.rollback3 + "/" + this.rollback4 + "/" + this.rollback5
                             ];
-                            breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 + this.rollback3 * 4 + this.rollback4 * 3 + this.rollback5) / 10)) / 100;
+                            breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 + this.rollback3 * 4 + this.rollback4 * 3 + this.rollback5) / 10), 10) / 100;
                             temp1 = resultFpa;
                         }
                     }
@@ -1572,7 +1552,7 @@ export default {
                       resultFpa = this.rollback1 + this.rollback2 + this.rollback3;
                       if (temp1 != resultFpa) {
                           breakpoints[breakpoints.length] = [Math.ceil(120 * (i - 100 - this.SIAS + this.WSMprimaer) / (120 - (i - 100 - this.SIAS + this.WSMprimaer))), this.rollback1 + "/" + this.rollback2 + "/" + this.rollback3];
-                          breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 + this.rollback3) / 3)) / 100;
+                          breakpointsAPS[breakpointsAPS.length] = parseInt(2500 / ((this.rollback1 + this.rollback2 + this.rollback3) / 3), 10) / 100;
                           temp1 = resultFpa;
                       }
                   }
@@ -1580,7 +1560,7 @@ export default {
           }
           // wereform table
           if (this.shapeShiftFormsSelected > 0) {
-              while (parseInt(OIAS / 5) != parseFloat(OIAS / 5)) {
+              while (parseInt(OIAS / 5, 10) != parseFloat(OIAS / 5)) {
                   OIAS--;
               }
               // duel wield && standard attack animation)
@@ -1601,18 +1581,18 @@ export default {
                           if (attackSkill.title == 'Feral Rage') {
                               breakpoints[breakpoints.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100))) - 1;
                               if ((OIAS > 70) && (j == 0)) {
-                                  breakpoints2[breakpoints2.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100))) - 1;
+                                  breakpoints2[breakpoints2.length] = Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS, 10)) / (120 + (5 * i + parseInt(OIAS, 10)))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS, 10)) / (120 + (5 * i + parseInt(OIAS, 10)))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS, 10)) / (120 + (5 * i + parseInt(OIAS, 10)))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS, 10)) / (120 + (5 * i + parseInt(OIAS, 10)))), 15), 175) / 100))) - 1;
                               }
                           }
                           if (attackSkill.title == 'Fury') {
                               temp = (Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) * 4 + Math.ceil(256 * 13 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) - 1) / 5;
-                              if (parseInt(temp) == parseFloat(temp)) {
+                              if (parseInt(temp, 10) == parseFloat(temp)) {
                                   temp = temp + ".0";
                               }
                               breakpoints[breakpoints.length] = temp;
                               if ((OIAS > 70) && (j == 0)) {
-                                  temp = (Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100)) * 4 + Math.ceil(256 * 13 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100)) - 1) / 5;
-                                  if (parseInt(temp) == parseFloat(temp)) {
+                                  temp = (Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS, 10)) / (120 + (5 * i + parseInt(OIAS, 10)))), 15), 175) / 100)) * 4 + Math.ceil(256 * 13 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS, 10)) / (120 + (5 * i + parseInt(OIAS, 10)))), 15), 175) / 100)) - 1) / 5;
+                                  if (parseInt(temp, 10) == parseFloat(temp)) {
                                       temp = temp + ".0";
                                   }
                                   breakpoints2[breakpoints2.length] = temp;
@@ -1631,25 +1611,25 @@ export default {
                               }
                               breakpoints[breakpoints.length] = Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + 5 * j) / (120 + (5 * i + 5 * j))), 15), 175) / 100)) - 1;
                               if ((OIAS > 70) && (j == 0)) {
-                                  breakpoints2[breakpoints2.length] = Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS)) / (120 + (5 * i + parseInt(OIAS)))), 15), 175) / 100)) - 1;
+                                  breakpoints2[breakpoints2.length] = Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * this.animationFrames / Math.floor((100 + 5 * i - this.WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (5 * i + parseInt(OIAS, 10)) / (120 + (5 * i + parseInt(OIAS, 10)))), 15), 175) / 100)) - 1;
                               }
                           }
                       }
                   }
                   // add current ias breakpoints if not a multiple of 5
                   for (let k = 0; k <= 14; k++) {
-                      if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (this.skillsSelected == 26)) {
-                          nonStandardWeapon.push(Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100))) - 1);
+                      if ((parseInt(WIAS / 5, 10) != parseFloat(WIAS / 5)) && (this.skillsSelected == 26)) {
+                          nonStandardWeapon.push(Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS, 10) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS, 10) + 5 * k) / (120 + (parseInt(WIAS, 10) + 5 * k))), 15), 175) / 100)) + Math.ceil((256 * 13 - Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS, 10) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS, 10) + 5 * k) / (120 + (parseInt(WIAS, 10) + 5 * k))), 15), 175) / 100) * Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS, 10) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS, 10) + 5 * k) / (120 + (parseInt(WIAS, 10) + 5 * k))), 15), 175) / 100))) / (2 * Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS, 10) - this.WSMprimaer) * 256 / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS, 10) + 5 * k) / (120 + (parseInt(WIAS, 10) + 5 * k))), 15), 175) / 100))) - 1);
                       }
-                      if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (this.skillsSelected == 29)) {
-                          temp = (Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS) - this.WSMprimaer) * 256 / 100))) * Math.min(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 175) / 100)) * 4 + Math.ceil(256 * 13 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS) - this.WSMprimaer) * 256 / 100))) * Math.min(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 175) / 100)) - 1) / 5;
-                          if (parseInt(temp) == parseFloat(temp)) {
+                      if ((parseInt(WIAS / 5, 10) != parseFloat(WIAS / 5)) && (this.skillsSelected == 29)) {
+                          temp = (Math.ceil(256 * 7 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS, 10) - this.WSMprimaer) * 256 / 100))) * Math.min(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS, 10) + 5 * k) / (120 + (parseInt(WIAS, 10) + 5 * k))), 175) / 100)) * 4 + Math.ceil(256 * 13 / Math.floor(Math.floor(256 * 9 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS, 10) - this.WSMprimaer) * 256 / 100))) * Math.min(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS, 10) + 5 * k) / (120 + (parseInt(WIAS, 10) + 5 * k))), 175) / 100)) - 1) / 5;
+                          if (parseInt(temp, 10) == parseFloat(temp)) {
                               temp = temp + ".0";
                           }
                           nonStandardWeapon.push(temp);
                       }
-                      if ((parseInt(WIAS / 5) != parseFloat(WIAS / 5)) && (this.skillsSelected != 26) && (this.skillsSelected != 29)) {
-                          nonStandardWeapon.push(Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS) - this.WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS) + 5 * k) / (120 + (parseInt(WIAS) + 5 * k))), 15), 175) / 100)) - 1)
+                      if ((parseInt(WIAS / 5, 10) != parseFloat(WIAS / 5)) && (this.skillsSelected != 26) && (this.skillsSelected != 29)) {
+                          nonStandardWeapon.push(Math.ceil(256 * tempframe / Math.floor(Math.floor(256 * tempframe2 / Math.floor(256 * this.animationFrames / Math.floor((100 + parseInt(WIAS, 10) - this.WSMprimaer) * AnimSpeed / 100))) * Math.min(Math.max(100 - this.WSMprimaer + this.SIAS + Math.floor(120 * (parseInt(WIAS, 10) + 5 * k) / (120 + (parseInt(WIAS, 10) + 5 * k))), 15), 175) / 100)) - 1)
                       }
                   }
               }
@@ -1670,7 +1650,7 @@ export default {
                     horizontalLabel: null,
                     verticalLabel: null,
                     columnHeaders: [],
-                    columnCurrent: null
+                    columnCurrent: null,
                 },
                 rows: []
             };
@@ -1679,21 +1659,31 @@ export default {
                 let maxPrimaryIasToCalculate = 250;
                 let maxSecondaryIasToCalculate = 70;
                 let rowIasIncrement = 5;
+                let colIasIncrement = 5;
                 let numberOfRowsToCalculate = maxPrimaryIasToCalculate/rowIasIncrement;
                 bps.meta.horizontalLabel = `Secondary Weapon IAS with ${this.iasOffWeapon} Off-Weapon IAS`;
                 bps.meta.verticalLabel = `Primary Weapon IAS with ${this.iasOffWeapon} Off-Weapon IAS`;
                 bps.meta.columnCurrent = this.iasWeaponSecondary;
+                let isMaxRows = false;
+                let isMaxCols = false;
                 for (let i = 0; i <= numberOfRowsToCalculate; i++) { // itterate down the table
                     let ias1 = i * rowIasIncrement;
                     let frames = [];
                     let aps = 0;
                     for (let ias2 = 0; ias2 <= Math.max(maxSecondaryIasToCalculate, this.iasWeaponSecondary); ias2++) { // itterate across the table
-                        if ((ias2 % rowIasIncrement === 0 && ias2 <= maxSecondaryIasToCalculate) || ias2 === this.iasWeaponSecondary) {
+                        if ((ias2 % colIasIncrement === 0 && ias2 <= maxSecondaryIasToCalculate) || ias2 === this.iasWeaponSecondary) {
                             let bp = this.frenzyFpa(this.iasOffWeapon, ias1, ias2);
                             frames.push(`${bp.parts[0]}/${bp.parts[1]}`);
                             // add column headers on first row pass
                             if (ias1 === 0) {
                                 bps.meta.columnHeaders.push(ias2);
+                            }
+                            // check if max fpa reached
+                            if (bp.isPrimaryFpaMaxed) {
+                                isMaxRows = true;
+                            }
+                            if (bp.isSecondaryFpaMaxed) {
+                                isMaxCols = true;
                             }
                         }
                     }
@@ -1703,6 +1693,10 @@ export default {
                         aps: aps,
                         current: ias1 == this.iasWeaponPrimary
                     });
+                    if (isMaxRows) {
+                        maxPrimaryIasToCalculate = ias1;
+                        break;
+                    }
                 }
                 // non-standard primary ias added at end and sorted later
                 if (this.iasWeaponPrimary % rowIasIncrement != 0 || this.iasWeaponPrimary > maxPrimaryIasToCalculate) {
@@ -1710,7 +1704,7 @@ export default {
                     let frames = [];
                     let aps = 0;
                     for (let ias2 = 0; ias2 <= Math.max(maxSecondaryIasToCalculate, this.iasWeaponSecondary); ias2++) { // itterate across the table
-                        if ((ias2 % rowIasIncrement === 0 && ias2 <= maxSecondaryIasToCalculate)  || ias2 === this.iasWeaponSecondary) {
+                        if ((ias2 % colIasIncrement === 0 && ias2 <= maxSecondaryIasToCalculate) || ias2 === this.iasWeaponSecondary) {
                             let bp = this.frenzyFpa(this.iasOffWeapon, ias1, ias2);
                             frames.push(`${bp.parts[0]}/${bp.parts[1]}`);
                         }
