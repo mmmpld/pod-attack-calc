@@ -20,7 +20,7 @@
 </style>
 
 <template>
-    <v-container fluid class="pa-0">
+    <v-container fluid class="pt-0">
         <v-row>
             <v-col cols="12" lg="2" md="4" class="px-8 grey lighten-5 d-none d-md-block"></v-col>
             <v-divider vertical></v-divider>
@@ -32,7 +32,7 @@
             <v-col cols="12" lg="2" md="4" class="px-8 grey lighten-5">
                 <v-row>
                     <v-col class="py-0 pl-3"><h2>Character</h2></v-col>
-                    <v-col class="py-0" align="right">
+                    <v-col class="py-0 pr-1" align="right">
                         <v-tooltip left color="green" transition="scroll-x-reverse-transition">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn icon color="green" 
