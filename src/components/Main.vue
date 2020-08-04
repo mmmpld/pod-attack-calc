@@ -49,8 +49,8 @@
                         <v-snackbar v-model="isShowingQuerySnackbar"
                                     timeout="4000"
                                     color="success"
-                                    outlined
-                                    align="center">
+                                    align="center"
+                        >
                             {{doAddQueryString ? 'url updated for sharing or bookmarking.' : 'url simplified, very tidy.'}}
                         </v-snackbar>
                     </v-col>
