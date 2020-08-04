@@ -919,6 +919,11 @@ export default {
                   { value: 29, text: 18 },
                   { value: 29, text: 19 },
                   { value: 30, text: 20 },
+                  { value: 31, text: 23 },
+                  { value: 32, text: 27 },
+                  { value: 33, text: 36 },
+                  { value: 34, text: 45 },
+                  { value: 35, text: 60 },
               ];
             } else {
                 let values = [];
