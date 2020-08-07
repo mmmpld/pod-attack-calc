@@ -69,7 +69,7 @@
                             v-model.number="iasOffWeapon" dense min="0" step="5" class="my-3"></v-text-field>
                     </div>
                     <div>
-                        <h3>Primary Weapon</h3>
+                        <h3 class="pb-2">Primary Weapon</h3>
                         <v-autocomplete
                             name="waffe" 
                             @input="updateCurrent" 
@@ -102,7 +102,23 @@
                         </v-text-field>
                     </div>
                     <div v-if="canDualWield == true">
-                        <h3>Secondary Weapon</h3>
+                        <v-row>
+                            <v-col class="py-0 pl-3 pb-2" cols="10"><h3>Secondary Weapon</h3></v-col>
+                            <v-col v-if="weaponsSecondarySelected > 0" class="py-0" cols="2" align="right">
+                                <v-tooltip left transition="scroll-x-reverse-transition">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-btn icon x-small
+                                            :href="shareLink"
+                                            @click.prevent="swapWeapons"
+                                            v-bind="attrs"
+                                            v-on="on">
+                                            <v-icon>mdi-swap-vertical-bold</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>swap weapons</span>
+                                </v-tooltip>
+                            </v-col>
+                        </v-row>
                         <v-autocomplete
                             name="zweitwaffe" 
                             @input="updateCurrent" 
@@ -298,6 +314,15 @@ export default {
             this.updateUrl();
             this.isShowingQuerySnackbar = true;
             localStorage.doAddQueryString = this.doAddQueryString;
+        },
+        swapWeapons: function () {
+            let tempWeaponsPrimarySelected = this.weaponsPrimarySelected;
+            let tempIasWeaponPrimaryRaw = this.iasWeaponPrimaryRaw;
+            this.weaponsPrimarySelected = this.weaponsSecondarySelected;
+            this.iasWeaponPrimaryRaw = this.iasWeaponSecondaryRaw;
+            this.weaponsSecondarySelected = tempWeaponsPrimarySelected;
+            this.iasWeaponSecondaryRaw = tempIasWeaponPrimaryRaw;
+            this.updateCurrent();
         },
       weaponFilter: function (item, queryText, itemText) {
           if (item.text.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true; // search in option text
