@@ -6,7 +6,7 @@
     .breakpoint-table .vertical-label {
         vertical-align: top;
     }
-    .breakpoint-table tr:hover .vertical-label {
+    .breakpoint-table tr:hover .vertical-label, .breakpoint-table tr .vertical-label {
         background-color: white;
     }
     .breakpoint-table div.vertical-label-spacer {
