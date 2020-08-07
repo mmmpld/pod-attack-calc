@@ -5,25 +5,30 @@
     }
     .breakpoint-table .vertical-label {
         vertical-align: top;
-        padding-top: 150px;
     }
-    .breakpoint-table .vertical-label span {
+    .breakpoint-table tr:hover .vertical-label {
+        background-color: white;
+    }
+    .breakpoint-table div.vertical-label-spacer {
+        max-height: 150px;
+        height: 20%;
+    }
+    .breakpoint-table div.vertical-label-text  {
         writing-mode: vertical-lr;
         transform: rotate(180deg);
         color: rgba(0,0,0,.6);
         font-size: .75rem;
         user-select: none;
+        height: max-content;
     }
     .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr > th.horizontal-label {
         text-align: center;
     }
-    .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th.border-off {
-        border-bottom: 0;
+    .border-off {
+        border-bottom: 0 !important;
     }
     .breakpoint-table tr.highlight-current-row {
         background-color: #F9FBE7;
-        border-color: aqua !important;
-        border-width: 10px !important;
     }
     .breakpoint-table col.highlight-current-col {
         background-color: #F9F9F9;
@@ -89,18 +94,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <th
-                        v-if="standardisedBreakpoints.rows[0].frames.length > 1"
-                        :rowspan="standardisedBreakpoints.rows.length + 1"
-                        class="vertical-label"
-                    >
-                        <span>{{standardisedBreakpoints.meta.verticalLabel}}</span>
-                    </th>
                     <tr
                         v-for="(breakpoint, index) in standardisedBreakpoints.rows"
                         :key="index"
                         :class="breakpoint.current ? 'highlight-current-row' : ''"
                     >
+                        <th
+                            v-if="standardisedBreakpoints.rows[0].frames.length > 1 && index === 0"
+                            :rowspan="standardisedBreakpoints.rows.length + 1"
+                            class="vertical-label border-off"
+                        >
+                            <div class="vertical-label-spacer"></div>
+                            <div class="vertical-label-text">{{standardisedBreakpoints.meta.verticalLabel}}</div>
+                        </th>
                         <th>{{ breakpoint.ias }}</th>
                         <td v-for="(frame, index) in breakpoint.frames" :key="index" scope="col">{{ frame }}</td>
                     </tr>
