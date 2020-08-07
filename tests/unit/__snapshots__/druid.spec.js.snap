@@ -2,8 +2,11 @@
 
 exports[`Druid default values feral with 31ias grief 1`] = `
 <tbody>
-  <th rowspan="53" class="vertical-label"><span>Primary Weapon IAS</span></th>
   <tr class="">
+    <th rowspan="53" class="vertical-label border-off">
+      <div class="vertical-label-spacer"></div>
+      <div class="vertical-label-text">Primary Weapon IAS</div>
+    </th>
     <th>0</th>
     <td scope="col">9</td>
     <td scope="col">9</td>
@@ -22,6 +25,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">9</td>
   </tr>
   <tr class="">
+    <!---->
     <th>5</th>
     <td scope="col">9</td>
     <td scope="col">9</td>
@@ -40,6 +44,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">9</td>
   </tr>
   <tr class="">
+    <!---->
     <th>10</th>
     <td scope="col">8</td>
     <td scope="col">8</td>
@@ -58,6 +63,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">8</td>
   </tr>
   <tr class="">
+    <!---->
     <th>15</th>
     <td scope="col">8</td>
     <td scope="col">8</td>
@@ -76,6 +82,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">8</td>
   </tr>
   <tr class="">
+    <!---->
     <th>20</th>
     <td scope="col">7</td>
     <td scope="col">7</td>
@@ -94,6 +101,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">7</td>
   </tr>
   <tr class="">
+    <!---->
     <th>25</th>
     <td scope="col">7</td>
     <td scope="col">7</td>
@@ -112,6 +120,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">7</td>
   </tr>
   <tr class="">
+    <!---->
     <th>30</th>
     <td scope="col">7</td>
     <td scope="col">7</td>
@@ -130,6 +139,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">7</td>
   </tr>
   <tr class="highlight-current-row">
+    <!---->
     <th>31</th>
     <td scope="col">7</td>
     <td scope="col">7</td>
@@ -148,6 +158,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">7</td>
   </tr>
   <tr class="">
+    <!---->
     <th>35</th>
     <td scope="col">7</td>
     <td scope="col">7</td>
@@ -166,6 +177,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">7</td>
   </tr>
   <tr class="">
+    <!---->
     <th>40</th>
     <td scope="col">7</td>
     <td scope="col">7</td>
@@ -184,6 +196,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">7</td>
   </tr>
   <tr class="">
+    <!---->
     <th>45</th>
     <td scope="col">6</td>
     <td scope="col">6</td>
@@ -202,6 +215,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">6</td>
   </tr>
   <tr class="">
+    <!---->
     <th>50</th>
     <td scope="col">6</td>
     <td scope="col">6</td>
@@ -220,6 +234,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">6</td>
   </tr>
   <tr class="">
+    <!---->
     <th>55</th>
     <td scope="col">6</td>
     <td scope="col">6</td>
@@ -238,6 +253,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">6</td>
   </tr>
   <tr class="">
+    <!---->
     <th>60</th>
     <td scope="col">6</td>
     <td scope="col">6</td>
@@ -256,6 +272,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">6</td>
   </tr>
   <tr class="">
+    <!---->
     <th>65</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -274,6 +291,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>70</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -292,6 +310,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>75</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -310,6 +329,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>80</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -328,6 +348,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>85</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -346,6 +367,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>90</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -364,6 +386,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>95</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -382,6 +405,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>100</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -400,6 +424,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>105</th>
     <td scope="col">5</td>
     <td scope="col">5</td>
@@ -418,6 +443,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">5</td>
   </tr>
   <tr class="">
+    <!---->
     <th>110</th>
     <td scope="col">4</td>
     <td scope="col">4</td>
@@ -436,6 +462,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">4</td>
   </tr>
   <tr class="">
+    <!---->
     <th>115</th>
     <td scope="col">4</td>
     <td scope="col">4</td>
@@ -454,6 +481,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">4</td>
   </tr>
   <tr class="">
+    <!---->
     <th>120</th>
     <td scope="col">4</td>
     <td scope="col">4</td>
@@ -472,6 +500,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">4</td>
   </tr>
   <tr class="">
+    <!---->
     <th>125</th>
     <td scope="col">4</td>
     <td scope="col">4</td>
@@ -490,6 +519,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">4</td>
   </tr>
   <tr class="">
+    <!---->
     <th>130</th>
     <td scope="col">4</td>
     <td scope="col">4</td>
@@ -508,6 +538,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">4</td>
   </tr>
   <tr class="">
+    <!---->
     <th>135</th>
     <td scope="col">4</td>
     <td scope="col">4</td>
@@ -526,6 +557,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">4</td>
   </tr>
   <tr class="">
+    <!---->
     <th>140</th>
     <td scope="col">4</td>
     <td scope="col">4</td>
@@ -544,6 +576,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">4</td>
   </tr>
   <tr class="">
+    <!---->
     <th>145</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -562,6 +595,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>150</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -580,6 +614,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>155</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -598,6 +633,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>160</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -616,6 +652,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>165</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -634,6 +671,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>170</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -652,6 +690,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>175</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -670,6 +709,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>180</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -688,6 +728,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>185</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -706,6 +747,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>190</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -724,6 +766,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>195</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -742,6 +785,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>200</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -760,6 +804,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>205</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -778,6 +823,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>210</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -796,6 +842,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>215</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -814,6 +861,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>220</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -832,6 +880,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>225</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -850,6 +899,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>230</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -868,6 +918,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>235</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -886,6 +937,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>240</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -904,6 +956,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>245</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
@@ -922,6 +975,7 @@ exports[`Druid default values feral with 31ias grief 1`] = `
     <td scope="col">3</td>
   </tr>
   <tr class="">
+    <!---->
     <th>250</th>
     <td scope="col">3</td>
     <td scope="col">3</td>
