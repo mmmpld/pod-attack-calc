@@ -272,8 +272,8 @@ export default {
       burstOfSpeedSkillIas: 0,
       holyFreezeSkillIas: 0,
       isDecrepify: false,
-      weaponsPrimarySelected: 0,
-      weaponsSecondarySelected: 0,
+      weaponsPrimarySelectedRaw: 0,
+      weaponsSecondarySelectedRaw: 0,
       weaponsPrimaryBarbHandednessSelected: -1,
       skillsSelected: 0,
       iasOffWeaponRaw: 0,
@@ -816,11 +816,30 @@ export default {
           }
       },
       sanitiseSelected: function (selected, values) {
-          if (typeof(values.find(v => v.value == selected)) === "undefined") selected = values[0].value;
-          return selected;
+            if (typeof(values.find(v => v.value == selected)) === "undefined") {
+                let valuesMap = values.filter(v => v.value !== undefined); // remove headers without values
+                selected = valuesMap[0].value;
+            }
+            return selected;
       }
   },
   computed: {
+        weaponsPrimarySelected: {
+            get () {
+                return this.weaponsPrimarySelectedRaw || 0;
+            },
+            set (value) {
+                this.weaponsPrimarySelectedRaw = Math.max(parseInt(value, 10), 0) || 0;
+            }
+        },
+        weaponsSecondarySelected: {
+            get () {
+                return this.weaponsSecondarySelectedRaw || 0;
+            },
+            set (value) {
+                this.weaponsSecondarySelectedRaw = Math.max(parseInt(value, 10), 0) || 0;
+            }
+        },
         iasPrimaryAndOffWeapon: function () {
             if (this.weaponsPrimarySelected > 0) return this.iasOffWeapon + this.iasWeaponPrimary;
             return this.iasOffWeapon;
