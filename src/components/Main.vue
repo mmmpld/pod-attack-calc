@@ -380,7 +380,7 @@ export default {
           if ((this.charactersSelected == 1) && (weapPrimary.type == this.weaponTypes.claw)) {
               animationSpeed = 208;
           }
-          // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
+          // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dual Strike, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
           if (((attackSkill.animation == 3) || (attackSkill.animation == 7)) && (attackSkill.title !== "Whirlwind")) {
               animationSpeed = 256;
           }
@@ -581,7 +581,7 @@ export default {
               }
               resultFpa = this.calcFPA(this.animationFrames, acceleration, start);
           }
-          // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
+          // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dual Strike, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
           // && not whirlwind && rollback normal
           if (attackSkill.title === "Frenzy (first swing hits)") {
                 //console.debug("special case frenzy hits");
@@ -593,7 +593,7 @@ export default {
                 this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback3) / 2), 10) / 100 + " attacks per second";
           } else if ((attackSkill.animation == 7) && (this.skillsSelected != 19) && (attackSkill.rollback == 100)) {
               this.animationFrames = this.sequences[attackSkill.sequence][weapPrimary.type];
-              // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
+              // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dual Strike && offhand weapon selected
               if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
                   this.animationFrames = 16;
               }
@@ -614,7 +614,7 @@ export default {
               if ((this.skillsSelected > 15) && (this.skillsSelected < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw 
                   resultFpa = resultFpa / 2;
               }
-              // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
+              // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dual Strike && offhand weapon selected
               if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
                   resultFpa = resultFpa / 2;
               }
@@ -810,7 +810,7 @@ export default {
           if (this.isDecrepify) {
               this.SIAS = this.SIAS - 50;
           }
-          // impale, jab, dragon claw, double swing, double throw, frenzy, whirlwind
+          // impale, jab, Dual Strike, double swing, double throw, frenzy, whirlwind
           if (attackSkill.animation == 7 && this.isPlayableClass) {
               this.SIAS = this.SIAS - 30; // this penalty is applied to bring the normal starting value of 100 down to the skill specific 70
           }
@@ -1209,7 +1209,7 @@ export default {
                           values.push(this.getSkillOptionData("Emberstorm"));
                       }
                       if ((weapPrimary.type == this.weaponTypes.claw) && (weapSecondary.type == this.weaponTypes.claw)) {
-                          values.push(this.getSkillOptionData("Dragon Claw"));
+                          values.push(this.getSkillOptionData("Dual Strike"));
                       }
                       values.push(this.getSkillOptionData("Dragon Tail"));
                       values.push(this.getSkillOptionData("Dragon Talon"));
@@ -1345,7 +1345,7 @@ export default {
           if (((this.charactersSelected == 0) || (this.charactersSelected == 6)) && (attackSkill.animation < 2)) {
               start = startframe[weapPrimary.type];
           }
-          // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
+          // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dual Strike, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
           // && not whirlwind && rollback normal
           if ((attackSkill.animation == 7) && (this.skillsSelected != 19) && (attackSkill.rollback == 100)) {
               start = 0;
@@ -1488,7 +1488,7 @@ export default {
                       }
                   }
               }
-              // Impale, Jab, Dragon Claw, Double Swing, Frenzy, Double Throw && not Whirlwind
+              // Impale, Jab, Dual Strike, Double Swing, Frenzy, Double Throw && not Whirlwind
               if ((attackSkill.animation == 7) && (this.skillsSelected != 19)) {
                   console.info("calc ias for animation 7");
                   for (let i = Math.max(100 + this.SIAS - this.WSMprimaer, 15); i <= 175; i++) {

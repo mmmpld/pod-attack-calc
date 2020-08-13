@@ -538,7 +538,7 @@ export var data = {
             rollback: 100
         },
         {
-            title: "Dragon Claw",
+            title: "Dual Strike",
             index: 12,
             animation: 7,
             sequence: 2,
