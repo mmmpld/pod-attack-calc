@@ -1309,7 +1309,6 @@ export default {
                   break;
               case 8: // Merc - Town Guard
                   values.push(this.getSkillOptionData("Jab"));
-                  values.push(this.getSkillOptionData("Standard"));
                   break;
               case 9: // Merc - Barbarian
                   values.push(this.getSkillOptionData("Bash"));
