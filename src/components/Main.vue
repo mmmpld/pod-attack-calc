@@ -1689,7 +1689,7 @@ export default {
                     oIas: OIAS,
                 }
             } catch (error) {
-                //console.error(error);
+                console.error(error);
                 return {
                     breakpoints: [],
                     breakpoints1: [],
