@@ -146,8 +146,8 @@
                         <v-text-field v-if="weaponsSecondarySelected" name=wIAS2 type="number" @input="updateCurrent"
                             label="Secondary Weapon IAS%" v-model.number="iasWeaponSecondary" dense min="0" step="5" class="mt-6 mb-0">
                         </v-text-field>
-                        <v-checkbox name="enableWsmBug" @input="updateCurrent" label="Apply WSM Bug"
-                            v-model="isWsmBug" dense class="my-0"></v-checkbox>
+                        <!-- <v-checkbox name="enableWsmBug" @input="updateCurrent" label="Apply WSM Bug"
+                            v-model="isWsmBug" dense class="my-0"></v-checkbox> -->
                     </div>
                     <div>
                         <h3>Speed Increasing Skills</h3>
