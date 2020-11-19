@@ -167,6 +167,13 @@
                         <v-checkbox name=altern @input="updateCurrent" label="Decrepify"
                             v-model="isDecrepify" dense class="my-0"></v-checkbox>
                     </div>
+                    <div v-if="debug === '1'">
+                        <h3>Debug Options</h3>
+                        <v-checkbox name=altern @input="updateCurrent" label="Vanilla Skill IAS"
+                            v-model="useVanillaSkillIas" dense class="my-0"></v-checkbox>
+                        <v-checkbox name=altern @input="updateCurrent" label="Unlock Weapons"
+                            v-model="isUnlockWeapons" dense class="my-0"></v-checkbox>
+                    </div>
                 </v-form>
             </v-col>
             <v-divider vertical></v-divider>
@@ -228,8 +235,12 @@ export default {
        bos: { default: '0' },
     freeze: { default: '0' },
     decrep: { default: '0' },
+     debug: { default: '0' },
   },
     data: () => ({
+        isDebug: false,
+        useVanillaSkillIas: false,
+        isUnlockWeapons: false,
         isShowingQuerySnackbar: false,
         doAddQueryString: localStorage.doAddQueryString || false,
         weaponClassFrames: calc.weaponClassFrames,
@@ -283,7 +294,6 @@ export default {
       currentFpa: '',
       isCurrentFpaMaxed: false,
       currentAps: '',
-      useVanillaSkillIas: false,
     }),
     methods: {
         getQualityColorClass: function(quality) {
@@ -872,6 +882,7 @@ export default {
             if (this.burstOfSpeedSkillIas) query.bos = this.burstOfSpeedSkillIas;
             if (this.holyFreezeSkillIas) query.freeze = this.holyFreezeSkillIas;
             if (this.isDecrepify) query.decrep = '1';
+            if (this.isDebug) query.debug = '1';
             return query;
         },
         queryString: function() {
@@ -992,29 +1003,41 @@ export default {
       },
       werewolf: function () {
           if (this.canShapeShiftWerewolf) {
-              return [
-                  { value: 0,  text: 0 },
-                  { value: 36, text: 1 },
-                  { value: 45, text: 2 },
-                  { value: 52, text: 3 },
-                  { value: 58, text: 4 },
-                  { value: 62, text: 5 },
-                  { value: 66, text: 6 },
-                  { value: 69, text: 7 },
-                  { value: 71, text: 8 },
-                  { value: 74, text: 9 },
-                  { value: 76, text: 10 },
-                  { value: 78, text: 11 },
-                  { value: 79, text: 12 },
-                  { value: 81, text: 13 },
-                  { value: 82, text: 14 },
-                  { value: 83, text: 15 },
-                  { value: 85, text: 16 },
-                  { value: 85, text: 17 },
-                  { value: 86, text: 18 },
-                  { value: 87, text: 19 },
-                  { value: 88, text: 20 },
-              ];
+            if (!this.useVanillaSkillIas) {
+                return [
+                    { value: 0,  text: 0 },
+                    { value: 36, text: 1 },
+                    { value: 45, text: 2 },
+                    { value: 52, text: 3 },
+                    { value: 58, text: 4 },
+                    { value: 62, text: 5 },
+                    { value: 66, text: 6 },
+                    { value: 69, text: 7 },
+                    { value: 71, text: 8 },
+                    { value: 74, text: 9 },
+                    { value: 76, text: 10 },
+                    { value: 78, text: 11 },
+                    { value: 79, text: 12 },
+                    { value: 81, text: 13 },
+                    { value: 82, text: 14 },
+                    { value: 83, text: 15 },
+                    { value: 85, text: 16 },
+                    { value: 85, text: 17 },
+                    { value: 86, text: 18 },
+                    { value: 87, text: 19 },
+                    { value: 88, text: 20 },
+                ];
+            } else {
+                let values = [];
+                for (let i = 0; i <= 50; i++) {
+                    if (i == 0) {
+                        values.push({text: i, value: 0});
+                    } else {
+                        values.push({text: i, value: Math.floor(Math.floor(Math.floor((110*i)/(6+i))*(80-10)/100)+10)});
+                    }
+                }
+                return values;
+            }
           } else {
               return [{ value: 0, text: '-' }];
           }
@@ -1038,46 +1061,65 @@ export default {
           return this.charactersSelected == 1;
       },
       holyFreeze: function () {
-          return [
-              { value: 0,  text: 0 },
-              { value: 14, text: 1 },
-              { value: 18, text: 2 },
-              { value: 20, text: 3 },
-              { value: 23, text: 4 },
-              { value: 25, text: 5 },
-              { value: 26, text: 6 },
-              { value: 27, text: 7 },
-              { value: 28, text: 8 },
-              { value: 29, text: 9 },
-              { value: 30, text: 10 },
-              { value: 31, text: 11 },
-              { value: 31, text: 12 },
-              { value: 32, text: 13 },
-              { value: 33, text: 14 },
-              { value: 33, text: 15 },
-              { value: 34, text: 16 },
-              { value: 34, text: 17 },
-              { value: 34, text: 18 },
-              { value: 34, text: 19 },
-              { value: 35, text: 20 },
-          ];
+          if (!this.useVanillaSkillIas) {
+            return [
+                { value: 0,  text: 0 },
+                { value: 14, text: 1 },
+                { value: 18, text: 2 },
+                { value: 20, text: 3 },
+                { value: 23, text: 4 },
+                { value: 25, text: 5 },
+                { value: 26, text: 6 },
+                { value: 27, text: 7 },
+                { value: 28, text: 8 },
+                { value: 29, text: 9 },
+                { value: 30, text: 10 },
+                { value: 31, text: 11 },
+                { value: 31, text: 12 },
+                { value: 32, text: 13 },
+                { value: 33, text: 14 },
+                { value: 33, text: 15 },
+                { value: 34, text: 16 },
+                { value: 34, text: 17 },
+                { value: 34, text: 18 },
+                { value: 34, text: 19 },
+                { value: 35, text: 20 },
+            ];
+          } else {
+                let values = [];
+                for (let i = 0; i <= 50; i++) {
+                    if (i == 0) {
+                        values.push({text: i, value: 0});
+                    } else {
+                        values.push({text: i, value: Math.floor(Math.floor((110*i)/(6+i))*(60-25)/100)+25});
+                    }
+                }
+                return values;
+          }
       },
       weaponsPrimary: function() {
           var values = [];
-          for (let i = 0; i < this.lookupWeapon.length; i++) {
-              var weapPrimary = this.lookupWeapon[i];
-              // -1 all classes || this class's item 
-              if ((weapPrimary.classItem < 0) || (weapPrimary.classItem == this.charactersSelected)) {
-                  if (this.isPlayableClass
-                      || i == 0 // unarmed
-                      || (this.charactersSelected == 7  && (weapPrimary.type == this.weaponTypes.bow || weapPrimary.type == this.weaponTypes.crossbow))                                         // Act 1 Merc
-                      || (this.charactersSelected == 8  && (weapPrimary.weaponCategory == this.weaponCategories.polearm || weapPrimary.weaponCategory == this.weaponCategories.spearOrJavalin)) // Act 2 Merc
-                      || (this.charactersSelected == 9  &&  weapPrimary.weaponCategory == this.weaponCategories.swords)                                                                    // Act 5 Merc
-                      || (this.charactersSelected == 10 &&  weapPrimary.weaponCategory == this.weaponCategories.swords && weapPrimary.type == this.weaponTypes.oneHandedSwingingWeapon)         // Act 3 Merc
-                  ) {
-                      values.push({ value: i, text: weapPrimary.name, commonItems: weapPrimary.commonItems });
-                  }
-              }
+          if (this.isUnlockWeapons) {
+            for (let i = 0; i < this.lookupWeapon.length; i++) {
+              var weapLookup = this.lookupWeapon[i];
+              values.push({ value: i, text: weapLookup.name, commonItems: weapLookup.commonItems });
+            }
+          } else {
+            for (let i = 0; i < this.lookupWeapon.length; i++) {
+                var weapPrimary = this.lookupWeapon[i];
+                // -1 all classes || this class's item 
+                if ((weapPrimary.classItem < 0) || (weapPrimary.classItem == this.charactersSelected)) {
+                    if (this.isPlayableClass
+                        || i == 0 // unarmed
+                        || (this.charactersSelected == 7  && (weapPrimary.type == this.weaponTypes.bow || weapPrimary.type == this.weaponTypes.crossbow))                                         // Act 1 Merc
+                        || (this.charactersSelected == 8  && (weapPrimary.weaponCategory == this.weaponCategories.polearm || weapPrimary.weaponCategory == this.weaponCategories.spearOrJavalin)) // Act 2 Merc
+                        || (this.charactersSelected == 9  &&  weapPrimary.weaponCategory == this.weaponCategories.swords)                                                                    // Act 5 Merc
+                        || (this.charactersSelected == 10 &&  weapPrimary.weaponCategory == this.weaponCategories.swords && weapPrimary.type == this.weaponTypes.oneHandedSwingingWeapon)         // Act 3 Merc
+                    ) {
+                        values.push({ value: i, text: weapPrimary.name, commonItems: weapPrimary.commonItems });
+                    }
+                }
+            }
           }
           return values;
       },
@@ -1097,37 +1139,44 @@ export default {
       weaponsSecondary: function () {
           var values = [];
           if (this.weaponsPrimarySelected == null) return values;
-          var weapPrimary = this.lookupWeapon[this.weaponsPrimarySelected];
-          switch (this.charactersSelected) {
-              case 1: // sin
-                  if (weapPrimary.type == this.weaponTypes.claw) {
-                      for (let i = 0; i < this.lookupWeapon.length; i++) {
-                          let weapLookup = this.lookupWeapon[i];
-                          if (weapLookup.classItem == 1 || weapLookup.type == this.weaponTypes.unarmed) {
-                              values.push({ value: i, text: weapLookup.name, commonItems: weapLookup.commonItems });
-                          }
-                      }
-                  } else {
-                      values.push({ value: 0, text: '-' });
-                  }
-                  break;
-              case 2: // barb
-                  if ((weapPrimary.type == this.weaponTypes.oneHandedSwingingWeapon || weapPrimary.type == this.weaponTypes.oneHandedThrustingWeapon) || (weapPrimary.type == this.weaponTypes.twoHandedSword && this.weaponsPrimaryBarbHandednessSelected == 1)) {
-                      for (let i = 0; i < this.lookupWeapon.length; i++) {
-                          let weapLookup = this.lookupWeapon[i];
-                          if (weapLookup.type == this.weaponTypes.unarmed 
-                              || weapLookup.type == this.weaponTypes.twoHandedSword 
-                              || ((weapLookup.type == this.weaponTypes.oneHandedSwingingWeapon || weapLookup.type == this.weaponTypes.oneHandedThrustingWeapon) && weapLookup.classItem == -1)) {
-                              values.push({ value: i, text: weapLookup.name, commonItems: weapLookup.commonItems });
-                          }
-                      }
-                  } else {
-                      values.push({ value: 0, text: '-' });
-                  }
-                  break;
-              default:
-                  values.push({ value: 0, text: '-' });
-                  break;
+          if (this.isUnlockWeapons) {
+            for (let i = 0; i < this.lookupWeapon.length; i++) {
+              var weapLookup = this.lookupWeapon[i];
+              values.push({ value: i, text: weapLookup.name, commonItems: weapLookup.commonItems });
+            }
+          } else {
+            var weapPrimary = this.lookupWeapon[this.weaponsPrimarySelected];
+            switch (this.charactersSelected) {
+                case 1: // sin
+                    if (weapPrimary.type == this.weaponTypes.claw) {
+                        for (let i = 0; i < this.lookupWeapon.length; i++) {
+                            let weapLookup = this.lookupWeapon[i];
+                            if (weapLookup.classItem == 1 || weapLookup.type == this.weaponTypes.unarmed) {
+                                values.push({ value: i, text: weapLookup.name, commonItems: weapLookup.commonItems });
+                            }
+                        }
+                    } else {
+                        values.push({ value: 0, text: '-' });
+                    }
+                    break;
+                case 2: // barb
+                    if ((weapPrimary.type == this.weaponTypes.oneHandedSwingingWeapon || weapPrimary.type == this.weaponTypes.oneHandedThrustingWeapon) || (weapPrimary.type == this.weaponTypes.twoHandedSword && this.weaponsPrimaryBarbHandednessSelected == 1)) {
+                        for (let i = 0; i < this.lookupWeapon.length; i++) {
+                            let weapLookup = this.lookupWeapon[i];
+                            if (weapLookup.type == this.weaponTypes.unarmed 
+                                || weapLookup.type == this.weaponTypes.twoHandedSword 
+                                || ((weapLookup.type == this.weaponTypes.oneHandedSwingingWeapon || weapLookup.type == this.weaponTypes.oneHandedThrustingWeapon) && weapLookup.classItem == -1)) {
+                                values.push({ value: i, text: weapLookup.name, commonItems: weapLookup.commonItems });
+                            }
+                        }
+                    } else {
+                        values.push({ value: 0, text: '-' });
+                    }
+                    break;
+                default:
+                    values.push({ value: 0, text: '-' });
+                    break;
+            }
           }
           return values;
       },
@@ -1927,6 +1976,7 @@ export default {
         this.burstOfSpeedSkillIas = parseInt(this.bos, 10);
         this.holyFreezeSkillIas = parseInt(this.freeze, 10);
         this.isDecrepify = this.decrep == '1';
+        this.isDebug = this.debug == '1';
         this.updateCurrent();
     },
     updated: function() {
