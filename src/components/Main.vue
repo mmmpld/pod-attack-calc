@@ -785,13 +785,15 @@ export default {
           // Most attacks
           if (attackSkill.rollback == 100 && attackSkill.title !== "Frenzy (first swing hits)") {
               this.currentFpa = resultFpa + " frames per attack";
-              this.currentAps = parseInt(100 * 25 / resultFpa, 10) / 100 + " attacks per second";
-              if (this.charactersSelected > 6) {
-                  this.currentAps = parseInt(100 * 25 / (resultFpa + 2), 10) / 100 + " attacks per second";
+              var aiDelay = 0;
+              // mercs
+              if (!this.isPlayableClass) {
+                aiDelay = 2; // added 2 frame ai delay for mercs
+                if ((this.charactersSelected == 8 && attackSkill.title === "Jab") || (this.charactersSelected == 9 && attackSkill.title === "Standard")) {
+                    aiDelay = 1; // added 1 frame ai delay for mercs
+                }
               }
-              if (((this.charactersSelected == 8) && (this.skillsSelected == 3)) || ((this.charactersSelected == 9) && (this.skillsSelected == 0))) {
-                  this.currentAps = parseInt(100 * 25 / (resultFpa + 1), 10) / 100 + " attacks per second";
-              }
+              this.currentAps = parseInt(100 * 25 / (resultFpa + aiDelay), 10) / 100 + " attacks per second";
               // Shape Shifted && off-hand weapon not unarmed && standard attack
               if ((this.shapeShiftFormsSelected > 0) && (this.weaponsSecondarySelected > 0) && (this.skillsSelected == 0)) {
                   this.currentFpa = "Calculation makes no sense";
