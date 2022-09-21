@@ -17,7 +17,7 @@
     "vue": "^2.6.12",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.4.3",
-    "vuetify": "^2.3.10"
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
