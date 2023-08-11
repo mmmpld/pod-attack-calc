@@ -8,7 +8,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "gh-pages-deploy": "node scripts/gh-pages-deploy.js",
+    "gh-pages-deploy": "node scripts/gh-pages-deploy.mjs",
     "test": "vue-cli-service test:unit",
     "testu": "vue-cli-service test:unit -u"
   },
