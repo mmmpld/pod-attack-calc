@@ -22,4 +22,14 @@ describe('Barbarian default values', () => {
     it('frenzy (first swing hits) phaseblade/colossus sword', async () => {
         await breakpoints('8/12', '2.5', { charactersSelected: characterId, skillsSelected: 37, weaponsPrimarySelected: 191, weaponsSecondarySelected: 56, frenzySkillIas: 30 });
     })
+
+    it('whirlwind dual berserker axe', async () => {
+        await breakpoints('4', '6.25', { charactersSelected: characterId, skillsSelected: 19, weaponsPrimarySelected: 25, weaponsSecondarySelected: 25 });
+    })
+    it('whirlwind warpike', async () => {
+        await breakpoints('4', '6.25', { charactersSelected: characterId, skillsSelected: 19, weaponsPrimarySelected: 274 });
+    })
+    it('whirlwind single phaseblade high ias', async () => {
+        await breakpoints('4', '6.25', { charactersSelected: characterId, skillsSelected: 19, weaponsPrimarySelected: 191, iasWeaponPrimary: 105 });
+    })
 })

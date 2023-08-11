@@ -1674,3 +1674,33 @@ exports[`Barbarian default values standard attack 1`] = `
   </tr>
 </tbody>
 `;
+
+exports[`Barbarian default values whirlwind dual berserker axe 1`] = `
+<tbody>
+  <tr class="highlight-current-row">
+    <th>0</th>
+    <td>4</td>
+    <td>6.25</td>
+  </tr>
+</tbody>
+`;
+
+exports[`Barbarian default values whirlwind single phaseblade high ias 1`] = `
+<tbody>
+  <tr class="highlight-current-row">
+    <th>0</th>
+    <td>4</td>
+    <td>6.25</td>
+  </tr>
+</tbody>
+`;
+
+exports[`Barbarian default values whirlwind warpike 1`] = `
+<tbody>
+  <tr class="highlight-current-row">
+    <th>0</th>
+    <td>4</td>
+    <td>6.25</td>
+  </tr>
+</tbody>
+`;

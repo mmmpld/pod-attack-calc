@@ -296,6 +296,28 @@ export default {
       currentAps: '',
     }),
     methods: {
+        whirlwind: function(temp) {
+            var result = 4;
+            if (temp > 11) {
+                result = 6;
+            }
+            if (temp > 14) {
+                result = 8;
+            }
+            if (temp > 17) {
+                result = 10;
+            }
+            if (temp > 19) {
+                result = 12;
+            }
+            if (temp > 22) {
+                result = 14;
+            }
+            if (temp > 25) {
+                result = 16;
+            }
+            return result;
+        },
         getQualityColorClass: function(quality) {
             console.log(quality);
             switch (quality) {
@@ -391,7 +413,7 @@ export default {
               animationSpeed = 208;
           }
           // Dragon Tail, Dragon Talon || Impale, Jab, Fists of Fire, Claws of Thunder, Blades of Ice, Dual Strike, Double Swing, Frenzy, Double Throw, Whirlwind && not Whirlwind
-          if (((attackSkill.animation == 3) || (attackSkill.animation == 7)) && (attackSkill.title !== "Whirlwind")) {
+          if (((attackSkill.animation == 3) || (attackSkill.animation == 7)) && attackSkill.title !== "Whirlwind (Classic)" && attackSkill.title !== "Whirlwind (LoD)") {
               animationSpeed = 256;
           }
           // Laying Traps
@@ -452,7 +474,7 @@ export default {
                 FPA = this.frenzyFpa(this.iasOffWeapon).sum;
                 FPAmax = this.frenzyFpa(175).sum;
           }
-          if (this.skillsSelected == 19) { // whirlwind
+          if (this.skillsSelected == 19 || this.skillsSelected == 38) { // whirlwind classic or lod
               FPA = Math.floor(256 * FramesPerDirection / Math.floor(animationSpeed * Acceleration / 100));
               FPAmax = 0;
           }
@@ -508,6 +530,7 @@ export default {
       calculateValues: function () {
           var isMaxIas = true; // true if further ias is useless
           var weapPrimary = this.lookupWeapon[this.weaponsPrimarySelected];
+          const weapSecondary = this.lookupWeapon[this.weaponsSecondarySelected];
           var resultFpa;
           var temp;
           var attackSkill = this.data.attack[this.skillsSelected];
@@ -629,13 +652,46 @@ export default {
                   resultFpa = resultFpa / 2;
               }
           }
-          // Whirlwind
+          // Whirlwind Classic
           if (this.skillsSelected == 19) {
               resultFpa = 4; // uses classic whirlwind locked at 4 frame attack for all weapons
               isMaxIas = true;
               if (isMaxIas) {
                   this.isCurrentFpaMaxed = true;
               }
+          }
+          // Whirlwind LoD
+          if (this.skillsSelected == 38) {
+            this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][0];
+            if (weapPrimary.type == calc.weaponTypes.twoHandedSword) { this.animationFrames = 16; }
+            acceleration = 100 + parseInt(this.iasWeaponPrimary, 10) - parseInt(this.lookupWeapon[this.weaponsPrimarySelected].wsm, 10);
+            let temp = this.calcFPA(this.animationFrames, acceleration, start);
+            resultFpa = this.whirlwind(temp);
+            if (resultFpa > 4) { isMaxIas = false; }
+            // unarmed
+            if (this.weaponsPrimarySelected == 0) {
+                console.debug("unarmed");
+                resultFpa = 10;
+            }
+            if (this.weaponsSecondarySelected > 0) {
+                console.debug("dual wield");
+                const temp2 = resultFpa;
+                this.animationFrames = this.weaponClassFrames[weapSecondary.type][this.charactersSelected][0];
+                if (weapSecondary.type == calc.weaponTypes.twoHandedSword) {
+                    this.animationFrames = 16;
+                }
+                acceleration = 100 + parseInt(this.iasWeaponSecondary, 10) - parseInt(this.lookupWeapon[this.weaponsSecondarySelected].wsm, 10);
+                temp = this.calcFPA(this.animationFrames, acceleration, start);
+                resultFpa = this.whirlwind(temp);
+                if (resultFpa > 4) {
+                    isMaxIas = false;
+                }
+                resultFpa = (resultFpa + temp2) / 4;
+            }
+            if (isMaxIas) {
+                this.isCurrentFpaMaxed = true;
+            }
+            isMaxIas = true;
           }
           // Dragon Talon, Zeal, Fury
           if (attackSkill.rollback == 0) {
@@ -1264,9 +1320,11 @@ export default {
                       }
                       values.push(this.getSkillOptionData("Dragon Tail"));
                       values.push(this.getSkillOptionData("Dragon Talon"));
-                      // should be weapons that can be passion runeword || POD chaos, any 3os sin claw
                       if (weapPrimary.canZeal) {
                           valuesNonNative.push(this.getSkillOptionData("Zeal"));
+                      }
+                      if (weapPrimary.type == this.weaponTypes.claw) {
+                          valuesNonNative.push(this.getSkillOptionData("Whirlwind (LoD)"));
                       }
                   }
                   break;
@@ -1289,7 +1347,7 @@ export default {
                       }
                       // not bow or xbow
                       if (weapPrimary.weaponCategory != this.weaponCategories.bowOrXbow) {
-                          values.push(this.getSkillOptionData("Whirlwind"));
+                          values.push(this.getSkillOptionData("Whirlwind (Classic)"));
                           values.push(this.getSkillOptionData("Concentrate"));
                           values.push(this.getSkillOptionData("Berserk"));
                           values.push(this.getSkillOptionData("Bash"));
@@ -1540,7 +1598,7 @@ export default {
                         }
                     }
                     // Impale, Jab, Dual Strike, Double Swing, Frenzy, Double Throw && not Whirlwind
-                    if ((attackSkill.animation == 7) && (this.skillsSelected != 19)) {
+                    if ((attackSkill.animation == 7) && (this.skillsSelected != 19 && this.skillsSelected != 38)) {
                         console.info("calc ias for animation 7");
                         for (let i = Math.min(Math.max(100 + this.SIAS - this.WSMprimaer, 15), 175); i <= 175; i++) {
                             resultFpa = this.calcFPA(this.animationFrames, i, 0);
@@ -1563,9 +1621,22 @@ export default {
                             }
                         }
                     }
-                    if (attackSkill.title == 'Whirlwind') {
-                        console.info("calc ias for whirlwind");
+                    if (attackSkill.title == 'Whirlwind (Classic)') {
+                        console.info("calc ias for classic whirlwind");
                         breakpoints[breakpoints.length] = [0, 4]; // classic whirlwind locked at 4fpa
+                    }
+                    if (attackSkill.title == 'Whirlwind (LoD)') {
+                        console.info("calc ias for lod whirlwind");
+                        for (let i = 100 + this.iasPrimaryAndOffWeapon - OIAS - this.WSMprimaer; i <= 175; i++) {
+                            temp = this.calcFPA(this.animationFrames, i, 0);
+                            resultFpa = this.whirlwind(temp);
+                            if (temp1 != resultFpa)
+                            {
+                                const newBreakpoint = [i - 100 + this.WSMprimaer, resultFpa];
+                                breakpoints[breakpoints.length] = newBreakpoint;
+                                temp1 = resultFpa;
+                            }
+                        }
                     }
                     // Dragon Talon, Zeal. Fury handled under wearform
                     if (attackSkill.rollback == 0) {
