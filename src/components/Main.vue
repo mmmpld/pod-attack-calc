@@ -208,7 +208,7 @@
 
 <script>
 import * as calc from '../assets/calc';
-import BreakpointsTable from './BreakpointsTable';
+import BreakpointsTable from './BreakpointsTable.vue';
 
 export default {
   name: 'App',

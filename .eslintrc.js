@@ -1,4 +1,7 @@
 module.exports = {
+    env: {
+        es2022: true,
+    },
     rules: {
         'no-console': 'off',
         'vue/no-side-effects-in-computed-properties': 'warn',
