@@ -128,38 +128,41 @@ export default {
 </script>
 
 <style>
-    .breakpoint-table.v-data-table > .v-data-table__wrapper > table {
-        width: auto;
-        text-align: right;
-    }
-    .breakpoint-table .vertical-label {
-        vertical-align: top;
-    }
-    .breakpoint-table tr:hover .vertical-label, .breakpoint-table tr .vertical-label {
-        background-color: white;
-    }
-    .breakpoint-table div.vertical-label-spacer {
-        max-height: 150px;
-        height: 20%;
-    }
-    .breakpoint-table div.vertical-label-text  {
-        writing-mode: vertical-lr;
-        transform: rotate(180deg);
-        color: rgba(0,0,0,.6);
-        font-size: .75rem;
-        user-select: none;
-        height: max-content;
-    }
-    .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr > th.horizontal-label {
-        text-align: center;
-    }
-    .border-off {
-        border-bottom: 0 !important;
-    }
-    .breakpoint-table tr.highlight-current-row {
-        background-color: #F9FBE7;
-    }
-    .breakpoint-table col.highlight-current-col {
-        background-color: #F9F9F9;
-    }
+  .breakpoint-table.v-data-table > .v-data-table__wrapper > table {
+      width: auto;
+      text-align: right;
+  }
+  .breakpoint-table .vertical-label {
+      vertical-align: top;
+  }
+  .breakpoint-table tr:hover .vertical-label, .breakpoint-table tr .vertical-label {
+      background-color: #1E1E1E;
+  }
+  .breakpoint-table div.vertical-label-spacer {
+      max-height: 150px;
+      height: 20%;
+  }
+  .breakpoint-table div.vertical-label-text  {
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: .75rem;
+      user-select: none;
+      height: max-content;
+  }
+  .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr > th.horizontal-label {
+      text-align: center;
+  }
+  .border-off {
+      border-bottom: 0 !important;
+  }
+  .breakpoint-table tr.highlight-current-row {
+      background-color: rgba(76, 175, 79, 0.3);
+  }
+  .breakpoint-table col.highlight-current-col {
+      background-color: rgba(76, 175, 79, 0.1);
+  }
+  .breakpoint-table.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+    background-color: rgba(33, 149, 243, 0.6);
+  }
 </style>

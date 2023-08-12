@@ -8,7 +8,7 @@
         cols="12"
         lg="2"
         md="4"
-        class="px-8 grey lighten-5 d-none d-md-block"
+        class="px-8 black d-none d-md-block"
       />
       <v-divider vertical />
       <v-col class="px-8">
@@ -20,7 +20,7 @@
         cols="12"
         lg="2"
         md="4"
-        class="px-8 grey lighten-5"
+        class="px-8 black"
       >
         <v-row>
           <v-col class="py-0 pl-3">
