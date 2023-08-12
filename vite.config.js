@@ -5,6 +5,7 @@ import Components from 'unplugin-vue-components/vite'
 
 const path = require('path')
 export default defineConfig({
+  base: '/pod-attack-calc/',
   plugins: [
     createVuePlugin(),
     Components({
