@@ -2,13 +2,12 @@ module.exports = {
     "root": true,
     env: {
         "node": true,
-        "jest": true,
         es2022: true,
     },
     "extends": [
-        "plugin:vue/base",
-        "plugin:vue/essential",
-        "eslint:recommended"
+        "plugin:vue/recommended",
+        "eslint:recommended",
+        "standard"
     ],
     rules: {
         'no-console': 'off',
@@ -20,10 +19,7 @@ module.exports = {
             "files": [
                 "**/__tests__/*.{j,t}s?(x)",
                 "**/tests/unit/**/*.spec.{j,t}s?(x)"
-            ],
-            "env": {
-                "jest": true
-            }
+            ]
         }
     ]
 }

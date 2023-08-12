@@ -1,9 +1,9 @@
-import { describe, it } from 'vitest';
+import { describe, it } from 'vitest'
 import breakpoints from './breakpoints.js'
-const characterId = 4;
+const characterId = 4
 
 describe('Necromancer default values', () => {
-    it('standard attack', async () => {
-        await breakpoints('14', '1.78', { charactersSelected: characterId });
-    })
+  it('standard attack', async () => {
+    await breakpoints('14', '1.78', { charactersSelected: characterId })
+  })
 })
