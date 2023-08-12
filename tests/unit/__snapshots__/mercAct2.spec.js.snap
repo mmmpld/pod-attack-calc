@@ -1,4 +1,22 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Merc Act2 default values > jab attack mancatcher 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Merc Act2 default values > jab attack no weapon 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Merc Act2 default values > jab attack thresher 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
 
 exports[`Merc Act2 default values jab attack mancatcher 1`] = `
 <tbody>

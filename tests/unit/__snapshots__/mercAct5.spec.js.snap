@@ -1,4 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Merc Act5 default values > bash attack 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
 
 exports[`Merc Act5 default values bash attack 1`] = `
 <tbody>

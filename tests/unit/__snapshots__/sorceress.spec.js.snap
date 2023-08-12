@@ -1,4 +1,16 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Sorceress default values > multishot upped doomslinger 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Sorceress default values > standard attack 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
 
 exports[`Sorceress default values multishot upped doomslinger 1`] = `
 <tbody>

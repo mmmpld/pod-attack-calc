@@ -1,4 +1,28 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Assassin default values > boi dual cestus 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Assassin default values > standard attack 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Assassin default values > trap laying 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Assassin default values > whirlwind feral/scissors suwayyah 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
 
 exports[`Assassin default values boi dual cestus 1`] = `
 <tbody>

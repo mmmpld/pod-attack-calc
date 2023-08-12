@@ -1,9 +1,10 @@
+import { describe, it, expect } from 'vitest';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import router from "@/router"
-import App from '@/App';
-import Main from '@/components/Main.vue'
+import App from '@/App.vue';
+// import Main from '@/components/Main.vue'
 import { mount, createLocalVue } from '@vue/test-utils';
 Vue.use(Vuetify);
 const localVue = createLocalVue();

@@ -1,3 +1,4 @@
+import { describe, it } from 'vitest';
 import breakpoints from './breakpoints.js'
 const characterId = 0;
 

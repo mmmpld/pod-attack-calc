@@ -1,4 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Merc Act3 default values > vengeance attack 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
 
 exports[`Merc Act3 default values vengeance attack 1`] = `
 <tbody>

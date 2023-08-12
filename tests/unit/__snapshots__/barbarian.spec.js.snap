@@ -1,4 +1,52 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Barbarian default values > cleave 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Barbarian default values > cleave wolf 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Barbarian default values > frenzy (first swing hits) phaseblade/colossus sword 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Barbarian default values > frenzy (first swing misses) 2x phaseblade 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Barbarian default values > standard attack 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Barbarian default values > whirlwind dual berserker axe 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Barbarian default values > whirlwind single phaseblade high ias 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Barbarian default values > whirlwind warpike 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
 
 exports[`Barbarian default values cleave 1`] = `
 <tbody>

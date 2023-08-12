@@ -1,4 +1,28 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Amazon default values > multishot 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Amazon default values > standard attack 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Amazon default values > strafe 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
+
+exports[`Amazon default values > strafe cho-ko-nu 1`] = `
+Wrapper {
+  "selector": ".breakpoint-table tbody",
+}
+`;
 
 exports[`Amazon default values multishot 1`] = `
 <tbody>
