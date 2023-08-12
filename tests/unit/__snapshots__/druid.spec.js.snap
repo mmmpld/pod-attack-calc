@@ -1,1049 +1,1037 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Druid default values > feral with 31ias grief 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"\\">
+    <th rowspan=\\"53\\" class=\\"vertical-label border-off\\">
+      <div class=\\"vertical-label-spacer\\"></div>
+      <div class=\\"vertical-label-text\\"> Primary Weapon IAS </div>
+    </th>
+    <th>0</th>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>5</th>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+    <td scope=\\"col\\"> 9 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>10</th>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>15</th>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+    <td scope=\\"col\\"> 8 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>20</th>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>25</th>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>30</th>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+  </tr>
+  <tr class=\\"highlight-current-row\\">
+    <!---->
+    <th>31</th>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>35</th>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>40</th>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+    <td scope=\\"col\\"> 7 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>45</th>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>50</th>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>55</th>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>60</th>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+    <td scope=\\"col\\"> 6 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>65</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>70</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>75</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>80</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>85</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>90</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>95</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>100</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>105</th>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+    <td scope=\\"col\\"> 5 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>110</th>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>115</th>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>120</th>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>125</th>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>130</th>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>135</th>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>140</th>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+    <td scope=\\"col\\"> 4 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>145</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>150</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>155</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>160</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>165</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>170</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>175</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>180</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>185</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>190</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>195</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>200</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>205</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>210</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>215</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>220</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>225</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>230</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>235</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>240</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>245</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+  <tr class=\\"\\">
+    <!---->
+    <th>250</th>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+    <td scope=\\"col\\"> 3 </td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Druid default values > standard attack 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
-`;
-
-exports[`Druid default values feral with 31ias grief 1`] = `
-<tbody>
-  <tr class="">
-    <th rowspan="53" class="vertical-label border-off">
-      <div class="vertical-label-spacer"></div>
-      <div class="vertical-label-text">Primary Weapon IAS</div>
-    </th>
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
     <th>0</th>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>5</th>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-    <td scope="col">9</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>10</th>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>15</th>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-    <td scope="col">8</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>20</th>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>25</th>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>30</th>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-  </tr>
-  <tr class="highlight-current-row">
-    <!---->
-    <th>31</th>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>35</th>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>40</th>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-    <td scope="col">7</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>45</th>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>50</th>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>55</th>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>60</th>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-    <td scope="col">6</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>65</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>70</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>75</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>80</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>85</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>90</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>95</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>100</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>105</th>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-    <td scope="col">5</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>110</th>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>115</th>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>120</th>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>125</th>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>130</th>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>135</th>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>140</th>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-    <td scope="col">4</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>145</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>150</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>155</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>160</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>165</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>170</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>175</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>180</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>185</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>190</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>195</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>200</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>205</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>210</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>215</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>220</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>225</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>230</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>235</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>240</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>245</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-  <tr class="">
-    <!---->
-    <th>250</th>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-    <td scope="col">3</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Druid default values standard attack 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>15</td>
+    <td> 15 </td>
     <td>1.66</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>9</th>
-    <td>14</td>
+    <td> 14 </td>
     <td>1.78</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>18</th>
-    <td>13</td>
+    <td> 13 </td>
     <td>1.92</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>30</th>
-    <td>12</td>
+    <td> 12 </td>
     <td>2.08</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>48</th>
-    <td>11</td>
+    <td> 11 </td>
     <td>2.27</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>75</th>
-    <td>10</td>
+    <td> 10 </td>
     <td>2.5</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>125</th>
-    <td>9</td>
+    <td> 9 </td>
     <td>2.77</td>
   </tr>
-</tbody>
+</tbody>"
 `;

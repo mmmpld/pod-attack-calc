@@ -46,7 +46,7 @@ async function expectBreakpointsTableMatches (fpa, aps, setDataOptions) {
   await mainComponent.vm.updateCurrent() // trigger the method to set the current fpa/aps values
   expect(wrapper.find('#currentFpa').text()).toBe(fpa + ' frames per attack')
   expect(wrapper.find('#currentAps').text()).toBe(aps + ' attacks per second')
-  expect(wrapper.find('.breakpoint-table tbody')).toMatchSnapshot()
+  expect(wrapper.find('.breakpoint-table tbody').html()).toMatchSnapshot()
 }
 
 export default expectBreakpointsTableMatches

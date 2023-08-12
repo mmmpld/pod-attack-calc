@@ -1,140 +1,116 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Amazon default values > multishot 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 11 </td>
+    <td>2.27</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>7</th>
+    <td> 10 </td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>23</th>
+    <td> 9 </td>
+    <td>2.77</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>48</th>
+    <td> 8 </td>
+    <td>3.12</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>95</th>
+    <td> 7 </td>
+    <td>3.57</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Amazon default values > standard attack 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 11 </td>
+    <td>2.27</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>11</th>
+    <td> 10 </td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>26</th>
+    <td> 9 </td>
+    <td>2.77</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>48</th>
+    <td> 8 </td>
+    <td>3.12</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>86</th>
+    <td> 7 </td>
+    <td>3.57</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>180</th>
+    <td> 6 </td>
+    <td>4.16</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Amazon default values > strafe 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 7/4/4/4/12 </td>
+    <td>4.9</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>3</th>
+    <td> 7/4/4/4/11 </td>
+    <td>5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>11</th>
+    <td> 6/3/3/3/10 </td>
+    <td>6.25</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>26</th>
+    <td> 6/3/3/3/9 </td>
+    <td>6.41</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>42</th>
+    <td> 5/3/3/3/9 </td>
+    <td>6.57</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>46</th>
+    <td> 5/3/3/3/8 </td>
+    <td>6.75</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>80</th>
+    <td> 5/3/3/3/7 </td>
+    <td>6.94</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Amazon default values > strafe cho-ko-nu 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
-`;
-
-exports[`Amazon default values multishot 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
     <th>0</th>
-    <td>11</td>
-    <td>2.27</td>
-  </tr>
-  <tr class="">
-    <th>7</th>
-    <td>10</td>
-    <td>2.5</td>
-  </tr>
-  <tr class="">
-    <th>23</th>
-    <td>9</td>
-    <td>2.77</td>
-  </tr>
-  <tr class="">
-    <th>48</th>
-    <td>8</td>
-    <td>3.12</td>
-  </tr>
-  <tr class="">
-    <th>95</th>
-    <td>7</td>
-    <td>3.57</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Amazon default values standard attack 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>11</td>
-    <td>2.27</td>
-  </tr>
-  <tr class="">
-    <th>11</th>
-    <td>10</td>
-    <td>2.5</td>
-  </tr>
-  <tr class="">
-    <th>26</th>
-    <td>9</td>
-    <td>2.77</td>
-  </tr>
-  <tr class="">
-    <th>48</th>
-    <td>8</td>
-    <td>3.12</td>
-  </tr>
-  <tr class="">
-    <th>86</th>
-    <td>7</td>
-    <td>3.57</td>
-  </tr>
-  <tr class="">
-    <th>180</th>
-    <td>6</td>
-    <td>4.16</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Amazon default values strafe 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>7/4/4/4/12</td>
-    <td>4.9</td>
-  </tr>
-  <tr class="">
-    <th>3</th>
-    <td>7/4/4/4/11</td>
-    <td>5</td>
-  </tr>
-  <tr class="">
-    <th>11</th>
-    <td>6/3/3/3/10</td>
-    <td>6.25</td>
-  </tr>
-  <tr class="">
-    <th>26</th>
-    <td>6/3/3/3/9</td>
-    <td>6.41</td>
-  </tr>
-  <tr class="">
-    <th>42</th>
-    <td>5/3/3/3/9</td>
-    <td>6.57</td>
-  </tr>
-  <tr class="">
-    <th>46</th>
-    <td>5/3/3/3/8</td>
-    <td>6.75</td>
-  </tr>
-  <tr class="">
-    <th>80</th>
-    <td>5/3/3/3/7</td>
-    <td>6.94</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Amazon default values strafe cho-ko-nu 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>7/3/4/4/10</td>
+    <td> 7/3/4/4/10 </td>
     <td>5.2</td>
   </tr>
-</tbody>
+</tbody>"
 `;

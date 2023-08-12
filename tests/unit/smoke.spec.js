@@ -4,7 +4,6 @@ import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import router from '@/router'
 import App from '@/App.vue'
-// import Main from '@/components/Main.vue'
 import { mount, createLocalVue } from '@vue/test-utils'
 Vue.use(Vuetify)
 const localVue = createLocalVue()

@@ -1,124 +1,106 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Merc Act2 default values > jab attack mancatcher 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 6 </td>
+    <td>3.57</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>9</th>
+    <td> 5.5 </td>
+    <td>3.84</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>26</th>
+    <td> 5 </td>
+    <td>4.16</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>52</th>
+    <td> 4.5 </td>
+    <td>4.54</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>102</th>
+    <td> 4 </td>
+    <td>5</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Merc Act2 default values > jab attack no weapon 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 7 </td>
+    <td>3.12</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>9</th>
+    <td> 6.5 </td>
+    <td>3.33</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>20</th>
+    <td> 6 </td>
+    <td>3.57</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>37</th>
+    <td> 5.5 </td>
+    <td>3.84</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>63</th>
+    <td> 5 </td>
+    <td>4.16</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>105</th>
+    <td> 4.5 </td>
+    <td>4.54</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>200</th>
+    <td> 4 </td>
+    <td>5</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Merc Act2 default values > jab attack thresher 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
-`;
-
-exports[`Merc Act2 default values jab attack mancatcher 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
     <th>0</th>
-    <td>6</td>
-    <td>3.57</td>
-  </tr>
-  <tr class="">
-    <th>9</th>
-    <td>5.5</td>
-    <td>3.84</td>
-  </tr>
-  <tr class="">
-    <th>26</th>
-    <td>5</td>
-    <td>4.16</td>
-  </tr>
-  <tr class="">
-    <th>52</th>
-    <td>4.5</td>
-    <td>4.54</td>
-  </tr>
-  <tr class="">
-    <th>102</th>
-    <td>4</td>
-    <td>5</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Merc Act2 default values jab attack no weapon 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>7</td>
-    <td>3.12</td>
-  </tr>
-  <tr class="">
-    <th>9</th>
-    <td>6.5</td>
+    <td> 6.5 </td>
     <td>3.33</td>
   </tr>
-  <tr class="">
-    <th>20</th>
-    <td>6</td>
-    <td>3.57</td>
-  </tr>
-  <tr class="">
-    <th>37</th>
-    <td>5.5</td>
-    <td>3.84</td>
-  </tr>
-  <tr class="">
-    <th>63</th>
-    <td>5</td>
-    <td>4.16</td>
-  </tr>
-  <tr class="">
-    <th>105</th>
-    <td>4.5</td>
-    <td>4.54</td>
-  </tr>
-  <tr class="">
-    <th>200</th>
-    <td>4</td>
-    <td>5</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Merc Act2 default values jab attack thresher 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>6.5</td>
-    <td>3.33</td>
-  </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>8</th>
-    <td>6</td>
+    <td> 6 </td>
     <td>3.57</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>22</th>
-    <td>5.5</td>
+    <td> 5.5 </td>
     <td>3.84</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>42</th>
-    <td>5</td>
+    <td> 5 </td>
     <td>4.16</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>75</th>
-    <td>4.5</td>
+    <td> 4.5 </td>
     <td>4.54</td>
   </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>142</th>
-    <td>4</td>
+    <td> 4 </td>
     <td>5</td>
   </tr>
-</tbody>
+</tbody>"
 `;

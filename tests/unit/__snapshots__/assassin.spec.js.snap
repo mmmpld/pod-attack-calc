@@ -1,200 +1,176 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Assassin default values > boi dual cestus 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 13.5 </td>
+    <td>1.85</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>6</th>
+    <td> 13 </td>
+    <td>1.92</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>7</th>
+    <td> 12.5 </td>
+    <td>2</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>15</th>
+    <td> 12 </td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>16</th>
+    <td> 11.5 </td>
+    <td>2.17</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>30</th>
+    <td> 10.5 </td>
+    <td>2.38</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>50</th>
+    <td> 10 </td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>52</th>
+    <td> 9.5 </td>
+    <td>2.63</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>83</th>
+    <td> 9 </td>
+    <td>2.77</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>89</th>
+    <td> 8.5 </td>
+    <td>2.94</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>142</th>
+    <td> 8 </td>
+    <td>3.12</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>168</th>
+    <td> 7.5 </td>
+    <td>3.33</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Assassin default values > standard attack 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 10.5 </td>
+    <td>2.38</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>11</th>
+    <td> 10 </td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>13</th>
+    <td> 9.5 </td>
+    <td>2.63</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>26</th>
+    <td> 9 </td>
+    <td>2.77</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>29</th>
+    <td> 8.5 </td>
+    <td>2.94</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>48</th>
+    <td> 8 </td>
+    <td>3.12</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>56</th>
+    <td> 7.5 </td>
+    <td>3.33</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>86</th>
+    <td> 7 </td>
+    <td>3.57</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>113</th>
+    <td> 6.5 </td>
+    <td>3.84</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>180</th>
+    <td> 6 </td>
+    <td>4.16</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Assassin default values > trap laying 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td> 15 </td>
+    <td>1.66</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>9</th>
+    <td> 14 </td>
+    <td>1.78</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>18</th>
+    <td> 13 </td>
+    <td>1.92</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>30</th>
+    <td> 12 </td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>48</th>
+    <td> 11 </td>
+    <td>2.27</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>78</th>
+    <td> 10 </td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>125</th>
+    <td> 9 </td>
+    <td>2.77</td>
+  </tr>
+</tbody>"
 `;
 
 exports[`Assassin default values > whirlwind feral/scissors suwayyah 1`] = `
-Wrapper {
-  "selector": ".breakpoint-table tbody",
-}
-`;
-
-exports[`Assassin default values boi dual cestus 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
     <th>0</th>
-    <td>13.5</td>
-    <td>1.85</td>
-  </tr>
-  <tr class="">
-    <th>6</th>
-    <td>13</td>
-    <td>1.92</td>
-  </tr>
-  <tr class="">
-    <th>7</th>
-    <td>12.5</td>
-    <td>2</td>
-  </tr>
-  <tr class="">
-    <th>15</th>
-    <td>12</td>
-    <td>2.08</td>
-  </tr>
-  <tr class="">
-    <th>16</th>
-    <td>11.5</td>
-    <td>2.17</td>
-  </tr>
-  <tr class="">
-    <th>30</th>
-    <td>10.5</td>
-    <td>2.38</td>
-  </tr>
-  <tr class="">
-    <th>50</th>
-    <td>10</td>
-    <td>2.5</td>
-  </tr>
-  <tr class="">
-    <th>52</th>
-    <td>9.5</td>
-    <td>2.63</td>
-  </tr>
-  <tr class="">
-    <th>83</th>
-    <td>9</td>
-    <td>2.77</td>
-  </tr>
-  <tr class="">
-    <th>89</th>
-    <td>8.5</td>
-    <td>2.94</td>
-  </tr>
-  <tr class="">
-    <th>142</th>
-    <td>8</td>
-    <td>3.12</td>
-  </tr>
-  <tr class="">
-    <th>168</th>
-    <td>7.5</td>
-    <td>3.33</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Assassin default values standard attack 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>10.5</td>
-    <td>2.38</td>
-  </tr>
-  <tr class="">
-    <th>11</th>
-    <td>10</td>
-    <td>2.5</td>
-  </tr>
-  <tr class="">
-    <th>13</th>
-    <td>9.5</td>
-    <td>2.63</td>
-  </tr>
-  <tr class="">
-    <th>26</th>
-    <td>9</td>
-    <td>2.77</td>
-  </tr>
-  <tr class="">
-    <th>29</th>
-    <td>8.5</td>
-    <td>2.94</td>
-  </tr>
-  <tr class="">
-    <th>48</th>
-    <td>8</td>
-    <td>3.12</td>
-  </tr>
-  <tr class="">
-    <th>56</th>
-    <td>7.5</td>
-    <td>3.33</td>
-  </tr>
-  <tr class="">
-    <th>86</th>
-    <td>7</td>
-    <td>3.57</td>
-  </tr>
-  <tr class="">
-    <th>113</th>
-    <td>6.5</td>
-    <td>3.84</td>
-  </tr>
-  <tr class="">
-    <th>180</th>
-    <td>6</td>
+    <td> 6 </td>
     <td>4.16</td>
   </tr>
-</tbody>
-`;
-
-exports[`Assassin default values trap laying 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>15</td>
-    <td>1.66</td>
-  </tr>
-  <tr class="">
-    <th>9</th>
-    <td>14</td>
-    <td>1.78</td>
-  </tr>
-  <tr class="">
-    <th>18</th>
-    <td>13</td>
-    <td>1.92</td>
-  </tr>
-  <tr class="">
-    <th>30</th>
-    <td>12</td>
-    <td>2.08</td>
-  </tr>
-  <tr class="">
-    <th>48</th>
-    <td>11</td>
-    <td>2.27</td>
-  </tr>
-  <tr class="">
-    <th>78</th>
-    <td>10</td>
-    <td>2.5</td>
-  </tr>
-  <tr class="">
-    <th>125</th>
-    <td>9</td>
-    <td>2.77</td>
-  </tr>
-</tbody>
-`;
-
-exports[`Assassin default values whirlwind feral/scissors suwayyah 1`] = `
-<tbody>
-  <tr class="highlight-current-row">
-    <th>0</th>
-    <td>6</td>
-    <td>4.16</td>
-  </tr>
-  <tr class="">
+  <tr class=\\"\\">
     <th>3</th>
-    <td>4</td>
+    <td> 4 </td>
     <td>6.25</td>
   </tr>
-</tbody>
+</tbody>"
 `;
