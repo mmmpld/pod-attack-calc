@@ -8,7 +8,7 @@
         cols="12"
         lg="2"
         md="4"
-        class="px-8 black d-none d-md-block"
+        class="px-8 bg-black d-none d-md-block"
       />
       <v-divider vertical />
       <v-col class="px-8">
@@ -20,7 +20,7 @@
         cols="12"
         lg="2"
         md="4"
-        class="px-8 black"
+        class="px-8 bg-black"
       >
         <v-row>
           <v-col class="py-0 pl-3">
@@ -31,18 +31,16 @@
             align="right"
           >
             <v-tooltip
-              left
-              color="green"
+              location="left"
               transition="scroll-x-reverse-transition"
             >
-              <template #activator="{ on, attrs }">
+              <template #activator="{ props }">
                 <v-btn
                   icon
                   color="green"
                   :href="shareLink"
-                  v-bind="attrs"
+                  v-bind="props"
                   @click.prevent="toggleAddQueryString"
-                  v-on="on"
                 >
                   <v-icon v-if="doAddQueryString">
                     mdi-bookmark
@@ -71,40 +69,43 @@
               v-model="charactersSelected"
               name="char"
               :items="characters"
+              item-title="text"
               label="Class"
               dense
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-select
               v-model="shapeShiftFormsSelected"
               name="charform"
               :items="shapeShiftForms"
+              item-title="text"
               label="Shape Shift"
               dense
               :disabled="!isPlayableClass"
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-select
               v-model="skillsSelected"
               name="skill"
               :items="skills"
+              item-title="text"
               label="Skill"
               dense
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-text-field
               v-model.number="iasOffWeapon"
               name="IAS"
               type="number"
               label="Off-Weapon IAS%"
-              dense
+              density="compact"
               min="0"
               step="5"
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
           </div>
           <div>
@@ -115,25 +116,28 @@
               v-model="weaponsPrimarySelected"
               name="waffe"
               :items="weaponsPrimary"
-              :filter="weaponFilter"
+              item-title="text"
+              :custom-filter="weaponFilter"
               label="Primary Weapon"
               dense
               persistent-hint
               :hint="`${weaponInfoPrimary.description} [${weaponInfoPrimary.wsm}]`"
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             >
-              <template #item="{ item }">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.text" />
+              <template #item="{ props, item }">
+                <v-list-item
+                  v-bind="props"
+                  :title="item?.raw?.text"
+                >
                   <v-list-item-subtitle
-                    v-for="(commonItem, index) in item.commonItems"
+                    v-for="(commonItem, index) in item?.raw?.commonItems"
                     :key="index"
                     :class="getQualityColorClass(commonItem.quality)"
                   >
                     {{ commonItem.title }}
                   </v-list-item-subtitle>
-                </v-list-item-content>
+                </v-list-item>
               </template>
             </v-autocomplete>
             <v-select
@@ -141,10 +145,11 @@
               v-model="weaponsPrimaryBarbHandednessSelected"
               name="barbschwert"
               :items="weaponsPrimaryBarbHandedness"
+              item-title="text"
               label="Handedness"
               dense
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-text-field
               v-if="weaponsPrimarySelected"
@@ -154,9 +159,9 @@
               label="Primary Weapon IAS%"
               min="0"
               step="5"
-              dense
+              density="compact"
               class="mt-6 mb-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
           </div>
           <div v-if="canDualWield === true">
@@ -174,17 +179,16 @@
                 align="right"
               >
                 <v-tooltip
-                  left
+                  location="left"
                   transition="scroll-x-reverse-transition"
                 >
-                  <template #activator="{ on, attrs }">
+                  <template #activator="{ props }">
                     <v-btn
                       icon
-                      x-small
+                      size="x-small"
                       :href="shareLink"
-                      v-bind="attrs"
+                      v-bind="props"
                       @click.prevent="swapWeapons"
-                      v-on="on"
                     >
                       <v-icon>mdi-swap-vertical-bold</v-icon>
                     </v-btn>
@@ -197,25 +201,28 @@
               v-model="weaponsSecondarySelected"
               name="zweitwaffe"
               :items="weaponsSecondary"
-              :filter="weaponFilter"
+              item-title="text"
+              :custom-filter="weaponFilter"
               label="Secondary Weapon"
               dense
               persistent-hint
               :hint="`${weaponInfoSecondary.description} [${weaponInfoSecondary.wsm}]`"
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             >
-              <template #item="{ item }">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.text" />
+              <template #item="{ props, item }">
+                <v-list-item
+                  v-bind="props"
+                  :title="item?.raw?.text"
+                >
                   <v-list-item-subtitle
-                    v-for="(commonItem, index) in item.commonItems"
+                    v-for="(commonItem, index) in item?.raw?.commonItems"
                     :key="index"
                     :class="getQualityColorClass(commonItem.quality)"
                   >
                     {{ commonItem.title }}
                   </v-list-item-subtitle>
-                </v-list-item-content>
+                </v-list-item>
               </template>
             </v-autocomplete>
             <v-text-field
@@ -224,11 +231,11 @@
               name="wIAS2"
               type="number"
               label="Secondary Weapon IAS%"
-              dense
+              density="compact"
               min="0"
               step="5"
               class="mt-6 mb-0"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <!-- <v-checkbox name="enableWsmBug" @input="updateCurrent" label="Apply WSM Bug"
                             v-model="isWsmBug" dense class="my-0"></v-checkbox> -->
@@ -239,20 +246,22 @@
               v-model="fanaticismSkillIas"
               name="fana"
               :items="fanaticism"
+              item-title="text"
               label="Fanaticism Level"
               dense
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-select
               v-if="canFrenzy"
               v-model="frenzySkillIas"
               name="frenzy"
               :items="frenzy"
+              item-title="text"
               label="Frenzy Level"
               dense
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-select
               v-if="canWerewolf"
@@ -260,10 +269,11 @@
               name="wolf"
               size="1"
               :items="werewolf"
+              item-title="text"
               label="Werewolf Level"
               dense
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-select
               v-if="canBurstOfSpeed"
@@ -271,10 +281,11 @@
               name="tempo"
               size="1"
               :items="burstOfSpeed"
+              item-title="text"
               label="Burst of Speed Level"
               dense
               class="my-3"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
           </div>
           <div>
@@ -283,10 +294,11 @@
               v-model="holyFreezeSkillIas"
               name="holyfrost"
               :items="holyFreeze"
+              item-title="text"
               label="Holy Freeze Level"
               dense
               class="mt-3 mb-0"
-              @input="updateCurrent"
+              @update:model-value="updateCurrent"
             />
             <v-checkbox
               v-model="isDecrepify"
@@ -991,8 +1003,9 @@ export default {
           break
       }
       if (valuesNonNative.length > 0) {
-        values.unshift({ header: 'native attacks' })
-        valuesNonNative.unshift({ header: 'non-class skills' })
+        // TODO workaround for vuetify 3 not supporting headers
+        // values.unshift({ header: 'native attacks' })
+        // valuesNonNative.unshift({ header: 'non-class skills' })
         values = values.concat(valuesNonNative)
       }
       return values
@@ -1579,6 +1592,9 @@ export default {
     skills: function (newVal) {
       this.skillsSelected = this.sanitiseSelected(this.skillsSelected, newVal)
       this.updateCurrent()
+    },
+    queryString: function (newQueryString) {
+      this.updateUrl()
     }
   },
   created: function () {
@@ -1602,9 +1618,6 @@ export default {
     this.isDecrepify = this.decrep === '1'
     this.isDebug = this.debug === '1'
     this.updateCurrent()
-  },
-  updated: function () {
-    if (this.doAddQueryString) this.$router.push({ query: this.query }).catch(_error => {}) // catch suppresses redundant navigation error in console
   },
   methods: {
     whirlwind: function (temp) {
@@ -1649,8 +1662,7 @@ export default {
       }
     },
     updateUrl: function () {
-      const query = this.doAddQueryString ? this.query : {}
-      this.$router.push({ query }).catch(_error => {}) // catch suppresses redundant navigation error in console
+      if (this.doAddQueryString) this.$router.push({ query: this.query })//.catch(_error => {}) // catch suppresses redundant navigation error in console
     },
     toggleAddQueryString: function () {
       this.doAddQueryString = !this.doAddQueryString

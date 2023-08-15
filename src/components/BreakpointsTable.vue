@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-simple-table
+    <v-table
       v-if="standardisedBreakpoints.rows[0].frames.length === 1"
-      dense
+      density="compact"
       class="breakpoint-table"
     >
       <template #default>
@@ -32,10 +32,10 @@
           </tr>
         </tbody>
       </template>
-    </v-simple-table>
-    <v-simple-table
+    </v-table>
+    <v-table
       v-else
-      dense
+      density="compact"
       class="breakpoint-table"
     >
       <template #default>
@@ -94,7 +94,7 @@
           </tr>
         </tbody>
       </template>
-    </v-simple-table>
+    </v-table>
   </div>
 </template>
 
@@ -128,7 +128,7 @@ export default {
 </script>
 
 <style>
-  .breakpoint-table.v-data-table > .v-data-table__wrapper > table {
+  .breakpoint-table.v-table > .v-table__wrapper > table {
       width: auto;
       text-align: right;
   }
@@ -136,7 +136,7 @@ export default {
       vertical-align: top;
   }
   .breakpoint-table tr:hover .vertical-label, .breakpoint-table tr .vertical-label {
-      background-color: #1E1E1E;
+      background-color: rgb(var(--v-theme-surface));
   }
   .breakpoint-table div.vertical-label-spacer {
       max-height: 150px;
@@ -145,12 +145,12 @@ export default {
   .breakpoint-table div.vertical-label-text  {
       writing-mode: vertical-lr;
       transform: rotate(180deg);
-      color: rgba(255, 255, 255, 0.7);
-      font-size: .75rem;
+      color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+      font-size: 1rem;
       user-select: none;
       height: max-content;
   }
-  .breakpoint-table.v-data-table > .v-data-table__wrapper > table > thead > tr > th.horizontal-label {
+  .breakpoint-table.v-table > .v-table__wrapper > table > thead > tr > th.horizontal-label {
       text-align: center;
   }
   .border-off {
@@ -162,7 +162,7 @@ export default {
   .breakpoint-table col.highlight-current-col {
       background-color: rgba(76, 175, 79, 0.1);
   }
-  .breakpoint-table.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+  .breakpoint-table.v-table > .v-table__wrapper > table > tbody > tr:hover:not(.v-table__expanded__content):not(.v-table__empty-wrapper) {
     background-color: rgba(33, 149, 243, 0.6);
   }
 </style>

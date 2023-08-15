@@ -5,10 +5,12 @@ module.exports = {
     es2022: true
   },
   extends: [
-    'plugin:vue/recommended',
-    'eslint:recommended',
-    'standard'
+    'plugin:vue/vue3-recommended',
+    'plugin:vuetify/base'
   ],
+  parserOptions: {
+    ecmaVersion: 2022
+  },
   rules: {
     'no-console': 'off',
     'vue/no-side-effects-in-computed-properties': 'warn',

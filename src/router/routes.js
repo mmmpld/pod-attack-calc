@@ -6,5 +6,5 @@ export default [
     component: Main,
     props: route => ({ ...route.query })
   },
-  { path: '*', redirect: '/pod-attack-calc/' }
+  { path: '/:pathMatch(.*)*', redirect: '/pod-attack-calc/' }
 ]
