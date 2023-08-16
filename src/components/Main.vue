@@ -1645,7 +1645,6 @@ export default {
       return result
     },
     getQualityColorClass: function (quality) {
-      console.log(quality)
       switch (quality) {
         case this.qualities.magic:
           return 'quality-magic'
