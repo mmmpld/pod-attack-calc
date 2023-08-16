@@ -1,5 +1,5 @@
 import { describe, it } from 'vitest'
-import breakpoints from './breakpoints.js'
+import breakpoints from './breakpoints'
 const characterId = 1
 
 describe('Assassin default values', () => {
@@ -12,10 +12,10 @@ describe('Assassin default values', () => {
   })
 
   it('boi dual cestus', async () => {
-    await breakpoints('13.5', '1.85', { charactersSelected: characterId, skillsSelected: 11, weaponsPrimarySelected: 43, weaponsSecondarySelected: 43 })
+    await breakpoints('13.5', '1.85', { charactersSelected: characterId, skillsSelected: 11, weaponsPrimarySelectedRaw: 43, weaponsSecondarySelectedRaw: 43 })
   })
 
   it('whirlwind feral/scissors suwayyah', async () => {
-    await breakpoints('2.5', '10', { charactersSelected: characterId, skillsSelected: 38, weaponsPrimarySelected: 95, weaponsSecondarySelected: 215 })
+    await breakpoints('2.5', '10', { charactersSelected: characterId, skillsSelected: 38, weaponsPrimarySelectedRaw: 95, weaponsSecondarySelectedRaw: 215 })
   })
 })

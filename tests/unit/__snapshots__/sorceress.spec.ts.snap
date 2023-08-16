@@ -1,0 +1,131 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Sorceress default values > multishot no-upped doomslinger 1`] = `
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td>14</td>
+    <td>1.78</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>4</th>
+    <td>13</td>
+    <td>1.92</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>16</th>
+    <td>12</td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>35</th>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+</tbody>"
+`;
+
+exports[`Sorceress default values > multishot upped doomslinger 1`] = `
+"<tbody>
+  <tr class=\\"\\">
+    <th>0</th>
+    <td>12</td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"highlight-current-row\\">
+    <th>8</th>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+</tbody>"
+`;
+
+exports[`Sorceress default values > multishot upped doomslinger no ias 1`] = `
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td>12</td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>8</th>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+</tbody>"
+`;
+
+exports[`Sorceress default values > standard attack 1`] = `
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td>14</td>
+    <td>1.78</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>9</th>
+    <td>13</td>
+    <td>1.92</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>19</th>
+    <td>12</td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>32</th>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>54</th>
+    <td>10</td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>86</th>
+    <td>9</td>
+    <td>2.77</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>152</th>
+    <td>8</td>
+    <td>3.12</td>
+  </tr>
+</tbody>"
+`;
+
+exports[`Sorceress default values > standard attack with giant thresher 1`] = `
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td>14</td>
+    <td>1.78</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>6</th>
+    <td>13</td>
+    <td>1.92</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>16</th>
+    <td>12</td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>30</th>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>52</th>
+    <td>10</td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>89</th>
+    <td>9</td>
+    <td>2.77</td>
+  </tr>
+</tbody>"
+`;

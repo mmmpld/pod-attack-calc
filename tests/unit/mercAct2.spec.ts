@@ -8,10 +8,10 @@ describe('Merc Act2 default values', () => {
   })
 
   it('jab attack thresher', async () => {
-    await breakpoints('6.5', '3.33', { charactersSelected: characterId, weaponsPrimarySelected: 248 })
+    await breakpoints('6.5', '3.33', { charactersSelected: characterId, weaponsPrimarySelectedRaw: 248 })
   })
 
   it('jab attack mancatcher', async () => {
-    await breakpoints('6', '3.57', { charactersSelected: characterId, weaponsPrimarySelected: 172 })
+    await breakpoints('6', '3.57', { charactersSelected: characterId, weaponsPrimarySelectedRaw: 172 })
   })
 })

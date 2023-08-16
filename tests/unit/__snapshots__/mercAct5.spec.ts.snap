@@ -4,37 +4,37 @@ exports[`Merc Act5 default values > bash attack 1`] = `
 "<tbody>
   <tr class=\\"highlight-current-row\\">
     <th>0</th>
-    <td> 15 </td>
+    <td>15</td>
     <td>1.47</td>
   </tr>
   <tr class=\\"\\">
     <th>9</th>
-    <td> 14 </td>
+    <td>14</td>
     <td>1.56</td>
   </tr>
   <tr class=\\"\\">
     <th>18</th>
-    <td> 13 </td>
+    <td>13</td>
     <td>1.66</td>
   </tr>
   <tr class=\\"\\">
     <th>30</th>
-    <td> 12 </td>
+    <td>12</td>
     <td>1.78</td>
   </tr>
   <tr class=\\"\\">
     <th>48</th>
-    <td> 11 </td>
+    <td>11</td>
     <td>1.92</td>
   </tr>
   <tr class=\\"\\">
     <th>75</th>
-    <td> 10 </td>
+    <td>10</td>
     <td>2.08</td>
   </tr>
   <tr class=\\"\\">
     <th>125</th>
-    <td> 9 </td>
+    <td>9</td>
     <td>2.27</td>
   </tr>
 </tbody>"

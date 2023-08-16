@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Paladin default values > standard attack 1`] = `
+"<tbody>
+  <tr class=\\"highlight-current-row\\">
+    <th>0</th>
+    <td>13</td>
+    <td>1.92</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>9</th>
+    <td>12</td>
+    <td>2.08</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>20</th>
+    <td>11</td>
+    <td>2.27</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>37</th>
+    <td>10</td>
+    <td>2.5</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>63</th>
+    <td>9</td>
+    <td>2.77</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>105</th>
+    <td>8</td>
+    <td>3.12</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>200</th>
+    <td>7</td>
+    <td>3.57</td>
+  </tr>
+</tbody>"
+`;
