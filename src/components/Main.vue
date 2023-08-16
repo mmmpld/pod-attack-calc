@@ -37,6 +37,7 @@
               <template #activator="{ props }">
                 <v-btn
                   icon
+                  variant="text"
                   color="green"
                   :href="shareLink"
                   v-bind="props"
@@ -185,6 +186,7 @@
                   <template #activator="{ props }">
                     <v-btn
                       icon
+                      variant="text"
                       size="x-small"
                       :href="shareLink"
                       v-bind="props"
