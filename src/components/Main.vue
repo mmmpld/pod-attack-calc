@@ -71,7 +71,7 @@
               :items="characters"
               item-title="text"
               label="Class"
-              dense
+              density="compact"
               class="my-3"
               @update:model-value="updateCurrent"
             />
@@ -81,7 +81,7 @@
               :items="shapeShiftForms"
               item-title="text"
               label="Shape Shift"
-              dense
+              density="compact"
               :disabled="!isPlayableClass"
               class="my-3"
               @update:model-value="updateCurrent"
@@ -92,7 +92,7 @@
               :items="skills"
               item-title="text"
               label="Skill"
-              dense
+              density="compact"
               class="my-3"
               @update:model-value="updateCurrent"
             />
@@ -119,7 +119,7 @@
               item-title="text"
               :custom-filter="weaponFilter"
               label="Primary Weapon"
-              dense
+              density="compact"
               persistent-hint
               :hint="`${weaponInfoPrimary.description} [${weaponInfoPrimary.wsm}]`"
               class="my-3"
@@ -147,7 +147,7 @@
               :items="weaponsPrimaryBarbHandedness"
               item-title="text"
               label="Handedness"
-              dense
+              density="compact"
               class="my-3"
               @update:model-value="updateCurrent"
             />
@@ -204,7 +204,7 @@
               item-title="text"
               :custom-filter="weaponFilter"
               label="Secondary Weapon"
-              dense
+              density="compact"
               persistent-hint
               :hint="`${weaponInfoSecondary.description} [${weaponInfoSecondary.wsm}]`"
               class="my-3"
@@ -248,7 +248,7 @@
               :items="fanaticism"
               item-title="text"
               label="Fanaticism Level"
-              dense
+              density="compact"
               class="my-3"
               @update:model-value="updateCurrent"
             />
@@ -259,7 +259,7 @@
               :items="frenzy"
               item-title="text"
               label="Frenzy Level"
-              dense
+              density="compact"
               class="my-3"
               @update:model-value="updateCurrent"
             />
@@ -271,7 +271,7 @@
               :items="werewolf"
               item-title="text"
               label="Werewolf Level"
-              dense
+              density="compact"
               class="my-3"
               @update:model-value="updateCurrent"
             />
@@ -283,7 +283,7 @@
               :items="burstOfSpeed"
               item-title="text"
               label="Burst of Speed Level"
-              dense
+              density="compact"
               class="my-3"
               @update:model-value="updateCurrent"
             />
@@ -296,7 +296,7 @@
               :items="holyFreeze"
               item-title="text"
               label="Holy Freeze Level"
-              dense
+              density="compact"
               class="mt-3 mb-0"
               @update:model-value="updateCurrent"
             />
@@ -304,7 +304,7 @@
               v-model="isDecrepify"
               name="altern"
               label="Decrepify"
-              dense
+              density="compact"
               class="my-0"
               @input="updateCurrent"
             />
@@ -315,7 +315,7 @@
               v-model="useVanillaSkillIas"
               name="altern"
               label="Vanilla Skill IAS"
-              dense
+              density="compact"
               class="my-0"
               @input="updateCurrent"
             />
@@ -323,7 +323,7 @@
               v-model="isUnlockWeapons"
               name="altern"
               label="Unlock Weapons"
-              dense
+              density="compact"
               class="my-0"
               @input="updateCurrent"
             />
