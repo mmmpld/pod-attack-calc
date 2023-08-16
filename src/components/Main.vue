@@ -1681,7 +1681,7 @@ export default {
       this.updateCurrent()
     },
     weaponFilter: function (item, queryText, itemText) {
-      if (item.text.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true // search in option text
+      if (item.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true // search in option text
       if (item.commonItems) { // search in common items
         for (let i = 0; i < item.commonItems.length; i++) {
           if (item.commonItems[i].title.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true
