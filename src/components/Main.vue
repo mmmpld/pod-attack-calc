@@ -92,6 +92,7 @@
               name="skill"
               :items="skills"
               item-title="text"
+              item-props="itemProps"
               label="Skill"
               density="compact"
               class="my-3"
@@ -1005,9 +1006,8 @@ export default {
           break
       }
       if (valuesNonNative.length > 0) {
-        // TODO workaround for vuetify 3 not supporting headers
-        // values.unshift({ header: 'native attacks' })
-        // valuesNonNative.unshift({ header: 'non-class skills' })
+        values.unshift({ text: 'native attacks', itemProps: { disabled: true } })
+        valuesNonNative.unshift({ text: 'non-class skills', itemProps: { disabled: true } })
         values = values.concat(valuesNonNative)
       }
       return values
@@ -2219,22 +2219,27 @@ export default {
 </script>
 
 <style>
-    .quality-magic {
-        color: #8484f0 !important;
-    }
-    .quality-rare {
-        color: #fce874 !important;
-    }
-    .quality-set {
-        color: #18fc00 !important;
-    }
-    .quality-unique {
-        color: #bb955e !important;
-    }
-    .quality-crafted {
-        color: orange !important;
-    }
-    .quality-runeword {
-        color: #c0a080 !important;
-    }
+  .quality-magic {
+    color: #8484f0 !important;
+  }
+  .quality-rare {
+    color: #fce874 !important;
+  }
+  .quality-set {
+    color: #18fc00 !important;
+  }
+  .quality-unique {
+    color: #bb955e !important;
+  }
+  .quality-crafted {
+    color: orange !important;
+  }
+  .quality-runeword {
+    color: #c0a080 !important;
+  }
+
+  .v-list-item--disabled {
+    color: #ffffffb3 !important;
+    padding-left: 8px !important;
+  }
 </style>
