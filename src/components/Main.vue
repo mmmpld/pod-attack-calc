@@ -113,35 +113,14 @@
           <div>
             <h3 class="pb-2">
               Primary Weapon
-            </h3>
-            <v-autocomplete
+            </h3>            
+            <weapon-select
               v-model="weaponsPrimarySelected"
               name="waffe"
               :items="weaponsPrimary"
-              item-title="text"
-              :custom-filter="weaponFilter"
               label="Primary Weapon"
-              density="compact"
-              persistent-hint
-              :hint="`${weaponInfoPrimary.description} [${weaponInfoPrimary.wsm}]`"
-              class="my-3"
               @update:model-value="updateCurrent"
-            >
-              <template #item="{ props, item }">
-                <v-list-item
-                  v-bind="props"
-                  :title="item?.raw?.text"
-                >
-                  <v-list-item-subtitle
-                    v-for="(commonItem, index) in item?.raw?.commonItems"
-                    :key="index"
-                    :class="getQualityColorClass(commonItem.quality)"
-                  >
-                    {{ commonItem.title }}
-                  </v-list-item-subtitle>
-                </v-list-item>
-              </template>
-            </v-autocomplete>
+            />
             <v-select
               v-if="isWeaponsPrimaryBarbHandednessNeeded"
               v-model="weaponsPrimaryBarbHandednessSelected"
@@ -200,34 +179,13 @@
                 </v-tooltip>
               </v-col>
             </v-row>
-            <v-autocomplete
+            <weapon-select
               v-model="weaponsSecondarySelected"
               name="zweitwaffe"
               :items="weaponsSecondary"
-              item-title="text"
-              :custom-filter="weaponFilter"
               label="Secondary Weapon"
-              density="compact"
-              persistent-hint
-              :hint="`${weaponInfoSecondary.description} [${weaponInfoSecondary.wsm}]`"
-              class="my-3"
               @update:model-value="updateCurrent"
-            >
-              <template #item="{ props, item }">
-                <v-list-item
-                  v-bind="props"
-                  :title="item?.raw?.text"
-                >
-                  <v-list-item-subtitle
-                    v-for="(commonItem, index) in item?.raw?.commonItems"
-                    :key="index"
-                    :class="getQualityColorClass(commonItem.quality)"
-                  >
-                    {{ commonItem.title }}
-                  </v-list-item-subtitle>
-                </v-list-item>
-              </template>
-            </v-autocomplete>
+            />
             <v-text-field
               v-if="weaponsSecondarySelected"
               v-model.number="iasWeaponSecondary"
@@ -375,11 +333,13 @@
 
 <script>
 import * as calc from '../assets/calc'
+import WeaponSelect from './WeaponSelect.vue'
 import BreakpointsTable from './BreakpointsTable.vue'
 
 export default {
   name: 'App',
   components: {
+    WeaponSelect,
     BreakpointsTable
   },
   props: {
@@ -410,7 +370,6 @@ export default {
     weaponClassFrames: calc.weaponClassFrames,
     aktionsframe: calc.aktionsframe,
     sequences: calc.sequences,
-    qualities: calc.qualities,
     weaponTypes: calc.weaponTypes,
     weaponCategories: calc.weaponCategories,
     lookupWeapon: calc.lookupWeapon,
@@ -1644,24 +1603,6 @@ export default {
       }
       return result
     },
-    getQualityColorClass: function (quality) {
-      switch (quality) {
-        case this.qualities.magic:
-          return 'quality-magic'
-        case this.qualities.rare:
-          return 'quality-rare'
-        case this.qualities.set:
-          return 'quality-set'
-        case this.qualities.unique:
-          return 'quality-unique'
-        case this.qualities.crafted:
-          return 'quality-crafted'
-        case this.qualities.runeword:
-          return 'quality-runeword'
-        default:
-          return 'quality-normal'
-      }
-    },
     updateUrl: function () {
       if (this.doAddQueryString) this.$router.push({ query: this.query })//.catch(_error => {}) // catch suppresses redundant navigation error in console
     },
@@ -1679,16 +1620,6 @@ export default {
       this.weaponsSecondarySelected = tempWeaponsPrimarySelected
       this.iasWeaponSecondaryRaw = tempIasWeaponPrimaryRaw
       this.updateCurrent()
-    },
-    weaponFilter: function (item, queryText, itemText) {
-      if (item.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true // search in option text
-      if (item.commonItems) { // search in common items
-        for (let i = 0; i < item.commonItems.length; i++) {
-          if (item.commonItems[i].title.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true
-          if (item.commonItems[i].title.toLowerCase().replace(/\W/g, '').indexOf(queryText.toLowerCase()) > -1) return true // with non-alphanumeric characters removed
-        }
-      }
-      return false
     },
     updateCurrent: function () {
       this.calculateValues()
