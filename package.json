@@ -12,6 +12,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "d2-data": "github:blizzhackers/d2data#1.14d",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "vuetify": "^3.3.12"

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { qualities, lookupWeapon, weaponClassFrames } from '@/assets/calc'
+import { qualities, lookupWeapon, weaponClassFrames, findInternalWeaponByName } from '@/assets/calc'
 
 export default {
   props: {
@@ -54,7 +54,7 @@ export default {
     },
     hint () {
       const weaponInfo = this.weaponInfo(this.weaponSelected)
-      return `${weaponInfo.description} [${weaponInfo.wsm}]`
+      return `${weaponInfo.wsm} wsm ${weaponInfo.description}, ${weaponInfo.sockets} sockets`
     }
   },
   methods: {
@@ -91,12 +91,16 @@ export default {
     },
     weaponInfo: function (weaponSelected) {
       const weapon = lookupWeapon[weaponSelected]
+      const internalWeaponData = findInternalWeaponByName(weapon.name)
+      const wsm = internalWeaponData?.speed ?? 0
+      const sockets = internalWeaponData?.gemsockets ?? 0
       if (weapon != null) {
         return {
           description: weaponClassFrames[weapon.type][11],
-          wsm: weapon.wsm,
+          wsm,
           value: weaponSelected,
-          text: weapon.text
+          text: weapon.text,
+          sockets
         }
       }
       return {

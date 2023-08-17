@@ -1,3 +1,30 @@
+
+import d2InternalStrings from 'd2-data/json/LocaleStringsEn.json'
+import d2InternalWeapons from 'd2-data/json/Weapons.json'
+
+export function findInternalWeaponByName (weaponName) {
+  const weaponValues = Object.values(d2InternalWeapons)
+  const namestrs = findInternalStringKeys(weaponName) // the shown name is not always the internal name (Ballista = Balista) so look up the keys
+  if (namestrs) {
+    // string language matched
+    const namestr = namestrs[0] // assume the first match is the correct one
+    return weaponValues.find(w => w.namestr === namestr)
+  }
+  // there was no string language match so use the name
+  return weaponValues.find(w => w.name === weaponName)
+}
+
+export function findInternalStringKeys (stringToFind) {
+  const nameKeys = []
+  for (const [key, value] of Object.entries(d2InternalStrings)) {
+    const string = value
+    if (string === stringToFind) {
+      nameKeys.push(key)
+    }
+  }
+  return nameKeys
+}
+
 // "weapon type"
 // first level is weapon "type" from lookupweapon
 // second level is char class value, or [11] for the description
@@ -341,7 +368,7 @@ export const lookupWeapon = [
   { name: 'Partizan', wsm: 10, type: 6, classItem: -1, weaponCategory: 8, canZeal: true, commonItems: [{ title: 'Pierre Tombale Couant', quality: qualities.unique }] },
   { name: 'Pellet Bow', wsm: -10, type: 8, classItem: -1, weaponCategory: 1, canZeal: false, commonItems: [] },
   { name: 'Petrified Wand', wsm: 10, type: 2, classItem: -1, weaponCategory: 0, canZeal: false, commonItems: [{ title: 'Carin Shard', quality: qualities.unique }] },
-  { name: 'Phaseblade', wsm: -30, type: 2, classItem: -1, weaponCategory: 9, canZeal: true, commonItems: [{ title: 'Lightsabre', quality: qualities.unique }, { title: 'Azurewrath', quality: qualities.unique }, { title: 'Grief', quality: qualities.runeword }] },
+  { name: 'Phase Blade', wsm: -30, type: 2, classItem: -1, weaponCategory: 9, canZeal: true, commonItems: [{ title: 'Lightsabre', quality: qualities.unique }, { title: 'Azurewrath', quality: qualities.unique }, { title: 'Grief', quality: qualities.runeword }] },
   { name: 'Pike', wsm: 20, type: 5, classItem: -1, weaponCategory: 8, canZeal: true, commonItems: [{ title: 'The Tannr Gorerod', quality: qualities.unique }] },
   { name: 'Pilum', wsm: 0, type: 4, classItem: -1, weaponCategory: 2, canZeal: false, commonItems: [] },
   { name: 'Poignard', wsm: -20, type: 4, classItem: -1, weaponCategory: 0, canZeal: false, commonItems: [{ title: 'Spineripper', quality: qualities.unique }] },
