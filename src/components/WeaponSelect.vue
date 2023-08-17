@@ -54,7 +54,8 @@ export default {
     },
     hint () {
       const weaponInfo = this.weaponInfo(this.weaponSelected)
-      return `${weaponInfo.wsm} wsm ${weaponInfo.description}, ${weaponInfo.sockets} sockets`
+      const socketOrSockets = weaponInfo.sockets === 1 ? 'socket' : 'sockets'
+      return `${weaponInfo.wsm} wsm ${weaponInfo.description}, ${weaponInfo.sockets} ${socketOrSockets}`
     }
   },
   methods: {
