@@ -30,18 +30,18 @@ export function findInternalStringKeys (stringToFind) {
 // third level: first value is "FramesPerDirection" (shape shifted frames? Zeal rollback3), second value is "frames" (full animation frames?)
 export const weaponClassFrames = [
   [
-    [13, 13],
-    [11, 12],
-    [12, 12],
-    [16, 16],
-    [15, 15],
-    [14, 14],
-    [16, 16],
-    [15, 15],
-    [16, 16],
-    [16, 16],
-    [15, 15],
-    'unarmed'
+    [13, 13], // Amazon
+    [11, 12], // Assassin
+    [12, 12], // Barbarian
+    [16, 16], // Druid
+    [15, 15], // Necromancer
+    [14, 14], // Paladin
+    [16, 16], // Sorceress
+    [15, 15], // Act 1 Merc - Rogue
+    [16, 16], // Act 2 Merc - Town Guard
+    [16, 16], // Act 5 Merc - Barbarian
+    [15, 15], // Act 3 Merc - Iron Wolves
+    'unarmed' // description text
   ],
   [
     [0, 0],
@@ -50,7 +50,12 @@ export const weaponClassFrames = [
     [0, 0],
     [0, 0],
     [0, 0],
-    [0, 0], 0, 0, 0, 0, 'claw'
+    [0, 0],
+    0,
+    0,
+    0,
+    0,
+    'claw'
   ],
   [
     [16, 16],
@@ -59,7 +64,12 @@ export const weaponClassFrames = [
     [19, 19],
     [19, 19],
     [15, 15],
-    [20, 20], 0, 0, [16, 16], [15, 15], 'one-handed swinging weapon'
+    [20, 20],
+    0,
+    0,
+    [16, 16],
+    [15, 15],
+    'one-handed swinging weapon'
   ],
   [
     [20, 20],
@@ -68,7 +78,12 @@ export const weaponClassFrames = [
     [21, 21],
     [23, 23],
     [18, 19],
-    [24, 24], 0, 0, [16, 16], 0, 'two-handed sword'
+    [24, 24],
+    0,
+    0,
+    [16, 16],
+    0,
+    'two-handed sword'
   ],
   [
     [15, 15],
@@ -77,7 +92,12 @@ export const weaponClassFrames = [
     [19, 19],
     [19, 19],
     [17, 17],
-    [19, 19], 0, [16, 16], 0, 0, 'one-handed thrusting weapon'
+    [19, 19],
+    0,
+    [16, 16],
+    0,
+    0,
+    'one-handed thrusting weapon'
   ],
   [
     [18, 18],
@@ -86,7 +106,12 @@ export const weaponClassFrames = [
     [23, 23],
     [24, 24],
     [20, 20],
-    [23, 23], 0, [16, 16], 0, 0, 'spear'
+    [23, 23],
+    0,
+    [16, 16],
+    0,
+    0,
+    'spear'
   ],
   [
     [20, 20],
@@ -95,7 +120,12 @@ export const weaponClassFrames = [
     [17, 17],
     [20, 20],
     [18, 18],
-    [18, 18], 0, [16, 16], 0, 0, 'two-handed weapon'
+    [18, 18],
+    0,
+    [16, 16],
+    0,
+    0,
+    'two-handed weapon'
   ],
   [
     [14, 14],
@@ -105,7 +135,11 @@ export const weaponClassFrames = [
     [18, 18],
     [16, 16],
     [17, 17],
-    [15, 15], 0, 0, 0, 'bow'
+    [15, 15],
+    0,
+    0,
+    0,
+    'bow'
   ],
   [
     [20, 20],
@@ -114,7 +148,12 @@ export const weaponClassFrames = [
     [20, 20],
     [20, 20],
     [20, 20],
-    [20, 20], [15, 15], 0, 0, 0, 'crossbow'
+    [20, 20],
+    [15, 15],
+    0,
+    0,
+    0,
+    'crossbow'
   ],
   [16, 16, 16, 18, 20, 16, 20] // Throw
 ]
@@ -176,7 +215,7 @@ export const weaponCategories = Object.freeze({
 })
 
 export const lookupWeapon = [
-  { name: '[unarmed]', wsm: 0, type: 0, classItem: -1, weaponCategory: 0, canZeal: false, commonItems: [] },
+  { name: '[unarmed]', wsm: 10, type: 0, classItem: -1, weaponCategory: 0, canZeal: false, commonItems: [] },
   { name: 'Ancient Axe', wsm: 10, type: 6, classItem: -1, weaponCategory: 0, canZeal: true, commonItems: [{ title: 'The Minotaur', quality: qualities.unique }] },
   { name: 'Ancient Sword', wsm: 0, type: 2, classItem: -1, weaponCategory: 9, canZeal: false, commonItems: [{ title: 'The Atlantean', quality: qualities.unique }] },
   { name: 'Arbalest', wsm: -10, type: 8, classItem: -1, weaponCategory: 1, canZeal: false, commonItems: [{ title: 'Langer Briser', quality: qualities.unique }] },
