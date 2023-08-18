@@ -5,14 +5,6 @@ import vuetify from 'vite-plugin-vuetify'
 const path = require('path')
 export default defineConfig({
   base: '/pod-attack-calc/',
-  build: {
-    rollupOptions: {
-      external: [
-        'd2-data/json/LocaleStringsEn.json',
-        'd2-data/json/Weapons.json'
-      ]
-    }
-  },
   plugins: [
     vue(),
     vuetify()

@@ -1,5 +1,5 @@
-import d2InternalStrings from 'd2-data/json/LocaleStringsEn.json'
-import d2InternalWeapons from 'd2-data/json/Weapons.json'
+import d2InternalStrings from 'd2-data/json/LocaleStringsEn.json?inline'
+import d2InternalWeapons from 'd2-data/json/Weapons.json?inline'
 
 export function findInternalWeaponByName (weaponName) {
   const weaponValues = Object.values(d2InternalWeapons)
