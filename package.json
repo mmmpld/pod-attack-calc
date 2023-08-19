@@ -29,6 +29,7 @@
     "eslint-plugin-vuetify": "^2.0.5",
     "execa": "latest",
     "jsdom-global": "^3.0.2",
+    "pod-data": "github:mmmpld/pod-data",
     "sass": "^1.65.1",
     "vite": "^4.4.9",
     "vite-plugin-vuetify": "^1.0.2",

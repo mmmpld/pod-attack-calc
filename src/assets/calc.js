@@ -1,5 +1,4 @@
-import d2InternalStrings from '@/assets/d2-data/json/LocaleStringsEn.json'
-import d2InternalWeapons from '@/assets/d2-data/json/weapons.json'
+import { localeStringsEn as d2InternalStrings, weapons as d2InternalWeapons } from 'pod-data'
 
 export function findInternalWeaponByName (weaponName) {
   const weaponValues = Object.values(d2InternalWeapons)
