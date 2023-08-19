@@ -80,12 +80,12 @@ export default {
     updateCurrent (newValue) {
       this.$emit('update:model-value', newValue)
     },
-    weaponFilter: function (item, queryText, itemText) {
-      if (item.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true // search in option text
-      if (item.commonItems) { // search in common items
-        for (let i = 0; i < item.commonItems.length; i++) {
-          if (item.commonItems[i].title.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true
-          if (item.commonItems[i].title.toLowerCase().replace(/\W/g, '').indexOf(queryText.toLowerCase()) > -1) return true // with non-alphanumeric characters removed
+    weaponFilter: function (itemText, queryText, item) {
+      if (itemText.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true // search in option text
+      if (item.raw.commonItems) { // search in common items
+        for (let i = 0; i < item.raw.commonItems.length; i++) {
+          if (item.raw.commonItems[i].title.toLowerCase().indexOf(queryText.toLowerCase()) > -1) return true
+          if (item.raw.commonItems[i].title.toLowerCase().replace(/\W/g, '').indexOf(queryText.toLowerCase()) > -1) return true // with non-alphanumeric characters removed
         }
       }
       return false
