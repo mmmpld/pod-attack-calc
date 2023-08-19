@@ -46,7 +46,7 @@ export const weaponClassFrames = [
   ],
   [
     [0, 0], // Amazon
-    [11, 12], // Assassin
+    [11, 12], // Assassin [attack one - swipe, attack 2 - stab] https://www.spriters-resource.com/pc_computer/diablo2diablo2lordofdestruction/sheet/54288/
     [0, 0], // Barbarian
     [0, 0], // Druid
     [0, 0], // Necromancer
@@ -78,7 +78,7 @@ export const weaponClassFrames = [
     [18, 18], // Barbarian
     [21, 21], // Druid
     [23, 23], // Necromancer
-    [18, 19], // Paladin
+    [18, 19], // Paladin [attack one - swipe, attack 2 - overhead slash]
     [24, 24], // Sorceress
     0, // Act 1 Merc - Rogue
     0, // Act 2 Merc - Town Guard
