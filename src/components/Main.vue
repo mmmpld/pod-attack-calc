@@ -1704,6 +1704,12 @@ export default {
       }
       return animationSpeed
     },
+    /**
+     * Calculate the frames per attack
+     * @param {number} FramesPerDirection 
+     * @param {number} Acceleration - combined (SIAS + EIAS - WSM)
+     * @param {number} StartingFrame 
+     */
     calcFPA: function (FramesPerDirection, Acceleration, StartingFrame) {
       const weapPrimary = this.lookupWeapon[this.weaponsPrimarySelected]
       const animationSpeed = this.animationSpeed(FramesPerDirection)

@@ -69,51 +69,26 @@ exports[`Assassin default values > standard attack 1`] = `
 "<tbody>
   <tr class=\\"highlight-current-row\\">
     <th>0</th>
-    <td>10.5</td>
-    <td>2.38</td>
-  </tr>
-  <tr class=\\"\\">
-    <th>11</th>
     <td>10</td>
     <td>2.5</td>
   </tr>
   <tr class=\\"\\">
     <th>13</th>
-    <td>9.5</td>
-    <td>2.63</td>
-  </tr>
-  <tr class=\\"\\">
-    <th>26</th>
     <td>9</td>
     <td>2.77</td>
   </tr>
   <tr class=\\"\\">
     <th>29</th>
-    <td>8.5</td>
-    <td>2.94</td>
-  </tr>
-  <tr class=\\"\\">
-    <th>48</th>
     <td>8</td>
     <td>3.12</td>
   </tr>
   <tr class=\\"\\">
     <th>56</th>
-    <td>7.5</td>
-    <td>3.33</td>
-  </tr>
-  <tr class=\\"\\">
-    <th>86</th>
     <td>7</td>
     <td>3.57</td>
   </tr>
   <tr class=\\"\\">
     <th>113</th>
-    <td>6.5</td>
-    <td>3.84</td>
-  </tr>
-  <tr class=\\"\\">
-    <th>180</th>
     <td>6</td>
     <td>4.16</td>
   </tr>

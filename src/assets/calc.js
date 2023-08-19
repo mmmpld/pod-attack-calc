@@ -24,14 +24,15 @@ export function findInternalStringKeys (stringToFind) {
   return nameKeys
 }
 
-// "weapon type"
+// Animation lengths
 // first level is weapon "type" from lookupweapon
 // second level is char class value, or [11] for the description
 // third level: [swing frames, alternate swing frames]. Notes: first value is used as "FramesPerDirection" (shape shifted frames? Zeal rollback3), second value is "frames". 
+// Note that the animation contains matching start and end frames, which the game will combine into a single frame when chaining animations. The fpa formula removes one frame to account for this.
 export const weaponClassFrames = [
   [
     [13, 13], // Amazon
-    [11, 12], // Assassin
+    [11, 11], // Assassin
     [12, 12], // Barbarian
     [16, 16], // Druid
     [15, 15], // Necromancer

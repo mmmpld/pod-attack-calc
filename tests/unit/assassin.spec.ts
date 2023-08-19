@@ -4,7 +4,7 @@ const characterId = 1
 
 describe('Assassin default values', () => {
   it('standard attack', async () => {
-    await breakpoints('10.5', '2.38', { charactersSelected: characterId })
+    await breakpoints('10', '2.5', { charactersSelected: characterId })
   })
 
   it('trap laying', async () => {
