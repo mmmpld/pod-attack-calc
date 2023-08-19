@@ -215,7 +215,7 @@ export const weaponCategories = Object.freeze({
 })
 
 export const lookupWeapon = [
-  { name: '[unarmed]', wsm: 10, type: 0, classItem: -1, weaponCategory: 0, canZeal: false, commonItems: [] },
+  { name: '[unarmed]', wsm: 0, type: 0, classItem: -1, weaponCategory: 0, canZeal: false, commonItems: [] },
   { name: 'Ancient Axe', wsm: 10, type: 6, classItem: -1, weaponCategory: 0, canZeal: true, commonItems: [{ title: 'The Minotaur', quality: qualities.unique }] },
   { name: 'Ancient Sword', wsm: 0, type: 2, classItem: -1, weaponCategory: 9, canZeal: false, commonItems: [{ title: 'The Atlantean', quality: qualities.unique }] },
   { name: 'Arbalest', wsm: -10, type: 8, classItem: -1, weaponCategory: 1, canZeal: false, commonItems: [{ title: 'Langer Briser', quality: qualities.unique }] },
