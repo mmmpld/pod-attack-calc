@@ -1010,12 +1010,16 @@ export default {
         // Unshifted
         if (this.shapeShiftFormsSelected === 0) {
           temp1 = 0
-          if (((attackSkill.animation === 0) ||
-                        (attackSkill.animation === 2) ||
-                        (attackSkill.animation === 3) ||
-                        (attackSkill.animation === 4) ||
-                        (attackSkill.animation === 5)
-          ) && (attackSkill.rollback === 100)) {
+          if (
+            (
+              attackSkill.animation === 0 ||
+              attackSkill.animation === 2 ||
+              attackSkill.animation === 3 ||
+              attackSkill.animation === 4 ||
+              attackSkill.animation === 5
+            )
+            && attackSkill.rollback === 100
+          ) {
             console.info('calc ias for most')
             for (let i = Math.min(Math.max(100 + this.SIAS - this.WSMprimaer, 15), 175); i <= 175; i++) {
               // this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][0]; // intentionally not set here as calculateValues sets it as a side-effect
@@ -1032,29 +1036,38 @@ export default {
             return {}
           }
           // standard attack animation && no secondary weapon (or primary only attacks) && standard rollback
-          if (attackSkill.animation === 1 &&
-                        attackSkill.rollback === 100 &&
-                        (this.weaponsSecondarySelected === 0 ||
-                            attackSkill.title === 'Static Strike' ||
-                            attackSkill.title === 'Blades of Ice' ||
-                            attackSkill.title === 'Emberstorm' ||
-                            attackSkill.title === 'Fists of Ice' ||
-                            attackSkill.title === 'Fists of Ember' ||
-                            attackSkill.title === 'Fists of Thunder')) {
+          if (
+            attackSkill.animation === 1 &&
+            attackSkill.rollback === 100 && (
+              this.weaponsSecondarySelected === 0 ||
+              attackSkill.title === 'Static Strike' || // TODO review sin skills
+              attackSkill.title === 'Blades of Ice' ||
+              attackSkill.title === 'Emberstorm' ||
+              attackSkill.title === 'Fists of Ice' ||
+              attackSkill.title === 'Fists of Ember' ||
+              attackSkill.title === 'Fists of Thunder'
+            )
+          ) {
             console.info('calc ias for standard attack single')
             for (let i = Math.min(Math.max(100 + this.SIAS - this.WSMprimaer, 15), 175); i <= 175; i++) {
+              // set animation frames for primary hand attack
               this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][0]
               if ((weapPrimary.type === this.weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected === 1)) {
+                // two handed sword as single handed
                 this.animationFrames = 16
               }
               resultFpa = this.calcFPA(this.animationFrames, i, start)
+              // set animation frames for alt attack - characters can have alternate swing animations with different frame lengths
               this.animationFrames = this.weaponClassFrames[weapPrimary.type][this.charactersSelected][1]
               if ((weapPrimary.type === this.weaponTypes.twoHandedSword) && (this.weaponsPrimaryBarbHandednessSelected === 1)) {
+                // two handed sword as single handed
                 this.animationFrames = 16
               }
               temp = this.calcFPA(this.animationFrames, i, start)
+              // average the swings
               resultFpa = (resultFpa + temp) / 2
               if (this.charactersSelected === 9) {
+                // if a barb merc half it (because he attacks twice for normal attack)
                 resultFpa = resultFpa / 2
               }
               if ((temp1 !== resultFpa) && (i - 100 - this.SIAS + this.WSMprimaer < 120)) {
@@ -1782,6 +1795,7 @@ export default {
         isSecondaryFpaMaxed: acceleration2 === 175
       }
     },
+    /** Calculates the Speed (frames per attack) and Frequency (attacks per second) in the Current section above the breakpoints table. */
     calculateValues: function () {
       let isMaxIas = true // true if further ias is useless
       const weapPrimary = this.lookupWeapon[this.weaponsPrimarySelected]

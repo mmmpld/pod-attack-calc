@@ -27,7 +27,7 @@ export function findInternalStringKeys (stringToFind) {
 // "weapon type"
 // first level is weapon "type" from lookupweapon
 // second level is char class value, or [11] for the description
-// third level: first value is "FramesPerDirection" (shape shifted frames? Zeal rollback3), second value is "frames" (full animation frames?)
+// third level: [swing frames, alternate swing frames]. Notes: first value is used as "FramesPerDirection" (shape shifted frames? Zeal rollback3), second value is "frames". 
 export const weaponClassFrames = [
   [
     [13, 13], // Amazon
@@ -44,116 +44,116 @@ export const weaponClassFrames = [
     'unarmed' // description text
   ],
   [
-    [0, 0],
-    [11, 12],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0],
-    0,
-    0,
-    0,
-    0,
-    'claw'
+    [0, 0], // Amazon
+    [11, 12], // Assassin
+    [0, 0], // Barbarian
+    [0, 0], // Druid
+    [0, 0], // Necromancer
+    [0, 0], // Paladin
+    [0, 0], // Sorceress
+    0, // Act 1 Merc - Rogue
+    0, // Act 2 Merc - Town Guard
+    0, // Act 5 Merc - Barbarian
+    0, // Act 3 Merc - Iron Wolves
+    'claw' // description text
   ],
   [
-    [16, 16],
-    [15, 15],
-    [16, 16],
-    [19, 19],
-    [19, 19],
-    [15, 15],
-    [20, 20],
-    0,
-    0,
-    [16, 16],
-    [15, 15],
-    'one-handed swinging weapon'
+    [16, 16], // Amazon
+    [15, 15], // Assassin
+    [16, 16], // Barbarian
+    [19, 19], // Druid
+    [19, 19], // Necromancer
+    [15, 15], // Paladin
+    [20, 20], // Sorceress
+    0, // Act 1 Merc - Rogue
+    0, // Act 2 Merc - Town Guard
+    [16, 16], // Act 5 Merc - Barbarian
+    [15, 15], // Act 3 Merc - Iron Wolves
+    'one-handed swinging weapon' // description text
   ],
   [
-    [20, 20],
-    [23, 23],
-    [18, 18],
-    [21, 21],
-    [23, 23],
-    [18, 19],
-    [24, 24],
-    0,
-    0,
-    [16, 16],
-    0,
-    'two-handed sword'
+    [20, 20], // Amazon
+    [23, 23], // Assassin
+    [18, 18], // Barbarian
+    [21, 21], // Druid
+    [23, 23], // Necromancer
+    [18, 19], // Paladin
+    [24, 24], // Sorceress
+    0, // Act 1 Merc - Rogue
+    0, // Act 2 Merc - Town Guard
+    [16, 16], // Act 5 Merc - Barbarian
+    0, // Act 3 Merc - Iron Wolves
+    'two-handed sword' // description text
   ],
   [
-    [15, 15],
-    [15, 15],
-    [16, 16],
-    [19, 19],
-    [19, 19],
-    [17, 17],
-    [19, 19],
-    0,
-    [16, 16],
-    0,
-    0,
-    'one-handed thrusting weapon'
+    [15, 15], // Amazon
+    [15, 15], // Assassin
+    [16, 16], // Barbarian
+    [19, 19], // Druid
+    [19, 19], // Necromancer
+    [17, 17], // Paladin
+    [19, 19], // Sorceress
+    0, // Act 1 Merc - Rogue
+    [16, 16], // Act 2 Merc - Town Guard
+    0, // Act 5 Merc - Barbarian
+    0, // Act 3 Merc - Iron Wolves
+    'one-handed thrusting weapon' // description text
   ],
   [
-    [18, 18],
-    [23, 23],
-    [19, 19],
-    [23, 23],
-    [24, 24],
-    [20, 20],
-    [23, 23],
-    0,
-    [16, 16],
-    0,
-    0,
-    'spear'
+    [18, 18], // Amazon
+    [23, 23], // Assassin
+    [19, 19], // Barbarian
+    [23, 23], // Druid
+    [24, 24], // Necromancer
+    [20, 20], // Paladin
+    [23, 23], // Sorceress
+    0, // Act 1 Merc - Rogue
+    [16, 16], // Act 2 Merc - Town Guard
+    0, // Act 5 Merc - Barbarian
+    0, // Act 3 Merc - Iron Wolves
+    'spear' // description text
   ],
   [
-    [20, 20],
-    [19, 19],
-    [19, 19],
-    [17, 17],
-    [20, 20],
-    [18, 18],
-    [18, 18],
-    0,
-    [16, 16],
-    0,
-    0,
-    'two-handed weapon'
+    [20, 20], // Amazon
+    [19, 19], // Assassin
+    [19, 19], // Barbarian
+    [17, 17], // Druid
+    [20, 20], // Necromancer
+    [18, 18], // Paladin
+    [18, 18], // Sorceress
+    0, // Act 1 Merc - Rogue
+    [16, 16], // Act 2 Merc - Town Guard
+    0, // Act 5 Merc - Barbarian
+    0, // Act 3 Merc - Iron Wolves
+    'two-handed weapon' // description text
   ],
   [
-    [14, 14],
-    [16, 16],
-    [15, 15],
-    [16, 16],
-    [18, 18],
-    [16, 16],
-    [17, 17],
-    [15, 15],
-    0,
-    0,
-    0,
-    'bow'
+    [14, 14], // Amazon
+    [16, 16], // Assassin
+    [15, 15], // Barbarian
+    [16, 16], // Druid
+    [18, 18], // Necromancer
+    [16, 16], // Paladin
+    [17, 17], // Sorceress
+    [15, 15], // Act 1 Merc - Rogue
+    0, // Act 2 Merc - Town Guard
+    0, // Act 5 Merc - Barbarian
+    0, // Act 3 Merc - Iron Wolves
+    'bow' // description text
   ],
   [
-    [20, 20],
-    [21, 21],
-    [20, 20],
-    [20, 20],
-    [20, 20],
-    [20, 20],
-    [20, 20],
-    [15, 15],
-    0,
-    0,
-    0,
-    'crossbow'
+    [20, 20], // Amazon
+    [21, 21], // Assassin
+    [20, 20], // Barbarian
+    [20, 20], // Druid
+    [20, 20], // Necromancer
+    [20, 20], // Paladin
+    [20, 20], // Sorceress
+    [15, 15], // Act 1 Merc - Rogue
+    0, // Act 2 Merc - Town Guard
+    0, // Act 5 Merc - Barbarian
+    0, // Act 3 Merc - Iron Wolves
+    'crossbow' // description text
   ],
   [16, 16, 16, 18, 20, 16, 20] // Throw
 ]
