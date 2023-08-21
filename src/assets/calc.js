@@ -764,20 +764,6 @@ export const data = {
       rollback: 100
     },
     {
-      title: 'Static Strike',
-      index: 35,
-      animation: 1,
-      sequence: 2,
-      rollback: 100
-    },
-    {
-      title: 'Emberstorm',
-      index: 36,
-      animation: 1,
-      sequence: 2,
-      rollback: 100
-    },
-    {
       title: 'Frenzy (first swing hits)',
       index: 37,
       animation: 7,

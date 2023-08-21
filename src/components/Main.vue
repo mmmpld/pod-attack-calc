@@ -844,8 +844,6 @@ export default {
               values.push(this.getSkillOptionData('Claws of Thunder'))
               values.push(this.getSkillOptionData('Fists of Ice'))
               values.push(this.getSkillOptionData('Blades of Ice'))
-              values.push(this.getSkillOptionData('Static Strike'))
-              values.push(this.getSkillOptionData('Emberstorm'))
             }
             if ((weapPrimary.type === this.weaponTypes.claw) && (weapSecondary.type === this.weaponTypes.claw)) {
               values.push(this.getSkillOptionData('Dragon Claw'))
@@ -1047,9 +1045,7 @@ export default {
             attackSkill.animation === 1 &&
             attackSkill.rollback === 100 && (
               this.weaponsSecondarySelected === 0 ||
-              attackSkill.title === 'Static Strike' || // TODO review sin skills
               attackSkill.title === 'Blades of Ice' ||
-              attackSkill.title === 'Emberstorm' ||
               attackSkill.title === 'Fists of Ice' ||
               attackSkill.title === 'Fists of Fire' ||
               attackSkill.title === 'Claws of Thunder'
@@ -1860,9 +1856,7 @@ export default {
           resultFpa = resultFpa / 2
         }
         if (this.weaponsSecondarySelected > 0 &&
-                  attackSkill.title !== 'Static Strike' &&
                   attackSkill.title !== 'Blades of Ice' &&
-                  attackSkill.title !== 'Emberstorm' &&
                   attackSkill.title !== 'Fists of Ice' &&
                   attackSkill.title !== 'Fists of Fire' &&
                   attackSkill.title !== 'Claws of Thunder'
