@@ -1044,12 +1044,8 @@ export default {
           // standard attack animation && no secondary weapon (or primary only attacks) && standard rollback
           if (
             attackSkill.animation === 1 &&
-            attackSkill.rollback === 100 && (
-              this.weaponsSecondarySelected === 0 ||
-              attackSkill.title === 'Blades of Ice' ||
-              attackSkill.title === 'Fists of Fire' ||
-              attackSkill.title === 'Claws of Thunder'
-            )
+            attackSkill.rollback === 100 &&
+            this.weaponsSecondarySelected === 0
           ) {
             console.info('calc ias for standard attack single')
             for (let i = Math.min(Math.max(100 + this.SIAS - this.WSMprimaer, 15), 175); i <= 175; i++) {

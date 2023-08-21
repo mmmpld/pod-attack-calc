@@ -4,33 +4,33 @@ exports[`Assassin default values > boi dual cestus 1`] = `
 "<tbody>
   <tr class=\\"highlight-current-row\\">
     <th>0</th>
+    <td>13.75</td>
+    <td>1.81</td>
+  </tr>
+  <tr class=\\"\\">
+    <th>6</th>
     <td>13.5</td>
     <td>1.85</td>
   </tr>
   <tr class=\\"\\">
-    <th>6</th>
-    <td>13</td>
-    <td>1.92</td>
+    <th>7</th>
+    <td>12.75</td>
+    <td>1.96</td>
   </tr>
   <tr class=\\"\\">
-    <th>7</th>
+    <th>15</th>
     <td>12.5</td>
     <td>2</td>
   </tr>
   <tr class=\\"\\">
-    <th>15</th>
-    <td>12</td>
-    <td>2.08</td>
-  </tr>
-  <tr class=\\"\\">
     <th>16</th>
-    <td>11.5</td>
-    <td>2.17</td>
+    <td>11.75</td>
+    <td>2.12</td>
   </tr>
   <tr class=\\"\\">
     <th>30</th>
-    <td>10.5</td>
-    <td>2.38</td>
+    <td>10.75</td>
+    <td>2.32</td>
   </tr>
   <tr class=\\"\\">
     <th>50</th>
@@ -39,8 +39,8 @@ exports[`Assassin default values > boi dual cestus 1`] = `
   </tr>
   <tr class=\\"\\">
     <th>52</th>
-    <td>9.5</td>
-    <td>2.63</td>
+    <td>9.75</td>
+    <td>2.56</td>
   </tr>
   <tr class=\\"\\">
     <th>83</th>
@@ -49,8 +49,8 @@ exports[`Assassin default values > boi dual cestus 1`] = `
   </tr>
   <tr class=\\"\\">
     <th>89</th>
-    <td>8.5</td>
-    <td>2.94</td>
+    <td>8.75</td>
+    <td>2.85</td>
   </tr>
   <tr class=\\"\\">
     <th>142</th>
@@ -59,8 +59,8 @@ exports[`Assassin default values > boi dual cestus 1`] = `
   </tr>
   <tr class=\\"\\">
     <th>168</th>
-    <td>7.5</td>
-    <td>3.33</td>
+    <td>7.75</td>
+    <td>3.22</td>
   </tr>
 </tbody>"
 `;
