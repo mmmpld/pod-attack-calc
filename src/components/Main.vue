@@ -840,6 +840,7 @@ export default {
             }
             values.push(this.getSkillOptionData('Laying Traps'))
             values.push(this.getSkillOptionData('Tiger Strike'))
+            values.push(this.getSkillOptionData('Cobra Strike'))
             if (weapPrimary.type === this.weaponTypes.claw || this.isDagger(this.weaponsPrimarySelected)) {
               values.push(this.getSkillOptionData('Fists of Fire'))
               values.push(this.getSkillOptionData('Claws of Thunder'))
