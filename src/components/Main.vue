@@ -835,8 +835,8 @@ export default {
             }
             values.push(this.getSkillOptionData('Laying Traps'))
             if (weapPrimary.type === this.weaponTypes.claw || this.isDagger(this.weaponsPrimarySelected)) {
-              values.push(this.getSkillOptionData('Fists of Ember'))
-              values.push(this.getSkillOptionData('Fists of Thunder'))
+              values.push(this.getSkillOptionData('Fists of Fire'))
+              values.push(this.getSkillOptionData('Claws of Thunder'))
               values.push(this.getSkillOptionData('Fists of Ice'))
               values.push(this.getSkillOptionData('Blades of Ice'))
               values.push(this.getSkillOptionData('Static Strike'))
@@ -980,7 +980,7 @@ export default {
       if (((this.charactersSelected === 0) || (this.charactersSelected === 6)) && (attackSkill.animation < 2)) {
         start = startframe[weapPrimary.type]
       }
-      // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
+      // Old BoI, Impale, Jab, old Fists of Fire, old Claws of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
       // && not whirlwind && rollback normal
       if ((attackSkill.animation === 7) && (this.skillsSelected !== 19) && (attackSkill.rollback === 100)) {
         start = 0
@@ -1044,8 +1044,8 @@ export default {
               attackSkill.title === 'Blades of Ice' ||
               attackSkill.title === 'Emberstorm' ||
               attackSkill.title === 'Fists of Ice' ||
-              attackSkill.title === 'Fists of Ember' ||
-              attackSkill.title === 'Fists of Thunder'
+              attackSkill.title === 'Fists of Fire' ||
+              attackSkill.title === 'Claws of Thunder'
             )
           ) {
             console.info('calc ias for standard attack single')
@@ -1857,8 +1857,8 @@ export default {
                   attackSkill.title !== 'Blades of Ice' &&
                   attackSkill.title !== 'Emberstorm' &&
                   attackSkill.title !== 'Fists of Ice' &&
-                  attackSkill.title !== 'Fists of Ember' &&
-                  attackSkill.title !== 'Fists of Thunder'
+                  attackSkill.title !== 'Fists of Fire' &&
+                  attackSkill.title !== 'Claws of Thunder'
         ) {
           temp = resultFpa
           resultFpa = this.calcFPA(12, acceleration2, 0)
@@ -1889,7 +1889,7 @@ export default {
         }
         resultFpa = this.calcFPA(this.animationFrames, acceleration, start)
       }
-      // Old BoI, Impale, Jab, old Fists of Ember, old Fists of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
+      // Old BoI, Impale, Jab, old Fists of Fire, old Claws of Thunder, Dragon Claw, Double Swing, Frenzy, Double Throw, Whirlwind (potential 2 hand attacks?)
       // && not whirlwind && rollback normal
       if (attackSkill.title === 'Frenzy (first swing hits)') {
         // console.debug("special case frenzy hits");
@@ -1901,7 +1901,7 @@ export default {
         this.currentAps = parseInt(100 * 25 / ((this.rollback1 + this.rollback3) / 2), 10) / 100 + ' attacks per second'
       } else if ((attackSkill.animation === 7) && (this.skillsSelected !== 19) && (attackSkill.rollback === 100)) {
         this.animationFrames = this.sequences[attackSkill.sequence][weapPrimary.type]
-        // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
+        // 9 Fists of Fire, 10 Claws of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
         if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
           this.animationFrames = 16
         }
@@ -1922,7 +1922,7 @@ export default {
         if ((this.skillsSelected > 15) && (this.skillsSelected < 19)) { // 16 Double Swing, 17 Frenzy, 18 Double Throw
           resultFpa = resultFpa / 2
         }
-        // 9 Fists of Ember, 10 Fists of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
+        // 9 Fists of Fire, 10 Claws of Thunder, 11 Blades of Ice, 12 Dragon Claw && offhand weapon selected
         if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
           resultFpa = resultFpa / 2
         }

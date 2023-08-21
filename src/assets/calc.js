@@ -582,14 +582,14 @@ export const data = {
       rollback: 100
     },
     {
-      title: 'Fists of Ember',
+      title: 'Fists of Fire',
       index: 9,
       animation: 1,
       sequence: 2,
       rollback: 100
     },
     {
-      title: 'Fists of Thunder',
+      title: 'Claws of Thunder',
       index: 10,
       animation: 1,
       sequence: 2,
