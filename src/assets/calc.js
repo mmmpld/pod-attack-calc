@@ -516,250 +516,285 @@ export function isDagger (weaponId) {
   return false
 }
 
+const animations = Object.freeze({
+  single: {
+    index: 0,
+    description: 'Concentrate, Berserk, Bash, Stun, Zeal, Feral Rage, Fury, Sacrifice, Vengence, Conversion, Strafe, Fend, Tiger Strike, Cobra Strike, Pheonix Strike'
+  },
+  standard: {
+    index: 1,
+    description: 'Standard'
+  },
+  throw: {
+    index: 2,
+    description: 'Throw'
+  },
+  kick: {
+    index: 3,
+    description: 'Dragon Tail, Dragon Talon'
+  },
+  shield: {
+    index: 4,
+    description: 'Smite'
+  },
+  trap: {
+    index: 5,
+    description: 'Laying Traps'
+  },
+  bite: {
+    index: 6,
+    description: 'Hunger, Rabies'
+  },
+  multi: {
+    index: 7,
+    description: 'Impale, Jab, Double Claw, Double String, Frenzy, Double Throw, Whirlwind'
+  }
+})
+
 export const data = {
   attack: [
     {
       title: 'Standard',
       index: 0,
-      animation: 1,
+      animation: animations.standard.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Throw',
       index: 1,
-      animation: 2,
+      animation: animations.throw.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Impale',
       index: 2,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Jab',
       index: 3,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 1,
       rollback: 100
     },
     {
       title: 'Strafe',
       index: 4,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 50
     },
     {
       title: 'Fend',
       index: 5,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 40
     },
     {
       title: 'Tiger Strike',
       index: 6,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Cobra Strike',
       index: 7,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Phoenix Strike',
       index: 8,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
-      title: 'Fists of Ember',
+      title: 'Fists of Fire',
       index: 9,
-      animation: 1,
+      animation: animations.standard.index,
       sequence: 2,
       rollback: 100
     },
     {
-      title: 'Fists of Thunder',
+      title: 'Claws of Thunder',
       index: 10,
-      animation: 1,
+      animation: animations.standard.index,
       sequence: 2,
       rollback: 100
     },
     {
       title: 'Blades of Ice',
       index: 11,
-      animation: 1,
+      animation: animations.standard.index,
       sequence: 2,
       rollback: 100
     },
     {
-      title: 'Dual Strike',
+      title: 'Dragon Claw',
       index: 12,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 2,
       rollback: 100
     },
     {
       title: 'Dragon Tail',
       index: 13,
-      animation: 3,
+      animation: animations.kick.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Dragon Talon',
       index: 14,
-      animation: 3,
+      animation: animations.kick.index,
       sequence: 0,
       rollback: 0
     },
     {
       title: 'Laying Traps',
       index: 15,
-      animation: 5,
+      animation: animations.trap.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Double Swing',
       index: 16,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 3,
       rollback: 100
     },
     {
       title: 'Frenzy (first swing misses)',
       index: 17,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 3,
       rollback: 100
     },
     {
       title: 'Double Throw',
       index: 18,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 4,
       rollback: 100
     },
     {
       title: 'Whirlwind (Classic)',
       index: 19,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Concentrate',
       index: 20,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Berserk',
       index: 21,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Bash',
       index: 22,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Stun',
       index: 23,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Zeal',
       index: 24,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 0
     },
     {
       title: 'Smite',
       index: 25,
-      animation: 4,
+      animation: animations.shield.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Feral Rage',
       index: 26,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Hunger',
       index: 27,
-      animation: 6,
+      animation: animations.bite.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Rabies',
       index: 28,
-      animation: 6,
+      animation: animations.bite.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Fury',
       index: 29,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 0
     },
     {
       title: 'Sacrifice',
       index: 30,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Vengeance',
       index: 31,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Conversion',
       index: 32,
-      animation: 0,
+      animation: animations.single.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Cleave',
       index: 33,
-      animation: 1,
+      animation: animations.standard.index,
       sequence: 0,
       rollback: 100
     },
     {
       title: 'Fists of Ice',
       index: 34,
-      animation: 1,
+      animation: animations.standard.index,
       sequence: 2,
       rollback: 100
     },
@@ -780,7 +815,7 @@ export const data = {
     {
       title: 'Frenzy (first swing hits)',
       index: 37,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 3,
       rollback: 100,
       note: 'Your current off-weapon attack speed is included in the calculation.'
@@ -788,7 +823,7 @@ export const data = {
     {
       title: 'Whirlwind (LoD)',
       index: 38,
-      animation: 7,
+      animation: animations.multi.index,
       sequence: 0,
       rollback: 100
     }
