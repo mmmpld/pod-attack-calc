@@ -603,7 +603,7 @@ export const data = {
       rollback: 100
     },
     {
-      title: 'Dual Strike',
+      title: 'Dragon Claw',
       index: 12,
       animation: 7,
       sequence: 2,
