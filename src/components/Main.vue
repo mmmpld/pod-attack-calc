@@ -844,7 +844,6 @@ export default {
             if (weapPrimary.type === this.weaponTypes.claw || this.isDagger(this.weaponsPrimarySelected)) {
               values.push(this.getSkillOptionData('Fists of Fire'))
               values.push(this.getSkillOptionData('Claws of Thunder'))
-              values.push(this.getSkillOptionData('Fists of Ice'))
               values.push(this.getSkillOptionData('Blades of Ice'))
             }
             if ((weapPrimary.type === this.weaponTypes.claw) && (weapSecondary.type === this.weaponTypes.claw)) {
@@ -1048,7 +1047,6 @@ export default {
             attackSkill.rollback === 100 && (
               this.weaponsSecondarySelected === 0 ||
               attackSkill.title === 'Blades of Ice' ||
-              attackSkill.title === 'Fists of Ice' ||
               attackSkill.title === 'Fists of Fire' ||
               attackSkill.title === 'Claws of Thunder'
             )
@@ -1863,7 +1861,6 @@ export default {
         }
         if (this.weaponsSecondarySelected > 0 &&
                   attackSkill.title !== 'Blades of Ice' &&
-                  attackSkill.title !== 'Fists of Ice' &&
                   attackSkill.title !== 'Fists of Fire' &&
                   attackSkill.title !== 'Claws of Thunder'
         ) {
