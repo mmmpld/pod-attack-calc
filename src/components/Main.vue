@@ -850,7 +850,7 @@ export default {
             if ((weapPrimary.type === this.weaponTypes.claw) && (weapSecondary.type === this.weaponTypes.claw)) {
               values.push(this.getSkillOptionData('Dragon Claw'))
             }
-            values.push(this.getSkillOptionData('Dragon Tail'))
+            // values.push(this.getSkillOptionData('Dragon Tail')) // removed skill
             if (oneHandedMeleeWeaponTypes.includes(weapPrimary.type)) {
               values.push(this.getSkillOptionData('Dragon Talon'))
             }
