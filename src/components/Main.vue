@@ -827,6 +827,11 @@ export default {
           }
           break
         case 1: // Assassin
+          const oneHandedMeleeWeaponTypes = [
+            this.weaponTypes.claw,
+            this.weaponTypes.oneHandedSwingingWeapon,
+            this.weaponTypes.oneHandedThrustingWeapon
+          ]
           values.push(this.getSkillOptionData('Standard'))
           // not shapeshifted
           if (this.shapeShiftFormsSelected === 0) {
@@ -846,7 +851,9 @@ export default {
               values.push(this.getSkillOptionData('Dragon Claw'))
             }
             values.push(this.getSkillOptionData('Dragon Tail'))
-            values.push(this.getSkillOptionData('Dragon Talon'))
+            if (oneHandedMeleeWeaponTypes.includes(weapPrimary.type)) {
+              values.push(this.getSkillOptionData('Dragon Talon'))
+            }
             if (weapPrimary.canZeal) {
               valuesNonNative.push(this.getSkillOptionData('Zeal'))
             }
