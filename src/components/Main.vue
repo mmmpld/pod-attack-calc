@@ -1146,15 +1146,19 @@ export default {
             for (let i = Math.min(Math.max(100 + this.SIAS - this.WSMprimaer, 15), 175); i <= 175; i++) {
               resultFpa = this.calcFPA(this.animationFrames, i, 0)
               resultFpa++
+              // Jab not merc
               if ((this.skillsSelected === 3) && (this.isPlayableClass)) {
                 resultFpa = parseInt(100 * resultFpa / 3, 10) / 100
               }
+              // act 2 merc
               if (this.charactersSelected === 8) {
                 resultFpa = resultFpa / 2
               }
+              // Double Swing/Frenzy (first swing misses)/Double Throw
               if ((this.skillsSelected > 15) && (this.skillsSelected < 19)) {
                 resultFpa = resultFpa / 2
               }
+              // Fists of Fire/Claws of Thunder/Blades of Ice/Dragon Claw
               if ((this.skillsSelected > 8) && (this.skillsSelected < 13) && (this.weaponsSecondarySelected > 0)) {
                 resultFpa = resultFpa / 2
               }
