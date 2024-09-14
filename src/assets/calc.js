@@ -740,7 +740,8 @@ export const data = {
       index: 26,
       animation: animations.single.index,
       sequence: 0,
-      rollback: 100
+      rollback: 100,
+      note: 'Attacks that miss use normal attack speed.'
     },
     {
       title: 'Hunger',
