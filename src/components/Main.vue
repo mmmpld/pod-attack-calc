@@ -853,6 +853,10 @@ export default {
             if (oneHandedMeleeWeaponTypes.includes(weapPrimary.type)) {
               values.push(this.getSkillOptionData('Dragon Talon'))
             }
+            // strafe for non-amazon player classes
+            if (weapPrimary.weaponCategory === this.weaponCategories.bowOrXbow) {
+              valuesNonNative.push(this.getSkillOptionData('Strafe'))
+            }
             if (weapPrimary.canZeal) {
               valuesNonNative.push(this.getSkillOptionData('Zeal'))
             }
@@ -887,6 +891,10 @@ export default {
               values.push(this.getSkillOptionData('Stun'))
               values.push(this.getSkillOptionData('Cleave'))
             }
+            // strafe for non-amazon player classes
+            if (weapPrimary.weaponCategory === this.weaponCategories.bowOrXbow) {
+              valuesNonNative.push(this.getSkillOptionData('Strafe'))
+            }
             // can zeal
             if (weapPrimary.canZeal || weapSecondary.canZeal) {
               valuesNonNative.push(this.getSkillOptionData('Zeal'))
@@ -913,6 +921,10 @@ export default {
           if (this.shapeShiftFormsSelected === 0) {
             if ((weapPrimary.weaponCategory === this.weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory === this.weaponCategories.throwing)) {
               values.push(this.getSkillOptionData('Throw'))
+            }
+            // strafe for non-amazon player classes
+            if (weapPrimary.weaponCategory === this.weaponCategories.bowOrXbow) {
+              valuesNonNative.push(this.getSkillOptionData('Strafe'))
             }
             if (weapPrimary.canZeal) {
               valuesNonNative.push(this.getSkillOptionData('Zeal'))
@@ -941,6 +953,10 @@ export default {
               values.push(this.getSkillOptionData('Vengeance'))
               values.push(this.getSkillOptionData('Conversion'))
             }
+            // strafe for non-amazon player classes
+            if (weapPrimary.weaponCategory === this.weaponCategories.bowOrXbow) {
+              valuesNonNative.push(this.getSkillOptionData('Strafe'))
+            }
             if ((weapPrimary.type === this.weaponTypes.unarmed) || (weapPrimary.type === this.weaponTypes.oneHandedSwingingWeapon) || (weapPrimary.type === this.weaponTypes.oneHandedThrustingWeapon)) {
               values.push(this.getSkillOptionData('Smite'))
             }
@@ -963,6 +979,10 @@ export default {
           if (this.shapeShiftFormsSelected === 0) {
             if ((weapPrimary.weaponCategory === this.weaponCategories.spearOrJavalin) || (weapPrimary.weaponCategory === this.weaponCategories.throwing)) {
               values.push(this.getSkillOptionData('Throw'))
+            }
+            // strafe for non-amazon player classes
+            if (weapPrimary.weaponCategory === this.weaponCategories.bowOrXbow) {
+              valuesNonNative.push(this.getSkillOptionData('Strafe'))
             }
             if (weapPrimary.canZeal) {
               valuesNonNative.push(this.getSkillOptionData('Zeal'))
