@@ -586,7 +586,8 @@ export const data = {
       index: 4,
       animation: animations.single.index,
       sequence: 0,
-      rollback: 50
+      rollback: 50,
+      note: 'Stafe\'s attack speed per level should be added as off-weapon ias.'
     },
     {
       title: 'Fend',
